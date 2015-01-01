@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-01T03:00:30.670Z</updated>
+  <updated>2015-01-01T03:01:21.469Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,10 +19,12 @@
     <link href="http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/"/>
     <id>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</id>
     <published>2015-01-01T00:00:00.000Z</published>
-    <updated>2014-12-31T23:34:03.000Z</updated>
+    <updated>2015-01-01T03:01:17.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/doctype.jpg" alt=""></p>
 <p>Você já deve saber que, com o HTML5, houveram algumas pequenas melhoras para adicionar o charset do document e o Doctype. Antigamente era preciso decorar algo parecido com isso:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></div></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p>E sem esquecer de colocar na tag <code>&lt;html&gt;</code> o atritubo xmlns:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.w3.org/1999/xhtml"</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -74,7 +76,11 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/doctype.jpg" alt=""></p>
-<p>Você já deve saber que, com o HTML5, houveram algumas peque]]>
+<p>Você já deve saber que, com o HTML5, houveram algumas pequenas melhoras para adicionar o charset do document e o Doctype. Antigamente era preciso decorar algo parecido com isso:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></div></pre></td></tr></table></figure>
+
+]]>
+    
     </summary>
     
       <category term="html5" scheme="http://blog.da2k.com.br/tags/html5/"/>
