@@ -82,6 +82,100 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-01-01T00:00:00.000Z"><a href="/2015/01/01/meta-tags-x-ua-compatible-e-charset/">1 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/01/01/meta-tags-x-ua-compatible-e-charset/">Meta Tags X-UA Compatible e Charset</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/doctype.jpg" alt=""></p>
+<p>Você já deve saber que, com o HTML5, houveram algumas pequenas melhoras para adicionar o charset do document e o Doctype. Antigamente era preciso decorar algo parecido com isso:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></div></pre></td></tr></table></figure>
+
+<p>E sem esquecer de colocar na tag <code>&lt;html&gt;</code> o atritubo xmlns:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.w3.org/1999/xhtml"</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Coisa linda! #sqn</p>
+<p>Hoje, para adicionar um doctype, você só precisa de:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div></pre></td></tr></table></figure>
+
+<p>e pronto! O mesmo problema ocorria quando precisávamos adicionar um charset ao documento. Tinhamos que escrever:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"content-type"</span> <span class="attribute">content</span>=<span class="value">"text/html;charset=utf-8"</span> /&gt;</span></div></pre></td></tr></table></figure>
+
+<p>E hoje, só precimos disso:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>O que muita gente não sabe é que, para que o charset seja setado corretamente no documento, ele precisa estar <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-charset" target="_blank" rel="external">nos primeiros 512b do seu documento</a>.</p>
+<p><em>Aaaahh, por isso que em alguns sites fica aparecendo uns caracteres estranhos?</em></p>
+<p>Exatamente! Ou porque a meta tag está após os primeiros 512b, ou porque ela não está presente no documento. Acredite, é muito comum :(</p>
+<p><em>E como se resolvemos isso?</em> </p>
+<p>Colocando a meta tag charset no início do <code>&lt;head&gt;</code>!</p>
+<p><em>Aeeeee!! o/</em></p>
+<p>Só que com isso, geramos um segundo problema.</p>
+<h2 id="A_meta_tag_X-UA_Compatible">A meta tag X-UA Compatible</h2>
+<p>Quem já desenvolve frontend a algum tempo, sabe que o IE é o vilão da internet! E para contornar os problemas que ele tem, podemos usar uma infinidade de <a href="http://browserhacks.com/#ie" target="_blank" rel="external">hacks</a> para manter a compatibilidade com o maior números de versões possíveis.</p>
+<p>O IE tem uma coisa feia chamada <strong>Modo de Compatibilidade</strong>. Esse modo foi criado para dar suporte a aplicações que só funcionavam nas versões mais antigas do IE (sabe-se lá porque cargas d’água não atualizam a disgrama da aplicação). Então, era só clicar no botão em formato de <em>folha</em>, que aparece na barra de endereços no IE, que ele renderizava como se fosse uma versão mais antiga.</p>
+<p>Só que esse modo não fica aplicado somente para a aplicação selecionada. Qualquer outro endereço de site que for acessado, vai abrir com essa versão mais antiga. </p>
+<p>Para “resolver” isso, você precisa adicionar a meta tag <strong>X-UA Compatible</strong> no <code>&lt;head&gt;</code>, dessa forma:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=Edge"</span> /&gt;</span></div></pre></td></tr></table></figure>
+
+<p>O <code>IE=Edge</code> diz para o IE renderizar aquela página com a versão mais recente que ele tiver. Ou seja, se o usuário clicou no modo de compatibilidade do IE9 para usar o IE7, essa meta tag avisa que o IE deve usar sempre a versão mais recente, no caso, a 9.</p>
+<p>Você ainda pode mudar esse parãmetro, passando a versão que você quer que o IE renderize, fazendo dessa forma (por exemplo):</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=8"</span> /&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Isso vai dizer que o IE deve renderizar aquela página sempre como IE8.</p>
+<p>Maaaas, essa tag tem um segredo, que pouquíssimas pessoas conhecem: se ela não for colocada como PRIMEIRA TAG DENTRO DO <code>&lt;HEAD&gt;</code>, o IE simplesmente ignora ela!</p>
+<p>Ou seja, se no seu site estiver assim:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=Edge"</span> /&gt;</span></div><div class="line">    ...</div></pre></td></tr></table></figure>
+
+<p>Pode esquecer que vai funcionar! O IE não vai nem dar bola pra ela e vai continuar no modo que o usuário deixou.<br>Triste, não?! :(</p>
+<p>Bom, eram essas dicas que eu queria deixar:</p>
+<ul>
+<li>meta charset deve estar sempre antes dos 512b do documento;</li>
+<li>X-UA Compatible sempre no início do <code>&lt;head&gt;</code>.</li>
+</ul>
+<p>Fazendo isso, você não terá problemas (aoa menos, não com charset ou com renderização de versões antigas do IE :P) :)</p>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2014-12-31T13:16:13.000Z"><a href="/2014/12/31/um-post-por-dia/">31 de dezembro de 2014</a></time>
       
       
@@ -388,6 +482,8 @@
   
     <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
   
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
     <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
   
     <li><a href="/categories/tips/">tips</a><small>1</small></li>
@@ -402,7 +498,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2014 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
   
 </div>
 <div class="clearfix"></div>

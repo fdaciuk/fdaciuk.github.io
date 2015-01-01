@@ -2,7 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
+    <loc>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</loc>
+    <lastmod>2015-01-01T03:00:23.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
+    <lastmod>2014-12-31T23:34:03.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
@@ -12,7 +22,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
@@ -23,11 +33,6 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
-    <lastmod>2014-12-31T20:16:39.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
