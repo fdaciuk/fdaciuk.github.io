@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
+    <lastmod>2015-01-01T10:39:25.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
-    <lastmod>2015-01-01T10:25:54.000Z</lastmod>
+    <lastmod>2015-01-01T10:26:25.000Z</lastmod>
   </url>
   
   <url>
@@ -23,11 +28,6 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
-    <lastmod>2014-12-31T20:16:39.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
