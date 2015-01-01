@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-01T10:08:20.708Z</updated>
+  <updated>2015-01-01T10:24:01.134Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/"/>
     <id>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</id>
     <published>2015-01-01T00:00:00.000Z</published>
-    <updated>2015-01-01T10:08:11.000Z</updated>
+    <updated>2015-01-01T10:23:52.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/doctype.jpg" alt=""></p>
 <p>Você já deve saber que, com o HTML5, houveram algumas pequenas melhorias para adicionar o charset e o doctype no seu documento. Antigamente era preciso decorar algo parecido com isso:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></div></pre></td></tr></table></figure>
@@ -53,19 +53,28 @@
 <p>Para “resolver” isso, você precisa adicionar a meta tag <strong>X-UA-Compatible</strong> no <code>&lt;head&gt;</code>, dessa forma:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=Edge"</span> /&gt;</span></div></pre></td></tr></table></figure>
 
+<blockquote>
+<p>Sobre a X-UA-Compatible: <a href="http://msdn.microsoft.com/en-us/library/ie/jj676915(v=vs.85).aspx" target="_blank" rel="external">http://msdn.microsoft.com/en-us/library/ie/jj676915(v=vs.85).aspx</a></p>
+</blockquote>
 <p>O <code>IE=Edge</code> diz para o IE renderizar aquela página com a versão mais recente que ele tiver. Ou seja, se o usuário clicou no modo de compatibilidade do IE9 para usar a versão 7, essa meta tag avisa que o IE deve usar sempre a versão mais recente, no caso, a 9.</p>
 <p>Você ainda pode mudar o content dessa tag, passando a versão que você quer que o IE renderize, fazendo dessa forma (por exemplo):</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=8"</span> /&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Isso vai dizer que o IE deve renderizar aquela página sempre como IE8 (se disponível essa versão).</p>
 <p>Maaaas, essa tag tem um segredo, que pouquíssimas pessoas conhecem: se ela não for colocada como PRIMEIRA TAG DENTRO DO <code>&lt;HEAD&gt;</code>, o IE simplesmente ignora ela!</p>
-<p>Ou seja, se no seu site estiver assim:</p>
+<p>Na página que fala sobre a tag, tem a seguinte citação:</p>
+<blockquote>
+<p>The X-UA-Compatible header isn’t case sensitive; however, it must appear in the header of the webpage (the HEAD section) before all other elements except for the title element and other meta elements.</p>
+</blockquote>
+<p>Mas essa exceção, na verdade, não existe :(</p>
+<p>Ela precisa vir antes de todas as outras. Ou seja, se no seu site estiver assim:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=Edge"</span> /&gt;</span></div><div class="line">    ...</div></pre></td></tr></table></figure>
 
 <p>Não vai funcionar! O IE não vai nem dar bola pra ela e vai continuar no modo que o usuário deixou.<br>Triste, não?! :(</p>
 <p>O correto é deixar dessa forma:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">html</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">http-equiv</span>=<span class="value">"X-UA-Compatible"</span> <span class="attribute">content</span>=<span class="value">"IE=Edge"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">    ...</div></pre></td></tr></table></figure>
 
+<p>Apesar</p>
 <p>Bom, eram essas dicas que eu queria deixar:</p>
 <ul>
 <li>meta charset deve estar sempre antes dos 512b do documento;</li>
