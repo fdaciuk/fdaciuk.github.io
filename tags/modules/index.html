@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   
-  <title>html5 | Da2k Blog</title>
+  <title>modules | Da2k Blog</title>
   <link rel="author" href="//plus.google.com/+FernandoDaciuk">
   
   
@@ -60,7 +60,7 @@
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title category">html5</h2>
+<h2 class="archive-title tag">modules</h2>
 
 
   
@@ -82,29 +82,37 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-01-01T00:00:00.000Z"><a href="/2015/01/01/meta-tags-x-ua-compatible-e-charset/">1 de janeiro de 2015</a></time>
+        <time datetime="2015-01-02T08:48:42.000Z"><a href="/2015/01/02/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd/">2 de janeiro de 2015</a></time>
       
       
   
-    <h1 class="title"><a href="/2015/01/01/meta-tags-x-ua-compatible-e-charset/">Meta Tags X-UA-Compatible e Charset</a></h1>
+    <h1 class="title"><a href="/2015/01/02/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd/">Como criar componentes JS usando módulos - AMD, CommonJS e UMD</a></h1>
   
 
     </header>
     <div class="entry">
       
-        <p><img src="http://blog.da2k.com.br/uploads/2015/01/doctype.jpg" alt=""></p>
-<p>Você já deve saber que, com o HTML5, houveram algumas pequenas melhorias para adicionar o charset e o doctype no seu documento. Antigamente era preciso decorar algo parecido com isso:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></div></pre></td></tr></table></figure>
+        <p><a href="http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/" target="_blank" rel="external">PEGAR IDEIAS DAQUI</a></p>
+<p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, então você pensa: </p>
+<p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
+<p>Para responder a essa pergunta, entram em cena duas especificações de módulo: <strong>AMD</strong> e <strong>CommonJS</strong> (ou <strong>CJS</strong>).</p>
+<p>Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.</p>
+<h2 id="AMD">AMD</h2>
+<p>Asynchronous Module Definition (AMD) ficou bastante conhecido por causa do <a href="http://requirejs.org/" target="_blank" rel="external">RequireJS</a>. O formato de utilização do AMD é o seguinte:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define( <span class="string">'moduleName'</span>, [ <span class="string">'jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</div><div class="line">});</div></pre></td></tr></table></figure>
 
+<p>Essa é a estrutura mais básica de um módulo escrito no formato AMD. A função <code>define</code> é uma global do AMD, e será usada para todo novo módulo que você criar.</p>
+<p>Como primeiro parâmetro dessa função, você pode passar o nome do módulo - opcional - (que será usado para você fazer o “include” dele em outro lugar).</p>
+<p>O segundo parâmetro é um array de dependências desse módulo. No nosso exemplo, colocamos como dependência a biblioteca jQuery. Esse método é chamado <strong>DI</strong>, ou Dependency Injection. ## PAREI AQUI ##</p>
+<p>E o terceiro é a função de callback, que será chamada assim que todos os módulos do array no segundo parãmetro forem baixados, e estiverem prontos para uso. </p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+</blockquote>
 
       
     </div>
     <footer>
       
-        
-          <div class="alignleft">
-            <a href="/2015/01/01/meta-tags-x-ua-compatible-e-charset/#more" class="more-link">Veja o post completo</a>
-          </div>
         
         
       
@@ -174,7 +182,7 @@
 
 <script type="text/javascript">
 var disqus_shortname = 'blogda2k';
-var disqus_url = 'http://blog.da2k.com.br/categories/html5/';
+var disqus_url = 'http://blog.da2k.com.br/tags/modules/';
 
 (function(){
   var dsq = document.createElement('script');
