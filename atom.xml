@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-02T23:19:43.720Z</updated>
+  <updated>2015-01-02T23:20:50.285Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -13,50 +13,6 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[Como criar componentes JS usando módulos - AMD, CommonJS e UMD]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/02/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd/"/>
-    <id>http://blog.da2k.com.br/2015/01/02/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd/</id>
-    <published>2015-01-02T08:48:42.000Z</published>
-    <updated>2015-01-02T08:48:42.000Z</updated>
-    <content type="html"><![CDATA[<p><a href="http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/" target="_blank" rel="external">PEGAR IDEIAS DAQUI</a></p>
-<p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, então você pensa: </p>
-<p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
-<p>Para responder a essa pergunta, entram em cena duas especificações de módulo: <strong>AMD</strong> e <strong>CommonJS</strong> (ou <strong>CJS</strong>).</p>
-<p>Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.</p>
-<h2 id="AMD">AMD</h2>
-<p>Asynchronous Module Definition (AMD) ficou bastante conhecido por causa do <a href="http://requirejs.org/" target="_blank" rel="external">RequireJS</a>. O formato de utilização do AMD é o seguinte:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define( <span class="string">'moduleName'</span>, [ <span class="string">'jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Essa é a estrutura mais básica de um módulo escrito no formato AMD. A função <code>define</code> é uma global do AMD, e será usada para todo novo módulo que você criar.</p>
-<p>Como primeiro parâmetro dessa função, você pode passar o nome do módulo - opcional - (que será usado para você fazer o “include” dele em outro lugar).</p>
-<p>O segundo parâmetro é um array de dependências desse módulo. No nosso exemplo, colocamos como dependência a biblioteca jQuery. Esse método é chamado <strong>DI</strong>, ou Dependency Injection. ## PAREI AQUI ##</p>
-<p>E o terceiro é a função de callback, que será chamada assim que todos os módulos do array no segundo parãmetro forem baixados, e estiverem prontos para uso. </p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><a href="http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/" target="_blank" rel="external">PEGAR IDEIAS DAQUI</a></p>
-<p>Depois]]>
-    </summary>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/tags/javascript/"/>
-    
-      <category term="modules" scheme="http://blog.da2k.com.br/tags/modules/"/>
-    
-      <category term="amd" scheme="http://blog.da2k.com.br/tags/amd/"/>
-    
-      <category term="commonjs" scheme="http://blog.da2k.com.br/tags/commonjs/"/>
-    
-      <category term="umd" scheme="http://blog.da2k.com.br/tags/umd/"/>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
   
   <entry>
     <title><![CDATA[Caminhos relativos no NodeJS]]></title>
@@ -299,111 +255,6 @@
       <category term="wordcamp" scheme="http://blog.da2k.com.br/tags/wordcamp/"/>
     
       <category term="wordcamp" scheme="http://blog.da2k.com.br/categories/wordcamp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[]]></title>
-    <link href="http://blog.da2k.com.br/2014/04/13/tdd-em-busca-do-codigo-limpo/"/>
-    <id>http://blog.da2k.com.br/2014/04/13/tdd-em-busca-do-codigo-limpo/</id>
-    <published>2014-04-13T04:47:35.000Z</published>
-    <updated>2014-03-22T12:11:26.000Z</updated>
-    <content type="html"><![CDATA[<p>title: TDD - Em busca do código limpo<br>category: tdd<br>cover: -<br>tags:</p>
-<ul>
-<li>tdd</li>
-<li>clean code</li>
-</ul>
-<hr>
-<p><img src="" alt="Clean Code"></p>
-<p>Nesses últimos dias conheci algumas pessoas que agregaram muito na minha vida profissional e na forma como eu escrevo códigos ((aka <a href="https://twitter.com/caiofbpa" target="_blank" rel="external">Caio Andrade</a>)*. Já havia começado várias vezes a estudar TDD/BDD, mas nunca tinha conseguido aplicar em algo real, pois sempre tinha alguma coisa que atrapalhava e me fazia deixar os testes de lado.</p>
-<p>O que eu descobri foi que eu precisava de alguém que me desse uma diretriz do que fazer, por qual caminho seguir para começar a fazer testes e escrever um código limpo.</p>
-<p>A partir de hoje, vou procurar escrever uma série de posts com minhas experiências com o TDD/BDD e como está indo a evolução do meu código, <strong>em busca do código limpo</strong>.</p>
-<a id="more"></a>
-
-<h2 id="Introdução">Introdução</h2>
-<p>Nesse artigo, vou começar pelas dificuldades que encontrei para começar, porque eu comecei e parei, comecei e parei, comecei e parei… várias vezes, até conseguir escrever testes corretamente e manter as coisas funcionando como deveriam.</p>
-<p>Talvez os problemas que eu passei você também pode <em>ter passado / estar passado</em>, então espero que esse artigo (e os próximos que virão) possa(m) ajudar de alguma forma :)</p>
-<h2 id="Aprendendo_com_os_erros">Aprendendo com os erros</h2>
-<p>Assisti muitas palestras sobre TDD, vi vários slides, li artigos e iniciei meus estudos, tentando colocar em prática tudo o que tinha visto. <em>“- Por que iniciar com baby steps?”</em>, <em>“- Por onde eu devo começar?”</em>, <em>“- Devo fazer testes nos meus arquivos já existentes?”</em>, <em>“- O que eu devo escrever primeiro?”</em>, <em>“- O que realmente eu preciso testar?”</em>, eram perguntas que sempre vinham a minha mente quando eu começava.</p>
-<p>O nome do negócio é auto-explicativo: <strong>TDD - Test Drive Development</strong>, ou “<strong>Desenvolvimento Guiado por Testes</strong>“. Se o desenvolvimento deve ser guiado por testes, significa que eu preciso começar a escrever testes que irão guiar meu desenvolvimento, correto? Correto! Mas como fazer isso? Não é tão simples para começar.</p>
-<p>Nas palestras que eu assistia, sempre mostravam as mesmas coisas:</p>
-<ul>
-<li>Escreva um teste</li>
-<li>Desenvolva em cima do teste algo com baby steps</li>
-<li>Faça o teste passar</li>
-<li>Refatore o código</li>
-<li>Escreva outro teste</li>
-<li>Continue nessa sequencia</li>
-</ul>
-<p>Eu começava a escrever meus testes e, chegava uma hora que eu já estava todo perdido, pois tinha feito um teste onde eu precisaria escrever uma lógica muito grande de código, e acabava deixando tudo de lado novamente.</p>
-<p>Os princípios que eu ouvia estavam corretos, mas eu não conseguia começar sem ver um exemplo real.</p>
-<h2 id="O_início_da_jornada">O início da jornada</h2>
-<p>Foi assistindo uma palestra do Caio que conheci a <a href="http://www.meetup.com/Comunidade-de-Artesanato-de-Software-de-Joinville/" target="_blank" rel="external">Comunidade de Artesanato de Software</a>, aqui em Joinville. Comecei então a participar de uns encontros, que acontecem todas as terças-feiras, para tentar entender de vez a forma certa de escrever testes e programar guiado pelos testes.</p>
-<p>Participei de dois encontros, e foi o suficiente para que eu pudesse começar minha jornada e entender por onde começar de verdade. Sem mais enrolação, vamos ao que interessa!</p>
-<h2 id="Algumas_coisas_que_você_precisa_saber_antes_de_escrever_testes">Algumas coisas que você precisa saber antes de escrever testes</h2>
-<h3 id="1)_Faça_os_seus_testes_fora_do_seu_ambiente_de_trabalho_(ao_menos_no_começo)-">1) Faça os seus testes fora do seu ambiente de trabalho (ao menos no começo).</h3>
-<p>Brinque bastante em casa, aos finais de semana, para que você entenda como tudo funciona. No final do post, vou deixar alguns links de referência legais para treinar o que será mostrado aqui xD</p>
-<h3 id="2)_Você_deve_sempre_usar_baby_steps,_independente_se_já_programa_a_mil_anos">2) Você deve sempre usar baby steps, independente se já programa a mil anos</h3>
-<p>Um código limpo precisa também ser pequeno. Se nos seus primeiros testes você já pensar na lógica toda do negócio, de nada adiantarão os testes. Comece com baby steps, partindo sempre do princípio mais simples, para ir avançando aos poucos e melhorando o código. Eu achava que baby steps deveriam ser usados somente quando estavamos começando com TDD. Mas na verdade, todos que escrevem códigos guiado por testes (até os caras mais feras), iniciam com baby steps. Não interessa o tempo de experiência que você tem. Lembre-se do <strong>KISS</strong>: <em>Keep It Simple, Stupid</em>.</p>
-<h3 id="3)_Seus_métodos_devem_ser_pequenos">3) Seus métodos devem ser pequenos</h3>
-<p>Você provavelmente já ouviu isso se já se aventurou com TDD: seus métodos devem ser pequenos. Mas o quão pequenos devem ser? Pense em algo pequeno. Deve ser menor que isso. De preferência, menor que esse último que você pensou :P</p>
-<p>Mas vamos deixar isso mais claro: quantas linhas é necessário para que um método seja considerado limpo? Depende. Sem xiitismo, pode depender da linguagem. Mas posso dizer que 20 linhas é muito. Até 10 linhas está de bom tamanho. Até 4 linhas seria o cenário ideal.</p>
-<p>Mas como vou fazer um método de 4 linhs?</p>
-<h3 id="4)_Aplique_o_SRP_(Single_Responsibility_Principle)">4) Aplique o SRP (Single Responsibility Principle)</h3>
-<p>Cada método deve fazer apenas uma coisa. Ele deve ser simples.</p>
-<p>Exemplo: Se seu método recebe um parâmetro booleano, então ele com certeza está fazendo mais de uma coisa, pois vai tratar o <em>true</em> e o <em>false</em>. Então você pode separá-lo em dois métodos diferentes.</p>
-<h3 id="5)_Comentários_mentem">5) Comentários mentem</h3>
-<p>Você ouve seu professor na faculdade dizer: <em>“Mantenha seu código comentado. O próximo desenvolvedor que pegar seu código vai saber o que você queria fazer pelo seu comentário.”</em>. Mentira! O cara <em>nem vai ler</em> seu comentário. Ele vai modificar seu código, mas vai deixar o comentário lá. Amanhã, quando você for pegar o código novamente, o seu comentário vai dizer umam coisa, mas o código vai estar fazendo outra. </p>
-<p>Então porque ao invés de usar comentários, você não faz seu código dizer o que ele quer fazer? Por exemplo:</p>
-<p>Porque ao invés de escrever:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> d; <span class="comment">// days of month</span></div></pre></td></tr></table></figure>
-
-<p>Você já não faz:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> daysOfMonth;</div></pre></td></tr></table></figure>
-
-<p>Sua variável diz exatamente o valor que ela vai receber (dias do mês) e não precisa de comentários. Inclusive isso já é também sobre o próximo tópico:</p>
-<h3 id="6)_Dê_nomes_relevantes_aos_métodos_e_variáveis">6) Dê nomes relevantes aos métodos e variáveis</h3>
-<p>Se você nomear sua variável como <code>d</code>, como alguém vai adivinhar <em>WTH</em> ela faz? Então você pode seguir uma pequena regra: Quando a variável for usada em um escopo local (exemplo de uma variável contadora em um <code>for</code>), ela pode ter um nome pequeno, pois não vou precisar “rolar” o meu método em busca da variável, pois sei o que ela está fazendo. Vou no máximo olhar uma linha antes pra ver a que ela se refere.</p>
-<p>Agora, quando a variável tiver um escopo maior, ela deve ter também um nome maior. Assim ela diz exatamente para que serve e eu não vou precisar ficar rolando até o início do método (onde provavelmente ela vai estar declarada) para saber o que ela está fazendo.</p>
-<p>A regra para métodos é o contrário: quanto maior o método (mas não tão grande), mais genérico o nome dele. Quanto menor o método, mais específico deve ser o seu nome. Exemplificando:</p>
-<p>Um método/função que faz chamada de outros métodos:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">wrap</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( isLeapYear() ) {</div><div class="line">    <span class="keyword">return</span> <span class="string">'É ano bissexto!'</span>;</div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> <span class="string">'Não é ano bissexto ainda.'</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Um método que retorna se o ano é bissexto ou não:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isLeapYear</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span> === <span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear() % <span class="number">4</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Foi um exemplo meio tosco, mas acho que deu pra entender xD</p>
-<h3 id="TDD_é_uma_filosofia">TDD é uma filosofia</h3>
-<p>Você precisa pensar TDD. Antes de codificar, pensar como um tester: <strong>“- Que tipos de dados esse método pode receber?”</strong>, <strong>“- Essa variável não poderia ter um nome mais auto-explicativo?”</strong>, etc.</p>
-<blockquote>
-<p>Não adianta aprender a fazer testes se você não mudar sua forma de pensar.</p>
-</blockquote>
-<p>Ainda tenho muito o que aprender quando o assunto é TDD, mas já tenho algumas coisas bem legais pra compartilhar =)<br>Acho que esse começo é o momento de compartilhar minhas experiências, meus erros, meus acertos, pois essa pode ser também a sua realidade.</p>
-<p>Se você também estiver iniciando sua experiência com TDD, eu recomendo fortemente que você procure pessoas que já trabalhem com isso e saibam o que estão fazendo. Vai ajudar muito no seu desenvolvimento. </p>
-<p>Procure grupos na sua cidade que se encontram para fazer <em>Dojos</em>, ou mesmo só fazer um lanche e trocar uma ideia, saber como outros programadores estão programando, como estão testando seus códigos. Isso ajuda muito no nosso crescimento profissional.</p>
-<h2 id="Fechar_com_chave_de_ouro">Fechar com chave de ouro</h2>
-<p>Agora pra não dizer que eu não mostrei nada de código, vou mostrar um exemplo besta de como algo pode parecer simples, mas com TDD a qualidade do código fica muito melhor.</p>
-<p>O nosso <strong>Katá</strong> vai ser o seguinte: Criar uma função/método que receba dois números e some-os. Simples? Veremos :P</p>
-<h2 id="Antes_de_começar_a_codar:_Instalação_dos_módulos">Antes de começar a codar: Instalação dos módulos</h2>
-<p>Antes de darmos início, precisamos de alguns módulos do NodeJS para fazer nossos testes. Vamos usar o <a href="http://visionmedia.github.io/mocha/" target="_blank" rel="external">Mocha</a>.</p>
-<hr>
-<h4 id="Documentação">Documentação</h4>
-<p>Quando você escreve seu código com testes, você não precisa de documentação. Seus testes são a documentação, pois dizem tudo o que o seu sistema faz :)</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>title: TDD - Em busca do código limpo<br>category: tdd<br>cover: -<br>tags:</p>
-<ul>
-<li>tdd</li>
-<li>clean code</li>
-</ul>
-<hr>
-<p><img src="" alt="Clean Code"></p>
-<p>Nesses últimos dias conheci algumas pessoas que agregaram muito na minha vida profissional e na forma como eu escrevo códigos ((aka <a href="https://twitter.com/caiofbpa" target="_blank" rel="external">Caio Andrade</a>)*. Já havia começado várias vezes a estudar TDD/BDD, mas nunca tinha conseguido aplicar em algo real, pois sempre tinha alguma coisa que atrapalhava e me fazia deixar os testes de lado.</p>
-<p>O que eu descobri foi que eu precisava de alguém que me desse uma diretriz do que fazer, por qual caminho seguir para começar a fazer testes e escrever um código limpo.</p>
-<p>A partir de hoje, vou procurar escrever uma série de posts com minhas experiências com o TDD/BDD e como está indo a evolução do meu código, <strong>em busca do código limpo</strong>.</p>
-]]>
-    
-    </summary>
     
   </entry>
   
