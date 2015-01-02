@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
+    <lastmod>2015-01-02T00:33:18.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
-    <lastmod>2015-01-01T10:39:25.000Z</lastmod>
+    <lastmod>2015-01-01T10:41:35.000Z</lastmod>
   </url>
   
   <url>

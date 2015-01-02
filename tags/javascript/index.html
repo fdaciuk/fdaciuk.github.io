@@ -123,11 +123,15 @@
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:blog.da2k.com.br">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
   </form>
 </div>
+
 
   
 <div class="widget tag">
@@ -141,6 +145,8 @@
     <li><a href="/categories/html5/">html5</a><small>1</small></li>
   
     <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
   
     <li><a href="/categories/tips/">tips</a><small>1</small></li>
   
@@ -162,6 +168,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
 
 
 <script type="text/javascript">

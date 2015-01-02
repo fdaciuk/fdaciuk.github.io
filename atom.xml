@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-01T10:40:12.783Z</updated>
+  <updated>2015-01-02T08:01:26.601Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -13,6 +13,65 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Caminhos relativos no NodeJS]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/"/>
+    <id>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</id>
+    <published>2015-01-02T00:00:00.000Z</published>
+    <updated>2015-01-02T00:33:18.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" alt=""></p>
+<p>Sabe quando você precisa dar <code>require</code> em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de <code>../../../</code> para chegar até o diretório certo do seu módulo?</p>
+<a id="more"></a>
+
+<p>Se você não entendeu, vou exemplificar. Digamos que você tem a seguinte estrutura de diretórios no seu projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── /controllers</div><div class="line">|   ├── /home</div><div class="line">|   |   ├── homeController.js</div><div class="line">├── /services</div><div class="line">|   ├── /home</div><div class="line">|   |   ├── homeService.js</div><div class="line">├── /routes</div><div class="line">└── app.js</div></pre></td></tr></table></figure>
+
+<p>Imagine que nos <code>services</code> você controla todas as regras de negócio e passa para o seu <code>controller</code>. No controller, você precisa então “requisitar” o <code>service</code> específico, chamando ele dessa forma no arquivo <code>homeController.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeService = <span class="built_in">require</span>( <span class="string">'../../services/home/homeService'</span> );</div></pre></td></tr></table></figure>
+
+<p>Como o arquivo <code>homeController.js</code> está dentro do diretório <code>controllers/home</code>, você precisa voltar dois níveis para então chegar no diretório <code>services</code>, entrar ali e chamar o <code>homeService.js</code>.</p>
+<p>Agora imagine você fazendo isso em um projeto que começa pequeno, mas vai escalando até ficar gigantesco! Se você resolver refatorar alguma coisa mudando algo de lugar, imagine o trabalho de ficar modificando manualmente essas estruturas de diretórios!</p>
+<p>Chato não?!</p>
+<p>Mas felizmente, o Node nos dá algumas maneiras de resolver isso. Você pode usar o método <code>resolve()</code> do módulo <a href="http://nodejs.org/api/path.html#path_path_resolve_from_to" target="_blank" rel="external">path</a>, que vai resolver a sua URL com o caminho absoluto, até onde a aplicação está rodando. Então você pode fazer a chamada assim no seu <code>homeController.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>( <span class="string">'path'</span> );</div><div class="line"><span class="keyword">var</span> homeService = <span class="built_in">require</span>( path.resolve( <span class="string">'services/home/homeService'</span> ) );</div></pre></td></tr></table></figure>
+
+<p>O <code>path</code> vai, a partir do caminho absoluto da sua aplicação, concatenar com o parâmetro passado para o método <code>resolve()</code>. Simples não?</p>
+<p>Mas é ruim ter que ficar adicionando mais uma linha em todo arquivo que eu precisar fazer um require. Por isso eu criei um módulo marotinho chamado <a href="https://github.com/fdaciuk/getmodule" target="_blank" rel="external">getmodule</a>, que facilita isso pra você!</p>
+<p>O <code>getmodule</code> usa o recurso do <code>path.resolve()</code> para gerar o caminho corretamente, mas ele exporta uma variável global chamada <code>getmodule</code> para que você possa substituir o <code>require</code> por ele.</p>
+<p>O módulo é só isso:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">global.getmodule = <span class="function"><span class="keyword">function</span> <span class="title">getmodule</span><span class="params">( modulePath )</span> </span>{</div><div class="line">  <span class="keyword">var</span> path = <span class="built_in">require</span>( <span class="string">'path'</span> );</div><div class="line">  <span class="keyword">return</span> <span class="built_in">require</span>( path.resolve( modulePath ) );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>E para usá-lo, é bem simples. Primeiro instale o módulo no seu projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save getmodule</div></pre></td></tr></table></figure>
+
+<p>Depois, adicione ele ao arquivo principal da sua aplicação. No caso do nosso exemplo, é o <code>app.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>( <span class="string">'getmodule'</span> );</div></pre></td></tr></table></figure>
+
+<p>E pronto! Agora, no nosso <code>homeController.js</code>, podemos simplesmente chamar o service dessa forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeService = getmodule( <span class="string">'services/home/homeService'</span> );</div></pre></td></tr></table></figure>
+
+<p>Que toda a parte verbosa vai ficar por conta do módulo :D</p>
+<p>Ae você me pergunta: <em>É vantagem usar um módulo só pra isso?</em></p>
+<p>Eu penso que sim. Senão você vai ter que ficar criando “helpers” no seu projeto pra fazer isso. Vai acabar deixando o negócio meio desorganizado ou com coisas desnecessárias. Como estamos usando um módulo, ele fica no diretório <code>node_modules</code> e se tiver alguma atualização para ele, pode ser feito via <code>npm update</code>. Muito mais prático trabalhar assim com módulos genéricos.</p>
+<p>Existem algumas outras formas de resolver esse problema, que foram discutidas <a href="https://www.facebook.com/groups/nodejsbrasil/permalink/580587242074567/" target="_blank" rel="external">nesse link</a> no grupo <strong>NodeJS Brasil</strong>, no Facebook.</p>
+<p>Bom, por hoje é só! Gostou da dica? Achou ridículo? Comenta aí :)</p>
+<p>Até a próxima :D</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" alt=""></p>
+<p>Sabe quando você precisa dar <code>require</code> em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de <code>../../../</code> para chegar até o diretório certo do seu módulo?</p>
+]]>
+    
+    </summary>
+    
+      <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="nodejs" scheme="http://blog.da2k.com.br/categories/nodejs/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Meta Tags X-UA-Compatible e Charset]]></title>
@@ -240,7 +299,7 @@
     <link href="http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/"/>
     <id>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</id>
     <published>2014-03-18T22:16:38.000Z</published>
-    <updated>2015-01-01T10:39:25.000Z</updated>
+    <updated>2015-01-01T10:41:35.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2014/03/module-pattern.jpg" alt="Module Pattern"></p>
 <p><a href="http://simplesideias.com.br/design-patterns-no-javascript-module" target="_blank" rel="external">Module Pattern</a> é muito utilizado por vários devs JS hoje em dia, e ele tem muitas variações. Em busca de um formato que facilitasse meu dia-a-dia, testei alguns, até que cheguei em um que me agradou (ao menos por agora xD).</p>
 <p>Resolvi escrever esse post, no caso de mais alguém se interessar nesse formato de organização de código <strong>Javascript</strong> :)</p>

@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Caminhos relativos no NodeJS | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Sabe quando você precisa dar require em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de ../../../ para chegar até o diretório certo do seu módulo?">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Caminhos relativos no NodeJS"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Da2k Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-02T00:00:00.000Z"><a href="/2015/01/02/caminhos-relativos-no-nodejs/">2 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Caminhos relativos no NodeJS</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" alt=""></p>
+<p>Sabe quando você precisa dar <code>require</code> em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de <code>../../../</code> para chegar até o diretório certo do seu módulo?</p>
+<a id="more"></a>
+
+<p>Se você não entendeu, vou exemplificar. Digamos que você tem a seguinte estrutura de diretórios no seu projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── /controllers</div><div class="line">|   ├── /home</div><div class="line">|   |   ├── homeController.js</div><div class="line">├── /services</div><div class="line">|   ├── /home</div><div class="line">|   |   ├── homeService.js</div><div class="line">├── /routes</div><div class="line">└── app.js</div></pre></td></tr></table></figure>
+
+<p>Imagine que nos <code>services</code> você controla todas as regras de negócio e passa para o seu <code>controller</code>. No controller, você precisa então “requisitar” o <code>service</code> específico, chamando ele dessa forma no arquivo <code>homeController.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeService = <span class="built_in">require</span>( <span class="string">'../../services/home/homeService'</span> );</div></pre></td></tr></table></figure>
+
+<p>Como o arquivo <code>homeController.js</code> está dentro do diretório <code>controllers/home</code>, você precisa voltar dois níveis para então chegar no diretório <code>services</code>, entrar ali e chamar o <code>homeService.js</code>.</p>
+<p>Agora imagine você fazendo isso em um projeto que começa pequeno, mas vai escalando até ficar gigantesco! Se você resolver refatorar alguma coisa mudando algo de lugar, imagine o trabalho de ficar modificando manualmente essas estruturas de diretórios!</p>
+<p>Chato não?!</p>
+<p>Mas felizmente, o Node nos dá algumas maneiras de resolver isso. Você pode usar o método <code>resolve()</code> do módulo <a href="http://nodejs.org/api/path.html#path_path_resolve_from_to" target="_blank" rel="external">path</a>, que vai resolver a sua URL com o caminho absoluto, até onde a aplicação está rodando. Então você pode fazer a chamada assim no seu <code>homeController.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>( <span class="string">'path'</span> );</div><div class="line"><span class="keyword">var</span> homeService = <span class="built_in">require</span>( path.resolve( <span class="string">'services/home/homeService'</span> ) );</div></pre></td></tr></table></figure>
+
+<p>O <code>path</code> vai, a partir do caminho absoluto da sua aplicação, concatenar com o parâmetro passado para o método <code>resolve()</code>. Simples não?</p>
+<p>Mas é ruim ter que ficar adicionando mais uma linha em todo arquivo que eu precisar fazer um require. Por isso eu criei um módulo marotinho chamado <a href="https://github.com/fdaciuk/getmodule" target="_blank" rel="external">getmodule</a>, que facilita isso pra você!</p>
+<p>O <code>getmodule</code> usa o recurso do <code>path.resolve()</code> para gerar o caminho corretamente, mas ele exporta uma variável global chamada <code>getmodule</code> para que você possa substituir o <code>require</code> por ele.</p>
+<p>O módulo é só isso:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">global.getmodule = <span class="function"><span class="keyword">function</span> <span class="title">getmodule</span><span class="params">( modulePath )</span> </span>{</div><div class="line">  <span class="keyword">var</span> path = <span class="built_in">require</span>( <span class="string">'path'</span> );</div><div class="line">  <span class="keyword">return</span> <span class="built_in">require</span>( path.resolve( modulePath ) );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>E para usá-lo, é bem simples. Primeiro instale o módulo no seu projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save getmodule</div></pre></td></tr></table></figure>
+
+<p>Depois, adicione ele ao arquivo principal da sua aplicação. No caso do nosso exemplo, é o <code>app.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>( <span class="string">'getmodule'</span> );</div></pre></td></tr></table></figure>
+
+<p>E pronto! Agora, no nosso <code>homeController.js</code>, podemos simplesmente chamar o service dessa forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeService = getmodule( <span class="string">'services/home/homeService'</span> );</div></pre></td></tr></table></figure>
+
+<p>Que toda a parte verbosa vai ficar por conta do módulo :D</p>
+<p>Ae você me pergunta: <em>É vantagem usar um módulo só pra isso?</em></p>
+<p>Eu penso que sim. Senão você vai ter que ficar criando “helpers” no seu projeto pra fazer isso. Vai acabar deixando o negócio meio desorganizado ou com coisas desnecessárias. Como estamos usando um módulo, ele fica no diretório <code>node_modules</code> e se tiver alguma atualização para ele, pode ser feito via <code>npm update</code>. Muito mais prático trabalhar assim com módulos genéricos.</p>
+<p>Existem algumas outras formas de resolver esse problema, que foram discutidas <a href="https://www.facebook.com/groups/nodejsbrasil/permalink/580587242074567/" target="_blank" rel="external">nesse link</a> no grupo <strong>NodeJS Brasil</strong>, no Facebook.</p>
+<p>Bom, por hoje é só! Gostou da dica? Achou ridículo? Comenta aí :)</p>
+<p>Até a próxima :D</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/nodejs/">nodejs</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/nodejs/">nodejs</a>, <a href="/tags/1postperday/">1postperday</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>1</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/tips/">tips</a><small>1</small></li>
+  
+    <li><a href="/categories/wordcamp/">wordcamp</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
