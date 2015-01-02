@@ -102,7 +102,7 @@
 <p>Como o arquivo <code>homeController.js</code> está dentro do diretório <code>controllers/home</code>, você precisa voltar dois níveis para então chegar no diretório <code>services</code>, entrar ali e chamar o <code>homeService.js</code>.</p>
 <p>Agora imagine você fazendo isso em um projeto que começa pequeno, mas vai escalando até ficar gigantesco! Se você resolver refatorar alguma coisa mudando algo de lugar, imagine o trabalho de ficar modificando manualmente essas estruturas de diretórios!</p>
 <p>Chato não?!</p>
-<p>Mas felizmente, o Node nos dá algumas maneiras de resolver isso. Você pode usar o método <code>resolve()</code> do módulo <a href="http://nodejs.org/api/path.html#path_path_resolve_from_to" target="_blank" rel="external">path</a>, que vai resolver a sua URL com o caminho absoluto, até onde a aplicação está rodando. Então você pode fazer a chamada assim no seu <code>homeController.js</code>:</p>
+<p>Mas felizmente, o Node nos dá algumas maneiras de resolver isso. Você pode usar o método <code>resolve()</code> do módulo <a href="http://nodejs.org/api/path.html#path_path_resolve_from_to" target="_blank" rel="external">path</a>, - que é nativo do Node - que vai resolver a sua URL com o caminho absoluto, até onde a aplicação está rodando. Então você pode fazer a chamada assim no seu <code>homeController.js</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>( <span class="string">'path'</span> );</div><div class="line"><span class="keyword">var</span> homeService = <span class="built_in">require</span>( path.resolve( <span class="string">'services/home/homeService'</span> ) );</div></pre></td></tr></table></figure>
 
 <p>O <code>path</code> vai, a partir do caminho absoluto da sua aplicação, concatenar com o parâmetro passado para o método <code>resolve()</code>. Simples não?</p>
@@ -126,6 +126,9 @@
 <p>Existem algumas outras formas de resolver esse problema, que foram discutidas <a href="https://www.facebook.com/groups/nodejsbrasil/permalink/580587242074567/" target="_blank" rel="external">nesse link</a> no grupo <strong>NodeJS Brasil</strong>, no Facebook.</p>
 <p>Bom, por hoje é só! Gostou da dica? Achou ridículo? Comenta aí :)</p>
 <p>Até a próxima :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+</blockquote>
 
       
     </div>
