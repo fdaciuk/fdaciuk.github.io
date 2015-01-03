@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-02T23:20:50.285Z</updated>
+  <updated>2015-01-03T11:03:29.934Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -13,6 +13,66 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 1/3]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"/>
+    <id>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</id>
+    <published>2015-01-03T00:00:00.000Z</published>
+    <updated>2015-01-03T11:03:19.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-amd.jpg" alt=""></p>
+<p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa: </p>
+<p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
+<p>Para responder a essa pergunta, entram em cena duas especificações de módulo: <strong>AMD</strong> e <strong>CommonJS</strong> (ou <strong>CJS</strong>).</p>
+<p>Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.</p>
+<a id="more"></a>
+
+<h2 id="AMD">AMD</h2>
+<p><strong>Asynchronous Module Definition</strong> (AMD) ficou bastante conhecido por causa do <a href="http://requirejs.org/" target="_blank" rel="external">RequireJS</a>. O formato de utilização do AMD é o seguinte:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define( <span class="string">'moduleName'</span>, [ <span class="string">'jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Essa é a estrutura mais básica de um módulo escrito no formato AMD. A função <code>define</code> será usada para todo novo módulo que você criar.</p>
+<p>Como primeiro parâmetro dessa função, você pode passar o nome do módulo - opcional - (que será usado para você fazer o “include” dele em outro lugar).</p>
+<p>O segundo parâmetro é um array de dependências desse módulo, também opcional. No nosso exemplo, colocamos como dependência a biblioteca jQuery.</p>
+<p>E o terceiro parãmetro é a função de callback que define o módulo e retorna o seu conteúdo. Essa função é obrigatória. Ela será chamada assim que todas as dependências do array no segundo parâmetro forem baixadas, e estiverem prontas para uso. </p>
+<p>As dependências normalmente retornam valores. Para usar os valores retornados, você deve passar como parâmetros da função as variáveis que irão receber os valores das dependências, sempre na mesma ordem do array.</p>
+<p>Por exemplo, se no seu módulo você vai precisar utilizar o jQuery e a LoDash, você pode fazer a chamada da seguinte forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Se não houver dependências, a função já será executada assim que ela for chamada:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>A ideia aqui é falar apenas como funcionam cada uma das especificações. Em posts futuros, entrarei em mais detalhes de como usar cada formato, especificamente.</p>
+<p>No próximo post, falaremos um pouco sobre o <strong>CommonJS</strong>. Até lá!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-amd.jpg" alt=""></p>
+<p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa: </p>
+<p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
+<p>Para responder a essa pergunta, entram em cena duas especificações de módulo: <strong>AMD</strong> e <strong>CommonJS</strong> (ou <strong>CJS</strong>).</p>
+<p>Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.</p>
+]]>
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/tags/javascript/"/>
+    
+      <category term="modules" scheme="http://blog.da2k.com.br/tags/modules/"/>
+    
+      <category term="amd" scheme="http://blog.da2k.com.br/tags/amd/"/>
+    
+      <category term="commonjs" scheme="http://blog.da2k.com.br/tags/commonjs/"/>
+    
+      <category term="umd" scheme="http://blog.da2k.com.br/tags/umd/"/>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Caminhos relativos no NodeJS]]></title>
