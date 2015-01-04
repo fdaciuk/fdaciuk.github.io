@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-03T21:56:27.200Z</updated>
+  <updated>2015-01-04T02:05:08.424Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,72 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 2/3]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/"/>
+    <id>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</id>
+    <published>2015-01-04T00:00:00.000Z</published>
+    <updated>2015-01-04T01:25:20.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-commonjs.jpg" alt=""></p>
+<p>No <a href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/" target="_blank" rel="external">artigo anterior</a>, mostrei um pouco do formato <strong>AMD</strong>. Hoje vamos falar sobre o <strong>CommonJS</strong>.</p>
+<a id="more"></a>
+
+<h2 id="CommonJS">CommonJS</h2>
+<p>Também conhecido carinhosamente como <strong>CJS</strong>, se você já escreveu algum código em NodeJS vai estar familiarizado com o formato.</p>
+<p>Usando o exemplo dado quando falamos sobre AMD, nós podemos escrevê-lo assim, usando CJS:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $ = <span class="built_in">require</span>( <span class="string">'jquery'</span> );</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myModule</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">}</div><div class="line"><span class="built_in">module</span>.exports = myModule;</div></pre></td></tr></table></figure>
+
+<p>Nesse formato as coisas ficam muito explícitas. Na variável <code>$</code>, estamos importando através do <code>require</code> o módulo <code>jquery</code>. Na função <code>myModule()</code>, você vai escrever seu módulo, que será exportado através do <code>module.exports</code>, para que possa ser importado para outro arquivo usando o <code>require</code>.</p>
+<p>E o módulo <code>jquery</code>, para ser importado com o <code>require</code>, terá uma estrutura mais ou menos assim (arquivo <code>jquery.js</code>): </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jQuery</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// código da jQuery</span></div><div class="line">}</div><div class="line"><span class="built_in">module</span>.exports = jQuery;</div></pre></td></tr></table></figure>
+
+<p>Bem fácil de entender, não?</p>
+<p>O <strong>CommonJS</strong> também dispõe de um objeto <code>exports</code>, que nada mais é que um alias para <code>module.exports</code>. Usando o <code>exports</code>, você consegue exportar vários métodos separadamente:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">exports.method1 = <span class="function"><span class="keyword">function</span> <span class="title">method1</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// método 1 do seu módulo</span></div><div class="line">};</div><div class="line"></div><div class="line">exports.method2 = <span class="function"><span class="keyword">function</span> <span class="title">method2</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// método 2 do seu módulo</span></div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Que também pode ser escrito dessa forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> {</div><div class="line">    method1: <span class="function"><span class="keyword">function</span> <span class="title">method1</span><span class="params">()</span> </span>{</div><div class="line">      <span class="comment">// método 1 do seu módulo</span></div><div class="line">    },</div><div class="line"></div><div class="line">    method2: <span class="function"><span class="keyword">function</span> <span class="title">method2</span><span class="params">()</span> </span>{</div><div class="line">      <span class="comment">// método 2 do seu módulo</span></div><div class="line">    }</div><div class="line">  }</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Os dois retornam exatamente a mesma coisa. Na verdade, no segundo exemplo é necessário executar a função antes de poder usar os métodos, mas os dois são formatos padrão de objetos Javascript, que você já está acostumado (se não está, em breve teremos posts falando sobre isso) :)</p>
+<p>Podemos usar o <strong>CommonJS</strong> tanto no servidor, com NodeJS, por exemplo, como no browser, com o <a href="http://browserify.org/" target="_blank" rel="external">browserify</a>.</p>
+<p>Bom, vimos que, usando tanto <strong>AMD</strong> como o <strong>CommonJS</strong>, fica fácil de modularizar qualquer código JS. Mas pensando em um cenário mais amplo: como eu vou saber se o desenvolvedor que vai usar meu módulo está usando <strong>AMD</strong> ou <strong>CommonJS</strong>? Vou ter que disponibilizar duas versões?</p>
+<p>Criar duas versões do mesmo código é praticamente uma heresia! <a href="http://pt.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" rel="external"><strong>DON’T REPEAT YOURSELF</strong></a>! </p>
+<p><em>Mas como resolver isso então?</em> </p>
+<p>Vamos ver no próximo post, sobre <strong>UMD</strong>! Aguarde :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-commonjs.jpg" alt=""></p>
+<p>No <a href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/" target="_blank" rel="external">artigo anterior</a>, mostrei um pouco do formato <strong>AMD</strong>. Hoje vamos falar sobre o <strong>CommonJS</strong>.</p>
+]]>
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/tags/javascript/"/>
+    
+      <category term="modules" scheme="http://blog.da2k.com.br/tags/modules/"/>
+    
+      <category term="amd" scheme="http://blog.da2k.com.br/tags/amd/"/>
+    
+      <category term="commonjs" scheme="http://blog.da2k.com.br/tags/commonjs/"/>
+    
+      <category term="umd" scheme="http://blog.da2k.com.br/tags/umd/"/>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+      <category term="commonjs" scheme="http://blog.da2k.com.br/categories/javascript/commonjs/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 1/3]]></title>
     <link href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"/>
     <id>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</id>
     <published>2015-01-03T00:00:00.000Z</published>
-    <updated>2015-01-03T11:04:12.000Z</updated>
+    <updated>2015-01-04T01:25:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-amd.jpg" alt=""></p>
 <p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa: </p>
 <p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
@@ -71,6 +132,8 @@
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+      <category term="amd" scheme="http://blog.da2k.com.br/categories/javascript/amd/"/>
     
   </entry>
   
