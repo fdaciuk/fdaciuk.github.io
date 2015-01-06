@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-05T00:09:54.487Z</updated>
+  <updated>2015-01-06T01:50:06.482Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,197 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Pensando TDD com Javascript]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/"/>
+    <id>http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/</id>
+    <published>2015-01-06T00:00:00.000Z</published>
+    <updated>2015-01-06T01:47:47.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/tdd-red-refactor-green.jpg" alt="TDD"></p>
+<p><strong>TDD</strong> é uma técnica de desenvolvimento. Provavelmente você já leu muitos artigos falando sobre TDD. Talvez você até já experimentou alguma ferramenta de TDD ao desenvolver seus códigos. Mas você continua usando? Você sabe o valor de desenvolver um código testável?</p>
+<a id="more"></a>
+
+<p>Assisti muitas palestras sobre TDD, vi vários slides, li artigos e iniciei meus estudos, tentando colocar em prática tudo o que tinha visto. </p>
+<p><em>“- Por que iniciar com baby steps?”</em><br><em>“- Por onde eu devo começar?”</em><br><em>“- Devo fazer testes nos meus arquivos já existentes?”</em>,<br><em>“- O que eu devo escrever primeiro?”</em>,<br><em>“- O que realmente eu preciso testar?”</em> </p>
+<p>Eram perguntas que sempre vinham a minha mente quando eu começava.</p>
+<p>O nome do negócio é auto-explicativo: <strong>TDD - Test Drive Development</strong>, ou “<strong>Desenvolvimento Guiado por Testes</strong>“. Se o desenvolvimento deve ser guiado por testes, significa que eu preciso começar a escrever testes que irão guiar meu desenvolvimento, correto? Correto! Mas como fazer isso? Não é tão simples para começar.</p>
+<p>Nas palestras que eu assistia, sempre mostravam as mesmas coisas:</p>
+<ul>
+<li>Escreva um teste</li>
+<li>Desenvolva em cima do teste algo com baby steps</li>
+<li>Faça o teste passar</li>
+<li>Refatore o código</li>
+<li>Escreva outro teste</li>
+<li>Continue nessa sequência</li>
+</ul>
+<p>Eu começava a escrever meus testes e, chegava uma hora que eu já estava todo perdido, pois tinha feito um teste onde eu precisaria escrever uma lógica muito grande de código, e acabava deixando tudo de lado novamente.</p>
+<p>Os princípios que eu ouvia estavam corretos, mas eu não conseguia começar sem ver um exemplo real.</p>
+<p>Foi então que em Janeiro do ano passado (2014), eu assisti uma palestra do <a href="https://twitter.com/caiofbpa" target="_blank" rel="external">Caio Andrade</a> sobre <strong>Artesanato de Software</strong>, onde ele falava de TDD e Código Limpo( o cara manja muito, sigam ele ae xD).</p>
+<p>Trocando algumas ideias com ele, percebi que, o que faltava pra eu entender de vez o porquê de escrever testes, é que eu precisava <strong>pensar TDD</strong> e aprender a escrever código limpo de verdade.</p>
+<h2 id="Clean_Code">Clean Code</h2>
+<p>Na palestra do Caio, ele recomenda o livro <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" target="_blank" rel="external"><strong>Clean Code</strong></a>, que apesar de ser baseado em Java, os conceitos são possíveis de se aplicar em qualquer linguagem, inclusive Javascript. </p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/clean-code-book.jpg" alt="Livro Clean Code"></p>
+<p>Recomendo fortemente a leitura do livro, que tem inclusive <a href="http://www.saraiva.com.br/codigo-limpo-habilidades-praticas-do-agile-software-edicao-revisada-2666082.html" target="_blank" rel="external">versão em pt-BR</a>, se você preferir :D</p>
+<p>Vou procurar falar bastante de <em>Clean Code</em> nos meus artigos, citando algumas dicas enquanto estiver mostrando códigos. Mas sério, leia o livro. Você não vai se arrepender, e vai te ajudar muito a pensar de forma diferente enquanto estiver programando :)</p>
+<h2 id="Como_começar">Como começar</h2>
+<p>Se você está começando agora com TDD, você precisa experimentar bastante, mas fora do seu ambiente de trabalho! Pratique muito as dicas passadas aqui até que fique clara a sua implementação. Se tiver dúvidas, poste nos comentários e vamos crescendo juntos! Também estou a pouco tempo escrevendo testes, mas quanto mais praticamos, mais aprendemos!</p>
+<p>Inicialmente, vou mostrar como fazer testes usando Javascript do lado do servidor, com NodeJS. Mas em posts futuros, iremos ver também como implementar no <em>client side</em>, quando criarmos nossos próprios componentes, colocando em prática o que aprendemos nos <a href="http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/" target="_blank" rel="external">posts sobre módulos</a>!</p>
+<h2 id="Preparando_o_ambiente">Preparando o ambiente</h2>
+<p>Vamos começar pela instalação das ferramentas necessárias para iniciarmos nossos testes. Iremos precisar de:</p>
+<ul>
+<li>NodeJS (óbvio);</li>
+<li><a href="http://mochajs.org/" target="_blank" rel="external">Mocha</a> - Para rodar os testes. Deve ser instalado globalmente;</li>
+<li><a href="https://github.com/gotwarlost/istanbul" target="_blank" rel="external">Istanbul</a> - Para Code Coverage. Também iremos instalar globalmente;</li>
+<li><a href="https://github.com/shouldjs/should.js" target="_blank" rel="external">ShouldJS</a> - Para fazer as asserções. Esse módulo será instalado localmente.</li>
+</ul>
+<h2 id="Mocha">Mocha</h2>
+<p>O Mocha é a ferramenta que vamos utilizar para executar nossos testes, e que vai disponibilizar a interface que necessitamos para padronizar a escrita dos testes. Por questões de legibilidade, iremos utilizar o formato <strong>BDD</strong>.</p>
+<p>BDD significa <em>Behavior Driven Development</em>, ou <em>Desenvolvimento Guiado por Comportamento</em>. Ele nada mais é do que uma forma mais “legível” (digamos assim), de escrever nossos testes.</p>
+<p>Só pra você entender melhor: em uma interface com TDD (usando <a href="http://nodejs.org/api/assert.html" target="_blank" rel="external">assert</a>, você escreveria seu código mais ou menos assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> assert = <span class="built_in">require</span>( <span class="string">'assert'</span> );</div><div class="line">assert.equal( ( <span class="number">1</span> + <span class="number">2</span> ), <span class="number">3</span>, <span class="string">'1 + 2 should be equal 3'</span> );</div></pre></td></tr></table></figure>
+
+<p>O módulo <code>assert</code> faz parte do core do NodeJS, e ele usa TDD. Seu método <code>equal()</code> recebe 3 parâmetros: o valor atual (que você quer testar), o valor esperado e uma mensagem que será mostrada no seu terminal quando esse teste rodar.</p>
+<p>Os parâmetros não ficam implícitos ao olhar esse código pela primeira vez, e sem conhecer o módulo assert. Você sabe que ali tem 3 parâmetros, mas não sabe o que exatamente eles são até que você olhe a documentação.</p>
+<p>Agora, olhe como ficaria o mesmo código usando BDD, com o módulo <a href="https://github.com/shouldjs/should.js" target="_blank" rel="external">should</a>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> should = <span class="built_in">require</span>( <span class="string">'should'</span> );</div><div class="line">( <span class="number">1</span> + <span class="number">2</span> ).should.be.equal( <span class="number">3</span> );</div></pre></td></tr></table></figure>
+
+<p>Precisa dizer algo? O <code>should</code> extende os objetos nativos do JS, adicionando uma propriedade <code>should</code>.<br>Essa propriedade é um objeto com outras propriedades e métodos que dizem exatamente o que é esperado do teste. Traduzindo o código acima, você pode ler:</p>
+<blockquote>
+<p>1 + 2 deveria ser igual a 3.</p>
+</blockquote>
+<p>Você também pode usar a variável <code>should</code>, que definimos ao usar <code>require( &#39;should&#39; )</code>, dessa forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> should = <span class="built_in">require</span>( <span class="string">'should'</span> );</div><div class="line">should( <span class="number">1</span> + <span class="number">2</span> ).be.equal( <span class="number">3</span> );</div></pre></td></tr></table></figure>
+
+<p>Que você terá o mesmo resultado. E a leitura é bastante semãntica.</p>
+<p>Esse é o motivo de escolhermos BDD :)</p>
+<p>Se quiser, depois você pode visitar o site do Mocha e ver quais são as outras interfaces que ele disponibiliza, e exemplos de cada uma delas, ok? Vamos em frente!</p>
+<p><em>Perae, perae.. e o que é esse tal Istanbul?</em></p>
+<p>Não comentei sobre ele porque ainda não tinha chegado a hora. Mas já que você perguntou, vamos lá: </p>
+<h2 id="Code_Coverage">Code Coverage</h2>
+<p>O <strong>Istanbul</strong> vai nos ajudar a fazer a cobertura do nosso código. Quando você começa a escrever testes, como você vai saber se esses testes estão cobrindo todos os <code>if&#39;s</code>, <code>switch&#39;s</code>, <code>function&#39;s</code>, etc, do seu código? O <strong>Istanbul</strong> nos ajuda com isso. Ele mostra a porcentagem de quanto o seu código está coberto por testes, e o que ainda não está testado. Vai ficar mais fácil entender quando começarmos a mexer com ele :)</p>
+<h2 id="Continuando…">Continuando…</h2>
+<p>Após instalar o NodeJS (se já não o tiver instalado), instale o Mocha e o Istanbul globalmente:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g mocha istanbul</div></pre></td></tr></table></figure>
+
+<p>Agora precisamos de um projeto para ver na prática como fazer nossos testes.</p>
+<h2 id="Iniciando_nosso_projeto">Iniciando nosso projeto</h2>
+<p>Vamos criar um módulo de soma. Uma função que recebe dois números e retorna a soma desses dois números. Exemplo bem besta, para você ver do início como deve testar um código. Crie a seguinte estrutura para nosso projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── app.js</div><div class="line">├── sum.js</div><div class="line">└── /tests</div><div class="line">    └── sumTest.js</div></pre></td></tr></table></figure>
+
+<p>O arquivo <code>app.js</code> executará nossa aplicação. O <code>sum.js</code> será nosso módulo responsável por fazer a soma.<br>E no diretório <code>tests</code>, iremos centralizar nossos testes.</p>
+<p>Ainda não temos nenhum código escrito. A ideia de usar TDD (ou BDD), é fazer com que todo o nosso desenvolvimento seja <strong>guiado</strong> por testes. Então, antes de escrever qualquer código, precisamos dizer o que esperamos que o nosso código faça. </p>
+<p>Parece insano não? Mas pense como se você estivesse criando uma documentação. Você vai escrever a <strong>interface</strong> do seu projeto, aquilo que você espera que seja público, mostrando como usá-lo. A diferença é que, com TDD, nós vamos garantir que essa interface realmente funciona como deveria.</p>
+<p>No final, você vai ver que os seus testes são exatamente isso: a documentação do seu projeto :)</p>
+<p>Mas antes de tudo, vamos instalar o <code>should</code>, pois sabemos que vamos precisar dele, como vimos no exemplo lá no começo do artigo:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i should</div></pre></td></tr></table></figure>
+
+<p>Então vamos começar pelo nosso arquivo <code>sum.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>( <span class="string">'should'</span> );</div><div class="line"><span class="keyword">var</span> sum = <span class="built_in">require</span>( <span class="string">'../sum'</span> );</div><div class="line"></div><div class="line">describe( <span class="string">'sum.js'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  it( <span class="string">'sum of 2 + 3 should return 5'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    sum( <span class="number">2</span>, <span class="number">3</span> ).should.be.equal( <span class="number">5</span> );</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>As funções <code>describe()</code> e <code>it()</code> fazem parte da interface do Mocha. O <code>describe()</code> cria um escopo de testes. No nosso caso, vamos usá-lo para testar todo o nosso módulo <code>sum.js</code>. O primeiro parâmetro que ele recebe é uma descrição para esse escopo. Vou deixar somente o nome do módulo, para simplificar. </p>
+<p>O segundo parâmetro é a função que será executada quando rodarmos esse escopo.</p>
+<p>A função <code>it()</code> é o que vamos usar como <em>wrapper</em> para o nosso teste. No primeiro parâmetro, você coloca a descrição do que você vai testar. O segundo parâmetro é a função que executará quando esse teste rodar.</p>
+<p>Devemos usar somente um <code>it()</code> por teste. E cada teste deve testar apenas uma coisa por vez. Da mesma forma que, no seu código, cada método ou função vai ter apenas uma responsabilidade, seguindo o <strong>SRP (Single Responsibility Principle)</strong>, devemos seguir o mesmo princípio para os testes: um <code>it()</code> por teste.</p>
+<p>E dentro do <code>it()</code>, fazemos a asserção. O que nós queremos é que, ao passar dois números como parâmetro para nosso módulo, ele retorne a soma desses dois números.</p>
+<p>Agora vamos executar nosso teste e ver o que vai acontecer:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mocha tests/sumTest.js</div></pre></td></tr></table></figure>
+
+<p>O resultado que você vai obter deve ser parecido com isso:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ mocha tests/sumTest.js </div><div class="line">  </div><div class="line">  </div><div class="line">  sum.js</div><div class="line">    <span class="number">1</span>) sum of <span class="number">2</span> + <span class="number">3</span> should <span class="keyword">return</span> <span class="number">5</span></div><div class="line">    </div><div class="line">    </div><div class="line">  <span class="number">0</span> passing (<span class="number">11</span>ms)</div><div class="line">  <span class="number">1</span> failing</div><div class="line">  </div><div class="line">  <span class="number">1</span>) sum.js sum of <span class="number">2</span> + <span class="number">3</span> should <span class="keyword">return</span> <span class="number">5</span>:</div><div class="line">     TypeError: object is not a function</div><div class="line">      at Context.&lt;anonymous&gt; (/var/www/tdd/tests/sumTest.js:<span class="number">6</span>:<span class="number">5</span>)</div><div class="line">      at callFn (/usr/lib/node_modules/mocha/lib/runnable.js:<span class="number">251</span>:<span class="number">21</span>)</div><div class="line">      at Test.Runnable.run (/usr/lib/node_modules/mocha/lib/runnable.js:<span class="number">244</span>:<span class="number">7</span>)</div><div class="line">      at Runner.runTest (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">374</span>:<span class="number">10</span>)</div><div class="line">      at /usr/lib/node_modules/mocha/lib/runner.js:<span class="number">452</span>:<span class="number">12</span></div><div class="line">      at next (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">299</span>:<span class="number">14</span>)</div><div class="line">      at /usr/lib/node_modules/mocha/lib/runner.js:<span class="number">309</span>:<span class="number">7</span></div><div class="line">      at next (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">248</span>:<span class="number">23</span>)</div><div class="line">      at Object._onImmediate (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">276</span>:<span class="number">5</span>)</div><div class="line">      at processImmediate [as _immediateCallback] (timers.js:<span class="number">345</span>:<span class="number">15</span>)</div></pre></td></tr></table></figure>
+
+<p>Na linha <code>1</code> mostra o comando de execução do teste.<br>Na linha <code>4</code>, mostra o texto que passamos para o <code>describe()</code>.<br>Na linha <code>5</code> mostra o texto que passamos para o <code>it()</code>, descrevendo o teste.<br>Na linha <code>8</code> e <code>9</code>, mostra quantos dos nossos passaram, e quantos falharam, e o tempo que demoraram para executar.<br>Na linha <code>11</code> ele mostra a descrição do teste que falhou.<br>Na linha <code>12</code> vai mostrar o motivo da falha: <code>TypeError: object is not a function</code>.</p>
+<p>Você sabe por que deu erro? Porque ainda não temos a função o nosso módulo <code>sum</code>. Mas no nosso teste, nós fizemos o <code>require</code> dele na variável <code>sum</code>. E dentro do nosso teste, esperávamos que ele fosse uma função, recebendo dois números e retornando a soma dos mesmos.</p>
+<p>Acabamos de concluir com sucesso a primeira parte dos testes: o <span style="color: red"><strong>RED</strong></span>. Lembra dos passos completos de um teste, que você vê em todo lugar? Se não sabe, os passos são esses:</p>
+<ul>
+<li><span style="color: red"><strong>RED</strong></span> - Fazer um teste para quebrar;</li>
+<li><span style="color: green"><strong>GREEN</strong></span> - Escrever um código, usando baby steps, para que o teste passe;</li>
+<li><strong>REFACTOR</strong> - Com o teste passado, refatorar o código, se necessário, para que funcione de maneira aceitável.</li>
+</ul>
+<p>Agora vamos para o segundo passo: fazer nosso código funcionar, com o mínimo de código possível.</p>
+<p>No arquivo <code>sum.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="number">5</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><em>Por que você retornou <code>5</code> direto?</em></p>
+<p>Isso são <em>baby steps</em>. Você não vai fazer toda a implementação do seu código agora, mas somente o MÍNIMO NECESSÁRIO para que o teste passe. Qual o resultado que o nosso teste precisa para passar? Não é <code>5</code>? Então iremos retornar <code>5</code>. Logo você vai entender melhor.</p>
+<p>Vamos rodar o teste novamente:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mocha tests/sumTest.js</div></pre></td></tr></table></figure>
+
+<p>E o resultado:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ mocha tests/sumTest.js </div><div class="line">  </div><div class="line">  </div><div class="line">  sum.js</div><div class="line">    ✓ sum of <span class="number">2</span> + <span class="number">3</span> should <span class="keyword">return</span> <span class="number">5</span> </div><div class="line">    </div><div class="line">  </div><div class="line">  <span class="number">1</span> passing (<span class="number">10</span>ms)</div></pre></td></tr></table></figure>
+
+<p>Nosso teste passou! Aeeee!! Já temos o <span style="color: green"><strong>GREEN</strong></span>. </p>
+<p><em>O que precisamos fazer agora?</em></p>
+<p>Passamos nesse primeiro teste pelo <span style="color: red"><strong>RED</strong></span> e pelo <span style="color: green"><strong>GREEN</strong></span>. Agora temos que verificar se o nosso código está sujo, se tem algo que poderia melhorar nele para que seja mais legível. Essa é a etapa do <strong>REFACTOR</strong>. </p>
+<p>O que pode ser melhorado nesse código? A resposta é: <strong>NADA</strong>!</p>
+<p><em>Mas como <strong>NADA</strong>? Você tá louco? Vai deixar um número fixo no código? Tá maluco? Não era pra somar? Vou sair daqui, não quero ler mais!</em></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/senta-aqui-jovem.jpg" alt="Que rebeldia é essa jovem? Senta aqui, vamos conversar."></p>
+<p>Calma jovem. Você vai entender isso agora. Os testes servem para testar todas as possibilidades de entrada de dado que podem chegar ao nosso código. Então ainda não acabou. Vamos testar mais uma possibilidade. </p>
+<p>Voltando ao <code>tests/sumTest.js</code>, adicione logo após o primeiro <code>it()</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">it( <span class="string">'sum of 10 + 10 should return 20'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  sum( <span class="number">10</span>, <span class="number">10</span> ).should.be.equal( <span class="number">20</span> );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Vamos rodar nosso teste novamente:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mocha tests/sumTest.js</div></pre></td></tr></table></figure>
+
+<p>E temos como resultado:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">$ mocha tests/sumTest.js </div><div class="line">  </div><div class="line">  </div><div class="line">  sum.js</div><div class="line">    ✓ sum of <span class="number">2</span> + <span class="number">3</span> should <span class="keyword">return</span> <span class="number">5</span> </div><div class="line">    <span class="number">1</span>) sum of <span class="number">10</span> + <span class="number">10</span> should <span class="keyword">return</span> <span class="number">20</span></div><div class="line">    </div><div class="line">    </div><div class="line">  <span class="number">1</span> passing (<span class="number">14</span>ms)</div><div class="line">  <span class="number">1</span> failing</div><div class="line">  </div><div class="line">  <span class="number">1</span>) sum.js sum of <span class="number">10</span> + <span class="number">10</span> should <span class="keyword">return</span> <span class="number">20</span>:</div><div class="line">      </div><div class="line">      AssertionError: expected <span class="number">5</span> to be <span class="number">20</span></div><div class="line">      + expected - actual</div><div class="line">      </div><div class="line">      +<span class="number">20</span></div><div class="line">      -<span class="number">5</span></div><div class="line">      </div><div class="line">      at Assertion.fail (/var/www/tdd/node_modules/should/lib/assertion.js:<span class="number">113</span>:<span class="number">17</span>)</div><div class="line">      at Assertion.prop.(anonymous function) (/var/www/tdd/node_modules/should/lib/assertion.js:<span class="number">39</span>:<span class="number">14</span>)</div><div class="line">      at Context.&lt;anonymous&gt; (/var/www/tdd/tests/sumTest.js:<span class="number">10</span>:<span class="number">29</span>)</div><div class="line">      at callFn (/usr/lib/node_modules/mocha/lib/runnable.js:<span class="number">251</span>:<span class="number">21</span>)</div><div class="line">      at Test.Runnable.run (/usr/lib/node_modules/mocha/lib/runnable.js:<span class="number">244</span>:<span class="number">7</span>)</div><div class="line">      at Runner.runTest (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">374</span>:<span class="number">10</span>)</div><div class="line">      at /usr/lib/node_modules/mocha/lib/runner.js:<span class="number">452</span>:<span class="number">12</span></div><div class="line">      at next (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">299</span>:<span class="number">14</span>)</div><div class="line">      at /usr/lib/node_modules/mocha/lib/runner.js:<span class="number">309</span>:<span class="number">7</span></div><div class="line">      at next (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">248</span>:<span class="number">23</span>)</div><div class="line">      at Object._onImmediate (/usr/lib/node_modules/mocha/lib/runner.js:<span class="number">276</span>:<span class="number">5</span>)</div><div class="line">      at processImmediate [as _immediateCallback] (timers.js:<span class="number">345</span>:<span class="number">15</span>)</div></pre></td></tr></table></figure>
+
+<p>Na linha <code>5</code>, mostra que o nosso primeiro teste continua passando.<br>Na linha <code>6</code>, mostra que o nosso segundo teste quebrou.<br>A partir da linha <code>12</code>, mostra a descrição do teste que quebrou: <code>AssertionError: expected 5 to be 20</code>. Ou seja: houve um erro na asserção: era esperado que, o 5 que a função está retornando fosse igual a 20.</p>
+<p>Na linha <code>15</code> mostra que, nas linhas abaixo, o que está com o sinal de <code>+</code> é o esperado <em>(expected)</em>, e o que está com o sinal de <code>-</code> é o valor atual <em>(actual)</em>, que foi retornado.</p>
+<p>Voltamos ao ciclo, passando com sucesso pelo <span style="color: red"><strong>RED</strong></span>, criando uma nova possibilidade que quebra nosso código.</p>
+<p>Tá conseguindo compreender agora o que estamos fazendo? Imagine os testes como aquele usuário que acessa seu site, fazendo aquelas ações que você sempre diz: <em>- Não, o usuário nunca vai fazer isso -</em> e é exatamente o que ele faz :P</p>
+<p>Os testes vão garantir que, qualquer bizarrice que o seu código receber como entrada, vai ser tratado corretamente para devolver sempre o valor correto no final. Agora tá ficando legal né, fala a verdade :D</p>
+<p>Então, vamos refatorar nosso código, para fazer com que o segundo teste passe. Lembrando que o primeiro teste não deve quebrar, pois já passamos por ele. Agora os dois testes precisam passar. Como vamos fazer isso?</p>
+<p>Voltamos ao <code>sum.js</code> e mudamos o nosso <code>return</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  <span class="keyword">return</span> number1 + number2;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Então, executamos novamente nosso teste:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mocha tests/sumTest.js</div></pre></td></tr></table></figure>
+
+<p>E temos o resultado:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ mocha tests/sumTest.js </div><div class="line">  </div><div class="line">  </div><div class="line">  sum.js</div><div class="line">    ✓ sum of <span class="number">2</span> + <span class="number">3</span> should <span class="keyword">return</span> <span class="number">5</span> </div><div class="line">    ✓ sum of <span class="number">10</span> + <span class="number">10</span> should <span class="keyword">return</span> <span class="number">20</span> </div><div class="line">    </div><div class="line">    </div><div class="line">  <span class="number">2</span> passing (<span class="number">14</span>ms)</div></pre></td></tr></table></figure>
+
+<p>Uhuull!! Passamos mais um teste! o/</p>
+<p>Agora, verificamos se podemos refatorar alguma coisa. Nos dois casos, não houve necessidade de refactor. O código está bem simples e legível. Fizemos somente uma função simples, que retorna dois números passados como parâmetro. Mas aí eu te pergunto: dá pra testar mais alguma coisa ainda nesse código?</p>
+<p>Se você começar a pensar nas possibilidades, dá sim. Mas esse post já está grande demais. Como lição de casa, vou deixar para VOCÊ JOVEM, complementar isso e fazer mais alguns testes. Por exemplo: você pode testar se o usuário vai entrar algum valor diferente de número. Se entrar, você precisa ver o que é o mais correto retornar: dispara um erro? Retorna <code>undefined</code>? Você decide. O módulo é seu. Você só precisa testar as possibilidades para ver se ele retorna o que realmente você espera.</p>
+<p>Quando você terminar de testar o seu módulo, e executar o <code>mocha</code> com todos os testes passados, vai perceber que tem a documentação completa do seu módulo, dizendo exatamente o que ele faz, o que ele espera e o que ele retorna :D</p>
+<h2 id="Conclusão">Conclusão</h2>
+<p>Essa foi só uma introdução aos testes. Nem mostrei sobre <em>Code Coverage</em>, mas o farei em um próximo post. E esse vai ser breve, pois minha meta é fazer <a href="">1 post por dia</a> :D</p>
+<p>Iremos falar muito sobre TDD/BDD e Clean Code também. Aguarde, nos próximos artigos :D</p>
+<p>Não esqueça de assinar o <a href="http://blog.da2k.com.br/atom.xml" target="_blank" rel="external">RSS</a> para receber atualizações sempre que tiver um post novo :)</p>
+<p>O <a href="http://willianjusten.com.br/" target="_blank" rel="external">Willian Justen</a> escreveu um <a href="http://willianjusten.com.br/um-post-por-dia/" target="_blank" rel="external">post citando o <strong>#1postperday</strong></a>, pois ele também está participando!</p>
+<p>No post, ele dá dicas de algumas ferramentas que você pode usar para se manter atualizado! Siga o blog dele também, tem conteúdo muito bom vindo por ae :D</p>
+<p>E então.. deu pra entender bem? Ficou alguma dúvida? Comenta ae, e até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/tdd-red-refactor-green.jpg" alt="TDD"></p>
+<p><strong>TDD</strong> é uma técnica de desenvolvimento. Provavelmente você já leu muitos artigos falando sobre TDD. Talvez você até já experimentou alguma ferramenta de TDD ao desenvolver seus códigos. Mas você continua usando? Você sabe o valor de desenvolver um código testável?</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="tdd" scheme="http://blog.da2k.com.br/tags/tdd/"/>
+    
+      <category term="bdd" scheme="http://blog.da2k.com.br/tags/bdd/"/>
+    
+      <category term="code coverage" scheme="http://blog.da2k.com.br/tags/code-coverage/"/>
+    
+      <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 3/3]]></title>
     <link href="http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/"/>
     <id>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</id>
     <published>2015-01-05T00:00:00.000Z</published>
-    <updated>2015-01-04T23:32:28.000Z</updated>
+    <updated>2015-01-05T00:10:22.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-umd.jpg" alt=""></p>
 <p>Já vimos como modularizar nossos códigos usando <a href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/" target="_blank" rel="external">AMD</a> e <a href="http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/" target="_blank" rel="external">CommonJS</a>. Hoje veremos o <strong>Capitão Planeta</strong> dos módulos: o <strong>UMD</strong>!</p>
 <a id="more"></a>

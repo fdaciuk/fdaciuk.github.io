@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/</loc>
+    <lastmod>2015-01-06T01:47:47.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</loc>
-    <lastmod>2015-01-04T23:32:28.000Z</lastmod>
+    <lastmod>2015-01-05T00:10:22.000Z</lastmod>
   </url>
   
   <url>
@@ -37,7 +42,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
@@ -47,12 +52,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
+    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
