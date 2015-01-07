@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Code Coverage em Javascript | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Já conversamos um pouco sobre TDD/BDD e montamos nosso ambiente para começar a brincar com testes. Que tal agora verificarmos como anda nossa cobertura de código? Let’s go!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Code Coverage em Javascript"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/istanbul.jpg" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-07T00:00:00.000Z"><a href="/2015/01/07/code-coverage-em-javascript/">7 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Code Coverage em Javascript</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/istanbul.jpg" alt="Istanbul"></p>
+<p>Já conversamos um pouco sobre TDD/BDD e montamos nosso ambiente para começar a brincar com testes. Que tal agora verificarmos como anda nossa cobertura de código? Let’s go!</p>
+<a id="more"></a>
+
+<h2 id="Code_Coverage">Code Coverage</h2>
+<p>Ferramentas de <em>Code Coverage</em> testam quantos porcento do nosso código está coberto por testes. Se você acompanhou o <a href="http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/" target="_blank" rel="external">post anterior sobre testes</a>, você já deve ter o <a href="https://github.com/gotwarlost/istanbul" target="_blank" rel="external">Istanbul</a> instalado. Se não tiver, dá uma lida lá no post e prepare seu ambiente :D</p>
+<h2 id="Começando">Começando</h2>
+<p>Para facilitar, vamos começar usando o mesmo módulo do <a href="http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/" target="_blank" rel="external">post anterior</a>, o <code>sum.js</code>, e ver quanto o nosso módulo está coberto por testes. Na raiz do seu projeto, execute o comando:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">istanbul cover _mocha tests/sumTest.js</div></pre></td></tr></table></figure>
+
+<p>Que vai executar o Istanbul, fazendo coverage, e dizendo a ele que estamos usando a interface do Mocha para escrever nossos testes.</p>
+<p>E esse será o resultado gerado:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ istanbul cover _mocha tests/sumTest.js</div><div class="line">  </div><div class="line">  </div><div class="line">  sum.js</div><div class="line">    ✓ sum of <span class="number">2</span> + <span class="number">3</span> should <span class="keyword">return</span> <span class="number">5</span> </div><div class="line">    ✓ sum of <span class="number">10</span> + <span class="number">10</span> should <span class="keyword">return</span> <span class="number">20</span> </div><div class="line">    </div><div class="line">    </div><div class="line">  <span class="number">2</span> passing (<span class="number">11</span>ms)</div><div class="line">  </div><div class="line">=============================================================================</div><div class="line">Writing coverage object [/var/www/tdd/coverage/coverage.json]</div><div class="line">Writing coverage reports at [/var/www/tdd/coverage]</div><div class="line">=============================================================================</div><div class="line"></div><div class="line">=============================== Coverage summary ===============================</div><div class="line">Statements   : <span class="number">100</span>% ( <span class="number">2</span>/<span class="number">2</span> )</div><div class="line">Branches     : <span class="number">100</span>% ( <span class="number">0</span>/<span class="number">0</span> )</div><div class="line">Functions    : <span class="number">100</span>% ( <span class="number">1</span>/<span class="number">1</span> )</div><div class="line">Lines        : <span class="number">100</span>% ( <span class="number">2</span>/<span class="number">2</span> )</div><div class="line">================================================================================</div></pre></td></tr></table></figure>
+
+<p>Nesse resultado, no terminal, ele mostra o resumo de tudo o que os nossos testem cobrem do nosso módulo. Perceba que ele criou um diretório <strong>coverage/</strong> dentro do nosso projeto. Se você acessar via browser a URL do seu projeto + <code>/coverage/lcov-report/</code>, vai conseguir navegar pelos arquivos e visualizar quais partes estão ou não cobertas por testes.</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/coverage-sumjs.jpg" alt="Coverage do arquivo sum.js"></p>
+<p>Nesse nosso exemplo, todo o nosso código está coberto por testes! Se continuarmos escrevendo TDD corretamente, escrevendo sempre um teste que quebre, um <em>baby step</em> para passar, e fazendo o refactor, nós iremos escrever sempre o mínimo possível de código, e todo ele estará coberto pelos testes.</p>
+<p><strong>IMPORTANTE:</strong><br>É importante salientar que um código com 100% de cobertura não garante que todas as possibilidades foram testadas, mas que, tudo o que está sendo testado está passando por todo o código. Mas, como vimos no módulo <code>sum.js</code>, ainda podemos fazer mais uns testes em áreas que já estão cobertas por outros testes.</p>
+<p>Só por questões de visualização, vamos adicionar um pouco mais de código no nosso módulo para ver a cobertura cair (NÃO FAÇA ISSO EM CASA!). No arquivo <code>sum.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  <span class="keyword">if</span>( <span class="built_in">isNaN</span>( number1 ) || <span class="built_in">isNaN</span>( number2 ) ) {</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> number1 + number2;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>E execute novamente o comando para verificarmos a cobertura:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">istanbul cover _mocha tests/sumTest.js</div></pre></td></tr></table></figure>
+
+<p>Olhando no navegador, podemos ver que a cobertura já diminuiu:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/coverage-sumjs2.jpg" alt="Coverage diminuiu"></p>
+<p>O <code>I</code> quer dizer que aquele <code>IF</code> não está coberto. Se fosse um <code>E</code>, faltava cobertura para o <code>ELSE</code>. E a linha vermelha é o <em>Statement</em> que não está coberto pelos testes.</p>
+<p>Para cobrir essa parte do nosso código por testes, nós precisamos fazer a seguinte pergunta a nós mesmos:</p>
+<p><em>- Essa parte não coberta por testes: eu realmente preciso dela no meu código?</em></p>
+<p>Se a sua resposta for <em>SIM</em>, então você precisa escrever um teste para cobrí-la. Senão, remova do seu código. Simples assim.</p>
+<p>No nosso caso, vamos precisar, pois precisamos saber se o a nossa função realmente recebeu um número. Senão, iremos retornar <code>undefined</code>. Vamos então fazer nosso teste. No arquivo <code>tests/sumTest.js</code>, adicione mais um teste:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">it( <span class="string">'If any parameter is not number, should return undefined'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  should( sum( <span class="number">1</span>, <span class="string">'arroz'</span> ) ).not.be.ok;</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p><em>Perae, porque você mudou o formato do uso do ShouldJS?</em></p>
+<p>Você está retornando <code>undefined</code> quando passar um valor que não seja número por parâmetro na função <code>sum()</code>, certo? Sabemos que <code>undefined</code> e <code>null</code> não têm propriedades. Logo, sempre que você precisar testar se um valor é <code>undefined</code> ou <code>null</code>, você precisa usar o <code>should</code> como função, ok? ;)</p>
+<p>Voltando: se o usuário passar um parâmetro que não seja número, devemos retornar <code>undefined</code>. Na nossa asserção, o <code>not.be.ok</code> quer dizer exatamente isso: algo que não esteja <em>ok</em>, ou que seja diferente de <code>true</code>. Em JS, os valores para isso são: <code>&#39;&#39;, null, undefined, 0, NaN</code>. Para ver todas as asserções do ShouldJS, acesse <a href="https://github.com/shouldjs/should.js" target="_blank" rel="external">esse link</a>.</p>
+<p>Vamos agora executar o Istanbul e ver como o nosso teste se comporta e o quanto ele cobre do nosso código:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">istanbul cover _mocha tests/sumTest.js</div></pre></td></tr></table></figure>
+
+<p>E pronto! Agora nosso código está com 100% de cobertura novamente :D</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/coverage-sumjs3.jpg" alt="Novamente 100% coberto"></p>
+<h2 id="Extras">Extras</h2>
+<p>Para facilitar a execução dos testes, podemos usar o próprio NPM, fazendo algumas malandragens.</p>
+<p>Primeiro crie um <code>package.json</code> com o comando <code>npm init</code>. Confirme os dados e edite o arquivo.</p>
+<p>Na diretiva <code>scripts</code>, adicione:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">"scripts": {</div><div class="line">  "test": "mocha -w tests/**/*.js",</div><div class="line">  "coverage": "istanbul cover _mocha tests/**/*.js"</div><div class="line">},</div></pre></td></tr></table></figure>
+
+<p>Então você pode executar os seus testes com o comando <code>npm test</code>. O <code>-w</code> ali significa que o Mocha irá assistir a cada alteração que fizermos no nosso arquivo de teste, e já executará o teste automaticamente.</p>
+<p>Para fazer o Coverage, execute <code>npm run coverage</code>, e pronto!</p>
+<p>Espero que tenha ficado claro! Dúvidas, poste nos comentários :)</p>
+<p>Ah, e não esqueça de se <a href="http://blog.da2k.com.br/atom.xml" target="_blank" rel="external">inscrever no RSS</a> :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/coverage/">coverage</a>, <a href="/tags/istanbul/">istanbul</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/javascript/amd/">amd</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>6</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/tips/">tips</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/categories/wordcamp/">wordcamp</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
