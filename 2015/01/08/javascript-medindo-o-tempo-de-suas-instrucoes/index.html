@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8" />
   
-  <title>Manter repositório do Github forkado sincronizado com o original | Da2k Blog</title>
+  <title>Javascript - Medindo o tempo de suas instruções | Da2k Blog</title>
   <link rel="author" href="//plus.google.com/+FernandoDaciuk">
   
-  <meta name="description" content="Depois que você forka um projeto no Github, você faz as alterações necessárias e envia um Pull Request para o repositório original.
-Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, mas já tem outras colaborações no repositório original, como você procede para manter seu repositório atualizado? Copia as alterações manualmente para o seu repositório? Apaga e forka novamente? Chora?">
+  <meta name="description" content="Quanto tempo demora aquela instrução que você escreveu em JS? Isso, aquele for que itera um array com 350.452 elementos.. você sabe como medir esse tempo? Vem que eu te mostro ;)">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Manter repositório do Github forkado sincronizado com o original"/>
+  <meta property="og:title" content="Javascript - Medindo o tempo de suas instruções"/>
   <meta property="og:site_name" content="Da2k Blog"/>
 
   
-    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2014/01/github-sync-repo.png" />
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/timer.jpg" />
   
 
   
@@ -86,38 +85,36 @@ Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, 
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-01-19T17:13:14.000Z"><a href="/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/">19 de janeiro de 2014</a></time>
+        <time datetime="2015-01-08T00:00:00.000Z"><a href="/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/">8 de janeiro de 2015</a></time>
       
       
   
-    <h1 class="title">Manter repositório do Github forkado sincronizado com o original</h1>
+    <h1 class="title">Javascript - Medindo o tempo de suas instruções</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><img src="http://blog.da2k.com.br/uploads/2014/01/github-sync-repo.png" alt="Sincronizar repositórios do Github"></p>
-<p>Depois que você <em>forka</em> um projeto no Github, você faz as alterações necessárias e envia um <em>Pull Request</em> para o repositório original.</p>
-<p>Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, mas já tem outras colaborações no repositório original, como você procede para manter seu repositório atualizado? Copia as alterações manualmente para o seu repositório? Apaga e forka novamente? Chora?</p>
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/timer.jpg" alt=""></p>
+<p>Quanto tempo demora aquela instrução que você escreveu em JS? Isso, aquele <code>for</code> que itera um array com 350.452 elementos.. você sabe como medir esse tempo? Vem que eu te mostro ;)</p>
 <a id="more"></a>
 
-<p>O Git é uma ferramenta excepcional e, quando você passa a conhecê-lo mais a fundo, vai ver que não vai precisar fazer mais nada manualmente quando ele é usado no seu projeto. Existe uma forma muito prática de sincronizar os dois repos, e vou mostrá-la agora mesmo! Me acompanha? ;)</p>
-<p>O seu repositório forkado normalmente é adicionado como <strong>origin</strong> quando você faz o clone. Para sincronizar com o repositório principal, adicione esse repositório com outro nome (no caso do exemplo, <strong>upstream</strong>), com o comando abaixo:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> upstream [ENDEREÇO <span class="pseudo">DO</span> REPOSITÓRIO PRINCIPAL]</div></pre></td></tr></table></figure>
+<h2 id="Console">Console</h2>
+<p>Todos os navegadores modernos, hoje em dia, tem um <code>console</code> à sua disposição, que você já deve conhecer. Inclusive o <a href="https://github.com/vitorbritto" target="_blank" rel="external">Vitor Britto</a> escreveu um <a href="http://www.vitorbritto.com.br/blog/examinando-sua-aplicacao/" target="_blank" rel="external">ótimo post</a> sobre isso, mostrando os métodos disponíveis no objeto <code>console</code>.</p>
+<p>Mas hoje eu queria focar em dois desses métodos, que servirão para medir o tempo que uma instrução demora para executar: o <code>time()</code> e o <code>timeEnd()</code>.</p>
+<h2 id="Como_usar">Como usar</h2>
+<p>O uso deles não tem segredo algum. Coloque o <code>console.time()</code>, antes da sua instrução, e o <code>console.timeEnd()</code> no final da instrução. Passe como parâmetro uma <em>String</em>, que será a referência utilizada para identificar a instrução. Exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.time( <span class="string">'How long does it take to run my "for"?'</span> );</div><div class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">350452</span>; i++ ) {</div><div class="line">  i;</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.timeEnd( <span class="string">'How long does it take to run my "for"?'</span> );</div></pre></td></tr></table></figure>
 
-<p>Substituindo <strong>[ENDEREÇO DO REPOSITÓRIO PRINCIPAL]</strong> pelo endereço do repositório (não diga :P)</p>
-<p>Depois, para sincronizar os repositórios, execute o comando:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> fetch upstream</div></pre></td></tr></table></figure>
+<p>Cole o código acima no seu console. A resposta que eu tive foi:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">How long does it take to run my <span class="string">"for"</span>?: <span class="number">257.039</span>ms</div></pre></td></tr></table></figure>
 
-<p>Finalmente, só dar merge na branch master:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="operator"><span class="keyword">merge</span> upstream/<span class="keyword">master</span></span></div></pre></td></tr></table></figure>
-
-<p><strong>And done! ;)</strong></p>
-<p>Mais fácil que isso, só o drag’n drop do Visual Studio :P</p>
-<p>Brincadeiras a parte: curtiu a dica? Já conhecia? Conhece outras formas de fazer a mesma coisa? Comente!</p>
-<p><strong>Link de referência:</strong> <a href="https://help.github.com/articles/syncing-a-fork" target="_blank" rel="external">https://help.github.com/articles/syncing-a-fork</a></p>
+<p>Ou seja, com esses dois métodos simples, eu consigo medir o tempo que a minha instrução está levando para executar, e fica muito fácil tomar ações para otimizar esse código.</p>
+<p>Curtiu a dica? Já conhecia? </p>
+<p>Nos próximos posts, falaremos um pouco mais sobre performance, e também como otimizar isso, para fazer nossa aplicação voar baixo! Fique ligado!</p>
 <blockquote>
-<p><strong>UPDATE:</strong> Havia esquecido de incluir o comando para dar merge na sua branch xD Com o <code>fetch</code>, o Git apenas sincroniza as branchs que existem no repositório selecionado. Obrigado <a href="http://disqus.com/claudiosmweb/" target="_blank" rel="external">Claudio Sanches</a> e <a href="http://disqus.com/gabrielizaias/" target="_blank" rel="external">Gabriel Izaias</a> :D</p>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
 </blockquote>
 
       
@@ -127,25 +124,30 @@ Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, 
         
   
   <div class="categories">
-    <a href="/categories/git/">git</a>
+    <a href="/categories/javascript/">javascript</a>
   </div>
 
         
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/performance/">performance</a>, <a href="/tags/debug/">debug</a>
+  </div>
+
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/"></a>
     
     
-      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/"></a>
     
     
-      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/"></a>
     
     
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/"></a>
     
-    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/"></a>
   </div>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
@@ -225,7 +227,7 @@ Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, 
 
 <script type="text/javascript">
 var disqus_shortname = 'blogda2k';
-var disqus_url = 'http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/';
 
 (function(){
   var dsq = document.createElement('script');

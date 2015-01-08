@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-07T08:23:21.804Z</updated>
+  <updated>2015-01-08T08:20:23.811Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -13,6 +13,51 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Javascript - Medindo o tempo de suas instruções]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/"/>
+    <id>http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/</id>
+    <published>2015-01-08T00:00:00.000Z</published>
+    <updated>2015-01-08T01:17:01.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/timer.jpg" alt=""></p>
+<p>Quanto tempo demora aquela instrução que você escreveu em JS? Isso, aquele <code>for</code> que itera um array com 350.452 elementos.. você sabe como medir esse tempo? Vem que eu te mostro ;)</p>
+<a id="more"></a>
+
+<h2 id="Console">Console</h2>
+<p>Todos os navegadores modernos, hoje em dia, tem um <code>console</code> à sua disposição, que você já deve conhecer. Inclusive o <a href="https://github.com/vitorbritto" target="_blank" rel="external">Vitor Britto</a> escreveu um <a href="http://www.vitorbritto.com.br/blog/examinando-sua-aplicacao/" target="_blank" rel="external">ótimo post</a> sobre isso, mostrando os métodos disponíveis no objeto <code>console</code>.</p>
+<p>Mas hoje eu queria focar em dois desses métodos, que servirão para medir o tempo que uma instrução demora para executar: o <code>time()</code> e o <code>timeEnd()</code>.</p>
+<h2 id="Como_usar">Como usar</h2>
+<p>O uso deles não tem segredo algum. Coloque o <code>console.time()</code>, antes da sua instrução, e o <code>console.timeEnd()</code> no final da instrução. Passe como parâmetro uma <em>String</em>, que será a referência utilizada para identificar a instrução. Exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.time( <span class="string">'How long does it take to run my "for"?'</span> );</div><div class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">350452</span>; i++ ) {</div><div class="line">  i;</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.timeEnd( <span class="string">'How long does it take to run my "for"?'</span> );</div></pre></td></tr></table></figure>
+
+<p>Cole o código acima no seu console. A resposta que eu tive foi:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">How long does it take to run my <span class="string">"for"</span>?: <span class="number">257.039</span>ms</div></pre></td></tr></table></figure>
+
+<p>Ou seja, com esses dois métodos simples, eu consigo medir o tempo que a minha instrução está levando para executar, e fica muito fácil tomar ações para otimizar esse código.</p>
+<p>Curtiu a dica? Já conhecia? </p>
+<p>Nos próximos posts, falaremos um pouco mais sobre performance, e também como otimizar isso, para fazer nossa aplicação voar baixo! Fique ligado!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/timer.jpg" alt=""></p>
+<p>Quanto tempo demora aquela instrução que você escreveu em JS? Isso, aquele <code>for</code> que itera um array com 350.452 elementos.. você sabe como medir esse tempo? Vem que eu te mostro ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="performance" scheme="http://blog.da2k.com.br/tags/performance/"/>
+    
+      <category term="debug" scheme="http://blog.da2k.com.br/tags/debug/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Code Coverage em Javascript]]></title>
