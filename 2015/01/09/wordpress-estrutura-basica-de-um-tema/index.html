@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>WordPress - Estrutura básica de um tema | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="WordPress é uma marca registrada, por isso a necessidade de escrever corretamente: com o W e o P maiúsculos, ok? Mas isso não tem nada a ver com o assunto do post, onde iremos aprender a montar a estrutura básica de um tema para WordPress :P 
+Sabia que, para criar um tema, você não precisa de nada mais que 2 arquivos? Duvida? Vem que eu te mostro ;)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="WordPress - Estrutura básica de um tema"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/wordpress.jpg" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-09T00:00:00.000Z"><a href="/2015/01/09/wordpress-estrutura-basica-de-um-tema/">9 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">WordPress - Estrutura básica de um tema</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress.jpg" alt="WordPress"></p>
+<p><strong>WordPress</strong> é uma marca registrada, por isso a necessidade de escrever corretamente: com o W e o P maiúsculos, ok? Mas isso não tem nada a ver com o assunto do post, onde iremos aprender a montar a estrutura básica de um tema para WordPress :P </p>
+<p>Sabia que, para criar um tema, você não precisa de nada mais que 2 arquivos? Duvida? Vem que eu te mostro ;)</p>
+<a id="more"></a>
+
+<p>Criar temas para <strong>WordPress</strong> é um trabalho bem simples, desde que você conheça PHP, HTML, CSS e Javascript.</p>
+<h2 id="Requisitos_mínimos">Requisitos mínimos</h2>
+<p>Além do conhecimento citado acima, você precisa ter instalado no seu computador o PHP 5.2.4 ou superior, e o MySQL 5.0 (ou Maria DB) ou superior.</p>
+<h2 id="Instalação">Instalação</h2>
+<p>A instalação do WordPress é bastante simples. <a href="https://wordpress.org/latest.zip" target="_blank" rel="external">Baixe aqui a última versão</a>. Descompacte-o em algum diretório que seja acessível pelo seu servidor (Apache ou Nginx), e acesse via browser.</p>
+<p>Seguindo todos os passos da tela corretamente, não terá problemas :)</p>
+<p>Só algumas dicas para a hora da instalação:</p>
+<ul>
+<li>Não use o nome do usuário como <code>admin</code>;</li>
+<li>Use uma senha forte;</li>
+<li>Altere o prefixo das tabelas da sua base de dados para algo diferente de <code>wp_</code>.</li>
+</ul>
+<p>O WordPress é uma ferramenta muito conhecida e bastante utilizada, por isso não use configurações que seriam fáceis de descobrir. Nome de usuário <code>admin</code> é muito comum. Usando esse nome, para invadir seu site só precisa de uns ataques de força bruta na senha. O mesmo vale para sua base de dados: mantendo o prefixo padrão <code>wp_</code>, fica muito mais fácil de alguém tentar invadir.</p>
+<h2 id="Criação_do_tema">Criação do tema</h2>
+<p>Crie um diretório dentro de <code>wp-content/themes</code> com o nome do seu tema. Use a conveção de letras minúsculas e separação de palavras com um traço <code>-</code>.</p>
+<p>Fazendo isso, crie a seguinte estrutura:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── index.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
+
+<p>Isso mesmo, só dois arquivos! O WordPress não é que nem “certos CMSs” que você precisar criar milhões de arquivos e XMLs de configuração para criar um tema :P</p>
+<p>Brincadeiras à parte, o WordPress tem uma convenção que facilita e muita na hora de criar um tema. </p>
+<h2 id="style-css">style.css</h2>
+<p>O WordPress pega do seu arquivo <code>style.css</code> alguns parâmetros para apresentar informações do seu tema no Painel.</p>
+<p>Os parãmetros mínimos que você precisa adicionar no <code>style.css</code> são esses:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">Theme Name: Nome do seu tema</div><div class="line">Author: Seu nome</div><div class="line">Description: Descrição do tema</div><div class="line">Version: 1.0</div><div class="line">*/</div></pre></td></tr></table></figure>
+
+<p>Com esses parâmetros passados como comentário no início do arquivo <code>style.css</code>, o WP já vai mostrar essas informações no Painel, quando você visualizar o tema.</p>
+<p>Para ativar o seu tema, logue-se no painel, em <code>http://seusite.com.br/wp-admin</code>. Vá até o menu <code>Aparência &gt; Temas</code>, selecione o seu tema e ative-o. E pronto! Todos os posts que você fizer já irão utilizar o tema que estamos desenvolvendo :D</p>
+<h2 id="index-php">index.php</h2>
+<p>O código que o WordPress usa para mostrar os posts é bem simples. Coloque na <code>index.php</code> do seu tema:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"pt-br"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Meu tema WordPress<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post(); <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">h2</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"&lt;?php the_permalink() ?&gt;"</span>&gt;</span></div><div class="line">      <span class="php"><span class="preprocessor">&lt;?php</span> the_title() <span class="preprocessor">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> the_content() <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endwhile</span>; <span class="preprocessor">?&gt;</span></span> </div><div class="line"></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">else</span> : <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>Não existem posts.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endif</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Na linha <code>9</code>, temos o que chamamos de <strong>Loop do WordPress</strong>. As funções do WordPress são muito semânticas, e dizem exatamente o que elas fazem: </p>
+<p>Primeiro, verificamos se existem posts, com a função <code>have_posts()</code> (o WordPress chama de <code>posts</code>, ou postagens, todo tipo de conteúdo que é possível cadastrar através do painel);</p>
+<p>Depois, fazemos um loop por todos os posts (<code>while( have_posts() )</code>) e, para cada post, é chamada a função <code>the_post()</code>. Essa função é responsável por trazer as informações de cada post específico que está relacionado no loop.</p>
+<p>Dependendo da URL em que você se encontra, o WordPress sabe exatamente onde deve buscar os posts corretos, por isso o Loop é padrão para todos os arquivos de template.</p>
+<p>O WordPress também tem alguns <em>fallbacks</em> para os arquivos do tema. Por exemplo: se no seu post você tiver um arquivo chamado <code>single.php</code>, com esse mesmo conteúdo, quando você acessar a URL de um post, o WordPress vai procurar pelo arquivo arquivo <code>single.php</code> no seu tema para usar. Se o arquivo não estiver presente, ele usará como fallback o <code>index.php</code>. O <code>index.php</code> é fallback para qualquer arquivo de template do seu tema. Falaremos sobre os arquivos de template em posts futuros.</p>
+<p>As outras funções, usadas dentro do Loop, são chamadas de <strong>Template Tags</strong>. Essas funções trazem informações do post. Por exemplo: <code>the_permalink()</code> traz o link do post. <code>the_title()</code> traz o título. <code>the_content()</code> traz o conteúdo. Percebe como os nomes são bastante semânticos? Para ver a lista das Template Tags disponíveis que você pode usar, acesse <a href="http://codex.wordpress.org/Template_Tags#Tags" target="_blank" rel="external">esse link</a>.</p>
+<p>Com esse código, você tem a estrutura básica para mostrar praticamente qualquer tipo de conteúdo que cadastrar no seu painel do WordPress.</p>
+<p>Obviamente que você não vai deixar seu tema assim, pois tem muuuuita coisa que precisa tratar: </p>
+<ul>
+<li>categorias;</li>
+<li>tags;</li>
+<li>datas; </li>
+<li>se for um post aberto (single) não precisa do link no título;</li>
+<li>página de erro 404;</li>
+<li>separar páginas institucionais dos posts de blog;</li>
+<li>etc.</li>
+</ul>
+<p>Mas é só pra mostrar que, ainda assim, você pode começar a aprender WP e fazer um tema somente utilizando dois arquivos :)</p>
+<p>Esse artigo é o primeiro de uma série que vou mostrar como criar temas completos, passando desde as funções do WordPress, hooks, até organização e separação de arquivos, boas práticas de desenvolvimento, orientação à objetos com PHP, para separar a lógica da view, entre outras coisinhas mais xD</p>
+<p>Ficou curioso? <a href="http://blog.da2k.com.br/atom.xml" target="_blank" rel="external">Assine o RSS</a> e não perca nenhum post! Acompanhe diariamente :D</p>
+<p>Ficou alguma dúvida sobre esse post? Comente!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/wordpress/">wordpress</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/javascript/amd/">amd</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>7</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/tips/">tips</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/categories/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

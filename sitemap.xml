@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
+    <lastmod>2015-01-09T00:42:22.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/</loc>
     <lastmod>2015-01-08T01:17:01.000Z</lastmod>
   </url>
@@ -57,17 +62,17 @@
   </url>
   
   <url>
+    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
+    <lastmod>2014-12-31T20:16:39.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
-    <lastmod>2014-12-31T20:16:39.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
