@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Debugar Javascript no browser | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Antigamente a única forma que tínhamos de debugar um código Javascript no browser era usando alert(). Hoje os browsers mais modernos disponibilizam  algumas ferramentas para ajudar nosso desenvolvimento. Uma delas é a API console.
+Mas apesar de todos os seus métodos, nem sempre é possível resolver um problema de forma prática somente usando console. 
+Quais são então nossas outras opções? Vem comigo que eu te mostro ;)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Debugar Javascript no browser"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/keep-calm-and-start-debugging.png" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-10T00:00:00.000Z"><a href="/2015/01/10/debugar-javascript-no-browser/">10 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Debugar Javascript no browser</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="/uploads/2015/01/keep-calm-and-start-debugging.png" alt="Debugue!"></p>
+<p>Antigamente a única forma que tínhamos de debugar um código Javascript no browser era usando <code>alert()</code>. Hoje os browsers mais modernos disponibilizam  algumas ferramentas para ajudar nosso desenvolvimento. Uma delas é a API <code>console</code>.</p>
+<p>Mas apesar de todos os seus métodos, nem sempre é possível resolver um problema de forma prática somente usando <code>console</code>. </p>
+<p><em>Quais são então nossas outras opções?</em> Vem comigo que eu te mostro ;)</p>
+<a id="more"></a>
+
+<p>A maior parte das ferramentas de desenvolvimento são bastante parecidas. Para os exemplos desse post, vou usar o <strong>Chrome DevTools</strong>, mas se você estiver usando <strong>Firefox</strong>, <strong>Opera</strong> ou qualquer outro navegador moderno, pode usar o <em>Inspetor</em> do seu próprio browser, que vai ser praticamente a mesma ideia :)</p>
+<h2 id="Source">Source</h2>
+<p>Abrindo o <strong>DevTools</strong>, temos várias abas. Uma delas é a <strong>Sources</strong>:</p>
+<p><img src="/uploads/2015/01/sources-tab.jpg" alt="Sources"></p>
+<p>Nessa aba, podemos ver todos os <em>assets</em> que foram carregados com a nossa página. Se você digitar <code>Ctrl + P</code> (ou <code>Cmd + P</code> no Mac), você consegue escolher um arquivo para abrir, com uma interface bem parecida com a do <strong>Sublime Text</strong> :)</p>
+<p><img src="/uploads/2015/01/sources-tab-search-file.jpg" alt="Aba Source com busca de arquivos"></p>
+<p>Para facilitar a visualização do arquivo, você também pode esconder as abas laterais, clicando nos botões marcados:</p>
+<p><img src="/uploads/2015/01/sources-tab-toggle.jpg" alt="Aba Source - botões para esconder abas"></p>
+<p><em>Tá, e no que isso vai me ajudar?</em></p>
+<p>Calma jovem, vamos ver isso agora :D</p>
+<h2 id="Estrutura_de_arquivos">Estrutura de arquivos</h2>
+<p>Vamos brincar um pouco. Crie uma estrutura de arquivos assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── index.html</div><div class="line">└── js</div><div class="line">    └── app.js</div></pre></td></tr></table></figure>
+
+<p>Na <code>index.html</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Test Debugger<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">form</span> <span class="attribute">action</span>=<span class="value">"./"</span> <span class="attribute">method</span>=<span class="value">"get"</span> <span class="attribute">data-js</span>=<span class="value">"form"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">name</span>=<span class="value">"name"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"submit"</span>&gt;</span>Enviar<span class="tag">&lt;/<span class="title">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">form</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"js/app.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Um simples formulário que envia um parâmetro <code>name</code> via <code>GET</code>. Perceba que, na aba <strong>Sources</strong> são mostrados todos os arquivos que são públicos do nosso projeto:</p>
+<p><img src="/uploads/2015/01/form-html.jpg" alt="Formulário"></p>
+<p>Se você submeter esse formulário, ele vai fazer o que precisa ser feito: direcionar a ação para a mesma página (<code>action=&quot;./&quot;</code>) e passar via <em>query string</em> na URL o parâmetro do campo <code>name</code> com o valor preenchido:</p>
+<p><img src="/uploads/2015/01/form-html-sent.jpg" alt="Formulário enviado via GET"></p>
+<p>Até aqui, nada demais. Vamos agora escrever um pouco de JS para escutar o evento que faz o envio desse formulário. No arquivo <code>js/app.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( doc, undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    <span class="keyword">var</span> $private = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      $private.initEvents();</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.initEvents = <span class="function"><span class="keyword">function</span> <span class="title">initEvents</span><span class="params">()</span> </span>{</div><div class="line">      doc.querySelector( <span class="string">'[data-js="form"]'</span> )</div><div class="line">        .addEventListener( <span class="string">'submit'</span>, $private.handleFormSubmit, <span class="literal">false</span> );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleFormSubmit = <span class="function"><span class="keyword">function</span> <span class="title">handleFormSubmit</span><span class="params">()</span> </span>{</div><div class="line">      <span class="comment">// do something</span></div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  doc.addEventListener( <span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    App().init();</div><div class="line">  }, <span class="literal">false</span> );</div><div class="line">})( <span class="built_in">document</span> );</div></pre></td></tr></table></figure>
+
+<p>Nada demais também até aqui. Simplesmente esperamos o DOM estar totalmente carregado e então iniciamos nossa função. Adicionamos um <em>listener</em> ao formulário para ouvir o evento <strong>submit</strong>. Antes do formulário ser enviado, a função de callback para o evento de <em>submit</em> (<code>$private.handleFormSubmit</code>) será executada.</p>
+<p><em>Será?</em></p>
+<p>Tente submeter o formulário. Como saber se entramos mesmo nessa função? Vamos adicionar um <code>console.log</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$private.handleFormSubmit = <span class="function"><span class="keyword">function</span> <span class="title">handleFormSubmit</span><span class="params">( e )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Enviou formulário'</span> );</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>No seu console, marque a opção <strong>“Preserve log”</strong> para não apagar os logs se a página recarregar:</p>
+<p><img src="/uploads/2015/01/console-preserve-log.jpg" alt="Console - Preserve log"></p>
+<p>Agora, submeta o formulário novamente. Se olharmos no console, a frase “Enviou formulário” será mostrada.</p>
+<p><em>Tá, mas ainda eu não sei em que momento ele entrou nesse evento.</em></p>
+<p>Certo, vamos então começar a debugar. Mudando a função de callback do submit, adicionando o comando <code>debugger</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$private.handleFormSubmit = <span class="function"><span class="keyword">function</span> <span class="title">handleFormSubmit</span><span class="params">( e )</span> </span>{</div><div class="line">  debugger;</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Enviou formulário'</span> );</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Recarregue a página e tente submeter o formulário novamente. O que aconteceu? O comando <code>debugger</code> não faz parte do Javascript. Ele é uma implementação dos browsers para criar um <em>breakpoint</em> na linha que tem o comando. Fazendo isso, você consegue literalmente parar a execução do browser naquele ponto:</p>
+<p><img src="/uploads/2015/01/breakpoint-with-debugger.png" alt="Breakpoint com debugger"></p>
+<p> <em>Para ver a imagem acima em tamanho real, abra-a em uma nova aba.</em></p>
+<p>Se você reparar na aba lateral, onde mostra <em>Scope Variables</em>, ali você tem todas as variáveis locais e os seus respectivos valores. Ali ele mostra a variável <code>e</code>, representando o objeto <code>Event</code>, que é passada como parâmetro para a função <code>handleFormSubmit</code> pelo evento <code>submit</code>. Nesse objeto contém todas as informações relacionadas ao evento de submit do formulário.</p>
+<p>Temos também o famoso <code>this</code>, que, nesse caso, é o nosso formulário. Se você pressionar <code>F8</code> ou clicar na seta azul, ao lado da mensagem que aparece no topo <code>Paused in debugger</code>, o browser continua a execução do script até o próximo breakpoint. Como não temos mais nenhum, ele simplesmente executa as próximas ações normalmente, submetendo o formulário.</p>
+<p><em>Legal, mas como eu posso tirar proveito disso?</em></p>
+<p>Vou te mostrar algo bem legal agora. Vá no seu console, digite <code>this</code> e dê enter:</p>
+<p><img src="/uploads/2015/01/this-window.png" alt="Console this window"></p>
+<p>O objeto <code>this</code> aponta para <code>window</code>, porque estamos no escopo global. Até aqui, nenhuma novidade. Agora, submeta o formulário para ele parar no debugger e faça a mesma coisa:</p>
+<p><img src="/uploads/2015/01/this-form.png" alt="Console this form"></p>
+<p>Percebeu o que acabou de acontecer? Quando estamos parados em algum <em>breakpoint</em>, o escopo do console muda junto! Agora o <code>this</code> aponta para o nosso formulário!</p>
+<p>Isso é bastante útil para debugar variáveis locais. Assim você consegue saber exatamente o valor que cada variável está recebendo naquele ponto exato do seu programa xD</p>
+<p><img src="/uploads/2015/01/this-form-name.png" alt="Console this com valor do campo name"></p>
+<p><em>Que loko véi! Tem mais? :D</em></p>
+<p>Tem sim xD</p>
+<p>Você também pode criar seus próprios <em>breakpoints</em> diretamente na aba <strong>Sources</strong>, clicando no número da linha. Mas primeiro, remova a linha <code>debugger</code> do <code>app.js</code>. Agora crie seu breakpoint diretamente no browser:</p>
+<p><img src="/uploads/2015/01/manual-breakpoint.png" alt="Breakpoint manual"></p>
+<p>Coloquei o DevTools na lateral para facilitar a visualização. Criei dois <em>breakpoints</em> nas linhas <code>18</code> e <code>25</code>, somente clicando sobre o número da linha. Na parte de baixo do DevTools (antes na lateral direita), temos uma guia chamada <strong>Breakpoints</strong>. Ali mostra todos os breakpoints que você adicionou no seu código. Clicando em cima de algum, o navegador dá o foco na linha com o breakpoint.</p>
+<p>Agora, recarregue a tela.</p>
+<p>Quando o DOM estiver pronto, o navegador para a execução na linha 25, onde fazemos o <code>init</code> do <code>App</code>. Clicando na seta azul ou pressionando <code>F8</code>, o navegador vai até o próximo breakpoint. Como só marcamos o breakpoint dentro do evento, então ele só vai parar quando submetermos o formulário.</p>
+<p>Recarregue a tela novamente.</p>
+<p>Perceba que, quando parados no breakpoint, ao lado da seta azul, temos uma outra seta, com uma bolinha embaixo. Clicando nela, ou pressionando <code>F10</code>, podemos ver qual o fluxo dentro do arquivo o navegador está seguindo, ou seja, quais são as próximas linhas que ele executa em ordem:</p>
+<p><img src="/uploads/2015/01/next-step.png" alt="Próximo passo"></p>
+<p>Coloque um breakpoint na linha <code>2</code> e vá clicando nesse botão, e veja você mesmo o que acontece :)</p>
+<h2 id="Event_Listener_Breakpoints">Event Listener Breakpoints</h2>
+<p>Sabe quando você tem um código muito grande e bagunçado, e está tentando encontrar qual função de callback é chamada quando você clica em determinado elemento da tela? Você faz <em>find</em> no seu editor em busca da função, vasculha arquivos, e perde mó tempão pra conseguir achar. Na aba <strong>Sources</strong>, nós temos a guia <strong>Event Listener Breakpoints</strong> que pode nos ajudar a encontrar isso de forma mais fácil:</p>
+<p><img src="/uploads/2015/01/event-listener-breakpoints.png" alt="Source guia Event Listener Breakpoints"></p>
+<p>Abrindo essa guia, podemos ver vários eventos que podemos debugar. No caso do clique, você pode selecionar “Mouse &gt; click”. Para exemplificar, vamos ver como podemos ver quando o DOM foi carregado. Abra a opção <strong>DOM Mutation</strong> e selecione <strong>DOMContentLoaded</strong>.</p>
+<p>Recarregue a página.</p>
+<p>Quando esse evento for executado, será mostrado qual (ou quais, se tiver mais de um) arquivo chama esse evento. Assim podemos ver exatamente, se estivermos usando alguma lib de terceiros, quem precisa esperar o DOM ser carregado, e o que essa lib carrega ao executar esse evento:</p>
+<p><img src="/uploads/2015/01/dom-content-loaded.png" alt="DOM Content Loaded"></p>
+<p>Essas são apenas algumas funcionalidades que você pode usar para debugar seu código Javascript. Experimente você mesmo as outras opções da aba <strong>Sources</strong> e veja o quanto isso te ajudará no dia a dia!</p>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/debugger/">debugger</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/javascript/amd/">amd</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>8</small></li>
+  
+    <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
+  
+    <li><a href="/categories/tips/">tips</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/categories/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

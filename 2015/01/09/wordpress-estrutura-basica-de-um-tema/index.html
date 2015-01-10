@@ -136,7 +136,7 @@ Sabia que, para criar um tema, você não precisa de nada mais que 2 arquivos? D
 <p>Primeiro, verificamos se existem posts, com a função <code>have_posts()</code> (o WordPress chama de <code>posts</code>, ou postagens, todo tipo de conteúdo que é possível cadastrar através do painel);</p>
 <p>Depois, fazemos um loop por todos os posts (<code>while( have_posts() )</code>) e, para cada post, é chamada a função <code>the_post()</code>. Essa função é responsável por trazer as informações de cada post específico que está relacionado no loop.</p>
 <p>Dependendo da URL em que você se encontra, o WordPress sabe exatamente onde deve buscar os posts corretos, por isso o Loop é padrão para todos os arquivos de template.</p>
-<p>O WordPress também tem alguns <em>fallbacks</em> para os arquivos do tema. Por exemplo: se no seu post você tiver um arquivo chamado <code>single.php</code>, com esse mesmo conteúdo, quando você acessar a URL de um post, o WordPress vai procurar pelo arquivo arquivo <code>single.php</code> no seu tema para usar. Se o arquivo não estiver presente, ele usará como fallback o <code>index.php</code>. O <code>index.php</code> é fallback para qualquer arquivo de template do seu tema. Falaremos sobre os arquivos de template em posts futuros.</p>
+<p>O WordPress também tem alguns <em>fallbacks</em> para os arquivos do tema. Por exemplo: se no seu tema você tiver um arquivo chamado <code>single.php</code>, com esse mesmo conteúdo, quando você acessar a URL de um post, o WordPress vai procurar pelo arquivo arquivo <code>single.php</code> no seu tema para usar. Se o arquivo não estiver presente, ele usará como fallback o <code>index.php</code>. O <code>index.php</code> é fallback para qualquer arquivo de template do seu tema. Falaremos sobre os arquivos de template em posts futuros.</p>
 <p>As outras funções, usadas dentro do Loop, são chamadas de <strong>Template Tags</strong>. Essas funções trazem informações do post. Por exemplo: <code>the_permalink()</code> traz o link do post. <code>the_title()</code> traz o título. <code>the_content()</code> traz o conteúdo. Percebe como os nomes são bastante semânticos? Para ver a lista das Template Tags disponíveis que você pode usar, acesse <a href="http://codex.wordpress.org/Template_Tags#Tags" target="_blank" rel="external">esse link</a>.</p>
 <p>Com esse código, você tem a estrutura básica para mostrar praticamente qualquer tipo de conteúdo que cadastrar no seu painel do WordPress.</p>
 <p>Obviamente que você não vai deixar seu tema assim, pois tem muuuuita coisa que precisa tratar: </p>
@@ -237,7 +237,7 @@ Sabia que, para criar um tema, você não precisa de nada mais que 2 arquivos? D
   
     <li><a href="/categories/html5/">html5</a><small>1</small></li>
   
-    <li><a href="/categories/javascript/">javascript</a><small>7</small></li>
+    <li><a href="/categories/javascript/">javascript</a><small>8</small></li>
   
     <li><a href="/categories/nodejs/">nodejs</a><small>1</small></li>
   
