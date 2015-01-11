@@ -3,7 +3,7 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
-    <lastmod>2015-01-11T00:51:18.000Z</lastmod>
+    <lastmod>2015-01-11T11:26:38.000Z</lastmod>
   </url>
   
   <url>
@@ -37,12 +37,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
     <lastmod>2015-01-04T01:25:20.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
     <lastmod>2015-01-04T01:25:20.000Z</lastmod>
   </url>
   
@@ -67,7 +67,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
+    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
+    <lastmod>2014-12-31T20:16:39.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   
@@ -77,12 +82,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
-    <lastmod>2014-12-31T20:16:39.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
     <lastmod>2014-12-31T20:16:39.000Z</lastmod>
   </url>
   

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-11T00:51:26.343Z</updated>
+  <updated>2015-01-11T11:26:52.116Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"/>
     <id>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</id>
     <published>2015-01-11T00:00:00.000Z</published>
-    <updated>2015-01-11T00:51:18.000Z</updated>
+    <updated>2015-01-11T11:26:38.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
 <p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
 <a id="more"></a>
@@ -28,6 +28,7 @@
 <p>Se você tem sugestões sobre o que gostaria que fosse abordado, deixe um comentário no final desse post. </p>
 <p>Se tiver algum problema com algum código, dê um <em>fork</em> no projeto e submeta um <em>Pull Request</em>. Se a sua correção for válida, o <em>Pull Request</em> será aceito e você será citado no post que falarmos da correção. Então se você ainda não tem familiaridade com o <a href="https://github.com" target="_blank" rel="external">Github</a>, agora é o momento de aprender isso também :)</p>
 <p>Vamos sempre consultar o <a href="http://codex.wordpress.org/" target="_blank" rel="external">Codex</a> e a <a href="http://php.net/manual/en/" target="_blank" rel="external">documentação do PHP</a> para nos auxiliar. Isso vai ajudar também àqueles que têm dificuldades em buscar informações nesses canais.</p>
+<p>Informação importante: você deve conhecer os <a href="http://codex.wordpress.org/WordPress_Coding_Standards" target="_blank" rel="external"><em>Coding Standards</em> do WordPress</a>. Acesse o link, leia, experimente. Iremos usá-lo muito, ok? ;)</p>
 <p>Esse post servirá como uma introdução à série, e como índice, para organização das postagens. Ele será atualizado conforme os posts forem sendo escritos. E em cada post da série, você verá um link para esse post de introdução, um para o post anterior e um para o próximo post da série.</p>
 <p>Aproveite, e bons estudos!</p>
 <h2 id="Índice">Índice</h2>
