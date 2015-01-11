@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8" />
   
-  <title>Manter repositório do Github forkado sincronizado com o original | Da2k Blog</title>
+  <title>Índice da série: Como criar temas para WordPress | Da2k Blog</title>
   <link rel="author" href="//plus.google.com/+FernandoDaciuk">
   
-  <meta name="description" content="Depois que você forka um projeto no Github, você faz as alterações necessárias e envia um Pull Request para o repositório original.
-Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, mas já tem outras colaborações no repositório original, como você procede para manter seu repositório atualizado? Copia as alterações manualmente para o seu repositório? Apaga e forka novamente? Chora?">
+  <meta name="description" content="Como falei nesse post, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site!">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Manter repositório do Github forkado sincronizado com o original"/>
+  <meta property="og:title" content="Índice da série: Como criar temas para WordPress"/>
   <meta property="og:site_name" content="Da2k Blog"/>
 
   
-    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2014/01/github-sync-repo.png" />
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" />
   
 
   
@@ -86,38 +85,31 @@ Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, 
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-01-19T17:13:14.000Z"><a href="/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/">19 de janeiro de 2014</a></time>
+        <time datetime="2015-01-11T00:00:00.000Z"><a href="/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/">11 de janeiro de 2015</a></time>
       
       
   
-    <h1 class="title">Manter repositório do Github forkado sincronizado com o original</h1>
+    <h1 class="title">Índice da série: Como criar temas para WordPress</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><img src="http://blog.da2k.com.br/uploads/2014/01/github-sync-repo.png" alt="Sincronizar repositórios do Github"></p>
-<p>Depois que você <em>forka</em> um projeto no Github, você faz as alterações necessárias e envia um <em>Pull Request</em> para o repositório original.</p>
-<p>Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, mas já tem outras colaborações no repositório original, como você procede para manter seu repositório atualizado? Copia as alterações manualmente para o seu repositório? Apaga e forka novamente? Chora?</p>
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
+<p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
 <a id="more"></a>
 
-<p>O Git é uma ferramenta excepcional e, quando você passa a conhecê-lo mais a fundo, vai ver que não vai precisar fazer mais nada manualmente quando ele é usado no seu projeto. Existe uma forma muito prática de sincronizar os dois repos, e vou mostrá-la agora mesmo! Me acompanha? ;)</p>
-<p>O seu repositório forkado normalmente é adicionado como <strong>origin</strong> quando você faz o clone. Para sincronizar com o repositório principal, adicione esse repositório com outro nome (no caso do exemplo, <strong>upstream</strong>), com o comando abaixo:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> upstream [ENDEREÇO <span class="pseudo">DO</span> REPOSITÓRIO PRINCIPAL]</div></pre></td></tr></table></figure>
-
-<p>Substituindo <strong>[ENDEREÇO DO REPOSITÓRIO PRINCIPAL]</strong> pelo endereço do repositório (não diga :P)</p>
-<p>Depois, para sincronizar os repositórios, execute o comando:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> fetch upstream</div></pre></td></tr></table></figure>
-
-<p>Finalmente, só dar merge na branch master:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="operator"><span class="keyword">merge</span> upstream/<span class="keyword">master</span></span></div></pre></td></tr></table></figure>
-
-<p><strong>And done! ;)</strong></p>
-<p>Mais fácil que isso, só o drag’n drop do Visual Studio :P</p>
-<p>Brincadeiras a parte: curtiu a dica? Já conhecia? Conhece outras formas de fazer a mesma coisa? Comente!</p>
-<p><strong>Link de referência:</strong> <a href="https://help.github.com/articles/syncing-a-fork" target="_blank" rel="external">https://help.github.com/articles/syncing-a-fork</a></p>
+<p>Não vamos nos ater a nenhum tipo de conteúdo em específico. Ao longo dos posts, vamos criar vários tipos de conteúdo diferentes, para mostrar tudo o que é possível fazer com o WordPress. O código do tema ficará disponível <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">nesse repositório do Github</a> - se você ainda não tem uma conta no Github, é a sua hora de criar :D</p>
+<p>Se você tem sugestões sobre o que gostaria que fosse abordado, deixe um comentário no final desse post. </p>
+<p>Se tiver algum problema com algum código, dê um <em>fork</em> no projeto e submeta um <em>Pull Request</em>. Se a sua correção for válida, o <em>Pull Request</em> será aceito e você será citado no post que falarmos da correção. Então se você ainda não tem familiaridade com o <a href="https://github.com" target="_blank" rel="external">Github</a>, agora é o momento de aprender isso também :)</p>
+<p>Vamos sempre consultar o <a href="http://codex.wordpress.org/" target="_blank" rel="external">Codex</a> e a <a href="http://php.net/manual/en/" target="_blank" rel="external">documentação do PHP</a> para nos auxiliar. Isso vai ajudar também àqueles que têm dificuldades em buscar informações nesses canais.</p>
+<p>Esse post servirá como uma introdução à série, e como índice, para organização das postagens. Ele será atualizado conforme os posts forem sendo escritos. E em cada post da série, você verá um link para esse post de introdução, um para o post anterior e um para o próximo post da série.</p>
+<p>Aproveite, e bons estudos!</p>
+<h2 id="Índice">Índice</h2>
+<p>1) <a href="">Estrutura inicial do tema, padrões de codificação e uso do editor - LINK EM BREVE (12/01/2015)</a></p>
 <blockquote>
-<p><strong>UPDATE:</strong> Havia esquecido de incluir o comando para dar merge na sua branch xD Com o <code>fetch</code>, o Git apenas sincroniza as branchs que existem no repositório selecionado. Obrigado <a href="http://disqus.com/claudiosmweb/" target="_blank" rel="external">Claudio Sanches</a> e <a href="http://disqus.com/gabrielizaias/" target="_blank" rel="external">Gabriel Izaias</a> :D</p>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
 </blockquote>
 
       
@@ -127,25 +119,30 @@ Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, 
         
   
   <div class="categories">
-    <a href="/categories/git/">git</a>
+    <a href="/categories/wordpress/">wordpress</a>
   </div>
 
         
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/serie-temas-wordpress/">serie temas wordpress</a>
+  </div>
+
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"></a>
     
     
-      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"></a>
     
     
-      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"></a>
     
     
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"></a>
     
-    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"></a>
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"></a>
   </div>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
@@ -227,7 +224,7 @@ Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, 
 
 <script type="text/javascript">
 var disqus_shortname = 'blogda2k';
-var disqus_url = 'http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/';
 
 (function(){
   var dsq = document.createElement('script');

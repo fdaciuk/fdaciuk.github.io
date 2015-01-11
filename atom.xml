@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-10T13:15:28.649Z</updated>
+  <updated>2015-01-11T00:51:26.343Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,49 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Índice da série: Como criar temas para WordPress]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"/>
+    <id>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</id>
+    <published>2015-01-11T00:00:00.000Z</published>
+    <updated>2015-01-11T00:51:18.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
+<p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
+<a id="more"></a>
+
+<p>Não vamos nos ater a nenhum tipo de conteúdo em específico. Ao longo dos posts, vamos criar vários tipos de conteúdo diferentes, para mostrar tudo o que é possível fazer com o WordPress. O código do tema ficará disponível <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">nesse repositório do Github</a> - se você ainda não tem uma conta no Github, é a sua hora de criar :D</p>
+<p>Se você tem sugestões sobre o que gostaria que fosse abordado, deixe um comentário no final desse post. </p>
+<p>Se tiver algum problema com algum código, dê um <em>fork</em> no projeto e submeta um <em>Pull Request</em>. Se a sua correção for válida, o <em>Pull Request</em> será aceito e você será citado no post que falarmos da correção. Então se você ainda não tem familiaridade com o <a href="https://github.com" target="_blank" rel="external">Github</a>, agora é o momento de aprender isso também :)</p>
+<p>Vamos sempre consultar o <a href="http://codex.wordpress.org/" target="_blank" rel="external">Codex</a> e a <a href="http://php.net/manual/en/" target="_blank" rel="external">documentação do PHP</a> para nos auxiliar. Isso vai ajudar também àqueles que têm dificuldades em buscar informações nesses canais.</p>
+<p>Esse post servirá como uma introdução à série, e como índice, para organização das postagens. Ele será atualizado conforme os posts forem sendo escritos. E em cada post da série, você verá um link para esse post de introdução, um para o post anterior e um para o próximo post da série.</p>
+<p>Aproveite, e bons estudos!</p>
+<h2 id="Índice">Índice</h2>
+<p>1) <a href="">Estrutura inicial do tema, padrões de codificação e uso do editor - LINK EM BREVE (12/01/2015)</a></p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
+<p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
+    
+      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Debugar Javascript no browser]]></title>
     <link href="http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/"/>
     <id>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</id>
     <published>2015-01-10T00:00:00.000Z</published>
-    <updated>2015-01-10T13:14:58.000Z</updated>
+    <updated>2015-01-10T13:15:46.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/keep-calm-and-start-debugging.png" alt="Debugue!"></p>
 <p>Antigamente a única forma que tínhamos de debugar um código Javascript no browser era usando <code>alert()</code>. Hoje os browsers mais modernos disponibilizam  algumas ferramentas para ajudar nosso desenvolvimento. Uma delas é a API <code>console</code>.</p>
 <p>Mas apesar de todos os seus métodos, nem sempre é possível resolver um problema de forma prática somente usando <code>console</code>. </p>
@@ -122,7 +160,7 @@
     <link href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/"/>
     <id>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</id>
     <published>2015-01-09T00:00:00.000Z</published>
-    <updated>2015-01-10T13:13:41.000Z</updated>
+    <updated>2015-01-11T00:40:32.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress.jpg" alt="WordPress"></p>
 <p><strong>WordPress</strong> é uma marca registrada, por isso a necessidade de escrever corretamente: com o W e o P maiúsculos, ok? Mas isso não tem nada a ver com o assunto do post, onde iremos aprender a montar a estrutura básica de um tema para WordPress :P </p>
 <p>Sabia que, para criar um tema, você não precisa de nada mais que 2 arquivos? Duvida? Vem que eu te mostro ;)</p>
@@ -157,7 +195,7 @@
 <p>Para ativar o seu tema, logue-se no painel, em <code>http://seusite.com.br/wp-admin</code>. Vá até o menu <code>Aparência &gt; Temas</code>, selecione o seu tema e ative-o. E pronto! Todos os posts que você fizer já irão utilizar o tema que estamos desenvolvendo :D</p>
 <h2 id="index-php">index.php</h2>
 <p>O código que o WordPress usa para mostrar os posts é bem simples. Coloque na <code>index.php</code> do seu tema:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"pt-br"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Meu tema WordPress<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post(); <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">h2</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"&lt;?php the_permalink() ?&gt;"</span>&gt;</span></div><div class="line">      <span class="php"><span class="preprocessor">&lt;?php</span> the_title() <span class="preprocessor">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> the_content() <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endwhile</span>; <span class="preprocessor">?&gt;</span></span> </div><div class="line"></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">else</span> : <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>Não existem posts.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endif</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"pt-br"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Meu tema WordPress<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post(); <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">h2</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"&lt;?php the_permalink() ?&gt;"</span>&gt;</span></div><div class="line">      <span class="php"><span class="preprocessor">&lt;?php</span> the_title() <span class="preprocessor">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> the_content() <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endwhile</span>; <span class="preprocessor">?&gt;</span></span> </div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">else</span> : <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>Não existem posts.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endif</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>Na linha <code>9</code>, temos o que chamamos de <strong>Loop do WordPress</strong>. As funções do WordPress são muito semânticas, e dizem exatamente o que elas fazem: </p>
 <p>Primeiro, verificamos se existem posts, com a função <code>have_posts()</code> (o WordPress chama de <code>posts</code>, ou postagens, todo tipo de conteúdo que é possível cadastrar através do painel);</p>
