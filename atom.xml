@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-12T01:00:52.293Z</updated>
+  <updated>2015-01-12T08:13:18.968Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/"/>
     <id>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</id>
     <published>2015-01-12T00:00:00.000Z</published>
-    <updated>2015-01-11T12:45:11.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
+    <updated>2015-01-12T08:12:46.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
 <p>Este é o primeiro post da nossa série <strong>Como criar temas para WordPress</strong>! É importante salientar que todos os posts serão <em>hands on</em>, então não adianta ficar só lendo! Para aprender de verdade é preciso praticar! Siga todos os passos citados nos posts, crie os arquivos conforme as orientações, que em breve você estará apto para criar seu próprio tema, combinado? ;)</p>
 <a id="more"></a>
 
@@ -102,7 +102,7 @@
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
 <p>Este é o primeiro post da nossa série <strong>Como criar temas para WordPress</strong>! É importante salientar que todos os posts serão <em>hands on</em>, então não adianta ficar só lendo! Para aprender de verdade é preciso praticar! Siga todos os passos citados nos posts, crie os arquivos conforme as orientações, que em breve você estará apto para criar seu próprio tema, combinado? ;)</p>
 ]]>
     
