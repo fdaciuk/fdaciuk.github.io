@@ -99,9 +99,6 @@
 <p>Este é o primeiro post da nossa série <strong>Como criar temas para WordPress</strong>! É importante salientar que todos os posts serão <em>hands on</em>, então não adianta ficar só lendo! Para aprender de verdade é preciso praticar! Siga todos os passos citados nos posts, crie os arquivos conforme as orientações, que em breve você estará apto para criar seu próprio tema, combinado? ;)</p>
 <a id="more"></a>
 
-<blockquote>
-<p>Link para o índice: <a href="http://blog.da2k.com.br/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
-</blockquote>
 <h2 id="Padrões_de_codificação">Padrões de codificação</h2>
 <p>Para manter um padrão de codificação, vamos seguir os <a href="http://codex.wordpress.org/WordPress_Coding_Standards" target="_blank" rel="external"><em>Coding Standards</em> do WordPress</a> para PHP, HTML, CSS e Javascript.</p>
 <h2 id="Editor">Editor</h2>
@@ -151,7 +148,7 @@
 
 <p>O erro diz: <em>Chamada para função indefinida get_header() no arquivo [caminho do arquivo] na linha 1</em></p>
 <p><em>Por que deu esse erro?</em></p>
-<p>A função não está definida, porque o WordPress começa a ser carregado a partir da <code>index.php</code> na raiz do projeto. Ali ele vai incluindo os arquivos necessários para que todas as funções funcionem corretamente. Como nós adicionamos as funções <code>wp_header()</code> e <code>wp_footer()</code> em nossa <code>index</code>, ao acessar o arquivo diretamente, o WordPress não foi carregado, e o PHP acusou esse erro.</p>
+<p>A função não está definida, porque o WordPress começa a ser carregado a partir da <code>index.php</code> na raiz do projeto. Ali ele vai incluindo os arquivos necessários para que todas as funções funcionem corretamente. Como nós adicionamos as funções <code>get_header()</code> e <code>get_footer()</code> em nossa <code>index</code>, ao acessar o arquivo diretamente, o WordPress não foi carregado, e o PHP acusou esse erro.</p>
 <p>E o problema maior é que ele mostra o caminho completo até o arquivo onde deu o erro! Se alguém com más intenções fizer isso no seu site em produção, ele poderá ter facilmente o caminho desde a raiz do seu servidor, até a sua pasta pública, para tentar atacar de alguma forma.</p>
 <p><em>E como podemos contornar isso?</em></p>
 <p>Se você abrir o arquivo <code>index.php</code> do WordPress, na raiz do projeto, vai ver que ele faz um include (usando <code>require</code>) do arquivo <code>wp-blog-header.php</code>, e nesse arquivo, tem um include para <code>wp-load.php</code>. Nesse arquivo, você verá uma constante definida chamada <code>ABSPATH</code> no início do arquivo.</p>
@@ -171,6 +168,13 @@
 <p>Não esqueça que isso deve ser feito em todo arquivo <code>.php</code> do seu tema, ok?</p>
 <p>Por hoje é só! No próximo post daremos continuidade!</p>
 <p>Até lá!</p>
+<blockquote>
+
+<p><strong>Link para o índice:</strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</a></p>
+</blockquote>
+
+
 <blockquote>
 <p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
 <p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
@@ -249,9 +253,9 @@
   
     <li><a href="/categories/html/">html</a><small>1</small></li>
   
-    <li><a href="/categories/javascript/">javascript</a><small>11</small></li>
+    <li><a href="/categories/javascript/">javascript</a><small>12</small></li>
   
-    <li><a href="/categories/wordpress/">wordpress</a><small>4</small></li>
+    <li><a href="/categories/wordpress/">wordpress</a><small>5</small></li>
   
   </ul>
 </div>
@@ -262,7 +266,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/1postperday/">1postperday</a><small>13</small></li>
+    <li><a href="/tags/1postperday/">1postperday</a><small>15</small></li>
   
     <li><a href="/tags/amd/">amd</a><small>1</small></li>
   
@@ -298,13 +302,13 @@
   
     <li><a href="/tags/performance/">performance</a><small>1</small></li>
   
-    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>2</small></li>
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>3</small></li>
   
     <li><a href="/tags/tdd/">tdd</a><small>1</small></li>
   
     <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
   
-    <li><a href="/tags/tips/">tips</a><small>2</small></li>
+    <li><a href="/tags/tips/">tips</a><small>3</small></li>
   
     <li><a href="/tags/umd/">umd</a><small>1</small></li>
   

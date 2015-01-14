@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Javascript - Brincando com números | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Quando você começa a estudar sobre a estrutura léxica da Javascript, você vê que as “bizarrices” encontradas em http://wtfjs.com/ são todos comportamentos esperados! Hoje eu quero mostrar algo simples, mas que pode te ajudar bastante ao trabalhar com números em Javascript :D">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript - Brincando com números"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/js-numbers.jpg" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-13T00:00:00.000Z"><a href="/2015/01/13/javascript-brincando-com-numeros/">13 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Javascript - Brincando com números</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/js-numbers.jpg" alt=""></p>
+<p>Quando você começa a estudar sobre a <a href="https://insidejavascript.wordpress.com/2011/09/16/lexical-structure/" target="_blank" rel="external">estrutura léxica</a> da <strong>Javascript</strong>, você vê que as “bizarrices” encontradas em <a href="http://wtfjs.com/" target="_blank" rel="external">http://wtfjs.com/</a> são todos comportamentos esperados! Hoje eu quero mostrar algo simples, mas que pode te ajudar bastante ao trabalhar com números em Javascript :D</p>
+<a id="more"></a>
+
+<h2 id="Conversão_de_números">Conversão de números</h2>
+<p>Em um projeto que você recebe uma entrada de dados do usuário, você precisa sempre tratar essa entrada, para saber se está realmente recebendo o valor que você espera. Vamos dar um exemplo, onde você tem uma função chamada <code>sum()</code>, que soma dois números. Esses dois números são recebidos através de dois <code>inputs</code> (vou deixar tudo em um só arquivo somente para exemplificar. Eviter fazer isso):</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Somar dois números<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Somar dois números<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">data-js</span>=<span class="value">"number1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">data-js</span>=<span class="value">"number2"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>Somar<span class="tag">&lt;/<span class="title">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-js</span>=<span class="value">"result"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">document</span>.querySelector( <span class="string">'button'</span> )</div><div class="line">      .addEventListener( <span class="string">'click'</span>, handleClick, <span class="literal">false</span> );</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleClick</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> number1 = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="number1"]'</span>).value;</div><div class="line">      <span class="keyword">var</span> number2 = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="number2"]'</span>).value;</div><div class="line">      </div><div class="line">      <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="result"]'</span> ).innerHTML = sum( number1, number2 );</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">      <span class="keyword">return</span> number1 + number2;</div><div class="line">    }</div><div class="line">  <span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Esse seria mais ou menos o código que você iria utilizar para fazer a soma, correto?</p>
+<p>Entre com dois números nos inputs e veja o resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/sum-1-2-12.png" alt="Somar &quot;1&quot; e &quot;2&quot; é igual a &quot;12&quot;"></p>
+<p>Eu entrei com os números <code>1</code> e <code>2</code> e tive como resultado… <strong><code>12</code></strong>!</p>
+<p><em>12??? Como assim?</em></p>
+<p>O Javascript recebeu os valores dos inputs da forma como eles vieram. Normalmente esses valores vêm como <code>String</code>. Se você conhece a estrutura léxica do Javascript, você sabe que, ao usar o sinal de <code>+</code>, ele pode tanto somar números, como concatenar strings. Quando você tem ao menos uma string em uma das partes, ele assume que o que você quer fazer é concatenar.</p>
+<p><em>Então como eu posso resolver isso?</em></p>
+<p>Precisamos converter esses valores de string para números, antes de efetuar a soma!</p>
+<h2 id="parseInt()">parseInt()</h2>
+<p>Temos a função <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt" target="_blank" rel="external">parseInt()</a>, que recebe dois parâmetros: o primeiro é o valor que você quer converter para um número inteiro, e o segundo, um número inteiro que vai representar o tipo de conversão que será feito. </p>
+<p>No nosso caso, vamos utilizar como segundo parâmetro o número <code>10</code>, que representa números decimais.</p>
+<p>Mudamos um pouco nossa função de soma para ficar assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  <span class="keyword">var</span> DECIMAL = <span class="number">10</span>;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">parseInt</span>( number1, DECIMAL ) + <span class="built_in">parseInt</span>( number2, DECIMAL );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Como já vimos em posts anteriores, vamos utilizar boas práticas de <em>Clean Code</em>. Coloquei o número 10 em uma variável chamada <code>DECIMAL</code> (tudo maiúsculo, pois é convenção para constantes), para que saibamos o que significa esse segundo parâmetro. </p>
+<p>A boa prática é nunca usar números mágicos, mas sempre atribuí-los à uma constante.</p>
+<p>Agora tente novamente fazer a soma:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/sum1-2-3.png" alt="Soma 1 + 2 = 3"></p>
+<p>E temos o resultado correto :)</p>
+<p>É importante frisar o uso do segundo parâmetro do <code>parseInt()</code>, pois isso pode alterar o resultado final. Por exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">parseInt</span>( <span class="string">'10px'</span> ); <span class="comment">// 10</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'10px'</span>, <span class="number">10</span> ); <span class="comment">// 10</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'0x'</span> ); <span class="comment">// NaN</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'0x'</span>, <span class="number">10</span> ) <span class="comment">// 0</span></div></pre></td></tr></table></figure>
+
+<p>Como você pode ver nos exemplos acima, o <code>parseInt()</code> converte a string baseado nos primeiros caracteres, se o segundo parâmetro não for passado.</p>
+<p>No primeiro e segundo exemplos, ele retorna <code>10</code>. Mas no terceiro e quarto exemplos, temos uma pequena diferença.</p>
+<p>Quando uma string é iniciada em <code>0X</code> ou <code>0x</code>, e o segundo parâmetro não for definido, o <code>parseInt()</code> entende que essa é uma notação <strong>hexadecimal</strong>, e tenta converter ao inteiro equivalente. Como <code>0x</code> é só o início da string, não retorna número algum, o resultado é <code>NaN</code> (Not a number).</p>
+<p>No quarto exemplo, nós dizemos ao <code>parseInt()</code> que a string deve ser interpretada como <strong>decimal</strong>. Então ele apresenta o resultado esperado.</p>
+<p>Muito cuidado com isso ;)</p>
+<blockquote>
+<p>Para ver todos os tipos disponíveis para usar no segundo parâmetro, acesse <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt" target="_blank" rel="external">https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt</a>.</p>
+</blockquote>
+<h2 id="O_operador_+">O operador <code>+</code></h2>
+<p>Mas tem outra malandragem pouco conhecida para a conversão de números: o sinal de <code>+</code>. Quando usado antes de uma string, e a string for um número, ele converte o tipo dessa string para <code>Number</code>! Duvida? Mude a função <code>sum()</code> novamente:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  number1 = +number1;</div><div class="line">  number2 = +number2;</div><div class="line">  <span class="keyword">return</span> number1 + number2;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Convertemos os valores para número antes de somar e… agora nosso resultado está correto novamente!</p>
+<h2 id="Conclusão">Conclusão</h2>
+<p>A intenção desse post foi mostrar o uso do operador <code>+</code>, que facilita muito na hora de converter <code>String</code> para <code>Number</code>, além de frisar a importância do uso do segundo parâmetro no <code>parseInt()</code>.</p>
+<p>Gostou da dica? Ficou com alguma dúvida? Comente! </p>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/tips/">tips</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>12</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>15</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>1</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>3</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>1</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>3</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-12T08:32:16.934Z</updated>
+  <updated>2015-01-14T02:38:10.395Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,18 +15,184 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[WordPress: o arquivo functions.php]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/"/>
+    <id>http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</id>
+    <published>2015-01-14T00:00:00.000Z</published>
+    <updated>2015-01-14T02:36:07.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-functions-php.jpg" alt="WordPress - O arquivo functions.php"></p>
+<p>O <strong>functions.php</strong> é o canal que liga o seu tema a todas as coisas legais que o WP tem a oferecer! Códigos personalizados, estrutura de arquivos… todo tipo de manipulação que você imagina no seu site WordPress, você faz através do <strong>functions.php</strong>. Vamos conhecê-lo? ;)</p>
+<a id="more"></a>
+
+<p>O <strong>functions.php</strong> é um arquivo que fica na raiz do seu tema WordPress, e ele é carregado antes de qualquer arquivo de template do tema.</p>
+<p>Sem perder tempo, vamos então criá-lo!</p>
+<h2 id="Segurança">Segurança</h2>
+<p>Uma pequena pausa para tratar de uma melhoria para segurança: no post anterior, comentei sobre como previnir acesso direto a um arquivo do seu tema, lembra? Pois o <strong>Pedro Diaz</strong> fez um comentário muito relevante:</p>
+<blockquote>
+<p>Uma dúvida: eu poderia colocar este código em um arquivo .php e somente dar um include nos outros arquivos?</p>
+</blockquote>
+<p>E a resposta é: SIM, é possível!</p>
+<p>Para manter a organização do nosso tema, vamos adicionar nossos códigos personalizados em um diretório chamado <code>functions</code>, e criar um arquivo chamado <code>security.php</code>. A estrutura de arquivos do nosso tema deve estar assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── .editorconfig</div><div class="line">├── footer.php</div><div class="line">├── functions</div><div class="line">│   └── security.php</div><div class="line">├── functions.php</div><div class="line">├── header.php</div><div class="line">├── index.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
+
+<p>Criamos o arquivo <code>functions.php</code> e o arquivo <code>security.php</code>. Então transferimos nosso código que faz o redirect para esse arquivo <code>security.php</code>:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="keyword">if</span>( ! defined( <span class="string">'ABSPATH'</span> ) ) {</div><div class="line">    header( <span class="string">'Location: /00-opensource/wordpress/'</span> );</div><div class="line">    <span class="keyword">exit</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p><em>Ei, você esqueceu de fechar o <code>&lt;?php</code></em>?</p>
+<p>Não! Essa é uma boa prática no desenvolvimento com PHP. Sempre que você tiver um arquivo que só irá conter código PHP, você não precisa (e não deve) fechar com a tag <code>?&gt;</code>, pois, se esse arquivo tiver a tag de fechamento e você esquecer um espaço ou quebra de linha após essa tag; e ele for carregado antes de qualquer outro arquivo que faça alguma modificação de <code>headers</code>, você terá um erro como esse:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">Erro</span> PHP: Cannot modify header information – headers already sent</div></pre></td></tr></table></figure>
+
+<p>Agora você precisa somente fazer o include do arquivo <code>security.php</code> nos seus arquivos, ao invés de adicionar o <code>if</code> todo :)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">&lt;?php</span> <span class="keyword">require_once</span> <span class="string">'functions/security.php'</span> <span class="preprocessor">?&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Só não esqueça que, se você estiver dentro de diretórios, vai precisar passar o caminho relativo ao arquivo. Mas use isso como você achar melhor, ok? ;)</p>
+<h2 id="Suporte_para_funcionalidades">Suporte para funcionalidades</h2>
+<p>O WordPress tem várias <a href="http://codex.wordpress.org/Function_Reference/add_theme_support" target="_blank" rel="external">funcionalidades legais</a>, mas que não vêm ativadas por padrão, pois consumiriam muitos recursos se estivessem ativadas e você não precisasse delas. Então, você ativa essas funcionalidades conforme a sua necessidade.</p>
+<p>Se você olhar no Painel, por exemplo, na tela de edição de post, você terá as seguintes opções:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/single-post.png" alt="Single post"></p>
+<p>Vamos adicionar a funcionalidade de <strong>Post Thumbnails</strong>, para que possamos adicionar uma imagem ao nosso post. No seu <code>functions.php</code>:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="keyword">require_once</span> <span class="string">'functions/security.php'</span>;</div><div class="line">  </div><div class="line">add_action( <span class="string">'after_setup_theme'</span>, <span class="string">'setup_features'</span> );</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setup_features</span><span class="params">()</span> </span>{</div><div class="line">    add_theme_support( <span class="string">'post-thumbnails'</span> );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>E temos como resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/featured-image.png" alt="Imagem destacada"></p>
+<p>Agora temos essa nova funcionalidade disponível para todos os nossos <em>tipos de conteúdo</em>!</p>
+<p><em>E como eu uso isso?</em></p>
+<p>Na sua <code>index.php</code>, adicione o código:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post() ?&gt;</div><div class="line">    &lt;?php</div><div class="line">        <span class="keyword">if</span>( has_post_thumbnail() ) {</div><div class="line">            the_post_thumbnail();</div><div class="line">        }</div><div class="line">    ?&gt;</div><div class="line">    <span class="comment">// ...</span></div></pre></td></tr></table></figure>
+
+<p>Adicionei o loop novamente (linha 1) só para que você possa se encontrar para saber onde deve adicionar o código.</p>
+<p><strong>Uma outra boa prática que preciso comentar aqui:</strong> percebeu que eu abri novamente uma tag PHP, ainda que na linha de cima eu já tinha uma linha só com código PHP? Por que eu não utilizei o mesmo escopo, deixando o código como abaixo?</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post();</div><div class="line">    <span class="keyword">if</span>( has_post_thumbnail() ) {</div><div class="line">        the_post_thumbnail();</div><div class="line">    }</div><div class="line">    ?&gt;</div><div class="line">    <span class="comment">// ...</span></div></pre></td></tr></table></figure>
+
+<p>Bom, por essa implementação, você já pode perceber que o alinhamento das indentações não bate. Procure sempre manter as indentações bem definidas. Sempre que você precisar fazer uma validação PHP usando <code>if</code> por exemplo, e vai precisar imprimir código HTML dentro desse <code>if</code>, use a notação com <code>:</code>, dessa forma, e abra um novo escopo de tags:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( verifique_alguma_coisa() ) : ?&gt;</div><div class="line">    &lt;h1&gt;Título&lt;/h1&gt;</div><div class="line">&lt;?php <span class="keyword">endif</span> ?&gt;</div></pre></td></tr></table></figure>
+
+<p>Dessa forma o código fica muito mais limpo e consistente, pois você sabe onde o <code>if</code> termina, por causa do <code>endif</code>. Se usar com chaves, já fica ruim de visualizar:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( verifique_alguma_coisa() ) { ?&gt;</div><div class="line">    &lt;h1&gt;Título&lt;/h1&gt;</div><div class="line">&lt;?php } ?&gt;</div></pre></td></tr></table></figure>
+
+<p>Da mesma forma, quando precisamos adicionar um código PHP indentado, mas precisamos fechar o PHP para adicionar HTML. Quando indentar, abrar um novo escopo de tags <code>&lt;?php ?&gt;</code>, para que seu código se mantenha o mais legível possível.</p>
+<p><strong>Fica a dica!</strong></p>
+<p>Agora temos duas novas funções: <code>has_post_thumbnail()</code> e <code>the_post_thumbnail()</code>. Os nomes são bem semânticos, não?</p>
+<p><code>has_post_thumbnail()</code> retorna <code>true</code> se o post tem uma imagem destacada, e <code>false</code> se não houver. E <code>the_post_thumbnail()</code>, gera uma tag de imagem, com a imagem destacada que você adicionar no seu post. Se não houver imagem, continua a exibição normal do post :)</p>
+<p>Para ver o código completo até aqui, siga esse repositório: <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br</a></p>
+<p>Lembra que comentamos sobre <em>hooks</em>? No código mais acima, podemos ver o hook <code>after_setup_theme</code> em ação.</p>
+<p><em>Como ele funciona?</em></p>
+<p>Os desenvolvedores do WordPress “largam” algumas chamadas aos <em>hooks</em> (ganchos) no meio do <em>core</em> do WP, para que você possa “pendurar” os seus próprios códigos. Nesse caso, dizemos ao WordPress que, quando chegar no local do código onde está posicionado o <em>hook</em> <code>after_setup_theme</code>, ele deve executar a função <code>setup_features</code>, passada no segundo parâmetro.</p>
+<p>O WordPress tem vários <em>hooks</em> no <em>core</em>, que podem ser encontrados aqui: <a href="http://codex.wordpress.org/Plugin_API/Hooks" target="_blank" rel="external">http://codex.wordpress.org/Plugin_API/Hooks</a></p>
+<p>Mas não se preocupe com isso agora. Veremos isso mais a fundo nos próximos posts, inclusive aprenderemos como criar nossos próprios hooks :D</p>
+<p>Bom, paramos por aqui, mas saiba que estamos apenas começando! Temos muitas coisas legais ainda pra ver! Continue acompanhando a série!</p>
+<p>Até o próximo post :D</p>
+<blockquote>
+
+<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</a></p>
+<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+</blockquote>
+
+
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-functions-php.jpg" alt="WordPress - O arquivo functions.php"></p>
+<p>O <strong>functions.php</strong> é o canal que liga o seu tema a todas as coisas legais que o WP tem a oferecer! Códigos personalizados, estrutura de arquivos… todo tipo de manipulação que você imagina no seu site WordPress, você faz através do <strong>functions.php</strong>. Vamos conhecê-lo? ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
+    
+      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Javascript - Brincando com números]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"/>
+    <id>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</id>
+    <published>2015-01-13T00:00:00.000Z</published>
+    <updated>2015-01-13T23:39:24.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/js-numbers.jpg" alt=""></p>
+<p>Quando você começa a estudar sobre a <a href="https://insidejavascript.wordpress.com/2011/09/16/lexical-structure/" target="_blank" rel="external">estrutura léxica</a> da <strong>Javascript</strong>, você vê que as “bizarrices” encontradas em <a href="http://wtfjs.com/" target="_blank" rel="external">http://wtfjs.com/</a> são todos comportamentos esperados! Hoje eu quero mostrar algo simples, mas que pode te ajudar bastante ao trabalhar com números em Javascript :D</p>
+<a id="more"></a>
+
+<h2 id="Conversão_de_números">Conversão de números</h2>
+<p>Em um projeto que você recebe uma entrada de dados do usuário, você precisa sempre tratar essa entrada, para saber se está realmente recebendo o valor que você espera. Vamos dar um exemplo, onde você tem uma função chamada <code>sum()</code>, que soma dois números. Esses dois números são recebidos através de dois <code>inputs</code> (vou deixar tudo em um só arquivo somente para exemplificar. Eviter fazer isso):</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Somar dois números<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Somar dois números<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">data-js</span>=<span class="value">"number1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">data-js</span>=<span class="value">"number2"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>Somar<span class="tag">&lt;/<span class="title">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-js</span>=<span class="value">"result"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">document</span>.querySelector( <span class="string">'button'</span> )</div><div class="line">      .addEventListener( <span class="string">'click'</span>, handleClick, <span class="literal">false</span> );</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleClick</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> number1 = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="number1"]'</span>).value;</div><div class="line">      <span class="keyword">var</span> number2 = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="number2"]'</span>).value;</div><div class="line">      </div><div class="line">      <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="result"]'</span> ).innerHTML = sum( number1, number2 );</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">      <span class="keyword">return</span> number1 + number2;</div><div class="line">    }</div><div class="line">  <span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Esse seria mais ou menos o código que você iria utilizar para fazer a soma, correto?</p>
+<p>Entre com dois números nos inputs e veja o resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/sum-1-2-12.png" alt="Somar &quot;1&quot; e &quot;2&quot; é igual a &quot;12&quot;"></p>
+<p>Eu entrei com os números <code>1</code> e <code>2</code> e tive como resultado… <strong><code>12</code></strong>!</p>
+<p><em>12??? Como assim?</em></p>
+<p>O Javascript recebeu os valores dos inputs da forma como eles vieram. Normalmente esses valores vêm como <code>String</code>. Se você conhece a estrutura léxica do Javascript, você sabe que, ao usar o sinal de <code>+</code>, ele pode tanto somar números, como concatenar strings. Quando você tem ao menos uma string em uma das partes, ele assume que o que você quer fazer é concatenar.</p>
+<p><em>Então como eu posso resolver isso?</em></p>
+<p>Precisamos converter esses valores de string para números, antes de efetuar a soma!</p>
+<h2 id="parseInt()">parseInt()</h2>
+<p>Temos a função <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt" target="_blank" rel="external">parseInt()</a>, que recebe dois parâmetros: o primeiro é o valor que você quer converter para um número inteiro, e o segundo, um número inteiro que vai representar o tipo de conversão que será feito. </p>
+<p>No nosso caso, vamos utilizar como segundo parâmetro o número <code>10</code>, que representa números decimais.</p>
+<p>Mudamos um pouco nossa função de soma para ficar assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  <span class="keyword">var</span> DECIMAL = <span class="number">10</span>;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">parseInt</span>( number1, DECIMAL ) + <span class="built_in">parseInt</span>( number2, DECIMAL );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Como já vimos em posts anteriores, vamos utilizar boas práticas de <em>Clean Code</em>. Coloquei o número 10 em uma variável chamada <code>DECIMAL</code> (tudo maiúsculo, pois é convenção para constantes), para que saibamos o que significa esse segundo parâmetro. </p>
+<p>A boa prática é nunca usar números mágicos, mas sempre atribuí-los à uma constante.</p>
+<p>Agora tente novamente fazer a soma:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/sum1-2-3.png" alt="Soma 1 + 2 = 3"></p>
+<p>E temos o resultado correto :)</p>
+<p>É importante frisar o uso do segundo parâmetro do <code>parseInt()</code>, pois isso pode alterar o resultado final. Por exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">parseInt</span>( <span class="string">'10px'</span> ); <span class="comment">// 10</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'10px'</span>, <span class="number">10</span> ); <span class="comment">// 10</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'0x'</span> ); <span class="comment">// NaN</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'0x'</span>, <span class="number">10</span> ) <span class="comment">// 0</span></div></pre></td></tr></table></figure>
+
+<p>Como você pode ver nos exemplos acima, o <code>parseInt()</code> converte a string baseado nos primeiros caracteres, se o segundo parâmetro não for passado.</p>
+<p>No primeiro e segundo exemplos, ele retorna <code>10</code>. Mas no terceiro e quarto exemplos, temos uma pequena diferença.</p>
+<p>Quando uma string é iniciada em <code>0X</code> ou <code>0x</code>, e o segundo parâmetro não for definido, o <code>parseInt()</code> entende que essa é uma notação <strong>hexadecimal</strong>, e tenta converter ao inteiro equivalente. Como <code>0x</code> é só o início da string, não retorna número algum, o resultado é <code>NaN</code> (Not a number).</p>
+<p>No quarto exemplo, nós dizemos ao <code>parseInt()</code> que a string deve ser interpretada como <strong>decimal</strong>. Então ele apresenta o resultado esperado.</p>
+<p>Muito cuidado com isso ;)</p>
+<blockquote>
+<p>Para ver todos os tipos disponíveis para usar no segundo parâmetro, acesse <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt" target="_blank" rel="external">https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt</a>.</p>
+</blockquote>
+<h2 id="O_operador_+">O operador <code>+</code></h2>
+<p>Mas tem outra malandragem pouco conhecida para a conversão de números: o sinal de <code>+</code>. Quando usado antes de uma string, e a string for um número, ele converte o tipo dessa string para <code>Number</code>! Duvida? Mude a função <code>sum()</code> novamente:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  number1 = +number1;</div><div class="line">  number2 = +number2;</div><div class="line">  <span class="keyword">return</span> number1 + number2;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Convertemos os valores para número antes de somar e… agora nosso resultado está correto novamente!</p>
+<h2 id="Conclusão">Conclusão</h2>
+<p>A intenção desse post foi mostrar o uso do operador <code>+</code>, que facilita muito na hora de converter <code>String</code> para <code>Number</code>, além de frisar a importância do uso do segundo parâmetro no <code>parseInt()</code>.</p>
+<p>Gostou da dica? Ficou com alguma dúvida? Comente! </p>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/js-numbers.jpg" alt=""></p>
+<p>Quando você começa a estudar sobre a <a href="https://insidejavascript.wordpress.com/2011/09/16/lexical-structure/" target="_blank" rel="external">estrutura léxica</a> da <strong>Javascript</strong>, você vê que as “bizarrices” encontradas em <a href="http://wtfjs.com/" target="_blank" rel="external">http://wtfjs.com/</a> são todos comportamentos esperados! Hoje eu quero mostrar algo simples, mas que pode te ajudar bastante ao trabalhar com números em Javascript :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="tips" scheme="http://blog.da2k.com.br/tags/tips/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[WordPress: Estrutura inicial do tema, padrões de codificação e uso do editor]]></title>
     <link href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/"/>
     <id>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</id>
     <published>2015-01-12T00:00:00.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
+    <updated>2015-01-14T00:02:23.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
 <p>Este é o primeiro post da nossa série <strong>Como criar temas para WordPress</strong>! É importante salientar que todos os posts serão <em>hands on</em>, então não adianta ficar só lendo! Para aprender de verdade é preciso praticar! Siga todos os passos citados nos posts, crie os arquivos conforme as orientações, que em breve você estará apto para criar seu próprio tema, combinado? ;)</p>
 <a id="more"></a>
 
-<blockquote>
-<p>Link para o índice: <a href="http://blog.da2k.com.br/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
-</blockquote>
 <h2 id="Padrões_de_codificação">Padrões de codificação</h2>
 <p>Para manter um padrão de codificação, vamos seguir os <a href="http://codex.wordpress.org/WordPress_Coding_Standards" target="_blank" rel="external"><em>Coding Standards</em> do WordPress</a> para PHP, HTML, CSS e Javascript.</p>
 <h2 id="Editor">Editor</h2>
@@ -76,7 +242,7 @@
 
 <p>O erro diz: <em>Chamada para função indefinida get_header() no arquivo [caminho do arquivo] na linha 1</em></p>
 <p><em>Por que deu esse erro?</em></p>
-<p>A função não está definida, porque o WordPress começa a ser carregado a partir da <code>index.php</code> na raiz do projeto. Ali ele vai incluindo os arquivos necessários para que todas as funções funcionem corretamente. Como nós adicionamos as funções <code>wp_header()</code> e <code>wp_footer()</code> em nossa <code>index</code>, ao acessar o arquivo diretamente, o WordPress não foi carregado, e o PHP acusou esse erro.</p>
+<p>A função não está definida, porque o WordPress começa a ser carregado a partir da <code>index.php</code> na raiz do projeto. Ali ele vai incluindo os arquivos necessários para que todas as funções funcionem corretamente. Como nós adicionamos as funções <code>get_header()</code> e <code>get_footer()</code> em nossa <code>index</code>, ao acessar o arquivo diretamente, o WordPress não foi carregado, e o PHP acusou esse erro.</p>
 <p>E o problema maior é que ele mostra o caminho completo até o arquivo onde deu o erro! Se alguém com más intenções fizer isso no seu site em produção, ele poderá ter facilmente o caminho desde a raiz do seu servidor, até a sua pasta pública, para tentar atacar de alguma forma.</p>
 <p><em>E como podemos contornar isso?</em></p>
 <p>Se você abrir o arquivo <code>index.php</code> do WordPress, na raiz do projeto, vai ver que ele faz um include (usando <code>require</code>) do arquivo <code>wp-blog-header.php</code>, e nesse arquivo, tem um include para <code>wp-load.php</code>. Nesse arquivo, você verá uma constante definida chamada <code>ABSPATH</code> no início do arquivo.</p>
@@ -96,6 +262,13 @@
 <p>Não esqueça que isso deve ser feito em todo arquivo <code>.php</code> do seu tema, ok?</p>
 <p>Por hoje é só! No próximo post daremos continuidade!</p>
 <p>Até lá!</p>
+<blockquote>
+
+<p><strong>Link para o índice:</strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</a></p>
+</blockquote>
+
+
 <blockquote>
 <p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
 <p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
@@ -121,7 +294,7 @@
     <link href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"/>
     <id>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</id>
     <published>2015-01-11T00:00:00.000Z</published>
-    <updated>2015-01-12T08:31:44.000Z</updated>
+    <updated>2015-01-14T02:35:38.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
 <p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
 <a id="more"></a>
@@ -134,7 +307,7 @@
 <p>Esse post servirá como uma introdução à série, e como índice, para organização das postagens. Ele será atualizado conforme os posts forem sendo escritos. E em cada post da série, você verá um link para esse post de introdução, um para o post anterior e um para o próximo post da série.</p>
 <p>Aproveite, e bons estudos!</p>
 <h2 id="Índice">Índice</h2>
-<p>1) <a href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/" target="_blank" rel="external">Estrutura inicial do tema, padrões de codificação e uso do editor</a></p>
+<p>1) <a href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/" target="_blank" rel="external">Estrutura inicial do tema, padrões de codificação e uso do editor</a><br>2) <a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">O arquivo functions.php</a></p>
 <blockquote>
 <p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
 <p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
