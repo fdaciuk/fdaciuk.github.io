@@ -3,22 +3,20 @@
 <head>
   <meta charset="utf-8" />
   
-  <title>Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 1/3 | Da2k Blog</title>
+  <title>Como ser um dev frontend usando Linux | Da2k Blog</title>
   <link rel="author" href="//plus.google.com/+FernandoDaciuk">
   
-  <meta name="description" content="Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa: 
-Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?
-Para responder a essa pergunta, entram em cena duas especificações de módulo: AMD e CommonJS (ou CJS).
-Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.">
+  <meta name="description" content="Muita gente me pergunta:“Você trabalha com frontend e usa Linux? Como faz pra usar Photoshop?“
+Como se frontend só trabalhasse com Photoshop :PMas vem comigo que te mostro ;)">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 1/3"/>
+  <meta property="og:title" content="Como ser um dev frontend usando Linux"/>
   <meta property="og:site_name" content="Da2k Blog"/>
 
   
-    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/modules-amd.jpg" />
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/linux.jpg" />
   
 
   
@@ -88,42 +86,38 @@ Eles permitem que você escreva seus códigos de forma modular, seguindo algumas
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-01-03T00:00:00.000Z"><a href="/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/">3 de janeiro de 2015</a></time>
+        <time datetime="2015-01-15T00:00:00.000Z"><a href="/2015/01/15/como-ser-um-dev-frontend-usando-linux/">15 de janeiro de 2015</a></time>
       
       
   
-    <h1 class="title">Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 1/3</h1>
+    <h1 class="title">Como ser um dev frontend usando Linux</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-amd.jpg" alt=""></p>
-<p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa: </p>
-<p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
-<p>Para responder a essa pergunta, entram em cena duas especificações de módulo: <strong>AMD</strong> e <strong>CommonJS</strong> (ou <strong>CJS</strong>).</p>
-<p>Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.</p>
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/linux.jpg" alt=""></p>
+<p>Muita gente me pergunta:<br>“<em>Você trabalha com frontend e usa Linux? Como faz pra usar Photoshop?</em>“</p>
+<p>Como se frontend só trabalhasse com Photoshop :P<br>Mas vem comigo que te mostro ;)</p>
 <a id="more"></a>
 
-<h2 id="AMD">AMD</h2>
-<p><strong>Asynchronous Module Definition</strong> (AMD) ficou bastante conhecido por causa do <a href="http://requirejs.org/" target="_blank" rel="external">RequireJS</a>. O formato de utilização do AMD é o seguinte:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define( <span class="string">'moduleName'</span>, [ <span class="string">'jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Essa é a estrutura mais básica de um módulo escrito no formato AMD. A função <code>define</code> será usada para todo novo módulo que você criar.</p>
-<p>Como primeiro parâmetro dessa função, você pode passar o nome do módulo - opcional - (que será usado para você fazer o “include” dele em outro lugar).</p>
-<p>O segundo parâmetro é um array de dependências desse módulo, também opcional. No nosso exemplo, colocamos como dependência a biblioteca jQuery.</p>
-<p>E o terceiro parãmetro é a função de callback que define o módulo e retorna o seu conteúdo. Essa função é obrigatória. Ela será chamada assim que todas as dependências do array no segundo parâmetro forem baixadas, e estiverem prontas para uso. </p>
-<p>As dependências normalmente retornam valores. Para usar os valores retornados, você deve passar como parâmetros da função as variáveis que irão receber os valores das dependências, sempre na mesma ordem do array.</p>
-<p>Por exemplo, se no seu módulo você vai precisar utilizar o jQuery e a LoDash, você pode fazer a chamada da seguinte forma:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Se não houver dependências, a função já será executada assim que ela for chamada:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>A ideia aqui é falar apenas como funcionam cada uma das especificações. Em posts futuros, entrarei em mais detalhes de como usar cada formato, especificamente.</p>
-<p>No próximo post, falaremos um pouco sobre o <strong>CommonJS</strong>. Até lá!</p>
+<p>Trabalhar com desenvolvimento frontend envolve muito código, por isso Linux - ao menos pra mim - é a melhor solução. Usar uma distribuição que não te deixe na mão e facilite a instalação de pacotes é essencial. No momento estou usando duas distros: <a href="http://ubuntugnome.org/" target="_blank" rel="external"><strong>Ubuntu Gnome</strong></a> - porque o <a href="https://unity.ubuntu.com/" target="_blank" rel="external"><strong>Unity</strong></a> é muito palha :P - e <a href="http://elementaryos.org/" target="_blank" rel="external"><strong>Elementary OS</strong></a>.</p>
+<p>As duas resolvem bem qualquer tipo de problema. </p>
+<p>Uso o <a href="https://apps.ubuntu.com/cat/applications/precise/terminator/" target="_blank" rel="external">Terminator</a> no lugar do terminal padrão do Ubuntu (dica do <a href="https://github.com/caarlos0/" target="_blank" rel="external">Carlos Becker</a>, que inclusive tem uma coleção de <a href="https://github.com/caarlos0/dotfiles" target="_blank" rel="external">dotfiles</a> bem da hora xD).</p>
+<p>Para codar, <strong>Sublime Text</strong> com algumas <a href="https://gist.github.com/fdaciuk/8b3269a3d797ee723672" target="_blank" rel="external">configurações específicas</a>.</p>
+<p><a href="https://apps.ubuntu.com/cat/applications/shutter/" target="_blank" rel="external">Shutter</a>, para tirar prints da tela.</p>
+<p><a href="https://apps.ubuntu.com/cat/applications/gimp/" target="_blank" rel="external">Gimp</a> para tratar alguma imagem - não fico mexendo muito com imagens, uso mais para fazer as capas dos posts do blog :P</p>
+<p><a href="https://apps.ubuntu.com/cat/applications/fogger/" target="_blank" rel="external">Fogger</a> para criar apps a partir de web apps - um que faz uma frente é o <a href="http://devdocs.io/" target="_blank" rel="external">DevDocs.io</a> :)</p>
+<p><em>Mas e quando você recebe um layout no Photoshop, como você abre os PSDs?</em></p>
+<p>Bom, já rodei Photoshop no Wine, - fica razoavelmente bom, com poucos bugs, mas fica pesado - já testei em máquina virtual, mas fica lento também. Até pouco tempo atrás, essas eram as únicas soluções.</p>
+<p>Mas - por incrível que pareça - a Adobe pensou nos devs frontend que, como eu, gostam de usar Linux e só usam Photoshop para fazer recorte de imagens, pegar medidas, fontes, tamanhos de fontes, cores, etc., e lançou um serviço <strong>lindo</strong> chamado <a href="https://projectparfait.adobe.com/" target="_blank" rel="external">Project Parfait</a>, onde você faz exatamente isso: pode fazer upload de um PSD (ou vários), e extrair cores, fontes, exportar imagens, etc.</p>
+<p>Agora você não tem mais desculpinha pra ficar usando Windows! E nem falo nada de programador BACKEND que usa Windows! :P</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/its-not-windows.jpg" alt="Don&#39;t Panic - It&#39;s not Windows"></p>
+<p>Mas brincadeiras à parte, use o sistema que você se sentir mais confortável, e te fizer mais produtivo! :D <span style="color: #f0f0f0">Desde que não seja Windows.</span></p>
+<p>E você, qual o seu sistema operacional? E qual o seu workflow? Comenta ae! :D</p>
 <blockquote>
 <p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
 </blockquote>
 
       
@@ -133,30 +127,30 @@ Eles permitem que você escreva seus códigos de forma modular, seguindo algumas
         
   
   <div class="categories">
-    <a href="/categories/javascript/">javascript</a>
+    <a href="/categories/frontend/">frontend</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/amd/">amd</a>, <a href="/tags/1postperday/">1postperday</a>
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/linux/">linux</a>, <a href="/tags/workflow/">workflow</a>
   </div>
 
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"></a>
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/"></a>
     
     
-      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"></a>
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/"></a>
     
     
-      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"></a>
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/"></a>
     
     
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"></a>
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/"></a>
     
-    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"></a>
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/"></a>
   </div>
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
 
@@ -289,7 +283,7 @@ Eles permitem que você escreva seus códigos de forma modular, seguindo algumas
 
 <script type="text/javascript">
 var disqus_shortname = 'blogda2k';
-var disqus_url = 'http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/';
 
 (function(){
   var dsq = document.createElement('script');

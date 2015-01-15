@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-14T02:38:10.395Z</updated>
+  <updated>2015-01-15T01:39:49.657Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,59 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Como ser um dev frontend usando Linux]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/"/>
+    <id>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</id>
+    <published>2015-01-15T00:00:00.000Z</published>
+    <updated>2015-01-15T01:37:49.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/linux.jpg" alt=""></p>
+<p>Muita gente me pergunta:<br>“<em>Você trabalha com frontend e usa Linux? Como faz pra usar Photoshop?</em>“</p>
+<p>Como se frontend só trabalhasse com Photoshop :P<br>Mas vem comigo que te mostro ;)</p>
+<a id="more"></a>
+
+<p>Trabalhar com desenvolvimento frontend envolve muito código, por isso Linux - ao menos pra mim - é a melhor solução. Usar uma distribuição que não te deixe na mão e facilite a instalação de pacotes é essencial. No momento estou usando duas distros: <a href="http://ubuntugnome.org/" target="_blank" rel="external"><strong>Ubuntu Gnome</strong></a> - porque o <a href="https://unity.ubuntu.com/" target="_blank" rel="external"><strong>Unity</strong></a> é muito palha :P - e <a href="http://elementaryos.org/" target="_blank" rel="external"><strong>Elementary OS</strong></a>.</p>
+<p>As duas resolvem bem qualquer tipo de problema. </p>
+<p>Uso o <a href="https://apps.ubuntu.com/cat/applications/precise/terminator/" target="_blank" rel="external">Terminator</a> no lugar do terminal padrão do Ubuntu (dica do <a href="https://github.com/caarlos0/" target="_blank" rel="external">Carlos Becker</a>, que inclusive tem uma coleção de <a href="https://github.com/caarlos0/dotfiles" target="_blank" rel="external">dotfiles</a> bem da hora xD).</p>
+<p>Para codar, <strong>Sublime Text</strong> com algumas <a href="https://gist.github.com/fdaciuk/8b3269a3d797ee723672" target="_blank" rel="external">configurações específicas</a>.</p>
+<p><a href="https://apps.ubuntu.com/cat/applications/shutter/" target="_blank" rel="external">Shutter</a>, para tirar prints da tela.</p>
+<p><a href="https://apps.ubuntu.com/cat/applications/gimp/" target="_blank" rel="external">Gimp</a> para tratar alguma imagem - não fico mexendo muito com imagens, uso mais para fazer as capas dos posts do blog :P</p>
+<p><a href="https://apps.ubuntu.com/cat/applications/fogger/" target="_blank" rel="external">Fogger</a> para criar apps a partir de web apps - um que faz uma frente é o <a href="http://devdocs.io/" target="_blank" rel="external">DevDocs.io</a> :)</p>
+<p><em>Mas e quando você recebe um layout no Photoshop, como você abre os PSDs?</em></p>
+<p>Bom, já rodei Photoshop no Wine, - fica razoavelmente bom, com poucos bugs, mas fica pesado - já testei em máquina virtual, mas fica lento também. Até pouco tempo atrás, essas eram as únicas soluções.</p>
+<p>Mas - por incrível que pareça - a Adobe pensou nos devs frontend que, como eu, gostam de usar Linux e só usam Photoshop para fazer recorte de imagens, pegar medidas, fontes, tamanhos de fontes, cores, etc., e lançou um serviço <strong>lindo</strong> chamado <a href="https://projectparfait.adobe.com/" target="_blank" rel="external">Project Parfait</a>, onde você faz exatamente isso: pode fazer upload de um PSD (ou vários), e extrair cores, fontes, exportar imagens, etc.</p>
+<p>Agora você não tem mais desculpinha pra ficar usando Windows! E nem falo nada de programador BACKEND que usa Windows! :P</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/its-not-windows.jpg" alt="Don&#39;t Panic - It&#39;s not Windows"></p>
+<p>Mas brincadeiras à parte, use o sistema que você se sentir mais confortável, e te fizer mais produtivo! :D <span style="color: #f0f0f0">Desde que não seja Windows.</span></p>
+<p>E você, qual o seu sistema operacional? E qual o seu workflow? Comenta ae! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/linux.jpg" alt=""></p>
+<p>Muita gente me pergunta:<br>“<em>Você trabalha com frontend e usa Linux? Como faz pra usar Photoshop?</em>“</p>
+<p>Como se frontend só trabalhasse com Photoshop :P<br>Mas vem comigo que te mostro ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="linux" scheme="http://blog.da2k.com.br/tags/linux/"/>
+    
+      <category term="workflow" scheme="http://blog.da2k.com.br/tags/workflow/"/>
+    
+      <category term="frontend" scheme="http://blog.da2k.com.br/categories/frontend/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[WordPress: o arquivo functions.php]]></title>
     <link href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/"/>
     <id>http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</id>
     <published>2015-01-14T00:00:00.000Z</published>
-    <updated>2015-01-14T02:36:07.000Z</updated>
+    <updated>2015-01-14T02:41:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-functions-php.jpg" alt="WordPress - O arquivo functions.php"></p>
 <p>O <strong>functions.php</strong> é o canal que liga o seu tema a todas as coisas legais que o WP tem a oferecer! Códigos personalizados, estrutura de arquivos… todo tipo de manipulação que você imagina no seu site WordPress, você faz através do <strong>functions.php</strong>. Vamos conhecê-lo? ;)</p>
 <a id="more"></a>
@@ -115,7 +163,7 @@
     <link href="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"/>
     <id>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</id>
     <published>2015-01-13T00:00:00.000Z</published>
-    <updated>2015-01-13T23:39:24.000Z</updated>
+    <updated>2015-01-14T02:41:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/js-numbers.jpg" alt=""></p>
 <p>Quando você começa a estudar sobre a <a href="https://insidejavascript.wordpress.com/2011/09/16/lexical-structure/" target="_blank" rel="external">estrutura léxica</a> da <strong>Javascript</strong>, você vê que as “bizarrices” encontradas em <a href="http://wtfjs.com/" target="_blank" rel="external">http://wtfjs.com/</a> são todos comportamentos esperados! Hoje eu quero mostrar algo simples, mas que pode te ajudar bastante ao trabalhar com números em Javascript :D</p>
 <a id="more"></a>
@@ -188,7 +236,7 @@
     <link href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/"/>
     <id>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</id>
     <published>2015-01-12T00:00:00.000Z</published>
-    <updated>2015-01-14T00:02:23.000Z</updated>
+    <updated>2015-01-14T02:41:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
 <p>Este é o primeiro post da nossa série <strong>Como criar temas para WordPress</strong>! É importante salientar que todos os posts serão <em>hands on</em>, então não adianta ficar só lendo! Para aprender de verdade é preciso praticar! Siga todos os passos citados nos posts, crie os arquivos conforme as orientações, que em breve você estará apto para criar seu próprio tema, combinado? ;)</p>
 <a id="more"></a>
@@ -294,7 +342,7 @@
     <link href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"/>
     <id>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</id>
     <published>2015-01-11T00:00:00.000Z</published>
-    <updated>2015-01-14T02:35:38.000Z</updated>
+    <updated>2015-01-14T02:41:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
 <p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
 <a id="more"></a>
@@ -1016,7 +1064,7 @@
     <link href="http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/"/>
     <id>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</id>
     <published>2015-01-02T00:00:00.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
+    <updated>2015-01-15T01:39:25.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" alt=""></p>
 <p>Sabe quando você precisa dar <code>require</code> em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de <code>../../../</code> para chegar até o diretório certo do seu módulo?</p>
 <a id="more"></a>
@@ -1042,7 +1090,7 @@
 <p>E para usá-lo, é bem simples. Primeiro instale o módulo no seu projeto:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save getmodule</div></pre></td></tr></table></figure>
 
-<p>Depois, adicione ele ao arquivo principal da sua aplicação. No caso do nosso exemplo, é o <code>app.js</code>:</p>
+<p>Depois, adicione ele na primeira linha do arquivo principal da sua aplicação. No caso do nosso exemplo, é o <code>app.js</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>( <span class="string">'getmodule'</span> );</div></pre></td></tr></table></figure>
 
 <p>E pronto! Agora, no nosso <code>homeController.js</code>, podemos simplesmente chamar o service dessa forma:</p>
@@ -1068,6 +1116,8 @@
       <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
     
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="getmodule" scheme="http://blog.da2k.com.br/tags/getmodule/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
@@ -1413,122 +1463,6 @@
       <category term="tips" scheme="http://blog.da2k.com.br/tags/tips/"/>
     
       <category term="git" scheme="http://blog.da2k.com.br/categories/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Hexo - criando um blog ao estilo "miojo"]]></title>
-    <link href="http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/"/>
-    <id>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</id>
-    <published>2014-01-05T00:00:00.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
-    <content type="html"><![CDATA[<p>Você é desenvolvedor web e gosta de escrever em <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown</a>? Então aprenda como fazer um blog em apenas 3 minutos com o <strong><a href="http://zespia.tw/hexo/" target="_blank" rel="external">Hexo</a></strong>!</p>
-<p><img src="http://blog.da2k.com.br/uploads/2014/01/hexo.jpg" alt="Hexo"></p>
-<a id="more"></a>
-
-<p>O Hexo é um framework para criação de blogs, escrito em <strong><a href="http://nodejs.org/" target="_blank" rel="external">NodeJS</a></strong> para geração de arquivos estáticos. Com ele, é possível criar um blog em apenas 3 minutos! Quer apostar? ;)</p>
-<h2 id="Primeiros_passos">Primeiros passos</h2>
-<p>Primeiramente você precisa ter o NodeJS e o Git instalados no seu computador. Se ainda não tem e não sabe como fazê-lo, recomendo <a href="http://udgwebdev.com/node-js-para-leigos-instalacao-e-configuracao/" target="_blank" rel="external">esse tutorial</a> para instalar o Node, ou <a href="http://zespia.tw/hexo/docs/index.html" target="_blank" rel="external">esse outro, direto do site do Hexo</a>, mostrando a melhor forma de instalar em qualquer sistema. Com o Node e o Git instalados, vamos instalar o Hexo.</p>
-<h2 id="Instalando_o_Hexo">Instalando o Hexo</h2>
-<p>Para instalar o Hexo, utilize o comando abaixo no seu terminal:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">sudo</span>] npm install -g hexo</div></pre></td></tr></table></figure>
-
-<p>Esse comando instalará o Hexo globalmente, deixando o comando <code>hexo</code> disponível no terminal.</p>
-<h2 id="Criando_os_arquivos">Criando os arquivos</h2>
-<p>Agora vamos criar os arquivos necessários para o nosso projeto.<br>Crie um diretório chamado <code>my-hexo-blog</code>. Acesse esse diretório no seu terminal, e execute o comando:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">init</span></div></pre></td></tr></table></figure>
-
-<p><strong>E pronto!</strong></p>
-<p>Será gerada a seguinte estrutura de arquivos:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml</div><div class="line">├── package.json</div><div class="line">├── scaffolds</div><div class="line">├── scripts</div><div class="line">├── source</div><div class="line"><span class="string">|   ├── _drafts</span></div><div class="line"><span class="string">|   └── _posts</span></div><div class="line">└── themes</div></pre></td></tr></table></figure>
-
-<p>Explicarei mais à frente sobre essa estrutura.</p>
-<h2 id="Iniciando_o_Server">Iniciando o Server</h2>
-<p>Agora, para ver seu blog rodando, execute o comando:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">server</span></div></pre></td></tr></table></figure>
-
-<p>Se tudo correu bem, você receberá a seguinte mensagem:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[info] Hexo <span class="keyword">is</span> running at localhos<span class="variable">t:4000</span>/. Press Ctrl+C <span class="keyword">to</span> <span class="keyword">stop</span>.</div></pre></td></tr></table></figure>
-
-<p>Agora acesse <code>http://localhost:4000/</code> no seu navegador e veja como ficou seu blog!</p>
-<p>Muito fácil não? Um blog <em>like a miojo</em> :P</p>
-<p>Agora vou mostrar como fazer algumas configurações mais básicas para o seu blog, como trocar de tema, mudar título, etc., e depois fazer deploy para o <a href="http://pages.github.com/" target="_blank" rel="external">Github Pages</a>, para que você tenha um local para hospedar seu blog.</p>
-<h2 id="O_arquivo__config-yml">O arquivo <code>_config.yml</code></h2>
-<p>Nesse arquivo fica toda a configuração padrão do blog. Cada tema pode ter um <code>_config.yml</code> também, para configurações específicas do tema. Não tem muito segredo em mexer nele.</p>
-<p>Digamos que o YML (pra quem não conhece), seja um JSON sem os brackets <code>{}</code> e as aspas duplas <code>&quot;&quot;</code>. Ele trabalha com base na indentação.</p>
-<p>Exemplo de um JSON:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">  "<span class="attribute">propriedade</span>": <span class="value"><span class="string">"valor"</span></span>,</div><div class="line">  "<span class="attribute">propriedade2</span>" : <span class="value"><span class="string">"valor2"</span></span>,</div><div class="line">  "<span class="attribute">propriedade3</span>" : <span class="value">{</span></div><div class="line">    "<span class="attribute">propriedade4</span>" : <span class="value"><span class="string">"valor4"</span></span></div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>O YML referente a esse JSON ficaria assim:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="label">propriedade:</span> valor</div><div class="line"><span class="label">propriedade2:</span> valor2</div><div class="line"><span class="label">propriedade3:</span></div><div class="line">  propriedade4: valor4</div></pre></td></tr></table></figure>
-
-<p>Ao editar o arquivo <code>_config.yml</code>, vai ver algumas propriedades como <code>title</code>, <code>author</code>, <code>url</code>, etc. Mude conforme as configurações do seu blog. Para ver para que serve cada um, consulte <a href="http://zespia.tw/hexo/docs/configuration.html" target="_blank" rel="external">esse link</a>.</p>
-<h2 id="Escrevendo_seu_primeiro_post">Escrevendo seu primeiro post</h2>
-<p>Para criar um novo post, execute o comando no terminal:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">new</span> <span class="string">"Meu novo post"</span></div></pre></td></tr></table></figure>
-
-<p>Isso irá criar um arquivo <code>meu-novo-post.md</code> no diretório <code>source/_posts/</code> com o seguinte conteúdo:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: Meu novo post</div><div class="line">date: 2014-01-05 20:53:29</div><div class="line"><span class="header">tags:</span></div><div class="line">---</div></pre></td></tr></table></figure>
-
-<p>Abaixo dos 3 traços <code>---</code> é onde você deve começar a digitar o seu post no formato Markdown. As variáveis title, date e tags são usadas no tema para mostrar essas informações ao usuário.</p>
-<p>Para fazer com que Hexo assista todas as alterações no seu post enquanto você escreve, execute o servidor com o parâmetro <code>--debug</code>:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">hexo</span> server --<span class="built_in">debug</span></div></pre></td></tr></table></figure>
-
-<p>Pressione <code>Ctrl+C</code> quando quiser parar.</p>
-<h2 id="Gerando_os_estáticos">Gerando os estáticos</h2>
-<p>Agora você precisa gerar os arquivos estáticos que serão “upados” para o Github Pages. Para isso, rode o comando no terminal (no diretório <code>my-hexo-blog</code>):</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo <span class="keyword">generate</span></div></pre></td></tr></table></figure>
-
-<p>Perceba que o Hexo criou um diretório <code>public</code>, com todos os arquivos estáticos necessários para o seu blog funcionar.</p>
-<blockquote>
-<p>PS.: Você pode mudar o nome dos diretórios <code>public</code> e <code>source</code> no arquivo <code>_config.yml</code></p>
-</blockquote>
-<p>O Hexo já vem com um post padrão <em>Hello World</em>. Você pode remover esse arquivo do diretório <code>source/_posts/</code> sem maiores problemas.</p>
-<p>Sempre que gerar um novo post, para gerar os estáticos, sempre execute o comando <code>hexo generate</code>, para que os estáticos estejam atualizados com a última versão dos seus posts.</p>
-<h2 id="Deploy_para_Github_Pages">Deploy para Github Pages</h2>
-<p>Para fazer deploy para o Github Pages é bem simples. Configure no arquivo <code>_config.yml</code> a propriedade <code>deploy</code> (no final do arquivo), dessa forma:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: github</div><div class="line">  repository: git@github.com:fdaciuk/fdaciuk.github.<span class="built_in">io</span>.git</div></pre></td></tr></table></figure>
-
-<p>No valor de <code>repository</code>, inclua o seu repositório.</p>
-<p>O Github te dá um subdomínio com o seu nome de usuário para você usar. No meu caso, ficou como <strong><a href="http://fdaciuk.github.io" target="_blank" rel="external">http://fdaciuk.github.io</a></strong>.</p>
-<p>Se você quiser usar esse domínio para o seu blog, crie um repositório no seu Github chamada <code>your_username.github.io</code>, trocando o <code>your_username</code> pelo seu nome de usuário. Copie a URL do repositório e cole no <code>_config.yml</code>, na propriedade <code>repository</code>, como mostrado acima.</p>
-<p>Depois execute o comando:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">hexo</span> deploy</div></pre></td></tr></table></figure>
-
-<p><strong>E pronto!</strong> Aguarde algus minutos e já poderá acessar seu blog em <strong>your_username.github.io</strong>.</p>
-<p>Agora seu blog está pronto e publicado!</p>
-<p>Você vai perceber que o Hexo criou um diretório <code>.deploy</code>, onde ficarão os arquivos que irão para o seu repositório ao rodar o comando de deploy. Quando você cria um post novo, o Hexo vai enviar somente os arquivos alterados para o Github.</p>
-<p>Veja que os diretório <code>public</code> e <code>.deploy</code> são gerados pelo Hexo. Eles contém somente os arquivos estáticos. Logo, se você precisar removê-los, não há problema algum. Pode fazer sem medo :)</p>
-<p>Para saber mais sobre o Github Pages, siga <a href="http://pages.github.com/" target="_blank" rel="external">esse link</a>.</p>
-<h2 id="Domínio_personalizado_usando_Github_Pages">Domínio personalizado usando Github Pages</h2>
-<p>Se você notar, o domínio do meu blog é <code>http://blog.da2k.com.br</code>. Para fazer isso é muito simples. Siga os procedimentos <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages" target="_blank" rel="external">desse link</a> para adicionar uma entrada <strong>CNAME</strong> que irá apontar para o endereço do seu blog.</p>
-<p>Depois, crie um arquivo chamado <code>CNAME</code> no diretório <code>source</code> com a URL do seu blog. No meu caso está assim:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blog.da2k.<span class="keyword">com</span>.<span class="keyword">br</span></div></pre></td></tr></table></figure>
-
-<p>Execute o <code>hexo generate</code> para gerar os estáticos e copiar o <code>CNAME</code> para a raiz de <code>public</code>. Então, execute o <code>hexo deploy</code> e pronto! Aguarde até que o DNS se propague. Isso pode levar algumas horas. Em breve, seu blog estará no seu domínio personalizado ;)</p>
-<h2 id="Considerações_sobre_arquivos_estáticos">Considerações sobre arquivos estáticos</h2>
-<p>Ao fazer o deploy do seu projeto, o Hexo irá gerar apenas arquivos estáticos (HTML, CSS e JS). Isso traz algumas vantagens e desvantagens.</p>
-<p>A vantagem disso é que o conteúdo será carregado muito mais rápido do que se fosse feito em um software como o WordPress, por exemplo, pois o servidor não precisará processar nada, somente entregar para o nevagador do usuário o HTML, CSS e JS, que o navegador vai tratar de interpretar.</p>
-<p>A desvantagem é que você perde a parte dinâmica da coisa. Não vai ser possível fazer, por exemplo, uma página de busca, comentários nativos, entre outras coisas que talvez facilitariam seu trabalho.</p>
-<p>Claro que existem algumas soluções para isso. No caso da busca, o Hexo por padrão utiliza o Google, com a URL do seu site sendo chamada antes de fazer a busca <code>(seusite.com.br: busca por algo)</code>. Isso faz com que o Google procure resultados somente no <em>seu site</em>. Mas o usuário vai pro site do Google pra ver o resultado e depois volta novamente para ver o conteúdo.</p>
-<p>Para comentários, temos os plugins do <a href="http://disqus.com/" target="_blank" rel="external">Disqus</a>, <a href="https://support.google.com/blogger/answer/2981015?hl=en" target="_blank" rel="external">Google+</a>, ou <a href="https://developers.facebook.com/docs/plugins/comments/" target="_blank" rel="external">Facebook</a>. Todos resolvem bem o problema de comentários para arquivos estáticos. Nesse caso, não há a necessidade de ter os comentários nativos.</p>
-<p>A dica que fica é: coloque sempre na balança para ver qual a melhor solução para o seu problema. Para desenvolvedores, um gerador estático sempre é uma excelente solução. Mas se estiver fazendo um blog para um cliente, onde <em>ele</em> vai alimentar o conteúdo do site, não seria boa ideia deixar ele escrever em Markdown, concorda? ;)</p>
-<h2 id="Conclusão">Conclusão</h2>
-<p>Estou gostando bastante de trabalhar com o Hexo. Já estava para começar a blogar faz um tempo, e o Hexo me proporcionou uma excelente experiência para começar a fazer isso muito rapidamente. Espero que você também goste!</p>
-<p>Até os próximos artigos!</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>Você é desenvolvedor web e gosta de escrever em <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown</a>? Então aprenda como fazer um blog em apenas 3 minutos com o <strong><a href="http://zespia.tw/hexo/" target="_blank" rel="external">Hexo</a></strong>!</p>
-<p><img src="http://blog.da2k.com.br/uploads/2014/01/hexo.jpg" alt="Hexo"></p>
-]]>
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://blog.da2k.com.br/tags/hexo/"/>
-    
-      <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
   </entry>
   
