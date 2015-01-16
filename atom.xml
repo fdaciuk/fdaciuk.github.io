@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-15T01:39:49.657Z</updated>
+  <updated>2015-01-16T00:53:39.894Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,64 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Segredos do Github - Variáveis]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/"/>
+    <id>http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/</id>
+    <published>2015-01-16T00:00:00.000Z</published>
+    <updated>2015-01-16T00:53:24.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github.png" alt="Segredos do Github"></p>
+<p>Hoje estarei dando início a uma nova série de posts chamada <strong>Segredos do Github</strong>. Essa série trará dicas de coisas <em>secretas</em> que vão dar um <em>up</em> na sua forma de utilizar a rede social mais adorada pelos nerds do mundo todo: o <a href="https://github.com" target="_blank" rel="external">Github</a>!</p>
+<a id="more"></a>
+
+<p>E o primeiro post será sobre… <strong>variáveis</strong>! Isso mesmo! Sabia que é possível utilizar variáveis nos seus arquivos Markdown?</p>
+<p>Vou mostrar como e porque você deveria utilizar!</p>
+<p>Imagine que o seu Markdown tem vários links. Vou dar um exemplo do meu repositório do <a href="https://github.com/fdaciuk/getmodule" target="_blank" rel="external">getmodule</a>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="header"># Get Module</span></div><div class="line">  </div><div class="line"><span class="blockquote">&gt; Include local NodeJS modules relative to your root path</span></div><div class="line">  </div><div class="line">[<span class="link_label">![NPM version</span>](<span class="link_url">https://badge.fury.io/js/getmodule.svg?style=flat</span>)](<span class="link_url">https://npmjs.org/package/getmodule</span>)</div><div class="line">[<span class="link_label">![Build Status</span>](<span class="link_url">https://travis-ci.org/fdaciuk/getmodule.svg</span>)](<span class="link_url">https://travis-ci.org/fdaciuk/getmodule</span>)</div><div class="line">[<span class="link_label">![Coverage Status</span>](<span class="link_url">https://img.shields.io/coveralls/fdaciuk/getmodule.svg?style=flat</span>)](<span class="link_url">https://coveralls.io/r/fdaciuk/getmodule?branch=master</span>)</div><div class="line">[<span class="link_label">![Code Climate</span>](<span class="link_url">https://codeclimate.com/github/fdaciuk/getmodule/badges/gpa.svg?style=flat</span>)](<span class="link_url">https://codeclimate.com/github/fdaciuk/getmodule</span>)</div><div class="line">[<span class="link_label">![NPM</span>](<span class="link_url">https://nodei.co/npm/getmodule.png?downloads=true&downloadRank=true&stars=true</span>)](<span class="link_url">https://nodei.co/npm/getmodule/</span>)</div></pre></td></tr></table></figure>
+
+<p>Como você pode ver, no início do arquivo <strong>README.md</strong>, eu tenho alguns badges com links apontando para versão do módulo no <a href="https://www.npmjs.com/" target="_blank" rel="external">NPM</a>, Status do <a href="https://travis-ci.com/" target="_blank" rel="external">TravisCI</a>, Status do <a href="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/" target="_blank" rel="external">Code Coverage</a> no <a href="https://coveralls.io/" target="_blank" rel="external">Coveralls</a>, <a href="https://codeclimate.com/" target="_blank" rel="external">Code Climate</a>, etc. </p>
+<p>Isso acaba ficando bastante verboso no seu arquivo e, se você precisar usar a mesma URL em outro lugar do seu <strong>README</strong>, terá que repetí-la.</p>
+<h2 id="Variáveis">Variáveis</h2>
+<p>Mas podemos usar um segredo guardado a sete chaves pelos Ninjas do Github, que são as variáveis! </p>
+<p><em>Tá, fala logo, como que usa isso! ¬¬</em></p>
+<p>Calma, vou dizer :P</p>
+<p>No final do seu arquivo, você coloca as suas variáveis nesse formato:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="link_reference">nome-da-variavel</span>]:<span class="link_url"> valor-da-variavel</span></div></pre></td></tr></table></figure>
+
+<p>E para usar, só fazer assim:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[nome-da-variavel]</div></pre></td></tr></table></figure>
+
+<p>No caso do arquivo Markdown acima, aquele trecho de código ficaria assim:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="header"># Get Module</span></div><div class="line">  </div><div class="line"><span class="blockquote">&gt; Include local NodeJS modules relative to your root path</span></div><div class="line">  </div><div class="line">[<span class="link_label">![NPM version</span>][<span class="link_reference">npm-version-image</span>]][<span class="link_reference">npm-version-url</span>]</div><div class="line">[<span class="link_label">![Build Status</span>][<span class="link_reference">travis-image</span>]][<span class="link_reference">travis-url</span>]</div><div class="line">[<span class="link_label">![Coverage Status</span>][<span class="link_reference">coveralls-image</span>]][<span class="link_reference">coveralls-url</span>]</div><div class="line">[<span class="link_label">![Code Climate</span>][<span class="link_reference">codeclimate-image</span>]][<span class="link_reference">codeclimate-url</span>]</div><div class="line">[<span class="link_label">![NPM</span>][<span class="link_reference">npm-image</span>]][<span class="link_reference">npm-url</span>]</div><div class="line">  </div><div class="line">[<span class="link_reference">npm-version-image</span>]:<span class="link_url"> https://badge.fury.io/js/getmodule.svg?style=flat</span><span class="link_url"></span></div><div class="line">[npm-version-url]: https://npmjs.org/package/getmodule<span class="link_url"></span></div><div class="line">[travis-image]: https://travis-ci.org/fdaciuk/getmodule.svg<span class="link_url"></span></div><div class="line">[travis-url]: https://travis-ci.org/fdaciuk/getmodule<span class="link_url"></span></div><div class="line">[coveralls-image]: https://img.shields.io/coveralls/fdaciuk/getmodule.svg?style=flat<span class="link_url"></span></div><div class="line">[coveralls-url]: https://coveralls.io/r/fdaciuk/getmodule?branch=master<span class="link_url"></span></div><div class="line">[npm-image]: https://nodei.co/npm/getmodule.png?downloads=true&downloadRank=true&stars=true<span class="link_url"></span></div><div class="line">[npm-url]: https://nodei.co/npm/getmodule/<span class="link_url"></span></div><div class="line">[codeclimate-image]: https://codeclimate.com/github/fdaciuk/getmodule/badges/gpa.svg?style=flat<span class="link_url"></span></div><div class="line">[codeclimate-url]: https://codeclimate.com/github/fdaciuk/getmodule</div></pre></td></tr></table></figure>
+
+<p>Da hora não? ;)</p>
+<p>Curtiu? Paia? Comente!</p>
+<p>Até o próximo post falando sobre os <strong>Segredos do Github</strong> :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github.png" alt="Segredos do Github"></p>
+<p>Hoje estarei dando início a uma nova série de posts chamada <strong>Segredos do Github</strong>. Essa série trará dicas de coisas <em>secretas</em> que vão dar um <em>up</em> na sua forma de utilizar a rede social mais adorada pelos nerds do mundo todo: o <a href="https://github.com" target="_blank" rel="external">Github</a>!</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Como ser um dev frontend usando Linux]]></title>
     <link href="http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/"/>
     <id>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</id>
     <published>2015-01-15T00:00:00.000Z</published>
-    <updated>2015-01-15T01:37:49.000Z</updated>
+    <updated>2015-01-15T01:40:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/linux.jpg" alt=""></p>
 <p>Muita gente me pergunta:<br>“<em>Você trabalha com frontend e usa Linux? Como faz pra usar Photoshop?</em>“</p>
 <p>Como se frontend só trabalhasse com Photoshop :P<br>Mas vem comigo que te mostro ;)</p>
@@ -1064,7 +1117,7 @@
     <link href="http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/"/>
     <id>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</id>
     <published>2015-01-02T00:00:00.000Z</published>
-    <updated>2015-01-15T01:39:25.000Z</updated>
+    <updated>2015-01-15T01:40:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" alt=""></p>
 <p>Sabe quando você precisa dar <code>require</code> em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de <code>../../../</code> para chegar até o diretório certo do seu módulo?</p>
 <a id="more"></a>
@@ -1417,52 +1470,6 @@
       <category term="mvc" scheme="http://blog.da2k.com.br/tags/mvc/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Manter repositório do Github forkado sincronizado com o original]]></title>
-    <link href="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/"/>
-    <id>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</id>
-    <published>2014-01-19T00:00:00.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2014/01/github-sync-repo.png" alt="Sincronizar repositórios do Github"></p>
-<p>Depois que você <em>forka</em> um projeto no Github, você faz as alterações necessárias e envia um <em>Pull Request</em> para o repositório original.</p>
-<p>Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, mas já tem outras colaborações no repositório original, como você procede para manter seu repositório atualizado? Copia as alterações manualmente para o seu repositório? Apaga e forka novamente? Chora?</p>
-<a id="more"></a>
-
-<p>O Git é uma ferramenta excepcional e, quando você passa a conhecê-lo mais a fundo, vai ver que não vai precisar fazer mais nada manualmente quando ele é usado no seu projeto. Existe uma forma muito prática de sincronizar os dois repos, e vou mostrá-la agora mesmo! Me acompanha? ;)</p>
-<p>O seu repositório forkado normalmente é adicionado como <strong>origin</strong> quando você faz o clone. Para sincronizar com o repositório principal, adicione esse repositório com outro nome (no caso do exemplo, <strong>upstream</strong>), com o comando abaixo:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote <span class="keyword">add</span> upstream [ENDEREÇO <span class="pseudo">DO</span> REPOSITÓRIO PRINCIPAL]</div></pre></td></tr></table></figure>
-
-<p>Substituindo <strong>[ENDEREÇO DO REPOSITÓRIO PRINCIPAL]</strong> pelo endereço do repositório (não diga :P)</p>
-<p>Depois, para sincronizar os repositórios, execute o comando:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> fetch upstream</div></pre></td></tr></table></figure>
-
-<p>Finalmente, só dar merge na branch master:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="operator"><span class="keyword">merge</span> upstream/<span class="keyword">master</span></span></div></pre></td></tr></table></figure>
-
-<p><strong>And done! ;)</strong></p>
-<p>Mais fácil que isso, só o drag’n drop do Visual Studio :P</p>
-<p>Brincadeiras a parte: curtiu a dica? Já conhecia? Conhece outras formas de fazer a mesma coisa? Comente!</p>
-<p><strong>Link de referência:</strong> <a href="https://help.github.com/articles/syncing-a-fork" target="_blank" rel="external">https://help.github.com/articles/syncing-a-fork</a></p>
-<blockquote>
-<p><strong>UPDATE:</strong> Havia esquecido de incluir o comando para dar merge na sua branch xD Com o <code>fetch</code>, o Git apenas sincroniza as branchs que existem no repositório selecionado. Obrigado <a href="http://disqus.com/claudiosmweb/" target="_blank" rel="external">Claudio Sanches</a> e <a href="http://disqus.com/gabrielizaias/" target="_blank" rel="external">Gabriel Izaias</a> :D</p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2014/01/github-sync-repo.png" alt="Sincronizar repositórios do Github"></p>
-<p>Depois que você <em>forka</em> um projeto no Github, você faz as alterações necessárias e envia um <em>Pull Request</em> para o repositório original.</p>
-<p>Se você precisa fazer mais alguma alteração no mesmo repositório no futuro, mas já tem outras colaborações no repositório original, como você procede para manter seu repositório atualizado? Copia as alterações manualmente para o seu repositório? Apaga e forka novamente? Chora?</p>
-]]>
-    
-    </summary>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/tags/github/"/>
-    
-      <category term="tips" scheme="http://blog.da2k.com.br/tags/tips/"/>
-    
-      <category term="git" scheme="http://blog.da2k.com.br/categories/git/"/>
     
   </entry>
   
