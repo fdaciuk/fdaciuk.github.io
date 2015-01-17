@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-17T02:32:53.307Z</updated>
+  <updated>2015-01-17T02:50:16.778Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/"/>
     <id>http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/</id>
     <published>2015-01-17T00:00:00.000Z</published>
-    <updated>2015-01-17T02:32:36.000Z</updated>
+    <updated>2015-01-17T02:49:58.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-tables-and-task-lists.jpg" alt="Segredos do Github"></p>
 <p>Continuando a série, hoje vou mostrar algumas outras features legais que você pode usar no Github: <strong>tabelas</strong> e <strong>task lists</strong>!</p>
 <a id="more"></a>
@@ -68,6 +68,8 @@
     
       <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
     
+      <category term="markdown" scheme="http://blog.da2k.com.br/tags/markdown/"/>
+    
       <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
     
   </entry>
@@ -77,7 +79,7 @@
     <link href="http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/"/>
     <id>http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/</id>
     <published>2015-01-16T00:00:00.000Z</published>
-    <updated>2015-01-17T01:44:23.000Z</updated>
+    <updated>2015-01-17T02:50:00.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github.png" alt="Segredos do Github"></p>
 <p>Hoje estarei dando início a uma nova série de posts chamada <strong>Segredos do Github</strong>. Essa série trará dicas de coisas <em>secretas</em> que vão dar um <em>up</em> na sua forma de utilizar a rede social mais adorada pelos nerds do mundo todo: o <a href="https://github.com" target="_blank" rel="external">Github</a>!</p>
 <a id="more"></a>
@@ -123,6 +125,8 @@
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
     
       <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="markdown" scheme="http://blog.da2k.com.br/tags/markdown/"/>
     
       <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
     
