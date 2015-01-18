@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/</loc>
+    <lastmod>2015-01-18T13:54:30.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/</loc>
-    <lastmod>2015-01-17T02:50:00.000Z</lastmod>
+    <lastmod>2015-01-17T03:02:25.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/</loc>
-    <lastmod>2015-01-17T02:49:58.000Z</lastmod>
+    <lastmod>2015-01-17T03:02:25.000Z</lastmod>
   </url>
   
   <url>
@@ -22,17 +27,17 @@
   </url>
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</loc>
+    <lastmod>2015-01-14T02:41:59.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</loc>
     <lastmod>2015-01-14T02:41:59.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</loc>
-    <lastmod>2015-01-14T02:41:59.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</loc>
     <lastmod>2015-01-14T02:41:59.000Z</lastmod>
   </url>
   
@@ -57,7 +62,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -68,6 +73,11 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -92,12 +102,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
