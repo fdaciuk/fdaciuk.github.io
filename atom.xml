@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-18T14:11:16.709Z</updated>
+  <updated>2015-01-19T01:32:00.053Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,56 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Segredos do Github - Parâmetros na URL]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/"/>
+    <id>http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/</id>
+    <published>2015-01-19T00:00:00.000Z</published>
+    <updated>2015-01-19T01:31:36.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-url-params.jpg" alt=""></p>
+<p>Hoje mais um segredo será revelado! Vamos brincar com alguns parâmetros na URL e ver o que podemos fazer com eles :D</p>
+<a id="more"></a>
+
+<h2 id="Ignorando_espaços_em_branco_no_commit">Ignorando espaços em branco no commit</h2>
+<p>Sabe quando você tem um commit onde tem um monte de espaços em branco sendo removidos, e fica difícil visualizar onde realmente foi alterado algum código? Se você passar <code>?w=1</code> na URL, o Github ignora os espaços em branco, e mostra só o que realmente é necessário:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-whitespace.png" alt="Remover espaços em branco"></p>
+<h2 id="Tamanho_da_tabulação">Tamanho da tabulação</h2>
+<p>Manja aquele código indentado com 4 tabs que fica com tamanho de 8 em qualquer outro lugar diferente do seu editor?</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/url-8-tabs.png" alt="Tab 8"></p>
+<p>Passando o parâmetro <code>?ts=4</code>, o Github mostra o código indentado com o valor passado para o parâmetro <code>ts</code>.<br>Nesse caso, <code>4</code>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/url-4-tabs.png" alt="Tab 4"></p>
+<h2 id="Separar_commits_por_autor">Separar commits por autor</h2>
+<p>Quer rever os só os seus commits que você fez naquele projeto open source, mas tem outros milhões de colaboradores?</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/all-commits.png" alt="Todos os commits"></p>
+<p>Adicione o parâmetro <code>?author=username</code>, passando o seu username do Github para mostrar só os seus:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/author-commits.png" alt="Commits de um usuário específico"></p>
+<p>E chega por hoje! xD</p>
+<p>Até o próximo <strong>Segredos do Github</strong>!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-url-params.jpg" alt=""></p>
+<p>Hoje mais um segredo será revelado! Vamos brincar com alguns parâmetros na URL e ver o que podemos fazer com eles :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[RequireJS - Carregando Javacript sob demanda]]></title>
     <link href="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"/>
     <id>http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/</id>
     <published>2015-01-18T00:00:00.000Z</published>
-    <updated>2015-01-18T13:54:30.000Z</updated>
+    <updated>2015-01-18T14:11:37.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/requirejs.png" alt="RequireJS"></p>
 <p>Quando você tem uma aplicação onde vai usar muito código Javascript, é sempre importante pensar na performance. Mas além disso, para que sua aplicação possa escalar, seu código precisa ser modular.</p>
 <p>Nesse momento surgem as dúvidas:<br><em>- Escrevo todo o meu código em um arquivo só, e minifico para não sobrecarregar os requests do browser?</em><br><em>- Separo em vários arquivos para facilitar o desenvolvimento, sem me preocupar com a quantidade de requests http?</em></p>
@@ -140,7 +185,7 @@
     <link href="http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/"/>
     <id>http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/</id>
     <published>2015-01-17T00:00:00.000Z</published>
-    <updated>2015-01-17T03:02:25.000Z</updated>
+    <updated>2015-01-19T00:45:12.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-tables-and-task-lists.jpg" alt="Segredos do Github"></p>
 <p>Continuando a série, hoje vou mostrar algumas outras features legais que você pode usar no Github: <strong>tabelas</strong> e <strong>task lists</strong>!</p>
 <a id="more"></a>
@@ -1477,70 +1522,6 @@
     </summary>
     
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WordCamp Belo Horizonte 2014 - Minhas impressões]]></title>
-    <link href="http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/"/>
-    <id>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</id>
-    <published>2014-05-19T02:42:44.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="https://camo.githubusercontent.com/23071767957a2edbe1d4d2bf1a0bc1d876f5d3ab/68747470733a2f2f7261772e6769746875622e636f6d2f6664616369756b2f74616c6b732f6d61737465722f6173736574732f696d616765732f776f726463616d702d62682e6a7067" alt="WordCamp Belo Horizonte"></p>
-<p>O <strong>WordCamp</strong>, como você já deve saber, é um evento internacional, que reúne pessoas de todos os lugares do mundo para falar de <strong>WordPress</strong>.</p>
-<p>No último sábado (17/05/14), aconteceu o <strong><a href="http://2014.belohorizonte.wordcamp.org/" target="_blank" rel="external">WordCamp Belo Horizonte</a></strong>. E já pra começo de conversa: Foi o <strong>WordCamp</strong> mais animal que já participei! O evento se superou em tudo. Então, já gostaria de agradecer ao <a href="https://www.facebook.com/valerio.souza" target="_blank" rel="external">Valério</a> que organizou tudo com muito carinho pra fazer o melhor <strong>WordCamp</strong> de todos os tempos!</p>
-<p>O cara tá morando no Rio de Janeiro, e fez o negócio acontecer de longe mesmo!</p>
-<p>E não faltou o famoso pão de queijo! Teve até sorteio de uma caixa no final do evento xD</p>
-<p>Mas vou começar pela viagem. Vem comigo!</p>
-<a id="more"></a>
-
-<h2 id="A_viagem">A viagem</h2>
-<p>Sexta (16/05) e domingo (28/05) foram praticamente o dia todo dentro de ônibus e aviões. A viagem daqui de Joinville até BH foi bem longa, passando por Curitiba, Congonhas/SP e depois Belo Horizonte. Chegando lá, ainda foi necessário mais 1h de ônibus para chegar até próximo ao local do evento.</p>
-<p>Foi cansativo, mas posso garantir que valeu muito a pena! Fizemos um encontro pré-evento na sexta pra conhecer a galera, trocar ideias e jogar conversa fora!</p>
-<p>Enfim, chegou o sábado xD</p>
-<h2 id="O_WordCamp">O WordCamp</h2>
-<p>O evento começou com mais ou menos 1h de atraso, pois tinha muita gente pra fazer o cadastramento (mais de 300 pessoas), mas só havia 1 computador para fazer validar o cadastro e fazer o crachá dos participantes.</p>
-<p>Ouvi algumas pessoas reclamando do atraso, alguns postando no Twitter também sobre isso. Vou dizer o que eu penso sobre: o evento foi (e é) feito para a comunidade. Enquanto alguns reclamaram por causa da demora, outros já foram abrindo seus notebooks e tablets, pedindo que o arquivo onde estavam os cadastros fosse compartilhado para que pudessem agilizar o processo. E isso economizou pelo menos mais 1 ou 2 horas de trabalho que estava sendo feito por apenas uma única pessoa.</p>
-<p>Isso é o trabalho da comunidade! Todo mundo se ajudando da forma que pode, pra fazer o negócio acontecer da melhor forma possível!</p>
-<p>E outra: quem reclamou foram 1 ou 2. As outras mais de 300 pessoas com certeza saíram de lá muito satisfeitas com o resultado xD</p>
-<p>Mas apesar do pequeno atraso (normal em qualquer evento), o <strong>WordCamp Belo Horizonte</strong> foi um sucesso! As palestras foram de muito alto nível, o networking foi fenomenal! Encontrei amigos de outros WordCamps e pude conhecer pessoalmente algumas pessoas que sempre participam do <a href="https://www.facebook.com/groups/wordpress.brasil/" target="_blank" rel="external">Grupo WordPress Brasil, no Facebook</a>. Foi fantástico!</p>
-<p>Teve gente vindo do Rio de Janeiro só para ser voluntário no evento! Isso é coisa linda de se ver :D</p>
-<p>Foram <a href="http://2014.belohorizonte.wordcamp.org/programacao/" target="_blank" rel="external">20 palestrantes</a> de todo lugar do Brasil (inclusive uma Argentina xD), compartilhando conhecimento com a galera! </p>
-<p>Dois palestrantes tiveram alguns imprevistos e não puderam comparecer por motivos pessoais, mas isso não foi um problema: O Luan Muniz conseguiu cobrir (e muito bem) um dos espaços com uma excelente palestra sobre como colaborar com projetos Open Source.</p>
-<p>É notório como a comunidade de <strong>WordPress</strong> está crescendo muito no Brasil inteiro, e isso eu pude constatar nesse último WordCamp.</p>
-<h2 id="Estrutura">Estrutura</h2>
-<p>O evento foi realizado na <a href="http://2014.belohorizonte.wordcamp.org/guia-de-sobrevivencia/" target="_blank" rel="external">UNIBH</a>, um local muito bem localizado no bairro Estoril, em BH. Duas salas e o auditório principal da Universidade foram disponibilizados para as apresentações. Não foi possível assistir a todas as palestras do dia, pois estavam sendo apresentadas de 3 em 3; mas todo o conteúdo foi filmado e será disponibilizado em breve no <a href="http://2014.belohorizonte.wordcamp.org/" target="_blank" rel="external">site oficial do WordCamp Belo Horizonte</a>. Assim ninguém vai chorar porque não viu uma palestra ou outra xD</p>
-<p>Havia algumas tomadas espalhadas pelo local, que foram suficientes pra carregar um ou outro smartphone ou notebook que arriou antes do tempo xD</p>
-<p>A internet foi bem boa, na medida do possível, mas atendeu bem todo o público presente. Até porque, para uma estrutura WiFi suportar 300 conexões simultâneas é bem complicado, mas deu tudo certo!</p>
-<p>Foi disponibilizado também, gratuitamente, um almoço no local, para que ninguém precisasse sair em busca de comida, haha! Tinha muitas bocas pra alimentar, mas todo mundo pôde comer bem a excelente comida mineira!</p>
-<h2 id="Conteúdo">Conteúdo</h2>
-<p>Muito conteúdo foi compartilhado durante todo o evento nas redes sociais usando a hashtag <strong>#wordcampbh</strong>. Você pode acompanhar tudo pelo <a href="https://www.facebook.com/hashtag/wordcampbh" target="_blank" rel="external">Facebook</a>, <a href="https://twitter.com/search?f=realtime&amp;q=%23wordcampbh&amp;src=typd" target="_blank" rel="external">Twitter</a> ou <a href="http://instagram.com/wordcampbh" target="_blank" rel="external">Instagram</a> (esse é o link para o perfil do WordCampBH no Instagram. Pesquise pela hashtag no seu smartphone xD).</p>
-<h2 id="Social">Social</h2>
-<p>No final, ainda sobrou muita comida. Por isso a organização do evento resolveu fazer sua parte social, e doou para a <a href="https://www.facebook.com/photo.php?fbid=634061596686214&amp;set=a.516641478428227.1073741828.492645257494516&amp;type=1" target="_blank" rel="external">Casa do Ancião Chichico Azevedo da Sociedade São Vicente de Paulo</a>. Uma atitude louvável!</p>
-<h2 id="Fotos">Fotos</h2>
-<p>Vou deixar aqui algumas fotos que tiramos lá (conformeu eu for encontrando outras, vou atualizando o post xD):</p>
-<p><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/guga-alves-daciuk-andre-bertolino.jpg" alt="Guga Alves, Eu, André Bertolino "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/gulpjs-apresentando-node.jpg" alt="Falando sobre Gulp "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/abertura.jpg" alt="Abertura "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/credencial-daciuk.jpg" alt="Credencial "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/daciuk-deblyn-claudio-sanches.jpg" alt="Eu, Deblyn Prado, Claudio Sanches "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/gulp-minify.jpg" alt="Gulp Minify "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/funchal-daciuk.jpg" alt="Rafael Funchal, Eu "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/valerio-daciuk.jpg" alt="Valério Souza, Eu "><br><img src="http://blog.da2k.com.br/uploads/2014/05/wordcamp-bh/daciuk-luan-muniz.jpg" alt="Eu, Luan Muniz "></p>
-<h2 id="Pra_finalizar">Pra finalizar</h2>
-<p>Belo Horizonte é uma cidade muito massa! As pessoas muito receptivas, algumas um pouco tímidas, mas o povo lá é muito hospitaleiro! Gostaria de ter ficado <em>“má um cadin”</em> por lá, mas as crianças já estavam chorando pra trazer o leite pra casa, hahah :P</p>
-<p>Quero voltar outras vezes pra visitar a cidade. Espero que em breve tenha outros eventos por lá pra eu usar como desculpa xD</p>
-<p>Acompanhe o <a href="http://2014.belohorizonte.wordcamp.org/" target="_blank" rel="external">site oficial do WordCamp Belo Horizonte</a> e as redes sociais (<a href="https://www.facebook.com/WordCampBeloHorizonte" target="_blank" rel="external">Facebook</a>, <a href="https://twitter.com/WordCampBH" target="_blank" rel="external">Twitter</a> e <a href="http://instagram.com/wordcampbh" target="_blank" rel="external">Instagram</a>), pois será divuulgado assim que saírem os vídeos das apresentações e as fotos tiradas no evento!</p>
-<p>Pra quem quiser ver, os slides da minha palestra estão disponíveis em <a href="https://github.com/fdaciuk/talks" target="_blank" rel="external">github.com/fdaciuk/talks</a>. Cada palestrante tuitou os slides da sua ou postou no grupo WordPress Brasil, no Facebook, mas em breve estarão todas reunidas também no site oficial!</p>
-<p>E você, foi no <strong>WordCamp Belo Horizonte</strong>? O que achou do evento? Diz ae!</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="https://camo.githubusercontent.com/23071767957a2edbe1d4d2bf1a0bc1d876f5d3ab/68747470733a2f2f7261772e6769746875622e636f6d2f6664616369756b2f74616c6b732f6d61737465722f6173736574732f696d616765732f776f726463616d702d62682e6a7067" alt="WordCamp Belo Horizonte"></p>
-<p>O <strong>WordCamp</strong>, como você já deve saber, é um evento internacional, que reúne pessoas de todos os lugares do mundo para falar de <strong>WordPress</strong>.</p>
-<p>No último sábado (17/05/14), aconteceu o <strong><a href="http://2014.belohorizonte.wordcamp.org/" target="_blank" rel="external">WordCamp Belo Horizonte</a></strong>. E já pra começo de conversa: Foi o <strong>WordCamp</strong> mais animal que já participei! O evento se superou em tudo. Então, já gostaria de agradecer ao <a href="https://www.facebook.com/valerio.souza" target="_blank" rel="external">Valério</a> que organizou tudo com muito carinho pra fazer o melhor <strong>WordCamp</strong> de todos os tempos!</p>
-<p>O cara tá morando no Rio de Janeiro, e fez o negócio acontecer de longe mesmo!</p>
-<p>E não faltou o famoso pão de queijo! Teve até sorteio de uma caixa no final do evento xD</p>
-<p>Mas vou começar pela viagem. Vem comigo!</p>
-]]>
-    
-    </summary>
-    
-      <category term="wordcamp" scheme="http://blog.da2k.com.br/tags/wordcamp/"/>
-    
-      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
     
   </entry>
   

@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8" />
   
-  <title>disqus | Da2k Blog</title>
+  <title>Segredos do Github - Parâmetros na URL | Da2k Blog</title>
   <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Hoje mais um segredo será revelado! Vamos brincar com alguns parâmetros na URL e ver o que podemos fazer com eles :D">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Segredos do Github - Parâmetros na URL"/>
   <meta property="og:site_name" content="Da2k Blog"/>
 
   
-    <meta property="og:image" content="undefined"/>
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-url-params.jpg" />
   
 
   
@@ -65,12 +67,7 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-<h2 class="archive-title tag">disqus</h2>
-
-
-  
-    <article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
     <div class="gallery">
   <div class="photoset">
@@ -88,29 +85,75 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2014-03-22T07:51:35.000Z"><a href="/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/">22 de março de 2014</a></time>
+        <time datetime="2015-01-19T00:00:00.000Z"><a href="/2015/01/19/segredos-do-github-parametros-na-url/">19 de janeiro de 2015</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/">Disqus - Uma thread para mais de uma URL</a></h1>
+    <h1 class="title">Segredos do Github - Parâmetros na URL</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><img src="http://blog.da2k.com.br/uploads/2014/03/disqus.png" alt="Disqus"></p>
-<p>Meu post sobre <a href="/2014/03/18/meu-workflow-javascript-com-module-pattern/">“Workflow Javascript com Module Pattern”</a> saiu na <a href="http://us5.campaign-archive1.com/?u=77b6594f10bba05dcc722c80e&amp;id=d85b8bbd77&amp;e=e3f205021c" target="_blank" rel="external">BrazilJS Weekly #69</a> <em>(obrigado a quem colocou lá o/)</em>, mas isso acabou me mostrando que eu tinha um pequeno “problema” com os comentários: como tinha uma query string na URL, o <a href="http://disqus.com/" target="_blank" rel="external">Disqus</a> achava que se tratava de uma página diferente e criava uma nova thread de comentários =/</p>
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-url-params.jpg" alt=""></p>
+<p>Hoje mais um segredo será revelado! Vamos brincar com alguns parâmetros na URL e ver o que podemos fazer com eles :D</p>
+<a id="more"></a>
+
+<h2 id="Ignorando_espaços_em_branco_no_commit">Ignorando espaços em branco no commit</h2>
+<p>Sabe quando você tem um commit onde tem um monte de espaços em branco sendo removidos, e fica difícil visualizar onde realmente foi alterado algum código? Se você passar <code>?w=1</code> na URL, o Github ignora os espaços em branco, e mostra só o que realmente é necessário:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-whitespace.png" alt="Remover espaços em branco"></p>
+<h2 id="Tamanho_da_tabulação">Tamanho da tabulação</h2>
+<p>Manja aquele código indentado com 4 tabs que fica com tamanho de 8 em qualquer outro lugar diferente do seu editor?</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/url-8-tabs.png" alt="Tab 8"></p>
+<p>Passando o parâmetro <code>?ts=4</code>, o Github mostra o código indentado com o valor passado para o parâmetro <code>ts</code>.<br>Nesse caso, <code>4</code>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/url-4-tabs.png" alt="Tab 4"></p>
+<h2 id="Separar_commits_por_autor">Separar commits por autor</h2>
+<p>Quer rever os só os seus commits que você fez naquele projeto open source, mas tem outros milhões de colaboradores?</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/all-commits.png" alt="Todos os commits"></p>
+<p>Adicione o parâmetro <code>?author=username</code>, passando o seu username do Github para mostrar só os seus:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/author-commits.png" alt="Commits de um usuário específico"></p>
+<p>E chega por hoje! xD</p>
+<p>Até o próximo <strong>Segredos do Github</strong>!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
 
       
     </div>
     <footer>
       
         
-          <div class="alignleft">
-            <a href="/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/#more" class="more-link">Veja o post completo</a>
-          </div>
+  
+  <div class="categories">
+    <a href="/categories/github/">github</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/segredos-do-github/">segredos do github</a>
+  </div>
+
         
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
       
       <div class="clearfix"></div>
     </footer>
@@ -118,13 +161,15 @@
 </article>
 
 
-  
+<section id="comment">
+  <h1 class="title">Comments</h1>
 
-  <nav id="pagination">
   
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
   
-  <div class="clearfix"></div>
-</nav>
+</section>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -245,13 +290,13 @@
 
 <script type="text/javascript">
 var disqus_shortname = 'blogda2k';
-var disqus_url = 'http://blog.da2k.com.br/tags/disqus/';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/';
 
 (function(){
   var dsq = document.createElement('script');
   dsq.type = 'text/javascript';
   dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
