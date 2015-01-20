@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-19T01:32:00.053Z</updated>
+  <updated>2015-01-20T02:57:58.899Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,103 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[WordPress: conhecendo o Painel - Parte 1]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/"/>
+    <id>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</id>
+    <published>2015-01-20T00:00:00.000Z</published>
+    <updated>2015-01-20T02:57:43.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part1.jpg" alt="WordPress: Conhecendo o Painel"></p>
+<p>Para que possamos usar o máximo de recursos possíveis no nosso tema, precisamos conhecer de onde eles vêm. Que tal fazer um <em>tour</em> pelo Painel do WordPress e conhecer tudo o que podemos fazer lá dentro? Vem comigo :D</p>
+<a id="more"></a>
+
+<p>Para entrar no Painel, precisamos acessar a área de login - em <code>/wp-admin</code> ou <code>/wp-login.php</code>.</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-login.png" alt="WordPress Login"></p>
+<p>Entramos com o usuário e senha criados na instalação do nosso site. E temos a seguinte tela:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-panel.png" alt="Painel logado"></p>
+<p>Como nosso tema ainda está <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">no início</a>, e ele está ativo, ainda não temos todas as opções possíveis do painel disponíveis. Então vamos ativar o tema padrão do WP e ver as funcionalidades que ele nos oferece no Painel!</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-themes.png" alt="Aparência &gt; Temas"></p>
+<p>Ativando o tema padrão, já podemos ver algumas opções a mais no menu <strong>Aparência</strong>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-appearance-menu.png" alt="Painel com mais opções"></p>
+<p>Mas vamos começar do início!</p>
+<h2 id="Painel">Painel</h2>
+<p>Começando pelo painel, você deve ter reparado nos itens <strong>“Opções de tela”</strong> e <strong>“Ajuda”</strong>, na lateral superior direita, né? Mas alguma vez você se interessou em clicar ali? Experimente!</p>
+<p>Em <strong>Opções de tela</strong>, temos alguns checkboxes:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-screen-options.png" alt="Opções de tela"></p>
+<p>Você pode marcá-los ou desmarcá-los para mostrar os widgets que aparecem nessa tela! Se você reparar, na maior parte das telas dentro do Painel do WP, você tem esse link <strong>Opções de tela</strong>, que tem as opções personalizadas para cada tela, em específico. Por exemplo: quando você está editando algum post, essa opção mostra todos os <em>metaboxes</em> disponíveis para o post :)</p>
+<p>O menu <strong>Ajuda</strong> também tem algumas opções interessantes. Se você não sabe para que serve qualquer um desses widgets mostrados, nesse menu você vai encontrar a resposta ;)</p>
+<p>Fique ligado nas telas que têm essas opções. Elas podem ser a resposta que você está a algum tempo procurando!</p>
+<h2 id="Posts">Posts</h2>
+<p>Na listagem de posts, temos as opções:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-list-posts.png" alt="Listagem de posts"></p>
+<p>No link <strong>Opções de tela</strong>, temos as opções que aparecem na coluna da tabela. É importante frisar que, quando você marca ou desmarca alguma dessas opções, o WordPress se lembra da próxima vez que você entra nessa tela, e traz exatamente como você deixou quando saiu :)</p>
+<p>Ao passar o mouse sobre um post, nos é mostrado um menu com algumas opções: “Editar”, “Edição Rápida”, “Lixeira”, “Ver”.</p>
+<p><strong>Editar</strong> faz o mesmo efeito de clicar no título do post: abre para edição;</p>
+<p><strong>Edição Rápida</strong> abre algumas opções que você pode editar rapidamente:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-quick-edition.png" alt="Edição Rápida"></p>
+<p><strong>Lixeira</strong> é óbvio;</p>
+<p><strong>Ver</strong> mostra o template renderizando esse post no seu tema.</p>
+<p>Ainda na tabela, se você clicar no ícone dos comentários, você é direcionado para a página de comentários, com os mesmos filtrados somente para esse post :D<br>Mais uma vez, o link <strong>Ajuda</strong> pode tirar algumas dúvidas básicas que alguém pode não saber.</p>
+<h2 id="Adicionar_novo_post">Adicionar novo post</h2>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-post-metabox.png" alt="Metabox novo post"></p>
+<p>Essas caixas - marcada em vermelho na imagem acima - na tela de “Novo Post”, são as <em>metaboxes</em>. São caixas com algumas metainformações relacionadas ao post. Normalmente são utilizadas para categorizar o post.</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-post-category-tag.png" alt="Taxonomias padrão"></p>
+<p>Você provavelmente já conhece essas metaboxes acima: <strong>Categorias</strong> e <strong>Tags</strong>. Elas são taxonomias padrão do WP.</p>
+<p><em>O que são taxonomias?</em></p>
+<blockquote>
+
+<p><strong>Taxonomia</strong> (do grego τασσεῖν ou tassein = “para classificar” e νόμος ou nomos = lei, ciência, administrar), foi a ciência de classificar organismos vivos (alfa taxonomia). Mais tarde a palavra foi aplicada em um sentido mais abrangente, podendo aplicar-se a uma das duas: classificação de coisas ou aos princípios subjacentes da classificação. Quase tudo - objetos animados, inanimados, lugares e eventos - pode ser classificado de acordo com algum esquema taxonômico. </p>
+<footer><strong>Wikipedia</strong><cite><a href="http://pt.wikipedia.org/wiki/Taxonomia_(geral)" target="_blank" rel="external">pt.wikipedia.org/wiki/&hellip;</a></cite></footer></blockquote>
+
+
+<p>Então as taxonomias, dentro do WP, servem para classificar, ou categorizar o seu conteúdo. Você pode criar suas próprias taxonomias baseadas no padrão de <strong>Categorias</strong> ou <strong>Tags</strong>, que o WP oferece, ou então criar uma nova <em>metabox</em> e adicionar qualquer tipo de campo de formulário necessário para fazer uma categorização personalizada: <em>select</em>, <em>radio button</em>, <em>checkbox</em>, etc. Veremos como fazer isso nos próximos posts da série.</p>
+<h2 id="O_editor">O editor</h2>
+<p>No editor de texto do WordPress, temos algumas features bem interessantes. Uma delas é o <strong>oEmbed</strong>.</p>
+<p>Essa feature nos permite <em>embedar</em> facilmente algumas coisas, somente pela URL.</p>
+<p>Por exemplo, um vídeo do Youtube. Escolha um vídeo qualquer, copie a URL e cole no editor. Olha só o que acontece:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-oembed-youtube.png" alt="oEmbed Youtube"></p>
+<p>Automagicamente, o vídeo é embedado e renderizado! Em tempo real! Você pode dar o play no vídeo ali mesmo!</p>
+<p>Não era esse vídeo que você queria adicionar? Clicando em cima do vídeo, você ainda tem duas opções: <strong>editar</strong> ou <strong>remover</strong>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-oembed-youtube-edit-remove.png" alt="Editar ou remover oEmbed"></p>
+<p>Tudo isso sem plugin algum! Coisa linda, não? ;)</p>
+<p><em>Que legal! E dá pra fazer isso só com o Youtube?</em></p>
+<p>Claro que não jovem! Você consegue embedar <a href="http://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F" target="_blank" rel="external">milhares de outras coisas</a>, incluindo um <em>tweet</em>, por exemplo:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-oembed-twitter.png" alt="oEmbed Twitter"></p>
+<p>E você ainda pode <strong>criar</strong> seu próprio <em>embed</em>! Vamos aprender a fazer isso também :D</p>
+<p>Tá curtindo a série? Então fica ligado que continuaremos falando sobre o Painel no próximo post, trazendo mais novidades! Até lá :D</p>
+<blockquote>
+
+<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</a></p>
+<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+</blockquote>
+
+
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part1.jpg" alt="WordPress: Conhecendo o Painel"></p>
+<p>Para que possamos usar o máximo de recursos possíveis no nosso tema, precisamos conhecer de onde eles vêm. Que tal fazer um <em>tour</em> pelo Painel do WordPress e conhecer tudo o que podemos fazer lá dentro? Vem comigo :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
+    
+      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - Parâmetros na URL]]></title>
     <link href="http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/"/>
     <id>http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/</id>
     <published>2015-01-19T00:00:00.000Z</published>
-    <updated>2015-01-19T01:31:36.000Z</updated>
+    <updated>2015-01-19T01:33:58.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-url-params.jpg" alt=""></p>
 <p>Hoje mais um segredo será revelado! Vamos brincar com alguns parâmetros na URL e ver o que podemos fazer com eles :D</p>
 <a id="more"></a>
@@ -351,7 +443,7 @@
     <link href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/"/>
     <id>http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</id>
     <published>2015-01-14T00:00:00.000Z</published>
-    <updated>2015-01-14T02:41:59.000Z</updated>
+    <updated>2015-01-20T02:40:57.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-functions-php.jpg" alt="WordPress - O arquivo functions.php"></p>
 <p>O <strong>functions.php</strong> é o canal que liga o seu tema a todas as coisas legais que o WP tem a oferecer! Códigos personalizados, estrutura de arquivos… todo tipo de manipulação que você imagina no seu site WordPress, você faz através do <strong>functions.php</strong>. Vamos conhecê-lo? ;)</p>
 <a id="more"></a>
@@ -418,7 +510,7 @@
 
 <p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
 <p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</a></p>
-<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</a></p>
 </blockquote>
 
 
@@ -626,7 +718,7 @@
     <link href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"/>
     <id>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</id>
     <published>2015-01-11T00:00:00.000Z</published>
-    <updated>2015-01-14T02:41:59.000Z</updated>
+    <updated>2015-01-20T02:22:18.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
 <p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
 <a id="more"></a>
@@ -639,7 +731,7 @@
 <p>Esse post servirá como uma introdução à série, e como índice, para organização das postagens. Ele será atualizado conforme os posts forem sendo escritos. E em cada post da série, você verá um link para esse post de introdução, um para o post anterior e um para o próximo post da série.</p>
 <p>Aproveite, e bons estudos!</p>
 <h2 id="Índice">Índice</h2>
-<p>1) <a href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/" target="_blank" rel="external">Estrutura inicial do tema, padrões de codificação e uso do editor</a><br>2) <a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">O arquivo functions.php</a></p>
+<p>1) <a href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/" target="_blank" rel="external">Estrutura inicial do tema, padrões de codificação e uso do editor</a><br>2) <a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">O arquivo functions.php</a><br>3) <a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/" target="_blank" rel="external">Conhecendo o Painel - Parte 1</a></p>
 <blockquote>
 <p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
 <p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
@@ -1492,36 +1584,6 @@
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
     
       <category term="html" scheme="http://blog.da2k.com.br/categories/html/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Um post por dia]]></title>
-    <link href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/"/>
-    <id>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</id>
-    <published>2014-12-31T13:16:13.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2014/12/calendar.jpg" alt=""></p>
-<p>Comecei com esse blog no início de 2014. Pretendia escrever vários posts, com uma frequência razoável, ao menos uma vez por mês, mas isso foi um mito. E pude perceber que não só pra mim, mas pra muita gente é complicado dedicar um tempo específico para escrever e manter o blog atualizado. Por isso resolvi lançar esse desafio a mim mesmo: <strong>escrever 1 post por dia em 2015</strong>.</p>
-<a id="more"></a>
-
-<p>Minha meta é chegar ao final do ano com, ao menos, 300 posts novos - dando uma margem de segurança de 65 dias pra poder respirar :P - para compartilhar conteúdo de qualidade em pt-BR sobre desenvolvimento web, focando em (mas não se limitando a) Javascript, HTML, CSS e WordPress.</p>
-<p>A ideia principal dessa iniciativa é gerar e compartilhar muito conteúdo bom em pt-BR. Coisas que ainda não foram faladas (ou talvez já :P), mas que agreguem conhecimento para, desde o cara que está começando na área, até o cara que já tem 30 anos de experiência :D</p>
-<p>Os posts podem ser desde dicas até tutorias completos, dicas sobre ferramentas, organização de arquivos, testes, workflow, etc.</p>
-<p>Todos os posts serão compartilhados com a hashtag <strong>#1postperday</strong>.</p>
-<p>Ideia doida? Pois é.. não sei se conseguirei fazer os posts diariamente, mas ao menos eu vou tentar.. o desafio está lançado!</p>
-<p>Quer sugerir algum tema para os posts? Deixe seu comentário <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">nessa issue</a>.</p>
-<p>Quer participar também? Não há regras, a não ser respeitar a frequência! Faça ao menos 1 post por dia e compartilhe-o usando a hashtag <strong>#1postperday</strong>! Se achar que é muito, use a criatividade e faça <strong>#1postperweek</strong> ou até <strong>#1postpermonth</strong>!</p>
-<p>E que venha 2015! o/</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2014/12/calendar.jpg" alt=""></p>
-<p>Comecei com esse blog no início de 2014. Pretendia escrever vários posts, com uma frequência razoável, ao menos uma vez por mês, mas isso foi um mito. E pude perceber que não só pra mim, mas pra muita gente é complicado dedicar um tempo específico para escrever e manter o blog atualizado. Por isso resolvi lançar esse desafio a mim mesmo: <strong>escrever 1 post por dia em 2015</strong>.</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
     
   </entry>
   
