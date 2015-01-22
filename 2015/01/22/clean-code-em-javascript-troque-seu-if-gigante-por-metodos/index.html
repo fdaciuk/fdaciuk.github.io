@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Clean code em Javascript - troque seu if gigante por métodos | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Como você viu no título, hoje vou falar sobre uma forma interessante de deixar suas funções / métodos pequenos, usando-os no lugar de if’s gigantescos!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Clean code em Javascript - troque seu if gigante por métodos"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/clean-code.jpg" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-22T00:00:00.000Z"><a href="/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/">22 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Clean code em Javascript - troque seu if gigante por métodos</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/clean-code.jpg" alt="Clean Code"></p>
+<p>Como você viu no título, hoje vou falar sobre uma forma interessante de deixar suas funções / métodos pequenos, usando-os no lugar de if’s gigantescos!</p>
+<a id="more"></a>
+
+<p>Quando você tem um código limpo, fica muito mais fácil entender como tudo acontece, facilitando a manutenção do código.</p>
+<p>Para usar a técnica de <em>Clean Code</em> você precisa deixar de pensar da forma tradicional, e adotar um novo paradigma. Sair da casinha, pensar fora da caixa!</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/guga-alves-thinking-outside-of-the-box.jpg" alt="Guga Alves pensando fora da caixa"></p>
+<p>Imagine a seguinte situação: você tem um código que precisa executar uma ação baseada no retorno de uma requisição. Essa requisição retornará um valor qualquer, dentre vários conhecidos.</p>
+<p>Vamos tomar como exemplo uma base de usuários, onde deve ser executada uma ação conforme o papel (<code>role</code>) desse usuário:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">  </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line"></div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">if</span>( <span class="string">'superadmin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'admin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'editor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'author'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'contributor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'subscriber'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">        }</div><div class="line">      });</div><div class="line">    };</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
+
+<p>E o <code>UsersResource</code>, que consulta informações em um servidor (por exemplo), e retorna um objeto com várias informações sobre usuários cadastrados no seu sistema e seus respectivos papéis:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">UsersResource</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">  </div><div class="line">    $public.get = <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">return</span> [</div><div class="line">        { name: <span class="string">'John'</span>, role: <span class="string">'superadmin'</span> },</div><div class="line">        { name: <span class="string">'Mark'</span>, role: <span class="string">'admin'</span> },</div><div class="line">        { name: <span class="string">'Robert'</span>, role: <span class="string">'editor'</span> },</div><div class="line">        { name: <span class="string">'Ana'</span>, role: <span class="string">'author'</span> },</div><div class="line">        { name: <span class="string">'Paul'</span>, role: <span class="string">'contributor'</span> },</div><div class="line">        { name: <span class="string">'Mariah'</span>, role: <span class="string">'subscriber'</span> }</div><div class="line">      ];</div><div class="line">    };</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">window</span>.UsersResource = UsersResource();</div><div class="line">})( <span class="built_in">window</span> );</div></pre></td></tr></table></figure>
+
+<p>E aí, teve um <em>Déjà vu</em>? Quantas vezes já escrevemos códigos como esse? Muito fácil de ler não é? #sqn.<br>Todo o nosso código está centralizado em um único método - <code>$public.init()</code>. Temos várias coisas acontecendo aqui, mas ainda está tudo muito acoplado.</p>
+<p>Que tal se tentarmos com <code>switch</code>?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line">      </div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">switch</span>( user.role ) {</div><div class="line">          <span class="keyword">case</span> <span class="string">'superadmin'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'admin'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'editor'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'author'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'contributor'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'subscriber'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">        }</div><div class="line">      });</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
+
+<p>Melhorou um pouco, mas ainda está tudo muito acoplado. Imagine se você precisar adicionar mais <strong>roles</strong> para os usuários.. pense no tamanho da zona que não vai virar?</p>
+<p><em>Como resolver então?</em></p>
+<h2 id="Funções_/_Métodos">Funções / Métodos</h2>
+<p>O Javascript é uma linguagem funcional, então porque escrever código imperativo? Vamos nos aproveitar do que o JS tem de melhor: as funções!</p>
+<p>A versão <em>clean code</em> do nosso código ficaria assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $private = {};</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      $private.getUsers();</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.getUsers = <span class="function"><span class="keyword">function</span> <span class="title">getUsers</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">var</span> role = $private.makeFirstLetterCapitalized( user.role );</div><div class="line">        $private[ <span class="string">'handle'</span> + role ]( user );</div><div class="line">      });</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.makeFirstLetterCapitalized = <span class="function"><span class="keyword">function</span> <span class="title">makeFirstLetterCapitalized</span><span class="params">( word )</span> </span>{</div><div class="line">      <span class="keyword">return</span> word.charAt(<span class="number">0</span>).toUpperCase() + word.slice(<span class="number">1</span>);</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleSuperadmin = <span class="function"><span class="keyword">function</span> <span class="title">handleSuperadmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleAdmin = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleEditor = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleAuthor = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleContributor = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleSubscriber = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
+
+<p>Aumentou um pouco a quantidade de linhas, mas é visível a separação de responsabilidades aqui. Cada método faz somente uma coisa. Primeiro, tiramos toda a lógica do método <code>init()</code>, e o deixamos somente para chamar outros métodos. </p>
+<p>Criamos um método <code>makeFirstLetterCapitalized()</code>, para transformar a primeira letra do <code>role</code> em maiúscula, pois padronizamos assim nossos métodos que irão manipular as informações desses usuários.</p>
+<p>Separamos os métodos de manipulação para cada <code>role</code>, seguindo o padrão nomeado de <code>handle{Role}</code>, onde <code>{Role}</code> é o papel do usuário, com a primeira letra maíuscula.</p>
+<p>Fica claro que isso não é solução para todos os casos, e você não vai trocar todos os seus <code>if&#39;s</code> por métodos. Mas essa é uma solução diferente para um problema bastante comum, que você pode aplicar no seu dia-a-dia, deixando seu código muito mais legível :)</p>
+<p>Essa foi uma dica simples, escrita em um código Javascript, mas que é possível aplicar também em praticamente qualquer outra linguagem. </p>
+<p>Gostou do post? Tem algo a compartilhar sobre o assunto? Comente!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/clean-code/">clean code</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>3</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>14</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>23</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>3</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>5</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>1</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>3</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

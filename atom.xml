@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-21T02:31:41.358Z</updated>
+  <updated>2015-01-22T02:57:50.567Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,68 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Clean code em Javascript - troque seu if gigante por métodos]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/"/>
+    <id>http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/</id>
+    <published>2015-01-22T00:00:00.000Z</published>
+    <updated>2015-01-22T02:57:30.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/clean-code.jpg" alt="Clean Code"></p>
+<p>Como você viu no título, hoje vou falar sobre uma forma interessante de deixar suas funções / métodos pequenos, usando-os no lugar de if’s gigantescos!</p>
+<a id="more"></a>
+
+<p>Quando você tem um código limpo, fica muito mais fácil entender como tudo acontece, facilitando a manutenção do código.</p>
+<p>Para usar a técnica de <em>Clean Code</em> você precisa deixar de pensar da forma tradicional, e adotar um novo paradigma. Sair da casinha, pensar fora da caixa!</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/guga-alves-thinking-outside-of-the-box.jpg" alt="Guga Alves pensando fora da caixa"></p>
+<p>Imagine a seguinte situação: você tem um código que precisa executar uma ação baseada no retorno de uma requisição. Essa requisição retornará um valor qualquer, dentre vários conhecidos.</p>
+<p>Vamos tomar como exemplo uma base de usuários, onde deve ser executada uma ação conforme o papel (<code>role</code>) desse usuário:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">  </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line"></div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">if</span>( <span class="string">'superadmin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'admin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'editor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'author'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'contributor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'subscriber'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">        }</div><div class="line">      });</div><div class="line">    };</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
+
+<p>E o <code>UsersResource</code>, que consulta informações em um servidor (por exemplo), e retorna um objeto com várias informações sobre usuários cadastrados no seu sistema e seus respectivos papéis:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">UsersResource</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">  </div><div class="line">    $public.get = <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">return</span> [</div><div class="line">        { name: <span class="string">'John'</span>, role: <span class="string">'superadmin'</span> },</div><div class="line">        { name: <span class="string">'Mark'</span>, role: <span class="string">'admin'</span> },</div><div class="line">        { name: <span class="string">'Robert'</span>, role: <span class="string">'editor'</span> },</div><div class="line">        { name: <span class="string">'Ana'</span>, role: <span class="string">'author'</span> },</div><div class="line">        { name: <span class="string">'Paul'</span>, role: <span class="string">'contributor'</span> },</div><div class="line">        { name: <span class="string">'Mariah'</span>, role: <span class="string">'subscriber'</span> }</div><div class="line">      ];</div><div class="line">    };</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">window</span>.UsersResource = UsersResource();</div><div class="line">})( <span class="built_in">window</span> );</div></pre></td></tr></table></figure>
+
+<p>E aí, teve um <em>Déjà vu</em>? Quantas vezes já escrevemos códigos como esse? Muito fácil de ler não é? #sqn.<br>Todo o nosso código está centralizado em um único método - <code>$public.init()</code>. Temos várias coisas acontecendo aqui, mas ainda está tudo muito acoplado.</p>
+<p>Que tal se tentarmos com <code>switch</code>?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line">      </div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">switch</span>( user.role ) {</div><div class="line">          <span class="keyword">case</span> <span class="string">'superadmin'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'admin'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'editor'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'author'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'contributor'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">          <span class="keyword">case</span> <span class="string">'subscriber'</span>:</div><div class="line">            <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">        }</div><div class="line">      });</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
+
+<p>Melhorou um pouco, mas ainda está tudo muito acoplado. Imagine se você precisar adicionar mais <strong>roles</strong> para os usuários.. pense no tamanho da zona que não vai virar?</p>
+<p><em>Como resolver então?</em></p>
+<h2 id="Funções_/_Métodos">Funções / Métodos</h2>
+<p>O Javascript é uma linguagem funcional, então porque escrever código imperativo? Vamos nos aproveitar do que o JS tem de melhor: as funções!</p>
+<p>A versão <em>clean code</em> do nosso código ficaria assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $private = {};</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      $private.getUsers();</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.getUsers = <span class="function"><span class="keyword">function</span> <span class="title">getUsers</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">var</span> role = $private.makeFirstLetterCapitalized( user.role );</div><div class="line">        $private[ <span class="string">'handle'</span> + role ]( user );</div><div class="line">      });</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.makeFirstLetterCapitalized = <span class="function"><span class="keyword">function</span> <span class="title">makeFirstLetterCapitalized</span><span class="params">( word )</span> </span>{</div><div class="line">      <span class="keyword">return</span> word.charAt(<span class="number">0</span>).toUpperCase() + word.slice(<span class="number">1</span>);</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleSuperadmin = <span class="function"><span class="keyword">function</span> <span class="title">handleSuperadmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleAdmin = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleEditor = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleAuthor = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleContributor = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleSubscriber = <span class="function"><span class="keyword">function</span> <span class="title">handleAdmin</span><span class="params">( user )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
+
+<p>Aumentou um pouco a quantidade de linhas, mas é visível a separação de responsabilidades aqui. Cada método faz somente uma coisa. Primeiro, tiramos toda a lógica do método <code>init()</code>, e o deixamos somente para chamar outros métodos. </p>
+<p>Criamos um método <code>makeFirstLetterCapitalized()</code>, para transformar a primeira letra do <code>role</code> em maiúscula, pois padronizamos assim nossos métodos que irão manipular as informações desses usuários.</p>
+<p>Separamos os métodos de manipulação para cada <code>role</code>, seguindo o padrão nomeado de <code>handle{Role}</code>, onde <code>{Role}</code> é o papel do usuário, com a primeira letra maíuscula.</p>
+<p>Fica claro que isso não é solução para todos os casos, e você não vai trocar todos os seus <code>if&#39;s</code> por métodos. Mas essa é uma solução diferente para um problema bastante comum, que você pode aplicar no seu dia-a-dia, deixando seu código muito mais legível :)</p>
+<p>Essa foi uma dica simples, escrita em um código Javascript, mas que é possível aplicar também em praticamente qualquer outra linguagem. </p>
+<p>Gostou do post? Tem algo a compartilhar sobre o assunto? Comente!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/clean-code.jpg" alt="Clean Code"></p>
+<p>Como você viu no título, hoje vou falar sobre uma forma interessante de deixar suas funções / métodos pequenos, usando-os no lugar de if’s gigantescos!</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="clean code" scheme="http://blog.da2k.com.br/tags/clean-code/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[WordPress: conhecendo o Painel - Parte 2]]></title>
     <link href="http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/"/>
     <id>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</id>
     <published>2015-01-21T00:00:00.000Z</published>
-    <updated>2015-01-21T02:31:10.000Z</updated>
+    <updated>2015-01-21T02:32:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part2.jpg" alt="WordPress: Conhecendo o Painel"></p>
 <p>Na primeira parte vimos várias funcionalidades do Painel do WP. Nesse post vamos continuar a saga e desvendar tudo o que podemos usar para personalizar nosso tema! Bora? ;)</p>
 <a id="more"></a>
@@ -125,7 +182,7 @@
     <link href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/"/>
     <id>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</id>
     <published>2015-01-20T00:00:00.000Z</published>
-    <updated>2015-01-20T23:36:27.000Z</updated>
+    <updated>2015-01-21T02:32:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part1.jpg" alt="WordPress: Conhecendo o Painel"></p>
 <p>Para que possamos usar o máximo de recursos possíveis no nosso tema, precisamos conhecer de onde eles vêm. Que tal fazer um <em>tour</em> pelo Painel do WordPress e conhecer tudo o que podemos fazer lá dentro? Vem comigo :D</p>
 <a id="more"></a>
@@ -824,7 +881,7 @@
     <link href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/"/>
     <id>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</id>
     <published>2015-01-11T00:00:00.000Z</published>
-    <updated>2015-01-20T23:36:37.000Z</updated>
+    <updated>2015-01-21T02:32:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-intro.jpg" alt="WordPress"></p>
 <p>Como falei <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">nesse post</a>, vamos começar uma série completa de posts, mostrando como criar temas para WordPress. Vamos abordar todas as partes necessárias, começando com o básico para criar um blog, passando por criação de páginas institucionais, campos personalizados, até que tenhamos uma estrutura que suporte qualquer tipo de site! </p>
 <a id="more"></a>
@@ -1543,70 +1600,6 @@
       <category term="amd" scheme="http://blog.da2k.com.br/tags/amd/"/>
     
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Caminhos relativos no NodeJS]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/"/>
-    <id>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</id>
-    <published>2015-01-02T00:00:00.000Z</published>
-    <updated>2015-01-15T01:40:05.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" alt=""></p>
-<p>Sabe quando você precisa dar <code>require</code> em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de <code>../../../</code> para chegar até o diretório certo do seu módulo?</p>
-<a id="more"></a>
-
-<p>Se você não entendeu, vou exemplificar. Digamos que você tem a seguinte estrutura de diretórios no seu projeto:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── /controllers</div><div class="line">|   ├── /home</div><div class="line">|   |   ├── homeController.js</div><div class="line">├── /services</div><div class="line">|   ├── /home</div><div class="line">|   |   ├── homeService.js</div><div class="line">├── /routes</div><div class="line">└── app.js</div></pre></td></tr></table></figure>
-
-<p>Imagine que nos <code>services</code> você controla todas as regras de negócio e passa para o seu <code>controller</code>. No controller, você precisa então “requisitar” o <code>service</code> específico, chamando ele dessa forma no arquivo <code>homeController.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeService = <span class="built_in">require</span>( <span class="string">'../../services/home/homeService'</span> );</div></pre></td></tr></table></figure>
-
-<p>Como o arquivo <code>homeController.js</code> está dentro do diretório <code>controllers/home</code>, você precisa voltar dois níveis para então chegar no diretório <code>services</code>, entrar ali e chamar o <code>homeService.js</code>.</p>
-<p>Agora imagine você fazendo isso em um projeto que começa pequeno, mas vai escalando até ficar gigantesco! Se você resolver refatorar alguma coisa mudando algo de lugar, imagine o trabalho de ficar modificando manualmente essas estruturas de diretórios!</p>
-<p>Chato não?!</p>
-<p>Mas felizmente, o Node nos dá algumas maneiras de resolver isso. Você pode usar o método <code>resolve()</code> do módulo <a href="http://nodejs.org/api/path.html#path_path_resolve_from_to" target="_blank" rel="external">path</a>, - que é nativo do Node - que vai resolver a sua URL com o caminho absoluto, até onde a aplicação está rodando. Então você pode fazer a chamada assim no seu <code>homeController.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>( <span class="string">'path'</span> );</div><div class="line"><span class="keyword">var</span> homeService = <span class="built_in">require</span>( path.resolve( <span class="string">'services/home/homeService'</span> ) );</div></pre></td></tr></table></figure>
-
-<p>O <code>path</code> vai, a partir do caminho absoluto da sua aplicação, concatenar com o parâmetro passado para o método <code>resolve()</code>. Simples não?</p>
-<p>Mas é ruim ter que ficar adicionando mais uma linha em todo arquivo que eu precisar fazer um require. Por isso eu criei um módulo marotinho chamado <a href="https://github.com/fdaciuk/getmodule" target="_blank" rel="external">getmodule</a>, que facilita isso pra você!</p>
-<p>O <code>getmodule</code> usa o recurso do <code>path.resolve()</code> para gerar o caminho corretamente, mas ele exporta uma variável global chamada <code>getmodule</code> para que você possa substituir o <code>require</code> por ele.</p>
-<p>O módulo é só isso:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">global.getmodule = <span class="function"><span class="keyword">function</span> <span class="title">getmodule</span><span class="params">( modulePath )</span> </span>{</div><div class="line">  <span class="keyword">var</span> path = <span class="built_in">require</span>( <span class="string">'path'</span> );</div><div class="line">  <span class="keyword">return</span> <span class="built_in">require</span>( path.resolve( modulePath ) );</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>E para usá-lo, é bem simples. Primeiro instale o módulo no seu projeto:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save getmodule</div></pre></td></tr></table></figure>
-
-<p>Depois, adicione ele na primeira linha do arquivo principal da sua aplicação. No caso do nosso exemplo, é o <code>app.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>( <span class="string">'getmodule'</span> );</div></pre></td></tr></table></figure>
-
-<p>E pronto! Agora, no nosso <code>homeController.js</code>, podemos simplesmente chamar o service dessa forma:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> homeService = getmodule( <span class="string">'services/home/homeService'</span> );</div></pre></td></tr></table></figure>
-
-<p>Que toda a parte verbosa vai ficar por conta do módulo :D</p>
-<p>Ae você me pergunta: <em>É vantagem usar um módulo só pra isso?</em></p>
-<p>Eu penso que sim. Senão você vai ter que ficar criando “helpers” no seu projeto pra fazer isso. Vai acabar deixando o negócio meio desorganizado ou com coisas desnecessárias. Como estamos usando um módulo, ele fica no diretório <code>node_modules</code> e se tiver alguma atualização para ele, pode ser feito via <code>npm update</code>. Muito mais prático trabalhar assim com módulos genéricos.</p>
-<p>Existem algumas outras formas de resolver esse problema, que foram discutidas <a href="https://www.facebook.com/groups/nodejsbrasil/permalink/580587242074567/" target="_blank" rel="external">nesse link</a> no grupo <strong>NodeJS Brasil</strong>, no Facebook.</p>
-<p>Bom, por hoje é só! Gostou da dica? Achou ridículo? Comenta aí :)</p>
-<p>Até a próxima :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/nodejs.jpg" alt=""></p>
-<p>Sabe quando você precisa dar <code>require</code> em um módulo que você criou, mas ele está em uma estrutura de diretórios bem longe do arquivo que você precisa incluir, e você tem que usar um milhão de <code>../../../</code> para chegar até o diretório certo do seu módulo?</p>
-]]>
-    
-    </summary>
-    
-      <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="getmodule" scheme="http://blog.da2k.com.br/tags/getmodule/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
