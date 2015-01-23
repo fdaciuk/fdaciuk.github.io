@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Como criar Extensões para o Google Chrome | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Sabe quando você está usando um aplicativo web, e percebe que falta alguma funcionalidade que, ao seu ver, você conseguiria resolver facilmente com Javascript? Mas como você não trabalha na empresa que criou o aplicativo, você fica de mãos atadas e diz: “- Eu mesmo vou fazer um aplicativo desses. Do zero!”, mas não faz, porque vai tomar muito tempo, ae você procrastina e continua chorando porque aquele app deveria ter a funcionalidade que você quer?
+Seus problemas acarabam! Agora você pode criar uma Chrome Extension, usando somente Javascript (que lindo isso cara *_* ) e EXTENDENDO as funcionalidades do aplicativo que você usa conforme a sua necessidade! 
+Curtiu a ideia? Quer aprender a fazer? Vem comigo xD">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Como criar Extensões para o Google Chrome"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="/uploads/2015/01/chrome-extensions.jpg" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-23T00:00:00.000Z"><a href="/2015/01/23/como-criar-extensoes-para-o-google-chrome/">23 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Como criar Extensões para o Google Chrome</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="/uploads/2015/01/chrome-extensions.jpg" alt="Chrome Extension"></p>
+<p>Sabe quando você está usando um aplicativo web, e percebe que falta alguma funcionalidade que, ao seu ver, você conseguiria resolver facilmente com <strong>Javascript</strong>? Mas como você não trabalha na empresa que criou o aplicativo, você fica de mãos atadas e diz: “- Eu mesmo vou fazer um aplicativo desses. Do zero!”, mas não faz, porque vai tomar muito tempo, ae você procrastina e continua chorando porque aquele app deveria ter a funcionalidade que você quer?</p>
+<p><strong>Seus problemas acarabam!</strong> Agora você pode criar uma <strong>Chrome Extension</strong>, usando somente Javascript (que lindo isso cara *_* ) e EXTENDENDO as funcionalidades do aplicativo que você usa conforme a sua necessidade! </p>
+<p>Curtiu a ideia? Quer aprender a fazer? Vem comigo xD</p>
+<a id="more"></a>
+
+<h2 id="Motivação">Motivação</h2>
+<p>O que me motivou a criar uma <em>Chrome Extension</em> foi o <a href="http://grooveshark.com/" target="_blank" rel="external">Grooveshark</a>. É a ferramenta que mais gosto pra passar o dia todo ouvindo música - sem propagandas - e programando :D</p>
+<p>Só que ele tem um problema: a cada <strong>x</strong> minutos (não tenho certeza se é 15 ou 30), ele pára de tocar e pergunta: “- Você ainda está aí?”; e para voltar a tocar, você precisa clicar no botão “Resume” ¬¬</p>
+<p>Sério, já passei algumas horas do dia com o fone apertando o ouvindo, no silêncio, porque estava focando em algum código, e quando percebi o Grooveshark já havia parado a muito tempo.</p>
+<p>Então pensei comigo: “- Por que não criar uma extensão do Chrome que clique nesse botão <strong>Resume</strong> pra mim?” E <a href="https://github.com/fdaciuk/dont-stop-grooveshark/" target="_blank" rel="external">foi exatamente o que eu fiz!</a></p>
+<h2 id="Por_onde_começar">Por onde começar</h2>
+<p>O Google tem um <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">guia</a> para que você possa desenvolver sua própria extensão, mas como está em Inglês, resolvi escrever esse artigo, até pra mostrar algumas <a href="#Surpresinha"><em>surpresinhas</em></a> que você não espera quando vai fazer uma treta dessas xD</p>
+<p>Vamos começar então criando um diretório para nossa extensão e um arquivo <code>manifest.json</code>.</p>
+<h2 id="O_arquivo_manifest-json">O arquivo manifest.json</h2>
+<p>Esse arquivo não é nada mais que um JSON, onde ficarão os metadados relacionados à sua extensão: nome da extensão, descrição, versão, permissões, etc. <a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="external">Nesse link</a> você encontra todos os metadados que podem ser incluídos no <code>manifest.json</code>.</p>
+<p>Vou mostrar os exemplos baseados no <a href="https://github.com/fdaciuk/dont-stop-grooveshark/" target="_blank" rel="external"><strong>Don’t stop Grooveshark</strong></a>. O <code>manifest.json</code> ficará assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">  <span class="string">"name"</span>: <span class="string">"Don't stop Grooveshark"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"0.0.2"</span>,</div><div class="line">  <span class="string">"manifest_version"</span>: <span class="number">2</span>,</div><div class="line">  <span class="string">"description"</span>: <span class="string">"Google Chrome Extension that don't leaves Grooveshark stop playing."</span>,</div><div class="line">  <span class="string">"icons"</span> : {</div><div class="line">    <span class="string">"16"</span> : <span class="string">"icon128.png"</span>,</div><div class="line">    <span class="string">"48"</span> : <span class="string">"icon128.png"</span>,</div><div class="line">    <span class="string">"128"</span> : <span class="string">"icon128.png"</span></div><div class="line">  },</div><div class="line">  <span class="string">"content_scripts"</span>: [{</div><div class="line">    <span class="string">"matches"</span>: [ <span class="string">"*://grooveshark.com/*"</span> ],</div><div class="line">    <span class="string">"js"</span>: [ <span class="string">"dont-stop-grooveshark.js"</span> ]</div><div class="line">  }]</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Vou comentar os parâmetros que não são tão óbvios, ok?</p>
+<h3 id="mainfest_version">mainfest_version</h3>
+<p>Esse parâmetro recebe um número inteiro, que representa a versão do mainfesto que o sua extensão está usando. A partir do <em>Chrome 18</em>, a versão <code>1</code> foi depreciada. Você deveria sempre usar a <code>2</code> a partir de então.</p>
+<h3 id="icons">icons</h3>
+<p>O ícone da sua extensão, que será mostrado na Chrome Store, ou quando sua extensão for mostrada na barra de extensões do <em>Chrome</em>.</p>
+<p>É recomendado que você tenha ao menos o tamanho de ícone em <code>128x128px</code>. Se possível, passe todos os tamanhos pedidos (16x16, 48x48, 128x128), pois o <em>Chrome</em> irá selecionar o que for mais apropriado para o momento que ele precisar ser apresentado.</p>
+<h3 id="content_scripts">content_scripts</h3>
+<p><em><strong>Content scripts</strong> is where the magic happens!</em> Aqui é o lugar onde você pode adicionar seus próprios <em>scripts</em> ou <em>css</em> e adicioná-los à alguma página na web.</p>
+<p>A propriedade <code>matches</code> recebe um array de domínios que sua extensão precisa de permissão para acessar. </p>
+<p>A propriedade <code>js</code> recebe um array de arquivos JS que serão incluídos quando esses domínios forem acessados.</p>
+<p>Você ainda pode ter uma propriedade <code>css</code>, que também receberá um array de arquivos CSS para estilizar a página do(s) domínio(s) setado(s) em <code>matches</code>.</p>
+<p>Basicamente é isso que você vai precisar. Se estiver pensando em fazer uma extensão um pouco mais complexa, talvez você precise setar mais alguns parâmetros, que podem ser encontrados <a href="https://developer.chrome.com/extensions/content_scripts" target="_blank" rel="external">nesse link</a>.</p>
+<h2 id="A_magia">A magia</h2>
+<p>No caso do <strong>Don’t stop Grooveshark</strong>, o que eu preciso que seja feito é que, sempre que aparecer na tela aquela mensagem perguntando se eu ainda estou ali, o botão de <strong>Resume</strong> deve receber um clique automaticamente.</p>
+<p>O código utilizado no arquivo <code>dont-stop-grooveshark.js</code> é o seguinte:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( doc )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( <span class="string">"Don't stop Grooveshark! ;)"</span> );</div><div class="line">  <span class="keyword">var</span> $resumePlaybackButton;</div><div class="line">  </div><div class="line">  <span class="built_in">window</span>.setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $resumePlaybackButton = doc.querySelector( <span class="string">'[data-translate-text="LB_INTERACTION_TIME_RESUME"]'</span> );</div><div class="line">    <span class="keyword">if</span>( ! $resumePlaybackButton ) {</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    }</div><div class="line">    </div><div class="line">    $resumePlaybackButton.click();</div><div class="line">  }, <span class="number">3000</span>);</div><div class="line">})( <span class="built_in">document</span> );</div></pre></td></tr></table></figure>
+
+<p>A única referência que eu tenho para o botão de <strong>Resume</strong>, é um atributo <code>data-translate-text</code>, com o conteúdo <code>LB_INTERACTION_TIME_RESUME</code>. Então o que eu faço é, a cada 3 segundos, verificar se esse botão está na tela e dar um clique nele. Se ele não estiver, não faço nada. :)</p>
+<h2 id="Conclusão">Conclusão</h2>
+<p>Tendo acesso direto a um app, e a possibilidade de injetar Javascript, você pode fazer QUALQUER COISA que quiser! Existem algumas extensões que precisam de uma tela específica para setar algumas configurações. Isso também é possível fazer, mas vou deixar pra mostrar isso em um próximo artigo :D</p>
+<h2 id="Surpresinha">Surpresinha</h2>
+<p>Para subir uma <em>Chrome Extension</em> para o <a href="">respositório oficial</a>, você precisa pagar <strong>U$ 5</strong> <del>doletas</del>. Apesar do preço baixo, - e você só precisar pagar esse valor uma única vez - ele serve como uma “segurança” para que muitos desenvolvedores não postem qualquer porcaria lá (apesar de já ter :P). Imagina se não cobrassem :P</p>
+<p>Depois desse pagamento, você pode fazer quantas extensões quiser, e subir à vontade!</p>
+<p>Por hoje é isso! </p>
+<p>E aí: para qual app você vai fazer a sua extensão? :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/chrome-extension/">chrome extension</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>3</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>15</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>24</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>3</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>3</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>5</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>1</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>3</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

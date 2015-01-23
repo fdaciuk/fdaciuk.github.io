@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-22T02:57:50.567Z</updated>
+  <updated>2015-01-23T01:09:23.463Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,83 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Como criar Extensões para o Google Chrome]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/"/>
+    <id>http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/</id>
+    <published>2015-01-23T00:00:00.000Z</published>
+    <updated>2015-01-23T01:08:32.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/uploads/2015/01/chrome-extensions.jpg" alt="Chrome Extension"></p>
+<p>Sabe quando você está usando um aplicativo web, e percebe que falta alguma funcionalidade que, ao seu ver, você conseguiria resolver facilmente com <strong>Javascript</strong>? Mas como você não trabalha na empresa que criou o aplicativo, você fica de mãos atadas e diz: “- Eu mesmo vou fazer um aplicativo desses. Do zero!”, mas não faz, porque vai tomar muito tempo, ae você procrastina e continua chorando porque aquele app deveria ter a funcionalidade que você quer?</p>
+<p><strong>Seus problemas acarabam!</strong> Agora você pode criar uma <strong>Chrome Extension</strong>, usando somente Javascript (que lindo isso cara *_* ) e EXTENDENDO as funcionalidades do aplicativo que você usa conforme a sua necessidade! </p>
+<p>Curtiu a ideia? Quer aprender a fazer? Vem comigo xD</p>
+<a id="more"></a>
+
+<h2 id="Motivação">Motivação</h2>
+<p>O que me motivou a criar uma <em>Chrome Extension</em> foi o <a href="http://grooveshark.com/" target="_blank" rel="external">Grooveshark</a>. É a ferramenta que mais gosto pra passar o dia todo ouvindo música - sem propagandas - e programando :D</p>
+<p>Só que ele tem um problema: a cada <strong>x</strong> minutos (não tenho certeza se é 15 ou 30), ele pára de tocar e pergunta: “- Você ainda está aí?”; e para voltar a tocar, você precisa clicar no botão “Resume” ¬¬</p>
+<p>Sério, já passei algumas horas do dia com o fone apertando o ouvindo, no silêncio, porque estava focando em algum código, e quando percebi o Grooveshark já havia parado a muito tempo.</p>
+<p>Então pensei comigo: “- Por que não criar uma extensão do Chrome que clique nesse botão <strong>Resume</strong> pra mim?” E <a href="https://github.com/fdaciuk/dont-stop-grooveshark/" target="_blank" rel="external">foi exatamente o que eu fiz!</a></p>
+<h2 id="Por_onde_começar">Por onde começar</h2>
+<p>O Google tem um <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">guia</a> para que você possa desenvolver sua própria extensão, mas como está em Inglês, resolvi escrever esse artigo, até pra mostrar algumas <a href="#Surpresinha"><em>surpresinhas</em></a> que você não espera quando vai fazer uma treta dessas xD</p>
+<p>Vamos começar então criando um diretório para nossa extensão e um arquivo <code>manifest.json</code>.</p>
+<h2 id="O_arquivo_manifest-json">O arquivo manifest.json</h2>
+<p>Esse arquivo não é nada mais que um JSON, onde ficarão os metadados relacionados à sua extensão: nome da extensão, descrição, versão, permissões, etc. <a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="external">Nesse link</a> você encontra todos os metadados que podem ser incluídos no <code>manifest.json</code>.</p>
+<p>Vou mostrar os exemplos baseados no <a href="https://github.com/fdaciuk/dont-stop-grooveshark/" target="_blank" rel="external"><strong>Don’t stop Grooveshark</strong></a>. O <code>manifest.json</code> ficará assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">  <span class="string">"name"</span>: <span class="string">"Don't stop Grooveshark"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"0.0.2"</span>,</div><div class="line">  <span class="string">"manifest_version"</span>: <span class="number">2</span>,</div><div class="line">  <span class="string">"description"</span>: <span class="string">"Google Chrome Extension that don't leaves Grooveshark stop playing."</span>,</div><div class="line">  <span class="string">"icons"</span> : {</div><div class="line">    <span class="string">"16"</span> : <span class="string">"icon128.png"</span>,</div><div class="line">    <span class="string">"48"</span> : <span class="string">"icon128.png"</span>,</div><div class="line">    <span class="string">"128"</span> : <span class="string">"icon128.png"</span></div><div class="line">  },</div><div class="line">  <span class="string">"content_scripts"</span>: [{</div><div class="line">    <span class="string">"matches"</span>: [ <span class="string">"*://grooveshark.com/*"</span> ],</div><div class="line">    <span class="string">"js"</span>: [ <span class="string">"dont-stop-grooveshark.js"</span> ]</div><div class="line">  }]</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Vou comentar os parâmetros que não são tão óbvios, ok?</p>
+<h3 id="mainfest_version">mainfest_version</h3>
+<p>Esse parâmetro recebe um número inteiro, que representa a versão do mainfesto que o sua extensão está usando. A partir do <em>Chrome 18</em>, a versão <code>1</code> foi depreciada. Você deveria sempre usar a <code>2</code> a partir de então.</p>
+<h3 id="icons">icons</h3>
+<p>O ícone da sua extensão, que será mostrado na Chrome Store, ou quando sua extensão for mostrada na barra de extensões do <em>Chrome</em>.</p>
+<p>É recomendado que você tenha ao menos o tamanho de ícone em <code>128x128px</code>. Se possível, passe todos os tamanhos pedidos (16x16, 48x48, 128x128), pois o <em>Chrome</em> irá selecionar o que for mais apropriado para o momento que ele precisar ser apresentado.</p>
+<h3 id="content_scripts">content_scripts</h3>
+<p><em><strong>Content scripts</strong> is where the magic happens!</em> Aqui é o lugar onde você pode adicionar seus próprios <em>scripts</em> ou <em>css</em> e adicioná-los à alguma página na web.</p>
+<p>A propriedade <code>matches</code> recebe um array de domínios que sua extensão precisa de permissão para acessar. </p>
+<p>A propriedade <code>js</code> recebe um array de arquivos JS que serão incluídos quando esses domínios forem acessados.</p>
+<p>Você ainda pode ter uma propriedade <code>css</code>, que também receberá um array de arquivos CSS para estilizar a página do(s) domínio(s) setado(s) em <code>matches</code>.</p>
+<p>Basicamente é isso que você vai precisar. Se estiver pensando em fazer uma extensão um pouco mais complexa, talvez você precise setar mais alguns parâmetros, que podem ser encontrados <a href="https://developer.chrome.com/extensions/content_scripts" target="_blank" rel="external">nesse link</a>.</p>
+<h2 id="A_magia">A magia</h2>
+<p>No caso do <strong>Don’t stop Grooveshark</strong>, o que eu preciso que seja feito é que, sempre que aparecer na tela aquela mensagem perguntando se eu ainda estou ali, o botão de <strong>Resume</strong> deve receber um clique automaticamente.</p>
+<p>O código utilizado no arquivo <code>dont-stop-grooveshark.js</code> é o seguinte:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( doc )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( <span class="string">"Don't stop Grooveshark! ;)"</span> );</div><div class="line">  <span class="keyword">var</span> $resumePlaybackButton;</div><div class="line">  </div><div class="line">  <span class="built_in">window</span>.setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $resumePlaybackButton = doc.querySelector( <span class="string">'[data-translate-text="LB_INTERACTION_TIME_RESUME"]'</span> );</div><div class="line">    <span class="keyword">if</span>( ! $resumePlaybackButton ) {</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    }</div><div class="line">    </div><div class="line">    $resumePlaybackButton.click();</div><div class="line">  }, <span class="number">3000</span>);</div><div class="line">})( <span class="built_in">document</span> );</div></pre></td></tr></table></figure>
+
+<p>A única referência que eu tenho para o botão de <strong>Resume</strong>, é um atributo <code>data-translate-text</code>, com o conteúdo <code>LB_INTERACTION_TIME_RESUME</code>. Então o que eu faço é, a cada 3 segundos, verificar se esse botão está na tela e dar um clique nele. Se ele não estiver, não faço nada. :)</p>
+<h2 id="Conclusão">Conclusão</h2>
+<p>Tendo acesso direto a um app, e a possibilidade de injetar Javascript, você pode fazer QUALQUER COISA que quiser! Existem algumas extensões que precisam de uma tela específica para setar algumas configurações. Isso também é possível fazer, mas vou deixar pra mostrar isso em um próximo artigo :D</p>
+<h2 id="Surpresinha">Surpresinha</h2>
+<p>Para subir uma <em>Chrome Extension</em> para o <a href="">respositório oficial</a>, você precisa pagar <strong>U$ 5</strong> <del>doletas</del>. Apesar do preço baixo, - e você só precisar pagar esse valor uma única vez - ele serve como uma “segurança” para que muitos desenvolvedores não postem qualquer porcaria lá (apesar de já ter :P). Imagina se não cobrassem :P</p>
+<p>Depois desse pagamento, você pode fazer quantas extensões quiser, e subir à vontade!</p>
+<p>Por hoje é isso! </p>
+<p>E aí: para qual app você vai fazer a sua extensão? :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/uploads/2015/01/chrome-extensions.jpg" alt="Chrome Extension"></p>
+<p>Sabe quando você está usando um aplicativo web, e percebe que falta alguma funcionalidade que, ao seu ver, você conseguiria resolver facilmente com <strong>Javascript</strong>? Mas como você não trabalha na empresa que criou o aplicativo, você fica de mãos atadas e diz: “- Eu mesmo vou fazer um aplicativo desses. Do zero!”, mas não faz, porque vai tomar muito tempo, ae você procrastina e continua chorando porque aquele app deveria ter a funcionalidade que você quer?</p>
+<p><strong>Seus problemas acarabam!</strong> Agora você pode criar uma <strong>Chrome Extension</strong>, usando somente Javascript (que lindo isso cara *_* ) e EXTENDENDO as funcionalidades do aplicativo que você usa conforme a sua necessidade! </p>
+<p>Curtiu a ideia? Quer aprender a fazer? Vem comigo xD</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="chrome extension" scheme="http://blog.da2k.com.br/tags/chrome-extension/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Clean code em Javascript - troque seu if gigante por métodos]]></title>
     <link href="http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/"/>
     <id>http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/</id>
     <published>2015-01-22T00:00:00.000Z</published>
-    <updated>2015-01-22T02:57:30.000Z</updated>
+    <updated>2015-01-22T22:53:28.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/clean-code.jpg" alt="Clean Code"></p>
 <p>Como você viu no título, hoje vou falar sobre uma forma interessante de deixar suas funções / métodos pequenos, usando-os no lugar de if’s gigantescos!</p>
 <a id="more"></a>
@@ -29,7 +101,7 @@
 <p><img src="http://blog.da2k.com.br/uploads/2015/01/guga-alves-thinking-outside-of-the-box.jpg" alt="Guga Alves pensando fora da caixa"></p>
 <p>Imagine a seguinte situação: você tem um código que precisa executar uma ação baseada no retorno de uma requisição. Essa requisição retornará um valor qualquer, dentre vários conhecidos.</p>
 <p>Vamos tomar como exemplo uma base de usuários, onde deve ser executada uma ação conforme o papel (<code>role</code>) desse usuário:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">  </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line"></div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">if</span>( <span class="string">'superadmin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'admin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'editor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'author'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'contributor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'subscriber'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">        }</div><div class="line">      });</div><div class="line">    };</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( UsersResource )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">App</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> users = UsersResource.get();</div><div class="line">      </div><div class="line">      users.forEach(<span class="function"><span class="keyword">function</span><span class="params">( user )</span> </span>{</div><div class="line">        <span class="keyword">if</span>( <span class="string">'superadmin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUPERADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'admin'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'ADMIN'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'editor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'EDITOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'author'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'AUTHOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'contributor'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'CONTRIBUTOR'</span>, user );</div><div class="line">        }</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>( <span class="string">'subscriber'</span> === user.role ) {</div><div class="line">          <span class="built_in">console</span>.log( <span class="string">'SUBSCRIBER'</span>, user );</div><div class="line">        }</div><div class="line">      });</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  App().init();</div><div class="line">})( <span class="built_in">window</span>.UsersResource );</div></pre></td></tr></table></figure>
 
 <p>E o <code>UsersResource</code>, que consulta informações em um servidor (por exemplo), e retorna um objeto com várias informações sobre usuários cadastrados no seu sistema e seus respectivos papéis:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win )</span> </span>{</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">UsersResource</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">  </div><div class="line">    $public.get = <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">return</span> [</div><div class="line">        { name: <span class="string">'John'</span>, role: <span class="string">'superadmin'</span> },</div><div class="line">        { name: <span class="string">'Mark'</span>, role: <span class="string">'admin'</span> },</div><div class="line">        { name: <span class="string">'Robert'</span>, role: <span class="string">'editor'</span> },</div><div class="line">        { name: <span class="string">'Ana'</span>, role: <span class="string">'author'</span> },</div><div class="line">        { name: <span class="string">'Paul'</span>, role: <span class="string">'contributor'</span> },</div><div class="line">        { name: <span class="string">'Mariah'</span>, role: <span class="string">'subscriber'</span> }</div><div class="line">      ];</div><div class="line">    };</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">window</span>.UsersResource = UsersResource();</div><div class="line">})( <span class="built_in">window</span> );</div></pre></td></tr></table></figure>
@@ -1546,58 +1618,6 @@
     </summary>
     
       <category term="commonjs" scheme="http://blog.da2k.com.br/tags/commonjs/"/>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 1/3]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/"/>
-    <id>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</id>
-    <published>2015-01-03T00:00:00.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-amd.jpg" alt=""></p>
-<p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa: </p>
-<p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
-<p>Para responder a essa pergunta, entram em cena duas especificações de módulo: <strong>AMD</strong> e <strong>CommonJS</strong> (ou <strong>CJS</strong>).</p>
-<p>Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.</p>
-<a id="more"></a>
-
-<h2 id="AMD">AMD</h2>
-<p><strong>Asynchronous Module Definition</strong> (AMD) ficou bastante conhecido por causa do <a href="http://requirejs.org/" target="_blank" rel="external">RequireJS</a>. O formato de utilização do AMD é o seguinte:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define( <span class="string">'moduleName'</span>, [ <span class="string">'jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Essa é a estrutura mais básica de um módulo escrito no formato AMD. A função <code>define</code> será usada para todo novo módulo que você criar.</p>
-<p>Como primeiro parâmetro dessa função, você pode passar o nome do módulo - opcional - (que será usado para você fazer o “include” dele em outro lugar).</p>
-<p>O segundo parâmetro é um array de dependências desse módulo, também opcional. No nosso exemplo, colocamos como dependência a biblioteca jQuery.</p>
-<p>E o terceiro parãmetro é a função de callback que define o módulo e retorna o seu conteúdo. Essa função é obrigatória. Ela será chamada assim que todas as dependências do array no segundo parâmetro forem baixadas, e estiverem prontas para uso. </p>
-<p>As dependências normalmente retornam valores. Para usar os valores retornados, você deve passar como parâmetros da função as variáveis que irão receber os valores das dependências, sempre na mesma ordem do array.</p>
-<p>Por exemplo, se no seu módulo você vai precisar utilizar o jQuery e a LoDash, você pode fazer a chamada da seguinte forma:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Se não houver dependências, a função já será executada assim que ela for chamada:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>A ideia aqui é falar apenas como funcionam cada uma das especificações. Em posts futuros, entrarei em mais detalhes de como usar cada formato, especificamente.</p>
-<p>No próximo post, falaremos um pouco sobre o <strong>CommonJS</strong>. Até lá!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-amd.jpg" alt=""></p>
-<p>Depois de um tempo escrevendo código Javascript, você começa a perceber que algumas coisas começam a se repetir, outras você precisa reutilizar, então você pensa: </p>
-<p><em>Como eu posso modularizar isso, para que esse componente seja reutilizado em vários projetos diferentes?</em></p>
-<p>Para responder a essa pergunta, entram em cena duas especificações de módulo: <strong>AMD</strong> e <strong>CommonJS</strong> (ou <strong>CJS</strong>).</p>
-<p>Eles permitem que você escreva seus códigos de forma modular, seguindo algumas definições. Vamos falar sobre cada um deles.</p>
-]]>
-    
-    </summary>
-    
-      <category term="amd" scheme="http://blog.da2k.com.br/tags/amd/"/>
     
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
     
