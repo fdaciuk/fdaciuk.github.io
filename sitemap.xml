@@ -2,13 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/</loc>
-    <lastmod>2015-01-23T01:08:32.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/</loc>
+    <lastmod>2015-01-24T20:20:59.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/</loc>
-    <lastmod>2015-01-22T22:53:28.000Z</lastmod>
+    <lastmod>2015-01-23T01:10:07.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/</loc>
+    <lastmod>2015-01-23T01:10:07.000Z</lastmod>
   </url>
   
   <url>
@@ -17,12 +22,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
     <lastmod>2015-01-21T02:32:05.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</loc>
     <lastmod>2015-01-21T02:32:05.000Z</lastmod>
   </url>
   
@@ -72,27 +77,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -107,11 +97,6 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
@@ -122,12 +107,32 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
