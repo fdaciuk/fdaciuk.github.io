@@ -5,6 +5,14 @@
   font-weight: normal;
   src: url("font/fontawesome-webfont.eot?#iefix") format('embedded-opentype'), url("font/fontawesome-webfont.woff") format('woff'), url("font/fontawesome-webfont.ttf") format('truetype'), url("font/fontawesome-webfont.svg#FontAwesomeRegular") format('svg');
 }
+.entry > table {
+  border-collapse: collapse;
+}
+.entry > table th,
+.entry > table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
 * {
   margin: 0;
   padding: 0;

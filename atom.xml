@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-24T20:21:53.147Z</updated>
+  <updated>2015-01-25T02:02:00.541Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,61 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Segredos do Github - Shortcuts]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/"/>
+    <id>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</id>
+    <published>2015-01-25T00:00:00.000Z</published>
+    <updated>2015-01-24T23:44:20.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-shortcuts.jpg" alt="Github Shortcuts"></p>
+<p>Atalhos sempre agilizam o trabalho com qualquer ferramenta. Hoje vou mostrar alguns atalhos interessantes do Github :D</p>
+<a id="more"></a>
+
+<h2 id="Buscando_arquivos">Buscando arquivos</h2>
+<p>Quando você está visualizando um repositório, você pode pressionar <code>t</code> e começar a digitar um nome de arquivo que contenha nesse diretório, que o arquivo será buscado recursivamente em todos os diretórios:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-search.png" alt="Github search"></p>
+<p>Usando as setas <code>↑</code> e <code>↓</code>, você navega pelos arquivos encontrados. E pressionando <code>enter</code>, você abre o arquivo :)<br>Esse comando funciona na listagem de arquivos de um repositório.</p>
+<h2 id="Branch_selector">Branch selector</h2>
+<p>Se você trabalha com várias <em>branchs</em>, pode usar o <code>w</code>, na tela principal do repositório, para abrir o <em>Branch Selector</em>. O campo de busca de branchs receberá foco. Pressionando <code>tab</code>, você navega nas abas <em>branches</em> e <em>tags</em>. Pressionando <code>enter</code> em cima da aba, ela é selecionada:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/branch-selector.png" alt="Branch selector"></p>
+<h2 id="Command_bar">Command bar</h2>
+<p>Pressionando <code>s</code>, o barra de busca recebe foco para que você possa encontrar conteúdos dentro do Github:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/command-bar.png" alt="Command bar"></p>
+<p>Mais dicas interessantes sobre a <em>Command bar</em> você encontra em <a href="https://help.github.com/articles/searching-github/" target="_blank" rel="external">https://help.github.com/articles/searching-github/</a></p>
+<h2 id="Labels">Labels</h2>
+<p>Na tela de  <em>issues</em>, pressionando <code>l</code>, você pode filtrar as <em>issues</em> por labels. Pode navegar por elas usando as setas <code>↑</code> e <code>↓</code> e pressionar <code>enter</code>para selecionar:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/labels.png" alt="Labels"></p>
+<h2 id="Congelar_uma_alteração_de_arquivo">Congelar uma alteração de arquivo</h2>
+<p>Ao visualizar um arquivo, se você pressionar <code>y</code>, a URL irá mudar para uma que “congela” como o arquivo está atualmente. Se esse arquivo mudar, você pode usar essa URL para ver exatamente como estava o arquivo antes das alterações :)</p>
+<h2 id="Todos_os_atalhos">Todos os atalhos</h2>
+<p>E por último, mas não menos importante, se você pressionar <code>?</code> em qualquer lugar, será mostrada a tela com todos os atalhos disponíveis no Github :D</p>
+<p>Inicialmente são mostrados somente os mais utilizados. Mas clicando no link <strong>Show all</strong>, você pode ver todos os atalhos! (<em>Mr. Óbvio ataca novamente!</em> :P)</p>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-shortcuts.jpg" alt="Github Shortcuts"></p>
+<p>Atalhos sempre agilizam o trabalho com qualquer ferramenta. Hoje vou mostrar alguns atalhos interessantes do Github :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[GulpJS - Um gole de otimização no seu workflow]]></title>
     <link href="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/"/>
     <id>http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/</id>
     <published>2015-01-24T00:00:00.000Z</published>
-    <updated>2015-01-24T20:20:59.000Z</updated>
+    <updated>2015-01-24T20:23:58.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs.png" alt=""></p>
 <p>Em 2014 <a href="https://github.com/fdaciuk/talks" target="_blank" rel="external">palestrei em alguns eventos</a> evangelizando a galera sobre o uso do <a href="http://gulpjs.com/" target="_blank" rel="external">GulpJS</a>. Hoje resolvi transformar essa palestra em post, para facilitar futuras consultas e poder fazer outros posts falando mais a fundo sobre GulpJS e seus plugins!</p>
 <p>Mas precisamos começar de algum lugar! Vem comigo? :D</p>
@@ -1743,87 +1793,6 @@
       <category term="code coverage" scheme="http://blog.da2k.com.br/tags/code-coverage/"/>
     
       <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Como criar componentes JS usando módulos - AMD, CommonJS e UMD - Parte 3/3]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/"/>
-    <id>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</id>
-    <published>2015-01-05T00:00:00.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-umd.jpg" alt=""></p>
-<p>Já vimos como modularizar nossos códigos usando <a href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/" target="_blank" rel="external">AMD</a> e <a href="http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/" target="_blank" rel="external">CommonJS</a>. Hoje veremos o <strong>Capitão Planeta</strong> dos módulos: o <strong>UMD</strong>!</p>
-<a id="more"></a>
-
-<h2 id="UMD">UMD</h2>
-<p><strong>Universal Module Definition</strong> (UMD), é o cara que vai unir os poderes do AMD e do CommonJS em um único componente! Na verdade, ele é responsável por verificar qual dos formatos está sendo usado, para que você não precise duplicar o seu código :)</p>
-<p>Seu código usando UMD vai ficar mais ou menos assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( root, factory )</span> </span>{</div><div class="line">  <span class="keyword">if</span>( <span class="keyword">typeof</span> define === <span class="string">'function'</span> && define.amd ) {</div><div class="line">    define([ <span class="string">'jquery'</span> ], factory );</div><div class="line">  }</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>( <span class="keyword">typeof</span> exports === <span class="string">'object'</span> ) {</div><div class="line">    <span class="built_in">module</span>.exports = factory( <span class="built_in">require</span>( <span class="string">'jquery'</span> ) );</div><div class="line">  }</div><div class="line">  <span class="keyword">else</span> {</div><div class="line">    root.myModule = factory( root.jQuery );</div><div class="line">  }</div><div class="line">})(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Hello World'</span>!</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Eu sei, o código é bem feio, e à primeira vista é meio ruim de entender. Mas vou quebrá-lo em partes para explicar melhor o que ele faz, ok? Vamos lá!</p>
-<p>Basicamente, você vai iniciar com uma <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/" target="_blank" rel="external">IIFE</a>, ou função imediata, que é uma função auto-executável:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  </div><div class="line">})();</div></pre></td></tr></table></figure>
-
-<p>Essa função vai receber dois parâmetros: o primeiro é o <code>this</code>, definido como <code>root</code>. Todo mundo sabe como o <code>this</code> em Javascript é polêmico, pois ele varia o seu valor conforme o escopo em que ele se encontra. No caso, estamos chamando o <code>this</code> no escopo global, logo, se eu estiver no client (browser), ele vai ser o objeto <code>window</code>. E se eu estiver no server (usando Node, por exemplo), ele será o objeto <code>global</code>.</p>
-<p>O segundo parâmetro, definido como <code>factory</code>, é a função que vai executar seu módulo. Sabemos que, em Javascript, funções são objetos de primeira classe. Elas são tratadas como qualquer outro tipo de valor, logo, elas também podem ser passadas por parâmetro para outra função. O <strong>UMD</strong> se aproveita disso para deixar o negócio um pouco mais ilegível e difícil de entender :P</p>
-<p>Mas olhando pelo lado bom, assim que você entende isso, fica fácil identificar cada parte :D</p>
-<p>Então, passando os parâmetros, vai ficar assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( root, factory )</span> </span>{</div><div class="line">  </div><div class="line">})( <span class="keyword">this</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{} );</div></pre></td></tr></table></figure>
-
-<p>Dentro da função passada como parâmetro vai o código do seu módulo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( root, factory )</span> </span>{</div><div class="line">  </div><div class="line">})( <span class="keyword">this</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// Código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Agora vamos ver o que acontece por dentro da função principal. Como o <strong>UMD</strong> identifica se você está usando <strong>AMD</strong> ou <strong>CommonJS</strong>.</p>
-<p>O formato <strong>AMD</strong> tem por padrão a função <code>define</code> e uma propriedade <code>amd</code> nessa função. É isso que é verificado no primeiro <code>if</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>( <span class="keyword">typeof</span> define === <span class="string">'function'</span> && define.amd ) {</div><div class="line">  <span class="comment">// ...</span></div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Ou seja, se existir um <code>define</code> e este for uma função, e a propriedade <code>amd</code> estiver definida para essa função, então o desenvolvedor está usando alguma lib no formato <strong>AMD</strong>. Sabendo disso, é só eu usar essa função <code>define</code> para “definir” meu módulo, passar as dependências no array e chamar a função que executa o módulo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>( <span class="keyword">typeof</span> define === <span class="string">'function'</span> && define.amd ) {</div><div class="line">  define([ <span class="string">'jquery'</span> ], factory );</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Lembra quando falamos sobre <strong>AMD</strong>? Cada parâmetro da função do módulo representa uma depência do array, mantendo a ordem. Então a função que é passada como parâmetro (factory), precisa receber o parâmetro para chamar o jQuery dentro do nosso módulo, já que ele é uma dependência:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( root, factory )</span> </span>{</div><div class="line">  <span class="keyword">if</span>( <span class="keyword">typeof</span> define === <span class="string">'function'</span> && define.amd ) {</div><div class="line">    define([ <span class="string">'jquery'</span> ], factory );</div><div class="line">  }</div><div class="line">})( <span class="keyword">this</span>, <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="comment">// Código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Legal não? xD</p>
-<p>Já resolvemos o problema do <strong>AMD</strong> :D</p>
-<p>Agora, se o usuário não estiver usando AMD, vamos ver se ele está usando <strong>CommonJS</strong>, na próxima verificação:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">else</span> <span class="keyword">if</span>( <span class="keyword">typeof</span> exports === <span class="string">'object'</span> ) {</div><div class="line">  <span class="comment">// ...</span></div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Vimos que uma das coisas que define o formato <strong>CommonJS</strong> é que ele tem um objeto <code>exports</code>. Então é isso que iremos verificar. Se <code>exports</code> existir, e for um objeto, exportamos nosso módulo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span>( <span class="keyword">typeof</span> exports === <span class="string">'object'</span> ) {</div><div class="line">  <span class="built_in">module</span>.exports = factory( <span class="built_in">require</span>( <span class="string">'jquery'</span> ) );</div><div class="line">}</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
-
-<p>Como precisamos passar o jQuery como parâmetro ao nosso módulo, usamos o <code>require</code>, pois já vimos que é assim que uma dependência é incluída usando esse formato.</p>
-<p>Resolvido também o <strong>CommonJS</strong>! o/</p>
-<p><em>Mas e se o desenvolvedor quiser usar nosso módulo, mas não estiver usando nem AMD, e nem CommonJS?</em></p>
-<p>Nesse caso, podemos dar um nome ao nosso módulo, exportando-o no escopo global, usando o <code>root</code>, que vai ser o objeto <code>window</code>, se ele estiver no browser, ou <code>global</code>, se ele estiver usando Node. Passamos também o objeto <code>jQuery</code>, que já deve estar também no escopo global:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">else</span> {</div><div class="line">  root.myModule = factory( root.jQuery );</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Da hora né? :D</p>
-<p>Existem algumas outras variações do <strong>UMD</strong>, que você pode ver <a href="https://github.com/umdjs/umd" target="_blank" rel="external">aqui</a>.</p>
-<p><em>Então a solução é usar <strong>UMD</strong> pra tudo o que eu fizer?</em></p>
-<p>Não jovem. </p>
-<p>Para tudo o que for referente à sua aplicação em específico, você vai usar um único padrão: ou AMD, ou CommonJS, ou então algum <em>pattern</em> próprio. </p>
-<p>Agora, quando você tiver um módulo genérico, que você quiser reutilizar em qualquer ambiente, e em qualquer projeto, é a hora de usar <strong>UMD</strong>.</p>
-<p>Ficou claro? Se tiver alguma dúvida, comenta ae :D</p>
-<p>Se você ficou um pouco perdido com esses formatos por não conhecer as ferramentas que trabalham com eles (RequireJS, Browserify, etc), não se preocupe! Em breve farei alguns posts falando melhor sobre essas ferramentas e vai ficar muito mais claro de entender :)</p>
-<p>Até a próxima!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/modules-umd.jpg" alt=""></p>
-<p>Já vimos como modularizar nossos códigos usando <a href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/" target="_blank" rel="external">AMD</a> e <a href="http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/" target="_blank" rel="external">CommonJS</a>. Hoje veremos o <strong>Capitão Planeta</strong> dos módulos: o <strong>UMD</strong>!</p>
-]]>
-    
-    </summary>
-    
-      <category term="umd" scheme="http://blog.da2k.com.br/tags/umd/"/>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
