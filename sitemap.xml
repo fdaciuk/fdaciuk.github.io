@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
+    <lastmod>2015-01-25T00:41:27.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
     <lastmod>2015-01-24T23:44:20.000Z</lastmod>
   </url>
@@ -22,17 +27,17 @@
   </url>
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</loc>
+    <lastmod>2015-01-21T02:32:05.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</loc>
     <lastmod>2015-01-21T02:32:05.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
-    <lastmod>2015-01-21T02:32:05.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</loc>
     <lastmod>2015-01-21T02:32:05.000Z</lastmod>
   </url>
   
@@ -72,18 +77,13 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</loc>
-    <lastmod>2015-01-14T02:41:59.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</loc>
     <lastmod>2015-01-14T02:41:59.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</loc>
+    <lastmod>2015-01-14T02:41:59.000Z</lastmod>
   </url>
   
   <url>
@@ -92,7 +92,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -102,12 +102,27 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -122,22 +137,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
