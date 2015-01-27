@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-25T11:02:13.496Z</updated>
+  <updated>2015-01-27T02:38:38.576Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,112 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[GulpJS - deploy com Rsync]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/"/>
+    <id>http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/</id>
+    <published>2015-01-27T00:00:00.000Z</published>
+    <updated>2015-01-27T02:38:28.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulp-rsync.png" alt=""></p>
+<p>Fazer deploy via FTP é um trabalho bem chato e custoso. Agora que já sabemos <a href="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/" target="_blank" rel="external">como usar o <strong>GulpJS</strong></a>, que tal utilizá-lo para fazer deploy do nosso projeto via <strong>SSH</strong>, usando <strong>Rsync</strong>, e com apenas um simples comando, sincronizar nosso ambiente local com o ambiente de produção? Duvida? Vem ver! ;)</p>
+<a id="more"></a>
+
+<p>E pra começar, vou mostrar que pra usar o <strong>Gulp</strong>, você não precisa ficar preso a um plugin específico. No <a href="http://gulpjs.com/plugins/" target="_blank" rel="external">repositório de plugins do <strong>GulpJS</strong></a>, se buscar por <strong>rsync</strong>, você vai encontrar o plugin <a href="https://www.npmjs.com/package/gulp-rsync/" target="_blank" rel="external">gulp-rsync</a>, mas não vamos utilizá-lo :P</p>
+<p>Vamos usar um módulo do <strong>NodeJS</strong>, chamado <a href="https://github.com/jedrichards/rsyncwrapper" target="_blank" rel="external">rsyncwrapper</a>.</p>
+<h2 id="Começando_do_começo">Começando do começo</h2>
+<p>Vamos criar a estrutura do nosso projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── build</div><div class="line">│   ├── // ... arquivos que irão para o servidor ...</div><div class="line">├── gulpfile.js</div><div class="line">└── package.json</div></pre></td></tr></table></figure>
+
+<p>Como você já sabe, o <code>package.json</code> deve ter somente <code>{}</code> como conteúdo.</p>
+<p>No diretório <code>build</code>, você vai colocar os arquivos que quer que sejam enviados ao seu servidor.</p>
+<blockquote>
+<p><strong>OBSERVAÇÃO IMPORTANTE:</strong> para fazer deploy com <strong>Rsync</strong>, você precisa ter acesso <strong>SSH</strong> liberado no seu servidor! (melhor avisar, antes que alguém comente dizendo que não funcionou :P)</p>
+</blockquote>
+<p>Sabendo disso, vamos instalar os módulos necessários: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp rsyncwrapper</div></pre></td></tr></table></figure>
+
+<p>Acho que isso eu não falei ainda, mas você pode instalar vários módulos de uma só vez :D<br>Nesse caso, estamos instalando o <code>gulp</code> e o <code>rsyncwrapper</code> ao mesmo tempo, e salvando no <code>package.json</code>.</p>
+<p>E vamos configurar nosso <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span></div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Essa é a configuração mais simples para usar o <code>rsync</code>. Adicionamos ao nosso <code>gulpfile.js</code> o <code>gulp</code> e o <code>rsyncwrapper</code>, chamando o método <code>rsync</code>, mas sem invocá-lo.</p>
+<p>Dentro da <code>task</code>, passamos um objeto como parâmetro da função <code>rsync</code>, com duas propriedades:</p>
+<ul>
+<li><strong>src</strong>: Caminho dos arquivos que serão “deployados” para o servidor;</li>
+<li><strong>dest</strong>: Caminho NO SERVIDOR que receberá os arquivos.</li>
+<li><strong>recursive</strong>: Passa recursivamente pelos diretórios em <code>src</code> para enviar os arquivos.</li>
+</ul>
+<p>O formato para o <code>dest</code> é o seguinte:</p>
+<ul>
+<li>nome do seu usuário;</li>
+<li>arroba (<code>@</code>);</li>
+<li>seu domínio;</li>
+<li>dois-pontos;</li>
+<li>caminho no servidor que receberá os arquivos.</li>
+</ul>
+<p>Listei para ficar fácil você saber o que precisa ser mantido, e o que você precisa editar. Não sei se precisava, mas enfim…</p>
+<p>Fazendo isso, pode rodar o comando <code>gulp</code> no terminal e conferir os arquivos no seu servidor!</p>
+<p><em>Mas não tenho nenhum feedback visual! Como vou saber quando terminou de enviar os arquivos?</em></p>
+<p>O <strong>rsyncwrapper</strong> tem algumas propriedades que podemos utilizar para facilitar nossa vida. Vamos a elas. Altere seu <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span>,</div><div class="line">    args: [ <span class="string">'--verbose'</span> ]</div><div class="line">  }, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( stdout, <span class="string">'END!'</span> );</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Passamos no primeiro parâmetro um objeto para a função <code>rsync</code>, com as propriedades <code>src</code> e <code>dest</code>. Como segundo parâmetro, podemos passar uma função de callback que será executada assim que todos os arquivos forem enviados!</p>
+<p>Adicionamos também um parâmetro <code>args</code>, que receberá argumentos, como se você estivesse usando o <strong>rsync</strong> na linha de comando xD</p>
+<p>Podemos passar para essa propriedade, um array de argumentos. Para conhecer todos os argumentos disponíveis para o <strong>rsync</strong>, visite <a href="https://rsync.samba.org/ftp/rsync/rsync.html" target="_blank" rel="external">https://rsync.samba.org/ftp/rsync/rsync.html</a></p>
+<p><em>Tá ficando bom! Mas eu tenho muitos arquivos! Eu posso acompanhar um a um, enquanto estiverem subindo?</em></p>
+<p>Sim! O <strong>rsyncwrapper</strong> tem um método <code>onStdout</code>, que recebe um parâmetro com o Buffer do arquivo que está sendo enviado. Vamos ver como utilizá-lo (vou colocar só a função <code>rsync</code> agora):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">rsync({</div><div class="line">  src: <span class="string">'./build/'</span>,</div><div class="line">  dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">  recursive: <span class="literal">true</span>,</div><div class="line">  args: [ <span class="string">'--verbose'</span> ],</div><div class="line">  onStdout: <span class="function"><span class="keyword">function</span><span class="params">( data )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( data.toString() );</div><div class="line">  }</div><div class="line">}, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'END!'</span> );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Usamos a forma mais bruta para mostrar o nome do arquivo: convertê-lo para <code>String</code>, usando o <code>.toString()</code>. Agora, a cada arquivo que subir, será mostrado o nome no terminal, para que você possa acompanhar o progresso :D</p>
+<p>Removi também do função de callback o <code>stdout</code>, para não mostrar duplicado o retorno.</p>
+<h2 id="Extras">Extras</h2>
+<p>Ainda podemos deixar melhor :D</p>
+<p>Temos uma propriedade <code>exclude</code>, que recebe um array de arquivos que você NÃO quer enviar. Exemplo: você quer ignorar um <code>.htaccess</code>, ou qualquer outro arquivo? Adicione-o ao array em <code>exclude</code>. Ficaria algo como:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exclude: [ <span class="string">'.htaccess'</span>, <span class="string">'.editorconfig'</span>, <span class="string">'node_modules'</span> ]</div></pre></td></tr></table></figure>
+
+<p>Você pode usar também as propriedades <code>delete: true</code> ou <code>deleteAll: true</code>.</p>
+<p><code>deleteAll</code> vai sincronizar os arquivos em <code>src</code> com o <code>dest</code>. Se você remover algo local, ele vai remover do servidor também. Bruto assim.</p>
+<p><code>delete</code> também sincroniza, porém ele ignora os arquivos em <code>exclude</code>. Se você tem, por exemplo, localmente um diretório <code>node_modules</code> que não quer enviar para o servidor, mas tem um diretório com o mesmo nome no servidor, mas não quer deletá-lo, usando o <code>delete</code> esse diretório se manterá lá. Caso contrário, use o <code>deleteAll</code>.</p>
+<blockquote>
+<p>Muito cuidado com essas opções! Você pode perder seus dados importantes se não configurar corretamente! Faça testes antes e verifique se está tudo ok antes de continuar!</p>
+</blockquote>
+<p>Podemos também setar um formato de comparação, usando <code>compareMode: &#39;checksum&#39;</code> ou <code>compareMode: &#39;sizeOnly</code>. <code>checksum</code> compara por um checksum de 128bit. <code>sizeOnly</code> só verifica se o tamanho do arquivo mudou. Recomendo que use o <code>checksum</code>, pois é mais preciso.</p>
+<p>Adicionando algumas dessas opções, nosso <code>gulpfile.js</code> ficaria assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span>,</div><div class="line">    args: [ <span class="string">'--verbose'</span> ],</div><div class="line">    deleteAll: <span class="literal">true</span>,</div><div class="line">    compareMode: <span class="string">'checksum'</span>,</div><div class="line">    onStdout: <span class="function"><span class="keyword">function</span><span class="params">( data )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( data.toString() );</div><div class="line">    }</div><div class="line">  }, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'END!'</span> );</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Para ver todas as opções do <strong>rsyncwrapper</strong>, acesse: <a href="https://github.com/jedrichards/rsyncwrapper" target="_blank" rel="external">https://github.com/jedrichards/rsyncwrapper</a></p>
+<p>Por hoje é isso! Mas ainda temos muita coisa de Gulp para mostrar! Continue acompanhando :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulp-rsync.png" alt=""></p>
+<p>Fazer deploy via FTP é um trabalho bem chato e custoso. Agora que já sabemos <a href="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/" target="_blank" rel="external">como usar o <strong>GulpJS</strong></a>, que tal utilizá-lo para fazer deploy do nosso projeto via <strong>SSH</strong>, usando <strong>Rsync</strong>, e com apenas um simples comando, sincronizar nosso ambiente local com o ambiente de produção? Duvida? Vem ver! ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="deploy" scheme="http://blog.da2k.com.br/tags/deploy/"/>
+    
+      <category term="gulpjs" scheme="http://blog.da2k.com.br/tags/gulpjs/"/>
+    
+      <category term="ssh" scheme="http://blog.da2k.com.br/tags/ssh/"/>
+    
+      <category term="rsync" scheme="http://blog.da2k.com.br/tags/rsync/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - Imagens]]></title>
     <link href="http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/"/>
     <id>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</id>
     <published>2015-01-26T00:00:00.000Z</published>
-    <updated>2015-01-25T00:41:27.000Z</updated>
+    <updated>2015-01-25T11:03:17.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-images.png" alt="Segredos do Github - Imagens"></p>
 <p>Imagens? Isso é segredo? ;)</p>
 <a id="more"></a>
@@ -103,7 +204,7 @@
     <link href="http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/"/>
     <id>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</id>
     <published>2015-01-25T00:00:00.000Z</published>
-    <updated>2015-01-24T23:44:20.000Z</updated>
+    <updated>2015-01-25T11:03:17.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-shortcuts.jpg" alt="Github Shortcuts"></p>
 <p>Atalhos sempre agilizam o trabalho com qualquer ferramenta. Hoje vou mostrar alguns atalhos interessantes do Github :D</p>
 <a id="more"></a>
@@ -1612,85 +1713,6 @@
       <category term="performance" scheme="http://blog.da2k.com.br/tags/performance/"/>
     
       <category term="debug" scheme="http://blog.da2k.com.br/tags/debug/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Code Coverage em Javascript]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/"/>
-    <id>http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/</id>
-    <published>2015-01-07T00:00:00.000Z</published>
-    <updated>2015-01-07T00:10:11.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/istanbul.jpg" alt="Istanbul"></p>
-<p>Já conversamos um pouco sobre TDD/BDD e montamos nosso ambiente para começar a brincar com testes. Que tal agora verificarmos como anda nossa cobertura de código? Let’s go!</p>
-<a id="more"></a>
-
-<h2 id="Code_Coverage">Code Coverage</h2>
-<p>Ferramentas de <em>Code Coverage</em> testam quantos porcento do nosso código está coberto por testes. Se você acompanhou o <a href="http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/" target="_blank" rel="external">post anterior sobre testes</a>, você já deve ter o <a href="https://github.com/gotwarlost/istanbul" target="_blank" rel="external">Istanbul</a> instalado. Se não tiver, dá uma lida lá no post e prepare seu ambiente :D</p>
-<h2 id="Começando">Começando</h2>
-<p>Para facilitar, vamos começar usando o mesmo módulo do <a href="http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/" target="_blank" rel="external">post anterior</a>, o <code>sum.js</code>, e ver quanto o nosso módulo está coberto por testes. Na raiz do seu projeto, execute o comando:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">istanbul cover _mocha tests/sumTest.js</div></pre></td></tr></table></figure>
-
-<p>Que vai executar o Istanbul, fazendo coverage, e dizendo a ele que estamos usando a interface do Mocha para escrever nossos testes.</p>
-<p>E esse será o resultado gerado:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ istanbul cover _mocha tests/sumTest.js</div><div class="line">  </div><div class="line">  </div><div class="line">  sum.js</div><div class="line">    ✓ sum of <span class="number">2</span> + <span class="number">3</span> should <span class="keyword">return</span> <span class="number">5</span> </div><div class="line">    ✓ sum of <span class="number">10</span> + <span class="number">10</span> should <span class="keyword">return</span> <span class="number">20</span> </div><div class="line">    </div><div class="line">    </div><div class="line">  <span class="number">2</span> passing (<span class="number">11</span>ms)</div><div class="line">  </div><div class="line">=============================================================================</div><div class="line">Writing coverage object [/var/www/tdd/coverage/coverage.json]</div><div class="line">Writing coverage reports at [/var/www/tdd/coverage]</div><div class="line">=============================================================================</div><div class="line"></div><div class="line">=============================== Coverage summary ===============================</div><div class="line">Statements   : <span class="number">100</span>% ( <span class="number">2</span>/<span class="number">2</span> )</div><div class="line">Branches     : <span class="number">100</span>% ( <span class="number">0</span>/<span class="number">0</span> )</div><div class="line">Functions    : <span class="number">100</span>% ( <span class="number">1</span>/<span class="number">1</span> )</div><div class="line">Lines        : <span class="number">100</span>% ( <span class="number">2</span>/<span class="number">2</span> )</div><div class="line">================================================================================</div></pre></td></tr></table></figure>
-
-<p>Nesse resultado, no terminal, ele mostra o resumo de tudo o que os nossos testem cobrem do nosso módulo. Perceba que ele criou um diretório <strong>coverage/</strong> dentro do nosso projeto. Se você acessar via browser a URL do seu projeto + <code>/coverage/lcov-report/</code>, vai conseguir navegar pelos arquivos e visualizar quais partes estão ou não cobertas por testes.</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/coverage-sumjs.jpg" alt="Coverage do arquivo sum.js"></p>
-<p>Nesse nosso exemplo, todo o nosso código está coberto por testes! Se continuarmos escrevendo TDD corretamente, escrevendo sempre um teste que quebre, um <em>baby step</em> para passar, e fazendo o refactor, nós iremos escrever sempre o mínimo possível de código, e todo ele estará coberto pelos testes.</p>
-<p><strong>IMPORTANTE:</strong><br>É importante salientar que um código com 100% de cobertura não garante que todas as possibilidades foram testadas, mas que, tudo o que está sendo testado está passando por todo o código. Mas, como vimos no módulo <code>sum.js</code>, ainda podemos fazer mais uns testes em áreas que já estão cobertas por outros testes.</p>
-<p>Só por questões de visualização, vamos adicionar um pouco mais de código no nosso módulo para ver a cobertura cair (NÃO FAÇA ISSO EM CASA!). No arquivo <code>sum.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  <span class="keyword">if</span>( <span class="built_in">isNaN</span>( number1 ) || <span class="built_in">isNaN</span>( number2 ) ) {</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> number1 + number2;</div><div class="line">};</div></pre></td></tr></table></figure>
-
-<p>E execute novamente o comando para verificarmos a cobertura:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">istanbul cover _mocha tests/sumTest.js</div></pre></td></tr></table></figure>
-
-<p>Olhando no navegador, podemos ver que a cobertura já diminuiu:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/coverage-sumjs2.jpg" alt="Coverage diminuiu"></p>
-<p>O <code>I</code> quer dizer que aquele <code>IF</code> não está coberto. Se fosse um <code>E</code>, faltava cobertura para o <code>ELSE</code>. E a linha vermelha é o <em>Statement</em> que não está coberto pelos testes.</p>
-<p>Para cobrir essa parte do nosso código por testes, nós precisamos fazer a seguinte pergunta a nós mesmos:</p>
-<p><em>- Essa parte não coberta por testes: eu realmente preciso dela no meu código?</em></p>
-<p>Se a sua resposta for <em>SIM</em>, então você precisa escrever um teste para cobrí-la. Senão, remova do seu código. Simples assim.</p>
-<p>No nosso caso, vamos precisar, pois precisamos saber se o a nossa função realmente recebeu um número. Senão, iremos retornar <code>undefined</code>. Vamos então fazer nosso teste. No arquivo <code>tests/sumTest.js</code>, adicione mais um teste:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">it( <span class="string">'If any parameter is not number, should return undefined'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  should( sum( <span class="number">1</span>, <span class="string">'arroz'</span> ) ).not.be.ok;</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p><em>Perae, porque você mudou o formato do uso do ShouldJS?</em></p>
-<p>Você está retornando <code>undefined</code> quando passar um valor que não seja número por parâmetro na função <code>sum()</code>, certo? Sabemos que <code>undefined</code> e <code>null</code> não têm propriedades. Logo, sempre que você precisar testar se um valor é <code>undefined</code> ou <code>null</code>, você precisa usar o <code>should</code> como função, ok? ;)</p>
-<p>Voltando: se o usuário passar um parâmetro que não seja número, devemos retornar <code>undefined</code>. Na nossa asserção, o <code>not.be.ok</code> quer dizer exatamente isso: algo que não esteja <em>ok</em>, ou que seja diferente de <code>true</code>. Em JS, os valores para isso são: <code>&#39;&#39;, null, undefined, 0, NaN</code>. Para ver todas as asserções do ShouldJS, acesse <a href="https://github.com/shouldjs/should.js" target="_blank" rel="external">esse link</a>.</p>
-<p>Vamos agora executar o Istanbul e ver como o nosso teste se comporta e o quanto ele cobre do nosso código:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">istanbul cover _mocha tests/sumTest.js</div></pre></td></tr></table></figure>
-
-<p>E pronto! Agora nosso código está com 100% de cobertura novamente :D</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/coverage-sumjs3.jpg" alt="Novamente 100% coberto"></p>
-<h2 id="Extras">Extras</h2>
-<p>Para facilitar a execução dos testes, podemos usar o próprio NPM, fazendo algumas malandragens.</p>
-<p>Primeiro crie um <code>package.json</code> com o comando <code>npm init</code>. Confirme os dados e edite o arquivo.</p>
-<p>Na diretiva <code>scripts</code>, adicione:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">"scripts": {</div><div class="line">  "test": "mocha -w tests/**/*.js",</div><div class="line">  "coverage": "istanbul cover _mocha tests/**/*.js"</div><div class="line">},</div></pre></td></tr></table></figure>
-
-<p>Então você pode executar os seus testes com o comando <code>npm test</code>. O <code>-w</code> ali significa que o Mocha irá assistir a cada alteração que fizermos no nosso arquivo de teste, e já executará o teste automaticamente.</p>
-<p>Para fazer o Coverage, execute <code>npm run coverage</code>, e pronto!</p>
-<p>Espero que tenha ficado claro! Dúvidas, poste nos comentários :)</p>
-<p>Ah, e não esqueça de se <a href="http://blog.da2k.com.br/atom.xml" target="_blank" rel="external">inscrever no RSS</a> :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/istanbul.jpg" alt="Istanbul"></p>
-<p>Já conversamos um pouco sobre TDD/BDD e montamos nosso ambiente para começar a brincar com testes. Que tal agora verificarmos como anda nossa cobertura de código? Let’s go!</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="coverage" scheme="http://blog.da2k.com.br/tags/coverage/"/>
-    
-      <category term="istanbul" scheme="http://blog.da2k.com.br/tags/istanbul/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     

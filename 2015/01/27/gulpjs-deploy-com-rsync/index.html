@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>GulpJS - deploy com Rsync | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Fazer deploy via FTP é um trabalho bem chato e custoso. Agora que já sabemos como usar o GulpJS, que tal utilizá-lo para fazer deploy do nosso projeto via SSH, usando Rsync, e com apenas um simples comando, sincronizar nosso ambiente local com o ambiente de produção? Duvida? Vem ver! ;)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="GulpJS - deploy com Rsync"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/gulp-rsync.png" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-27T00:00:00.000Z"><a href="/2015/01/27/gulpjs-deploy-com-rsync/">27 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">GulpJS - deploy com Rsync</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/gulp-rsync.png" alt=""></p>
+<p>Fazer deploy via FTP é um trabalho bem chato e custoso. Agora que já sabemos <a href="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/" target="_blank" rel="external">como usar o <strong>GulpJS</strong></a>, que tal utilizá-lo para fazer deploy do nosso projeto via <strong>SSH</strong>, usando <strong>Rsync</strong>, e com apenas um simples comando, sincronizar nosso ambiente local com o ambiente de produção? Duvida? Vem ver! ;)</p>
+<a id="more"></a>
+
+<p>E pra começar, vou mostrar que pra usar o <strong>Gulp</strong>, você não precisa ficar preso a um plugin específico. No <a href="http://gulpjs.com/plugins/" target="_blank" rel="external">repositório de plugins do <strong>GulpJS</strong></a>, se buscar por <strong>rsync</strong>, você vai encontrar o plugin <a href="https://www.npmjs.com/package/gulp-rsync/" target="_blank" rel="external">gulp-rsync</a>, mas não vamos utilizá-lo :P</p>
+<p>Vamos usar um módulo do <strong>NodeJS</strong>, chamado <a href="https://github.com/jedrichards/rsyncwrapper" target="_blank" rel="external">rsyncwrapper</a>.</p>
+<h2 id="Começando_do_começo">Começando do começo</h2>
+<p>Vamos criar a estrutura do nosso projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── build</div><div class="line">│   ├── // ... arquivos que irão para o servidor ...</div><div class="line">├── gulpfile.js</div><div class="line">└── package.json</div></pre></td></tr></table></figure>
+
+<p>Como você já sabe, o <code>package.json</code> deve ter somente <code>{}</code> como conteúdo.</p>
+<p>No diretório <code>build</code>, você vai colocar os arquivos que quer que sejam enviados ao seu servidor.</p>
+<blockquote>
+<p><strong>OBSERVAÇÃO IMPORTANTE:</strong> para fazer deploy com <strong>Rsync</strong>, você precisa ter acesso <strong>SSH</strong> liberado no seu servidor! (melhor avisar, antes que alguém comente dizendo que não funcionou :P)</p>
+</blockquote>
+<p>Sabendo disso, vamos instalar os módulos necessários: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp rsyncwrapper</div></pre></td></tr></table></figure>
+
+<p>Acho que isso eu não falei ainda, mas você pode instalar vários módulos de uma só vez :D<br>Nesse caso, estamos instalando o <code>gulp</code> e o <code>rsyncwrapper</code> ao mesmo tempo, e salvando no <code>package.json</code>.</p>
+<p>E vamos configurar nosso <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span></div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Essa é a configuração mais simples para usar o <code>rsync</code>. Adicionamos ao nosso <code>gulpfile.js</code> o <code>gulp</code> e o <code>rsyncwrapper</code>, chamando o método <code>rsync</code>, mas sem invocá-lo.</p>
+<p>Dentro da <code>task</code>, passamos um objeto como parâmetro da função <code>rsync</code>, com duas propriedades:</p>
+<ul>
+<li><strong>src</strong>: Caminho dos arquivos que serão “deployados” para o servidor;</li>
+<li><strong>dest</strong>: Caminho NO SERVIDOR que receberá os arquivos.</li>
+<li><strong>recursive</strong>: Passa recursivamente pelos diretórios em <code>src</code> para enviar os arquivos.</li>
+</ul>
+<p>O formato para o <code>dest</code> é o seguinte:</p>
+<ul>
+<li>nome do seu usuário;</li>
+<li>arroba (<code>@</code>);</li>
+<li>seu domínio;</li>
+<li>dois-pontos;</li>
+<li>caminho no servidor que receberá os arquivos.</li>
+</ul>
+<p>Listei para ficar fácil você saber o que precisa ser mantido, e o que você precisa editar. Não sei se precisava, mas enfim…</p>
+<p>Fazendo isso, pode rodar o comando <code>gulp</code> no terminal e conferir os arquivos no seu servidor!</p>
+<p><em>Mas não tenho nenhum feedback visual! Como vou saber quando terminou de enviar os arquivos?</em></p>
+<p>O <strong>rsyncwrapper</strong> tem algumas propriedades que podemos utilizar para facilitar nossa vida. Vamos a elas. Altere seu <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span>,</div><div class="line">    args: [ <span class="string">'--verbose'</span> ]</div><div class="line">  }, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( stdout, <span class="string">'END!'</span> );</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Passamos no primeiro parâmetro um objeto para a função <code>rsync</code>, com as propriedades <code>src</code> e <code>dest</code>. Como segundo parâmetro, podemos passar uma função de callback que será executada assim que todos os arquivos forem enviados!</p>
+<p>Adicionamos também um parâmetro <code>args</code>, que receberá argumentos, como se você estivesse usando o <strong>rsync</strong> na linha de comando xD</p>
+<p>Podemos passar para essa propriedade, um array de argumentos. Para conhecer todos os argumentos disponíveis para o <strong>rsync</strong>, visite <a href="https://rsync.samba.org/ftp/rsync/rsync.html" target="_blank" rel="external">https://rsync.samba.org/ftp/rsync/rsync.html</a></p>
+<p><em>Tá ficando bom! Mas eu tenho muitos arquivos! Eu posso acompanhar um a um, enquanto estiverem subindo?</em></p>
+<p>Sim! O <strong>rsyncwrapper</strong> tem um método <code>onStdout</code>, que recebe um parâmetro com o Buffer do arquivo que está sendo enviado. Vamos ver como utilizá-lo (vou colocar só a função <code>rsync</code> agora):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">rsync({</div><div class="line">  src: <span class="string">'./build/'</span>,</div><div class="line">  dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">  recursive: <span class="literal">true</span>,</div><div class="line">  args: [ <span class="string">'--verbose'</span> ],</div><div class="line">  onStdout: <span class="function"><span class="keyword">function</span><span class="params">( data )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( data.toString() );</div><div class="line">  }</div><div class="line">}, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'END!'</span> );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Usamos a forma mais bruta para mostrar o nome do arquivo: convertê-lo para <code>String</code>, usando o <code>.toString()</code>. Agora, a cada arquivo que subir, será mostrado o nome no terminal, para que você possa acompanhar o progresso :D</p>
+<p>Removi também do função de callback o <code>stdout</code>, para não mostrar duplicado o retorno.</p>
+<h2 id="Extras">Extras</h2>
+<p>Ainda podemos deixar melhor :D</p>
+<p>Temos uma propriedade <code>exclude</code>, que recebe um array de arquivos que você NÃO quer enviar. Exemplo: você quer ignorar um <code>.htaccess</code>, ou qualquer outro arquivo? Adicione-o ao array em <code>exclude</code>. Ficaria algo como:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exclude: [ <span class="string">'.htaccess'</span>, <span class="string">'.editorconfig'</span>, <span class="string">'node_modules'</span> ]</div></pre></td></tr></table></figure>
+
+<p>Você pode usar também as propriedades <code>delete: true</code> ou <code>deleteAll: true</code>.</p>
+<p><code>deleteAll</code> vai sincronizar os arquivos em <code>src</code> com o <code>dest</code>. Se você remover algo local, ele vai remover do servidor também. Bruto assim.</p>
+<p><code>delete</code> também sincroniza, porém ele ignora os arquivos em <code>exclude</code>. Se você tem, por exemplo, localmente um diretório <code>node_modules</code> que não quer enviar para o servidor, mas tem um diretório com o mesmo nome no servidor, mas não quer deletá-lo, usando o <code>delete</code> esse diretório se manterá lá. Caso contrário, use o <code>deleteAll</code>.</p>
+<blockquote>
+<p>Muito cuidado com essas opções! Você pode perder seus dados importantes se não configurar corretamente! Faça testes antes e verifique se está tudo ok antes de continuar!</p>
+</blockquote>
+<p>Podemos também setar um formato de comparação, usando <code>compareMode: &#39;checksum&#39;</code> ou <code>compareMode: &#39;sizeOnly</code>. <code>checksum</code> compara por um checksum de 128bit. <code>sizeOnly</code> só verifica se o tamanho do arquivo mudou. Recomendo que use o <code>checksum</code>, pois é mais preciso.</p>
+<p>Adicionando algumas dessas opções, nosso <code>gulpfile.js</code> ficaria assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span>,</div><div class="line">    args: [ <span class="string">'--verbose'</span> ],</div><div class="line">    deleteAll: <span class="literal">true</span>,</div><div class="line">    compareMode: <span class="string">'checksum'</span>,</div><div class="line">    onStdout: <span class="function"><span class="keyword">function</span><span class="params">( data )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( data.toString() );</div><div class="line">    }</div><div class="line">  }, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'END!'</span> );</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Para ver todas as opções do <strong>rsyncwrapper</strong>, acesse: <a href="https://github.com/jedrichards/rsyncwrapper" target="_blank" rel="external">https://github.com/jedrichards/rsyncwrapper</a></p>
+<p>Por hoje é isso! Mas ainda temos muita coisa de Gulp para mostrar! Continue acompanhando :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/deploy/">deploy</a>, <a href="/tags/gulpjs/">gulpjs</a>, <a href="/tags/ssh/">ssh</a>, <a href="/tags/rsync/">rsync</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>5</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>17</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>28</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>2</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>4</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>5</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>5</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>1</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>3</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
