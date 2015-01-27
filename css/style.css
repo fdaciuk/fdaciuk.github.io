@@ -497,6 +497,9 @@ article footer .addthis iframe {
   font-weight: normal;
   margin-bottom: 15px;
 }
+#pagination {
+  display: none;
+}
 #pagination a {
   display: block;
   padding: 5px 10px;
