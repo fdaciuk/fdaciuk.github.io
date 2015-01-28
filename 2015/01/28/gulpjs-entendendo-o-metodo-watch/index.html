@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>GulpJS - entendendo o método watch() | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Apesar de simples, o método watch() do GulpJS tem algumas particularidades que o tornam bastante poderoso!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="GulpJS - entendendo o método watch()"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/gulpjs-watch.jpg" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-28T00:00:00.000Z"><a href="/2015/01/28/gulpjs-entendendo-o-metodo-watch/">28 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">GulpJS - entendendo o método watch()</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs-watch.jpg" alt=""></p>
+<p>Apesar de simples, o método <code>watch()</code> do <strong>GulpJS</strong> tem algumas particularidades que o tornam bastante poderoso!</p>
+<a id="more"></a>
+
+<h2 id="Sintaxe">Sintaxe</h2>
+<p>O método <code>watch()</code> tem duas possíveis sintaxes:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( glob, [, opts], tasks );</div></pre></td></tr></table></figure>
+
+<p>e:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( glob, [, opts, cb]);</div></pre></td></tr></table></figure>
+
+<p>Na primeira sintaxe, temos:</p>
+<h3 id="glob">glob</h3>
+<p>Tipo: <code>String</code> ou <code>Array</code></p>
+<p>Um simples <em>glob</em> ou array de <em>globs</em>, que indicam quais arquivos devem ser assistidos, para saber quando foram alterados.</p>
+<p>Exemplo de uso:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( <span class="string">'src/js/**/*.js'</span> );</div></pre></td></tr></table></figure>
+
+<p>Onde todos os arquivos <code>.js</code>, dentro do diretório <code>src/js</code> serão assistidos, recursivamente.</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/recursion.gif" alt="Recursão"></p>
+<p>Outro exemplo, com <code>Array</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch([ <span class="string">'src/js/**/*.js'</span>, <span class="string">'src/stylus/**/*.styl'</span> ]);</div></pre></td></tr></table></figure>
+
+<p>Assiste todos os arquivos <code>.js</code> dentro de <code>src/js</code>, e todos os arquivos <code>.styl</code>, dentro de <code>src/stylus</code>, recursivamente.</p>
+<h3 id="opts">opts</h3>
+<p>Tipo: <code>Object</code></p>
+<p>Opções, que são passadas para a lib <a href="https://github.com/shama/gaze" target="_blank" rel="external">Gaze</a>, que o <strong>GulpJS</strong> usa para fazer o <code>watch</code> dos arquivos. As opções que você pode usar estão disponíveis em <a href="https://github.com/shama/gaze#properties" target="_blank" rel="external">https://github.com/shama/gaze#properties</a></p>
+<h3 id="tasks">tasks</h3>
+<p>Tipo: <code>Array</code></p>
+<p>Um <code>Array</code> de tasks criadas com <code>gulp.task()</code>, que devem ser executadas, quando houver mudanças em qualquer dos arquivos passados em <code>glob</code>.</p>
+<p>Exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( <span class="string">'src/js/**/*.js'</span>, [ <span class="string">'lint'</span>, <span class="string">'uglify'</span> ] );</div></pre></td></tr></table></figure>
+
+<p>As tarefas <code>lint</code> e <code>uglify</code> serão executadas sempre que um arquivo <code>.js</code> em <code>src/js</code> for alterado.</p>
+<p>Você ainda pode usar eventos do <strong>NodeJS</strong>, para ter uma função <code>callback</code> que execute assim que os arquivos forem alterados:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> watcher = gulp.watch( <span class="string">'src/js/**/*.js'</span>, [ <span class="string">'lint'</span>, <span class="string">'uglify'</span> ] );</div><div class="line">watcher.on( <span class="string">'change'</span>, <span class="function"><span class="keyword">function</span><span class="params">( event )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'File'</span> + event.path + <span class="string">' was '</span> + event.type );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>O <code>callback</code> tem como parâmetro o objeto <code>event</code>, que possui as propriedades <code>path</code>, com o caminho do arquivo, e <code>type</code>, com o tipo de evento disparado.</p>
+<p><code>event.type</code> pode ter 3 possíveis valores:</p>
+<ul>
+<li><code>changed</code>: quando um arquivo no caminho assistido é alterado;</li>
+<li><code>deleted</code>: quando um arquivo é deletado do caminho assistido;</li>
+<li><code>added</code>: Quando um novo arquivo é criado no caminho assistido.</li>
+</ul>
+<p>A segunda sintaxe difere apenas no último parâmetro. Você pode passar uma função de <code>callback</code> no lugar de chamar tasks para executar. Essa função tem o mesmo parâmetro <code>event</code> mostrado anteriormente, quando usado com o método <code>.on(&#39;change&#39;)</code>.</p>
+<h2 id="Problemas_com_event-type_added_no_GulpJS">Problemas com <code>event.type added</code> no GulpJS</h2>
+<p>O <strong>GulpJS</strong> executa corretamente os eventos <code>changed</code> e <code>deleted</code>, mas quando você adiciona um novo arquivo, em alguns momentos o <code>added</code> não é disparado.</p>
+<p>Já havia conversado com alguns amigos sobre isso, e estava confiante que era algum bug no <strong>GulpJS</strong>. Fiz algumas pesquisas por cima, mas não cheguei a nenhuma solução. </p>
+<p>O problema era que, ao adicionar um novo arquivo, eu sempre teria que parar o <code>watch()</code>, criar os novos arquivos e então executar novamente o <code>watch()</code>.</p>
+<p>Mas hoje estava trocando uma ideia com o <a href="https://github.com/romuloctba" target="_blank" rel="external">Rômulo</a>, que estava passando pelo mesmo problema. Então, em meio a vários links dizendo que era “um problema mesmo”, “era bug do Gaze”, etc., ele encontrou um link onde dizia exatamente qual era o problema:</p>
+<p>Havia uma <em>issue</em> aberta no Gaze, - que foi fechada, mas o problema continua - dizendo que isso acontecia quando se usava <code>./</code> no início do <code>glob</code>, no <code>watch()</code>. E o problema - e consequentemente, a solução - é exatamente esse!</p>
+<p>Se você não colocar o <code>./</code> no início do <code>glob</code>, o <strong>GulpJS</strong> reconhece corretamente novos arquivos adicionados, sem precisar parar o <code>watch()</code>!</p>
+<p>Uma grande descoberta :D</p>
+<p>Bom, era isso que eu queria mostrar sobre o <code>watch()</code> hoje. O <strong>GulpJS</strong> nos dá muitas possibilidades de personalização, e você ainda vai cansar - ou não - de ler artigos legais sobre o Gulp aqui no blog :D</p>
+<p>Até o próximo!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/gulpjs/">gulpjs</a>, <a href="/tags/nodejs/">nodejs</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>5</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>18</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>7</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>29</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>5</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>5</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>5</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>1</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>3</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>2</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-27T03:51:37.379Z</updated>
+  <updated>2015-01-28T01:00:45.034Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -13,6 +13,89 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[GulpJS - entendendo o método watch()]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"/>
+    <id>http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/</id>
+    <published>2015-01-28T00:00:00.000Z</published>
+    <updated>2015-01-28T00:59:34.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs-watch.jpg" alt=""></p>
+<p>Apesar de simples, o método <code>watch()</code> do <strong>GulpJS</strong> tem algumas particularidades que o tornam bastante poderoso!</p>
+<a id="more"></a>
+
+<h2 id="Sintaxe">Sintaxe</h2>
+<p>O método <code>watch()</code> tem duas possíveis sintaxes:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( glob, [, opts], tasks );</div></pre></td></tr></table></figure>
+
+<p>e:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( glob, [, opts, cb]);</div></pre></td></tr></table></figure>
+
+<p>Na primeira sintaxe, temos:</p>
+<h3 id="glob">glob</h3>
+<p>Tipo: <code>String</code> ou <code>Array</code></p>
+<p>Um simples <em>glob</em> ou array de <em>globs</em>, que indicam quais arquivos devem ser assistidos, para saber quando foram alterados.</p>
+<p>Exemplo de uso:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( <span class="string">'src/js/**/*.js'</span> );</div></pre></td></tr></table></figure>
+
+<p>Onde todos os arquivos <code>.js</code>, dentro do diretório <code>src/js</code> serão assistidos, recursivamente.</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/recursion.gif" alt="Recursão"></p>
+<p>Outro exemplo, com <code>Array</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch([ <span class="string">'src/js/**/*.js'</span>, <span class="string">'src/stylus/**/*.styl'</span> ]);</div></pre></td></tr></table></figure>
+
+<p>Assiste todos os arquivos <code>.js</code> dentro de <code>src/js</code>, e todos os arquivos <code>.styl</code>, dentro de <code>src/stylus</code>, recursivamente.</p>
+<h3 id="opts">opts</h3>
+<p>Tipo: <code>Object</code></p>
+<p>Opções, que são passadas para a lib <a href="https://github.com/shama/gaze" target="_blank" rel="external">Gaze</a>, que o <strong>GulpJS</strong> usa para fazer o <code>watch</code> dos arquivos. As opções que você pode usar estão disponíveis em <a href="https://github.com/shama/gaze#properties" target="_blank" rel="external">https://github.com/shama/gaze#properties</a></p>
+<h3 id="tasks">tasks</h3>
+<p>Tipo: <code>Array</code></p>
+<p>Um <code>Array</code> de tasks criadas com <code>gulp.task()</code>, que devem ser executadas, quando houver mudanças em qualquer dos arquivos passados em <code>glob</code>.</p>
+<p>Exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( <span class="string">'src/js/**/*.js'</span>, [ <span class="string">'lint'</span>, <span class="string">'uglify'</span> ] );</div></pre></td></tr></table></figure>
+
+<p>As tarefas <code>lint</code> e <code>uglify</code> serão executadas sempre que um arquivo <code>.js</code> em <code>src/js</code> for alterado.</p>
+<p>Você ainda pode usar eventos do <strong>NodeJS</strong>, para ter uma função <code>callback</code> que execute assim que os arquivos forem alterados:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> watcher = gulp.watch( <span class="string">'src/js/**/*.js'</span>, [ <span class="string">'lint'</span>, <span class="string">'uglify'</span> ] );</div><div class="line">watcher.on( <span class="string">'change'</span>, <span class="function"><span class="keyword">function</span><span class="params">( event )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'File'</span> + event.path + <span class="string">' was '</span> + event.type );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>O <code>callback</code> tem como parâmetro o objeto <code>event</code>, que possui as propriedades <code>path</code>, com o caminho do arquivo, e <code>type</code>, com o tipo de evento disparado.</p>
+<p><code>event.type</code> pode ter 3 possíveis valores:</p>
+<ul>
+<li><code>changed</code>: quando um arquivo no caminho assistido é alterado;</li>
+<li><code>deleted</code>: quando um arquivo é deletado do caminho assistido;</li>
+<li><code>added</code>: Quando um novo arquivo é criado no caminho assistido.</li>
+</ul>
+<p>A segunda sintaxe difere apenas no último parâmetro. Você pode passar uma função de <code>callback</code> no lugar de chamar tasks para executar. Essa função tem o mesmo parâmetro <code>event</code> mostrado anteriormente, quando usado com o método <code>.on(&#39;change&#39;)</code>.</p>
+<h2 id="Problemas_com_event-type_added_no_GulpJS">Problemas com <code>event.type added</code> no GulpJS</h2>
+<p>O <strong>GulpJS</strong> executa corretamente os eventos <code>changed</code> e <code>deleted</code>, mas quando você adiciona um novo arquivo, em alguns momentos o <code>added</code> não é disparado.</p>
+<p>Já havia conversado com alguns amigos sobre isso, e estava confiante que era algum bug no <strong>GulpJS</strong>. Fiz algumas pesquisas por cima, mas não cheguei a nenhuma solução. </p>
+<p>O problema era que, ao adicionar um novo arquivo, eu sempre teria que parar o <code>watch()</code>, criar os novos arquivos e então executar novamente o <code>watch()</code>.</p>
+<p>Mas hoje estava trocando uma ideia com o <a href="https://github.com/romuloctba" target="_blank" rel="external">Rômulo</a>, que estava passando pelo mesmo problema. Então, em meio a vários links dizendo que era “um problema mesmo”, “era bug do Gaze”, etc., ele encontrou um link onde dizia exatamente qual era o problema:</p>
+<p>Havia uma <em>issue</em> aberta no Gaze, - que foi fechada, mas o problema continua - dizendo que isso acontecia quando se usava <code>./</code> no início do <code>glob</code>, no <code>watch()</code>. E o problema - e consequentemente, a solução - é exatamente esse!</p>
+<p>Se você não colocar o <code>./</code> no início do <code>glob</code>, o <strong>GulpJS</strong> reconhece corretamente novos arquivos adicionados, sem precisar parar o <code>watch()</code>!</p>
+<p>Uma grande descoberta :D</p>
+<p>Bom, era isso que eu queria mostrar sobre o <code>watch()</code> hoje. O <strong>GulpJS</strong> nos dá muitas possibilidades de personalização, e você ainda vai cansar - ou não - de ler artigos legais sobre o Gulp aqui no blog :D</p>
+<p>Até o próximo!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs-watch.jpg" alt=""></p>
+<p>Apesar de simples, o método <code>watch()</code> do <strong>GulpJS</strong> tem algumas particularidades que o tornam bastante poderoso!</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="gulpjs" scheme="http://blog.da2k.com.br/tags/gulpjs/"/>
+    
+      <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[GulpJS - deploy com Rsync]]></title>
@@ -1670,51 +1753,6 @@
       <category term="tema wordpress" scheme="http://blog.da2k.com.br/tags/tema-wordpress/"/>
     
       <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Javascript - Medindo o tempo de suas instruções]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/"/>
-    <id>http://blog.da2k.com.br/2015/01/08/javascript-medindo-o-tempo-de-suas-instrucoes/</id>
-    <published>2015-01-08T00:00:00.000Z</published>
-    <updated>2015-01-08T01:17:01.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/timer.jpg" alt=""></p>
-<p>Quanto tempo demora aquela instrução que você escreveu em JS? Isso, aquele <code>for</code> que itera um array com 350.452 elementos.. você sabe como medir esse tempo? Vem que eu te mostro ;)</p>
-<a id="more"></a>
-
-<h2 id="Console">Console</h2>
-<p>Todos os navegadores modernos, hoje em dia, tem um <code>console</code> à sua disposição, que você já deve conhecer. Inclusive o <a href="https://github.com/vitorbritto" target="_blank" rel="external">Vitor Britto</a> escreveu um <a href="http://www.vitorbritto.com.br/blog/examinando-sua-aplicacao/" target="_blank" rel="external">ótimo post</a> sobre isso, mostrando os métodos disponíveis no objeto <code>console</code>.</p>
-<p>Mas hoje eu queria focar em dois desses métodos, que servirão para medir o tempo que uma instrução demora para executar: o <code>time()</code> e o <code>timeEnd()</code>.</p>
-<h2 id="Como_usar">Como usar</h2>
-<p>O uso deles não tem segredo algum. Coloque o <code>console.time()</code>, antes da sua instrução, e o <code>console.timeEnd()</code> no final da instrução. Passe como parâmetro uma <em>String</em>, que será a referência utilizada para identificar a instrução. Exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.time( <span class="string">'How long does it take to run my "for"?'</span> );</div><div class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">350452</span>; i++ ) {</div><div class="line">  i;</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.timeEnd( <span class="string">'How long does it take to run my "for"?'</span> );</div></pre></td></tr></table></figure>
-
-<p>Cole o código acima no seu console. A resposta que eu tive foi:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">How long does it take to run my <span class="string">"for"</span>?: <span class="number">257.039</span>ms</div></pre></td></tr></table></figure>
-
-<p>Ou seja, com esses dois métodos simples, eu consigo medir o tempo que a minha instrução está levando para executar, e fica muito fácil tomar ações para otimizar esse código.</p>
-<p>Curtiu a dica? Já conhecia? </p>
-<p>Nos próximos posts, falaremos um pouco mais sobre performance, e também como otimizar isso, para fazer nossa aplicação voar baixo! Fique ligado!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/timer.jpg" alt=""></p>
-<p>Quanto tempo demora aquela instrução que você escreveu em JS? Isso, aquele <code>for</code> que itera um array com 350.452 elementos.. você sabe como medir esse tempo? Vem que eu te mostro ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="performance" scheme="http://blog.da2k.com.br/tags/performance/"/>
-    
-      <category term="debug" scheme="http://blog.da2k.com.br/tags/debug/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
   </entry>
   
