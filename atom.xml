@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-28T01:00:45.034Z</updated>
+  <updated>2015-01-29T02:49:21.311Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,100 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Javascript - Usando temporizadores like a Ninja]]></title>
+    <link href="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"/>
+    <id>http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/</id>
+    <published>2015-01-29T00:00:00.000Z</published>
+    <updated>2015-01-29T02:49:03.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/javascript-timers.jpg" alt=""></p>
+<p>Você provavelmente já conhece os métodos <code>setInterval()</code> e <code>setTimeout()</code>. Mas você sabe a exatamente a diferença entre eles? Sabe como eles realmente funcionam? Vem descobrir :)</p>
+<a id="more"></a>
+
+<p><code>setInterval()</code> e <code>setTimeout()</code> são funções temporizadoras. Elas executam uma função de <em>callback</em> após determinado tempo.</p>
+<p>O uso delas é assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setTimeout( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Executa uma vez após 1 segundo.'</span> );</div><div class="line">}, <span class="number">1000</span> );</div><div class="line">  </div><div class="line">setInterval( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Executa infinitamente, 1 vez por segundo.'</span> );</div><div class="line">}, <span class="number">1000</span> );</div></pre></td></tr></table></figure>
+
+<p>Como você pode ver, a sintaxe para as duas é a mesma: o primeiro parâmetro é uma função de callback que será executada após <code>x</code> milissegundos, passados no segundo parâmetro.</p>
+<p>A principal diferença entre elas é que:</p>
+<ul>
+<li><code>setInterval()</code> executa infinitamente, até que você execute <code>clearInterval()</code>;</li>
+<li><code>setTimeout()</code> executa apenas uma vez.</li>
+</ul>
+<p>Você pode remover um temporizador, atribuindo ele a uma variável, e depois usando <code>clearInterval( variavel )</code> para o <code>setInterval()</code>, e <code>clearTimeout( variavel )</code> para <code>setTimeout()</code>.</p>
+<p>Um exemplo prático:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( counter &gt;= <span class="number">10</span> ) {</div><div class="line">    clearInterval( timer );</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( counter++ );</div><div class="line">}, <span class="number">1000</span>);</div></pre></td></tr></table></figure>
+
+<p>Colando esse código no seu console, você pode constatar que é printado o valor de 0 a 10, e então o temporizador é removido.</p>
+<p>Para usar com o <code>setTimeout()</code>, poderíamos fazer algo assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTimer</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> timer = setTimeout( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( counter++ );</div><div class="line">    <span class="keyword">if</span>( counter &lt; <span class="number">11</span> ) {</div><div class="line">      myTimer();</div><div class="line">    }</div><div class="line">  }, <span class="number">1000</span> );</div><div class="line">}</div><div class="line">  </div><div class="line">myTimer();</div></pre></td></tr></table></figure>
+
+<p>Como o <code>setTimeout()</code> executa somente uma vez, precisamos utilizar uma função recursiva para que temporizador continue executando até que ele encha o saco e nós possamos mandá-lo parar de chamar a função! xD</p>
+<p>Bom, até aqui, provavelmente você já sabia de tudo. Mas você sabe em que momento usar <code>setInterval()</code> e quando usar <code>setTimeout()</code>? E porquê?</p>
+<p><em>Dá no mesmo, posso usar qualquer uma!</em></p>
+<p>É nesse ponto que fazemos a separação do jovem Padawan para o verdadeiro Ninja: você precisa conhecer o <em>Event Loop</em> do Javascript, e saber como essas funções o afetam.</p>
+<h2 id="Como_funciona_o_Javascript">Como funciona o Javascript</h2>
+<p>O Javascript trabalha em single thread. Aí você me pergunta: <em>então como ele faz concorrência?</em> </p>
+<p>Através do <em>Event Loop!</em></p>
+<p>Cada instrução assíncrona que precisa ser executada em JS, é lançada no <em>Event Loop</em>. Imagine um círculo, com uma única entrada e uma única saída. Todas as instruções entram pelo mesmo lugar, e saem por outro, uma de cada vez.</p>
+<p>Como essas instruções são <em>assíncronas</em>, elas ficam rodando ali no <em>Event Loop</em> até que estejam prontas. Com isso, o JS não bloqueia a thread, podendo executar outras instruções. Quando uma instrução finaliza, o JS dispara um <strong>evento</strong> (daí o nome <em>Event Loop</em>), devolvendo em uma função de <code>callback</code> o resultado dessa instrução.</p>
+<p>Instruções <em>síncronas</em> são executadas diretamente, bloqueando a thread.</p>
+<p>Vamos ver isso na prática:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ ) {</div><div class="line">  <span class="built_in">console</span>.log( i );</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.log( <span class="string">'Terminou o for'</span> );</div></pre></td></tr></table></figure>
+
+<p>Um loop é uma instrução <em>síncrona</em>, bloqueante. Ou seja, enquanto ele estiver executando, a thread ficará bloqueada. Assim que ele terminar, a próxima instrução é executada. Rodando o exemplo acima no seu console, você verá que, primeiro serão impressos os números de 0 a 9, para então mostrar a mensagem <code>Terminou o for</code>.</p>
+<p><em>E como seria uma instrução assíncrona?</em></p>
+<p>Assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log( <span class="string">'Vou executar antes de setInterval() o/'</span> );</div><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( counter &gt;= <span class="number">10</span> ) {</div><div class="line">    clearInterval( timer );</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( counter++ );</div><div class="line">}, <span class="number">1000</span>);</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( <span class="string">'E eu, apesar de estar depois, também vou executar antes do setInterval() xD'</span> );</div></pre></td></tr></table></figure>
+
+<p><em>Porque os console.log() executam antes de setInterval()?</em></p>
+<p>Por que o temporizador é uma função assíncrona. Tanto o <code>setInterval()</code>, quanto o <code>setTimeout()</code>. A função passada como parâmetro não é executada até que o tempo passado no segundo parâmetro se esgote.</p>
+<p>O que acontece basicamente é o seguinte: o primeiro <code>console.log()</code> é automaticamente executado. Depois, o setInterval é colocado no <em>Event Loop</em> e, assim que se passar 1 segundo, e ele for o próximo da fila a ser executado (lembra que o <em>Event Loop</em> só executa uma coisa de cada vez?), o JS vai disparar um evento, fazendo com que a função de callback passada no primeiro parâmetro seja executada.</p>
+<p>O tempo nunca vai garantir que o que está no callback vai ser executado exatamente naquele tempo, pois podem ter outras funções assíncronas no <em>Event Loop</em> sendo disparadas. Logo que a fila é liberada, e chega a vez do temporizador, aí então ele é executado.</p>
+<p>Ficou claro como funciona o <em>Event Loop</em>? Ótimo, vamos seguir!</p>
+<p>Sabendo disso, podemos enfim falar sobre as diferenças de <code>setInterval()</code> e <code>setTimeout()</code>.</p>
+<h2 id="setInterval()">setInterval()</h2>
+<p>Como o <code>setInterval()</code> executa infinitamente, a garantia que temos é que ele vai adicionar uma instrução ao <em>Event Loop</em> a cada um segundo (levando em consideração os exemplos passados).</p>
+<p>Isso significa que, se em 1 segundo a primeira instrução não for executada, - por ter outras instruções no <em>Event Loop</em> - a segunda instrução será adicionada ao <em>Event Loop</em>, ficando duas instruções na fila.</p>
+<p>Imagine agora você com vários temporizadores na tela. Cada <code>setInterval()</code> adicionando várias instruções ao <em>Event Loop</em>. Lembrando que o <em>Event Loop</em> é gerenciado pelo browser, no <em>client side</em>. Pode acontecer de chegar um momento que seu computador não terá memória suficiente para suportar a quantidade de eventos alocados, fazer seu navegador dar <em>crash</em>, e em alguns casos, até travar o computador.</p>
+<p>Isso já aconteceu com você? Então. O problema, provavelmente, era o <code>setInterval()</code>.</p>
+<h2 id="setTimeout()">setTimeout()</h2>
+<p>Agora, analisando por esse lado, e sabendo que o <code>setTimeout()</code> só executa uma vez, - a menos que fizermos uma chamada recursiva para que ele execute mais vezes - podemos concluir que, o <code>setTimeout()</code> só vai adicionar mais uma instrução no <em>Event Loop</em> depois que a primeira instrução for retornada através do evento disparado!</p>
+<p>Se a primeira instrução demorar 5 segundos para disparar o evento, a segunda instrução só será adicionada DEPOIS disso!</p>
+<p>Agora pense no caso do exemplo acima, onde usamos vários <code>setInterval()</code>. Com o <code>setTimeout()</code> não teríamos o mesmo problema, pois cada <code>setTimeout()</code> garante que só uma instrução por <code>setTimeout()</code> será enviada ao <em>Event Loop</em>! É um ganho de performance absurdo! :D</p>
+<p>Então, sempre que estiver na dúvida: </p>
+<p><em><code>setInterval()</code> ou <code>setTimeout()</code> recursivo?</em></p>
+<p>Vá pela segunda opção. É muito mais performática!</p>
+<p>Até o próximo artigo!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/javascript-timers.jpg" alt=""></p>
+<p>Você provavelmente já conhece os métodos <code>setInterval()</code> e <code>setTimeout()</code>. Mas você sabe a exatamente a diferença entre eles? Sabe como eles realmente funcionam? Vem descobrir :)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="temporizadores" scheme="http://blog.da2k.com.br/tags/temporizadores/"/>
+    
+      <category term="setInterval" scheme="http://blog.da2k.com.br/tags/setinterval/"/>
+    
+      <category term="setTimeout" scheme="http://blog.da2k.com.br/tags/settimeout/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[GulpJS - entendendo o método watch()]]></title>
     <link href="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"/>
     <id>http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/</id>
     <published>2015-01-28T00:00:00.000Z</published>
-    <updated>2015-01-28T00:59:34.000Z</updated>
+    <updated>2015-01-28T01:01:10.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs-watch.jpg" alt=""></p>
 <p>Apesar de simples, o método <code>watch()</code> do <strong>GulpJS</strong> tem algumas particularidades que o tornam bastante poderoso!</p>
 <a id="more"></a>
@@ -1669,90 +1758,6 @@
       <category term="devtools" scheme="http://blog.da2k.com.br/tags/devtools/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WordPress - Estrutura básica de um tema]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/"/>
-    <id>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</id>
-    <published>2015-01-09T00:00:00.000Z</published>
-    <updated>2015-01-12T08:23:35.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress.jpg" alt="WordPress"></p>
-<p><strong>WordPress</strong> é uma marca registrada, por isso a necessidade de escrever corretamente: com o W e o P maiúsculos, ok? Mas isso não tem nada a ver com o assunto do post, onde iremos aprender a montar a estrutura básica de um tema para WordPress :P </p>
-<p>Sabia que, para criar um tema, você não precisa de nada mais que 2 arquivos? Duvida? Vem que eu te mostro ;)</p>
-<a id="more"></a>
-
-<p>Criar temas para <strong>WordPress</strong> é um trabalho bem simples, desde que você conheça PHP, HTML, CSS e Javascript.</p>
-<h2 id="Requisitos_mínimos">Requisitos mínimos</h2>
-<p>Além do conhecimento citado acima, você precisa ter instalado no seu computador o PHP 5.2.4 ou superior, e o MySQL 5.0 (ou Maria DB) ou superior.</p>
-<h2 id="Instalação">Instalação</h2>
-<p>A instalação do WordPress é bastante simples. <a href="https://wordpress.org/latest.zip" target="_blank" rel="external">Baixe aqui a última versão</a>. Descompacte-o em algum diretório que seja acessível pelo seu servidor (Apache ou Nginx), e acesse via browser.</p>
-<p>Seguindo todos os passos da tela corretamente, não terá problemas :)</p>
-<p>Só algumas dicas para a hora da instalação:</p>
-<ul>
-<li>Não use o nome do usuário como <code>admin</code>;</li>
-<li>Use uma senha forte;</li>
-<li>Altere o prefixo das tabelas da sua base de dados para algo diferente de <code>wp_</code>.</li>
-</ul>
-<p>O WordPress é uma ferramenta muito conhecida e bastante utilizada, por isso não use configurações que seriam fáceis de descobrir. Nome de usuário <code>admin</code> é muito comum. Usando esse nome, para invadir seu site só precisa de uns ataques de força bruta na senha. O mesmo vale para sua base de dados: mantendo o prefixo padrão <code>wp_</code>, fica muito mais fácil de alguém tentar invadir.</p>
-<h2 id="Criação_do_tema">Criação do tema</h2>
-<p>Crie um diretório dentro de <code>wp-content/themes</code> com o nome do seu tema. Use a conveção de letras minúsculas e separação de palavras com um traço <code>-</code>.</p>
-<p>Fazendo isso, crie a seguinte estrutura:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── index.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
-
-<p>Isso mesmo, só dois arquivos! O WordPress não é que nem “certos CMSs” que você precisar criar milhões de arquivos e XMLs de configuração para criar um tema :P</p>
-<p>Brincadeiras à parte, o WordPress tem uma convenção que facilita e muita na hora de criar um tema. </p>
-<h2 id="style-css">style.css</h2>
-<p>O WordPress pega do seu arquivo <code>style.css</code> alguns parâmetros para apresentar informações do seu tema no Painel.</p>
-<p>Os parãmetros mínimos que você precisa adicionar no <code>style.css</code> são esses:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">Theme Name: Nome do seu tema</div><div class="line">Author: Seu nome</div><div class="line">Description: Descrição do tema</div><div class="line">Version: 1.0</div><div class="line">*/</div></pre></td></tr></table></figure>
-
-<p>Com esses parâmetros passados como comentário no início do arquivo <code>style.css</code>, o WP já vai mostrar essas informações no Painel, quando você visualizar o tema.</p>
-<p>Para ativar o seu tema, logue-se no painel, em <code>http://seusite.com.br/wp-admin</code>. Vá até o menu <code>Aparência &gt; Temas</code>, selecione o seu tema e ative-o. E pronto! Todos os posts que você fizer já irão utilizar o tema que estamos desenvolvendo :D</p>
-<h2 id="index-php">index.php</h2>
-<p>O código que o WordPress usa para mostrar os posts é bem simples. Coloque na <code>index.php</code> do seu tema:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"pt-br"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Meu tema WordPress<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post(); <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">h2</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"&lt;?php the_permalink() ?&gt;"</span>&gt;</span></div><div class="line">      <span class="php"><span class="preprocessor">&lt;?php</span> the_title() <span class="preprocessor">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> the_content() <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endwhile</span>; <span class="preprocessor">?&gt;</span></span> </div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">else</span> : <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>Não existem posts.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endif</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>Na linha <code>9</code>, temos o que chamamos de <strong>Loop do WordPress</strong>. As funções do WordPress são muito semânticas, e dizem exatamente o que elas fazem: </p>
-<p>Primeiro, verificamos se existem posts, com a função <code>have_posts()</code> (o WordPress chama de <code>posts</code>, ou postagens, todo tipo de conteúdo que é possível cadastrar através do painel);</p>
-<p>Depois, fazemos um loop por todos os posts (<code>while( have_posts() )</code>) e, para cada post, é chamada a função <code>the_post()</code>. Essa função é responsável por trazer as informações de cada post específico que está relacionado no loop.</p>
-<p>Dependendo da URL em que você se encontra, o WordPress sabe exatamente onde deve buscar os posts corretos, por isso o Loop é padrão para todos os arquivos de template.</p>
-<p>O WordPress também tem alguns <em>fallbacks</em> para os arquivos do tema. Por exemplo: se no seu tema você tiver um arquivo chamado <code>single.php</code>, com esse mesmo conteúdo, quando você acessar a URL de um post, o WordPress vai procurar pelo arquivo arquivo <code>single.php</code> no seu tema para usar. Se o arquivo não estiver presente, ele usará como fallback o <code>index.php</code>. O <code>index.php</code> é fallback para qualquer arquivo de template do seu tema. Falaremos sobre os arquivos de template em posts futuros.</p>
-<p>As outras funções, usadas dentro do Loop, são chamadas de <strong>Template Tags</strong>. Essas funções trazem informações do post. Por exemplo: <code>the_permalink()</code> traz o link do post. <code>the_title()</code> traz o título. <code>the_content()</code> traz o conteúdo. Percebe como os nomes são bastante semânticos? Para ver a lista das Template Tags disponíveis que você pode usar, acesse <a href="http://codex.wordpress.org/Template_Tags#Tags" target="_blank" rel="external">esse link</a>.</p>
-<p>Com esse código, você tem a estrutura básica para mostrar praticamente qualquer tipo de conteúdo que cadastrar no seu painel do WordPress.</p>
-<p>Obviamente que você não vai deixar seu tema assim, pois tem muuuuita coisa que precisa tratar: </p>
-<ul>
-<li>categorias;</li>
-<li>tags;</li>
-<li>datas; </li>
-<li>se for um post aberto (single) não precisa do link no título;</li>
-<li>página de erro 404;</li>
-<li>separar páginas institucionais dos posts de blog;</li>
-<li>etc.</li>
-</ul>
-<p>Mas é só pra mostrar que, ainda assim, você pode começar a aprender WP e fazer um tema somente utilizando dois arquivos :)</p>
-<p>Esse artigo é o primeiro de uma série que vou mostrar como criar temas completos, passando desde as funções do WordPress, hooks, até organização e separação de arquivos, boas práticas de desenvolvimento, orientação à objetos com PHP, para separar a lógica da view, entre outras coisinhas mais xD</p>
-<p>Ficou curioso? <a href="http://blog.da2k.com.br/atom.xml" target="_blank" rel="external">Assine o RSS</a> e não perca nenhum post! Acompanhe diariamente :D</p>
-<p>Ficou alguma dúvida sobre esse post? Comente!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress.jpg" alt="WordPress"></p>
-<p><strong>WordPress</strong> é uma marca registrada, por isso a necessidade de escrever corretamente: com o W e o P maiúsculos, ok? Mas isso não tem nada a ver com o assunto do post, onde iremos aprender a montar a estrutura básica de um tema para WordPress :P </p>
-<p>Sabia que, para criar um tema, você não precisa de nada mais que 2 arquivos? Duvida? Vem que eu te mostro ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="tema wordpress" scheme="http://blog.da2k.com.br/tags/tema-wordpress/"/>
-    
-      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
     
   </entry>
   
