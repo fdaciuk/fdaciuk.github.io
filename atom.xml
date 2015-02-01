@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-01-31T13:07:46.647Z</updated>
+  <updated>2015-02-01T02:13:05.312Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,59 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Segredos do Github - mantendo a ordem no seu repositório]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/"/>
+    <id>http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/</id>
+    <published>2015-02-01T00:00:00.000Z</published>
+    <updated>2015-01-31T14:10:00.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/uploads/2015/01/github-secrets-clean-repository.png" alt=""></p>
+<p>Uma dica simples, mas funcional!</p>
+<a id="more"></a>
+
+<p>Quando vocẽ cria uma nova feature para um projeto open source, normalmente você cria uma branch nova, faz suas alterações, faz o <em>push</em> para o seu repositório nessa nova branch e então envia um <em>pull request</em>.</p>
+<p>Quando o <em>pull request</em> é aceito, você faz o <a href="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/" target="_blank" rel="external">processo para atualizar o seu repositório com o repositório forkado</a> e tudo fica 100% como deveria!</p>
+<p>Mas, com o tempo, sua lista de branchs no <strong>Github</strong> vai aumentando, mas você não vai mais precisar delas, pois seu <em>pull request</em> já foi aceito. Como limpar a sujeira e deixar somente as branchs que você precisa?</p>
+<h2 id="Removendo_branchs_do_Github">Removendo branchs do Github</h2>
+<p>Para remover uma branch do <strong>Github</strong>, você pode usar o comando no seu terminal:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin nome_da_branch --delete</div></pre></td></tr></table></figure>
+
+<p>Isso irá deletar a branch do <strong>Github</strong>!</p>
+<p>Você pode ainda fazer assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin :nome_da_branch</div></pre></td></tr></table></figure>
+
+<p>Com os dois pontos (<code>:</code>) na frente do nome da branch, o resultado é o mesmo :D</p>
+<h2 id="Removendo_branchs_localmente">Removendo branchs localmente</h2>
+<p>E para remover branchs localmente, o comando é:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -D nome_da_branch</div></pre></td></tr></table></figure>
+
+<p>Dica rápida, mas ajuda a organizar a casa :D</p>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/uploads/2015/01/github-secrets-clean-repository.png" alt=""></p>
+<p>Uma dica simples, mas funcional!</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - incentivar a contribuição para seus projetos open source]]></title>
     <link href="http://blog.da2k.com.br/2015/01/31/segredos-do-github-incentivar-a-contribuicao-para-seus-projetos-open-source/"/>
     <id>http://blog.da2k.com.br/2015/01/31/segredos-do-github-incentivar-a-contribuicao-para-seus-projetos-open-source/</id>
     <published>2015-01-31T00:00:00.000Z</published>
-    <updated>2015-01-31T13:07:29.000Z</updated>
+    <updated>2015-01-31T13:32:26.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-contributing.png" alt=""></p>
 <p>Contribuir para projetos open source é algo que nos faz crescer muito como profissionais. Temos a oportunidade de aprender coisas novas e praticar o que muitas vezes não utilizamos comumente no nosso dia-a-dia. Como o Github nos ajuda com isso?</p>
 <a id="more"></a>
@@ -1775,112 +1823,6 @@
       <category term="tips" scheme="http://blog.da2k.com.br/tags/tips/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WordPress: Estrutura inicial do tema, padrões de codificação e uso do editor]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/"/>
-    <id>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</id>
-    <published>2015-01-12T00:00:00.000Z</published>
-    <updated>2015-01-14T02:41:59.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
-<p>Este é o primeiro post da nossa série <strong>Como criar temas para WordPress</strong>! É importante salientar que todos os posts serão <em>hands on</em>, então não adianta ficar só lendo! Para aprender de verdade é preciso praticar! Siga todos os passos citados nos posts, crie os arquivos conforme as orientações, que em breve você estará apto para criar seu próprio tema, combinado? ;)</p>
-<a id="more"></a>
-
-<h2 id="Padrões_de_codificação">Padrões de codificação</h2>
-<p>Para manter um padrão de codificação, vamos seguir os <a href="http://codex.wordpress.org/WordPress_Coding_Standards" target="_blank" rel="external"><em>Coding Standards</em> do WordPress</a> para PHP, HTML, CSS e Javascript.</p>
-<h2 id="Editor">Editor</h2>
-<p>Eu irei utilizar o <strong>Sublime Text</strong> para codificar nosso tema, mas você pode utilizar qual você preferir, contanto que mantenha os padrões de codificação dos arquivos, não haverá maiores problemas em utilizar outro editor ou IDE.</p>
-<p>Se quiser usar o <strong>Sublime Text</strong> nas mesmas configurações que eu uso, siga as instruções <a href="https://gist.github.com/fdaciuk/8b3269a3d797ee723672" target="_blank" rel="external">desse gist</a>.</p>
-<h2 id="Estrutura_inicial_de_arquivos">Estrutura inicial de arquivos</h2>
-<p>Nós vamos criando os arquivos conforme a necessidade das funcionalidades do tema, enquanto estivermos desenvolvendo. Então vamos começar apenas com a estrutura abaixo:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── .editorconfig</div><div class="line">├── index.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
-
-<p>Já vimos no <a href="http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/" target="_blank" rel="external">artigo de apresentação</a> que essa é a estrutura base de um tema para WordPress. Nós iremos utilizar essa mesma estrutura para dar início ao nosso tema.</p>
-<p>O único arquivo novo aqui é o <code>.editorconfig</code> (se escreve assim mesmo, com um ponto no início). Com esse arquivo, nós conseguimos setar algumas configurações para criação de arquivos, para que não venhamos ter problemas ao usar editores diferentes.</p>
-<p>Vamos usar a seguinte configuração no <code>.editorconfig</code>:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># editorconfig.org</span></div><div class="line"><span class="variable">root =</span> <span class="constant">true</span></div><div class="line">  </div><div class="line">[*]</div><div class="line"><span class="variable">charset =</span> utf-<span class="number">8</span></div><div class="line"><span class="variable">end_of_line =</span> lf</div><div class="line"><span class="variable">indent_size =</span> <span class="number">4</span></div><div class="line"><span class="variable">indent_style =</span> space</div><div class="line"><span class="variable">insert_final_newline =</span> <span class="constant">false</span></div><div class="line"><span class="variable">trim_trailing_whitespace =</span> <span class="constant">true</span></div></pre></td></tr></table></figure>
-
-<p>É necessário instalar o plugin do <em>Editorconfig</em> no seu editor. Para saber mais sobre o <code>.editorconfig</code>, e ver como instalar o plugin para o editor de sua preferência, acesse <a href="http://editorconfig.org/" target="_blank" rel="external">http://editorconfig.org/</a></p>
-<p>Nesse caso, nós definimos que todos os nossos arquivos serão salvos com o charset <strong>utf-8</strong>, o estilo de indentação será com espaços (<code>indent_style = space</code>), com tamanho de indentação de <strong>4 espaços</strong> (<code>indent_size = 4</code>). </p>
-<p> Nos <em>Coding Standards</em> do WordPress, ele diz que devemos utilizar <code>tabs</code>, mas vamos utilizar espaços aqui. Se você for desenvolver algum tema ou plugin para subir no repositório do WP, você precisa seguir todos os <em>Coding Standards</em> corretamente, nesse caso, usando <em>tab</em> ao invés de <em>space</em>.</p>
-<p>Não se preocupe, você não vai precisar ficar dando 4 espaços a todo momento que for indentar. A diferença é que, ao pressionar a tecla <em>TAB</em>, o que o seu editor faz é usar quatro <code>\s</code> (que representa espaços) ao invés de usar um <code>\t</code> (que representa tabulação) com tamanho 4.</p>
-<p>A vantagem de utilizar espaços é que, em qualquer editor, o tamanho da indentação vai permanecer sempre igual. Se utilizarmos tab, esse tamanho pode variar para 8 ou 16, dependendo da configuração do editor (não tenho certeza se com o <em>editorconfig</em> instalado o problema continua, mas por garantia, vamos usar espaços).</p>
-<p>Também não iremos deixar adicionar uma nova linha ao final do arquivo quando salvar (<code>insert_final_newline = false</code>), e iremos remover espaços em branco sobrando no final das linhas (<code>trim_trailing_whitespace = true</code>).</p>
-<h2 id="Quebrando_a_index">Quebrando a index</h2>
-<p>Feito isso, vamos quebrar nossa index em algumas partes. O header e o footer serão padrão para todos os templates, então iremos separá-los em mais dois arquivos: <code>header.php</code> e <code>footer.php</code>.</p>
-<p>O <code>header.php</code> vai ficar assim:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"pt-br"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Meu tema WordPress<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> wp_head() <span class="preprocessor">?&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>E o <code>footer.php</code> assim:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> wp_footer() <span class="preprocessor">?&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>Isso porque nós iremos incluir o mesmo header e o footer em cada arquivo do nosso tema, então separamos em <em>partials</em> para que possamos aproveitá-los sem ficar repetindo código. Mais pra frente você vai entender a vantagem de usar o header e o footer dessa forma, quebrando a abertura / fechamento da tag <code>body</code>.</p>
-<p>Temos duas novidades aqui: as funções <code>wp_head()</code> e <code>wp_footer()</code>. Elas são usadas pelo WordPress como <em>hooks</em> (ganchos), para <strong>pendurar</strong> alguns códigos. Veremos o uso disso em posts futuros.</p>
-<p>E a nossa <code>index</code> vai ficar assim:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> get_header() <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post() <span class="preprocessor">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="title">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"&lt;?php the_permalink() ?&gt;"</span>&gt;</span></div><div class="line">            <span class="php"><span class="preprocessor">&lt;?php</span> the_title() <span class="preprocessor">?&gt;</span></span></div><div class="line">        <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line">  </div><div class="line">    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">        <span class="php"><span class="preprocessor">&lt;?php</span> the_content() <span class="preprocessor">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endwhile</span>; <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">else</span> : <span class="preprocessor">?&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span>Não existem posts.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endif</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> get_footer() <span class="preprocessor">?&gt;</span></span></div></pre></td></tr></table></figure>
-
-<p>Nas linhas <code>1</code>e <code>19</code> podemos ver duas funções novas: <code>get_header()</code> e <code>get_footer()</code>. Essas funções incluem os arquivos <code>header.php</code> e <code>footer.php</code> no nosso template.</p>
-<p><em>Mas o PHP já tem uma função <code>include</code>. Por que eu não posso usar o <code>include</code> do PHP ao invés das funções do WordPress?</em></p>
-<p>Em breve iremos falar sobre <em>hooks</em>, e, além da questão <strong>segurança</strong>, é por causa desses <em>hooks</em> que iremos utilizar as funções do WordPress, ao invés de usar o <code>include</code> puro do PHP.</p>
-<p><em>E como o WordPress sabe que são esses arquivos que ele precisa incluir, sendo que você acabou de criá-los?</em></p>
-<p>O WordPress tem algumas funções que nos ajudam no desenvolvimento do nosso tema. Você pode ler mais sobre isso acessando <a href="http://codex.wordpress.org/Theme_Development" target="_blank" rel="external">http://codex.wordpress.org/Theme_Development</a></p>
-<p>Falaremos com mais detalhes sobre cada uma dessas funções nos próximos posts.</p>
-<p>Nossa estrutura inicial separada em partials está legal! Mas ainda temos um problema se segurança.</p>
-<p><em>Ah é? Onde?</em></p>
-<p>Tente acessar o arquivo <code>index.php</code> diretamente pela URL do seu navegador, por exemplo.<br>O index do meu tema está localizado em:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost/<span class="number">00</span>-opensource/wordpress/wp-content/themes/wordpress-base-theme-da2k.com.br/index.php</div></pre></td></tr></table></figure>
-
-<p>Será mostrado esse erro: </p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Fatal error: <span class="operator"><span class="keyword">Call</span> <span class="keyword">to</span> undefined <span class="keyword">function</span> get_header() <span class="keyword">in</span> /<span class="keyword">var</span>/www/<span class="number">00</span>-opensource/wordpress/wp-content/themes/wordpress-base-theme-da2k.com.br/<span class="keyword">index</span>.php <span class="keyword">on</span> line <span class="number">1</span></span></div></pre></td></tr></table></figure>
-
-<p>O erro diz: <em>Chamada para função indefinida get_header() no arquivo [caminho do arquivo] na linha 1</em></p>
-<p><em>Por que deu esse erro?</em></p>
-<p>A função não está definida, porque o WordPress começa a ser carregado a partir da <code>index.php</code> na raiz do projeto. Ali ele vai incluindo os arquivos necessários para que todas as funções funcionem corretamente. Como nós adicionamos as funções <code>get_header()</code> e <code>get_footer()</code> em nossa <code>index</code>, ao acessar o arquivo diretamente, o WordPress não foi carregado, e o PHP acusou esse erro.</p>
-<p>E o problema maior é que ele mostra o caminho completo até o arquivo onde deu o erro! Se alguém com más intenções fizer isso no seu site em produção, ele poderá ter facilmente o caminho desde a raiz do seu servidor, até a sua pasta pública, para tentar atacar de alguma forma.</p>
-<p><em>E como podemos contornar isso?</em></p>
-<p>Se você abrir o arquivo <code>index.php</code> do WordPress, na raiz do projeto, vai ver que ele faz um include (usando <code>require</code>) do arquivo <code>wp-blog-header.php</code>, e nesse arquivo, tem um include para <code>wp-load.php</code>. Nesse arquivo, você verá uma constante definida chamada <code>ABSPATH</code> no início do arquivo.</p>
-<p>Como é o WordPress que define essa constante, nós podemos deduzir que, se essa constante não estiver definida, então o WordPress não foi carregado. Logo, podemos ir um pouco mais longe e deduzir que, se esse erro foi mostrado, algum safado-sem-vergonha está tentando acessar nosso site pra tentar encontrar alguma brecha de segurança, correto? Então vamos nos previnir disso! </p>
-<p>O código abaixo você precisa colocar em todos os arquivos <code>.php</code> dentro do SEU TEMA, ok?</p>
-<p>Por enquanto temos só o <code>header.php</code>, <code>footer.php</code> e <code>index.php</code>, mas quando tivermos mais, esse código deve ser adicionado a cada um deles, ok?</p>
-<p>Coloque no início do arquivo:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span></span></div><div class="line"><span class="keyword">if</span>( ! defined( <span class="string">'ABSPATH'</span> ) ) {</div><div class="line">    header( <span class="string">'Location: /'</span> );</div><div class="line">    <span class="keyword">exit</span>;</div><div class="line">}</div><div class="line"><span class="preprocessor">?&gt;</span></div></pre></td></tr></table></figure>
-
-<p><em>O que nós estamos fazendo aqui?</em></p>
-<p>Estamos verificando se o <code>ABSPATH</code> está definido. Se não tiver, vamos redirecionar o safado-sem-vergonha para a home do site! O <code>exit</code> diz ao PHP para parar de renderizar qualquer coisa que vier após esse código, pois se o redirect demorasse, ainda seria possível ver o erro na tela.</p>
-<p>E se a constante <code>ABSPATH</code> estiver definida, o PHP pula esse <code>if</code> e segue o fluxo normal :)</p>
-<p>Se o seu site estiver em uma subpasta, você precisa adicionar ela no lugar da barra. No meu caso, está em <code>/00-opensource/wordpress/</code>, então vou colocar dessa forma:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span></span></div><div class="line"><span class="keyword">if</span>( ! defined( <span class="string">'ABSPATH'</span> ) ) {</div><div class="line">    header( <span class="string">'Location: /00-opensource/wordpress/'</span> );</div><div class="line">    <span class="keyword">exit</span>;</div><div class="line">}</div><div class="line"><span class="preprocessor">?&gt;</span></div></pre></td></tr></table></figure>
-
-<p>Agora tente acessar novamente o arquivo <code>index.php</code> e você será redirecionado para a home :D</p>
-<p>Não esqueça que isso deve ser feito em todo arquivo <code>.php</code> do seu tema, ok?</p>
-<p>Por hoje é só! No próximo post daremos continuidade!</p>
-<p>Até lá!</p>
-<blockquote>
-
-<p><strong>Link para o índice:</strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
-<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</a></p>
-</blockquote>
-
-
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/serie-wp-01.jpg" alt="WordPress"></p>
-<p>Este é o primeiro post da nossa série <strong>Como criar temas para WordPress</strong>! É importante salientar que todos os posts serão <em>hands on</em>, então não adianta ficar só lendo! Para aprender de verdade é preciso praticar! Siga todos os passos citados nos posts, crie os arquivos conforme as orientações, que em breve você estará apto para criar seu próprio tema, combinado? ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
-    
-      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
     
   </entry>
   
