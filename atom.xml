@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-01T02:13:05.312Z</updated>
+  <updated>2015-02-02T09:32:32.093Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,16 +15,69 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Segredos do Github - Licenças]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/"/>
+    <id>http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/</id>
+    <published>2015-02-02T00:00:00.000Z</published>
+    <updated>2015-02-02T09:31:44.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-license.png" alt=""></p>
+<p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
+<p>Quem responde a essas perguntas são as <em>licenças!</em></p>
+<a id="more"></a>
+
+<p>Não vou entrar em muitos detalhes sobre as licenças, pois o post é sobre como o Github nos ajuda com elas. Mas é necessário uma pequena divagação sobre o assunto.</p>
+<p>Quando você coloca seu código na internet, ele fica disponível para milhões de pessoas o aproveitarem como bem entenderem. Algumas irão utilizar seu código, citando que você é o autor, outras simplesmente irão copiá-lo, como se fossem os próprios autores. Enfim, internet é terra de ninguém, e todos sabemos disso. </p>
+<p>O que te “garante” algo é a licença que você disponibiliza junto com seu código. Existem vários tipos de licenças.</p>
+<p>Algumas das mais utilizadas conhecidas são: MIT, GPL, LGPL, BSD.</p>
+<p><em>Mas o que o Github tem a ver com isso?</em></p>
+<p>Quando você cria um novo repositório, o Github te dá a opção de adicionar uma licença:</p>
+<p><img src="/uploads/2015/02/license.png" alt=""></p>
+<p><em>Mas eu já tenho meu projeto, e não tenho uma licença ainda? Como escolher?</em></p>
+<p>Se você já criou seu repositório, você tem a opção de criar o arquivo de licença através do link <code>+</code>, mostrado abaixo:</p>
+<p><img src="/uploads/2015/02/new-license.png" alt=""></p>
+<p>Será mostrada a tela para criar um novo arquivo:</p>
+<p><img src="/uploads/2015/02/new-file-github.png" alt=""></p>
+<p>Coloque o nome do arquivo como <code>LICENSE</code>, e veja a mágica acontecer:</p>
+<p><img src="/uploads/2015/02/new-file-github-license.png" alt=""></p>
+<p>Agora é só escolher uma licença, e salvar. Ao fazer isso, já fica registrado um novo commit com a alteração :D</p>
+<p>Para saber mais sobre lincenças, segue alguns links interessantes:</p>
+<ul>
+<li><a href="http://ccsl.ime.usp.br/files/relatorio-licencas.pdf" target="_blank" rel="external">http://ccsl.ime.usp.br/files/relatorio-licencas.pdf</a></li>
+<li><a href="http://www.dirceupauka.com/entendendo-a-licenca-mit" target="_blank" rel="external">http://www.dirceupauka.com/entendendo-a-licenca-mit</a></li>
+</ul>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/uploads/2015/02/github-secrets-license.png" alt=""></p>
+<p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
+<p>Quem responde a essas perguntas são as <em>licenças!</em></p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - mantendo a ordem no seu repositório]]></title>
     <link href="http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/"/>
     <id>http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/</id>
     <published>2015-02-01T00:00:00.000Z</published>
-    <updated>2015-01-31T14:10:00.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="/uploads/2015/01/github-secrets-clean-repository.png" alt=""></p>
+    <updated>2015-02-02T09:14:26.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-clean-repository.png" alt=""></p>
 <p>Uma dica simples, mas funcional!</p>
 <a id="more"></a>
 
-<p>Quando vocẽ cria uma nova feature para um projeto open source, normalmente você cria uma branch nova, faz suas alterações, faz o <em>push</em> para o seu repositório nessa nova branch e então envia um <em>pull request</em>.</p>
+<p>Quando você cria uma nova feature para um projeto open source, normalmente você cria uma branch nova, faz suas alterações, faz o <em>push</em> para o seu repositório nessa nova branch e então envia um <em>pull request</em>.</p>
 <p>Quando o <em>pull request</em> é aceito, você faz o <a href="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/" target="_blank" rel="external">processo para atualizar o seu repositório com o repositório forkado</a> e tudo fica 100% como deveria!</p>
 <p>Mas, com o tempo, sua lista de branchs no <strong>Github</strong> vai aumentando, mas você não vai mais precisar delas, pois seu <em>pull request</em> já foi aceito. Como limpar a sujeira e deixar somente as branchs que você precisa?</p>
 <h2 id="Removendo_branchs_do_Github">Removendo branchs do Github</h2>
@@ -48,7 +101,7 @@
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="/uploads/2015/01/github-secrets-clean-repository.png" alt=""></p>
+    <![CDATA[<p><img src="/uploads/2015/02/github-secrets-clean-repository.png" alt=""></p>
 <p>Uma dica simples, mas funcional!</p>
 ]]>
     
@@ -1750,79 +1803,6 @@
       <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
     
       <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Javascript - Brincando com números]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/"/>
-    <id>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</id>
-    <published>2015-01-13T00:00:00.000Z</published>
-    <updated>2015-01-14T02:41:59.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/js-numbers.jpg" alt=""></p>
-<p>Quando você começa a estudar sobre a <a href="https://insidejavascript.wordpress.com/2011/09/16/lexical-structure/" target="_blank" rel="external">estrutura léxica</a> da <strong>Javascript</strong>, você vê que as “bizarrices” encontradas em <a href="http://wtfjs.com/" target="_blank" rel="external">http://wtfjs.com/</a> são todos comportamentos esperados! Hoje eu quero mostrar algo simples, mas que pode te ajudar bastante ao trabalhar com números em Javascript :D</p>
-<a id="more"></a>
-
-<h2 id="Conversão_de_números">Conversão de números</h2>
-<p>Em um projeto que você recebe uma entrada de dados do usuário, você precisa sempre tratar essa entrada, para saber se está realmente recebendo o valor que você espera. Vamos dar um exemplo, onde você tem uma função chamada <code>sum()</code>, que soma dois números. Esses dois números são recebidos através de dois <code>inputs</code> (vou deixar tudo em um só arquivo somente para exemplificar. Eviter fazer isso):</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Somar dois números<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Somar dois números<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">data-js</span>=<span class="value">"number1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">data-js</span>=<span class="value">"number2"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"button"</span>&gt;</span>Somar<span class="tag">&lt;/<span class="title">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-js</span>=<span class="value">"result"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">document</span>.querySelector( <span class="string">'button'</span> )</div><div class="line">      .addEventListener( <span class="string">'click'</span>, handleClick, <span class="literal">false</span> );</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleClick</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> number1 = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="number1"]'</span>).value;</div><div class="line">      <span class="keyword">var</span> number2 = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="number2"]'</span>).value;</div><div class="line">      </div><div class="line">      <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="result"]'</span> ).innerHTML = sum( number1, number2 );</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">      <span class="keyword">return</span> number1 + number2;</div><div class="line">    }</div><div class="line">  <span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>Esse seria mais ou menos o código que você iria utilizar para fazer a soma, correto?</p>
-<p>Entre com dois números nos inputs e veja o resultado:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/sum-1-2-12.png" alt="Somar &quot;1&quot; e &quot;2&quot; é igual a &quot;12&quot;"></p>
-<p>Eu entrei com os números <code>1</code> e <code>2</code> e tive como resultado… <strong><code>12</code></strong>!</p>
-<p><em>12??? Como assim?</em></p>
-<p>O Javascript recebeu os valores dos inputs da forma como eles vieram. Normalmente esses valores vêm como <code>String</code>. Se você conhece a estrutura léxica do Javascript, você sabe que, ao usar o sinal de <code>+</code>, ele pode tanto somar números, como concatenar strings. Quando você tem ao menos uma string em uma das partes, ele assume que o que você quer fazer é concatenar.</p>
-<p><em>Então como eu posso resolver isso?</em></p>
-<p>Precisamos converter esses valores de string para números, antes de efetuar a soma!</p>
-<h2 id="parseInt()">parseInt()</h2>
-<p>Temos a função <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt" target="_blank" rel="external">parseInt()</a>, que recebe dois parâmetros: o primeiro é o valor que você quer converter para um número inteiro, e o segundo, um número inteiro que vai representar o tipo de conversão que será feito. </p>
-<p>No nosso caso, vamos utilizar como segundo parâmetro o número <code>10</code>, que representa números decimais.</p>
-<p>Mudamos um pouco nossa função de soma para ficar assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  <span class="keyword">var</span> DECIMAL = <span class="number">10</span>;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">parseInt</span>( number1, DECIMAL ) + <span class="built_in">parseInt</span>( number2, DECIMAL );</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Como já vimos em posts anteriores, vamos utilizar boas práticas de <em>Clean Code</em>. Coloquei o número 10 em uma variável chamada <code>DECIMAL</code> (tudo maiúsculo, pois é convenção para constantes), para que saibamos o que significa esse segundo parâmetro. </p>
-<p>A boa prática é nunca usar números mágicos, mas sempre atribuí-los à uma constante.</p>
-<p>Agora tente novamente fazer a soma:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/sum1-2-3.png" alt="Soma 1 + 2 = 3"></p>
-<p>E temos o resultado correto :)</p>
-<p>É importante frisar o uso do segundo parâmetro do <code>parseInt()</code>, pois isso pode alterar o resultado final. Por exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">parseInt</span>( <span class="string">'10px'</span> ); <span class="comment">// 10</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'10px'</span>, <span class="number">10</span> ); <span class="comment">// 10</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'0x'</span> ); <span class="comment">// NaN</span></div><div class="line"><span class="built_in">parseInt</span>( <span class="string">'0x'</span>, <span class="number">10</span> ) <span class="comment">// 0</span></div></pre></td></tr></table></figure>
-
-<p>Como você pode ver nos exemplos acima, o <code>parseInt()</code> converte a string baseado nos primeiros caracteres, se o segundo parâmetro não for passado.</p>
-<p>No primeiro e segundo exemplos, ele retorna <code>10</code>. Mas no terceiro e quarto exemplos, temos uma pequena diferença.</p>
-<p>Quando uma string é iniciada em <code>0X</code> ou <code>0x</code>, e o segundo parâmetro não for definido, o <code>parseInt()</code> entende que essa é uma notação <strong>hexadecimal</strong>, e tenta converter ao inteiro equivalente. Como <code>0x</code> é só o início da string, não retorna número algum, o resultado é <code>NaN</code> (Not a number).</p>
-<p>No quarto exemplo, nós dizemos ao <code>parseInt()</code> que a string deve ser interpretada como <strong>decimal</strong>. Então ele apresenta o resultado esperado.</p>
-<p>Muito cuidado com isso ;)</p>
-<blockquote>
-<p>Para ver todos os tipos disponíveis para usar no segundo parâmetro, acesse <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt" target="_blank" rel="external">https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/parseInt</a>.</p>
-</blockquote>
-<h2 id="O_operador_+">O operador <code>+</code></h2>
-<p>Mas tem outra malandragem pouco conhecida para a conversão de números: o sinal de <code>+</code>. Quando usado antes de uma string, e a string for um número, ele converte o tipo dessa string para <code>Number</code>! Duvida? Mude a função <code>sum()</code> novamente:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">( number1, number2 )</span> </span>{</div><div class="line">  number1 = +number1;</div><div class="line">  number2 = +number2;</div><div class="line">  <span class="keyword">return</span> number1 + number2;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Convertemos os valores para número antes de somar e… agora nosso resultado está correto novamente!</p>
-<h2 id="Conclusão">Conclusão</h2>
-<p>A intenção desse post foi mostrar o uso do operador <code>+</code>, que facilita muito na hora de converter <code>String</code> para <code>Number</code>, além de frisar a importância do uso do segundo parâmetro no <code>parseInt()</code>.</p>
-<p>Gostou da dica? Ficou com alguma dúvida? Comente! </p>
-<p>Até a próxima!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/js-numbers.jpg" alt=""></p>
-<p>Quando você começa a estudar sobre a <a href="https://insidejavascript.wordpress.com/2011/09/16/lexical-structure/" target="_blank" rel="external">estrutura léxica</a> da <strong>Javascript</strong>, você vê que as “bizarrices” encontradas em <a href="http://wtfjs.com/" target="_blank" rel="external">http://wtfjs.com/</a> são todos comportamentos esperados! Hoje eu quero mostrar algo simples, mas que pode te ajudar bastante ao trabalhar com números em Javascript :D</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="tips" scheme="http://blog.da2k.com.br/tags/tips/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
   </entry>
   
