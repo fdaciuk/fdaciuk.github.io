@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-02T09:32:32.093Z</updated>
+  <updated>2015-02-03T02:58:34.113Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,12 +15,71 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[WordPress - Tipos de conteúdo]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
+    <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
+    <published>2015-02-03T00:00:00.000Z</published>
+    <updated>2015-02-03T02:58:20.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
+<p><em>Como eu posso estruturar meus arquivos dentro do WordPress? Ele tem algum padrão a ser seguido? Posso criar arquivos novos, ou só posso usar os arquivos padrão?</em></p>
+<p>Essas são algumas dúvidas quando se está começando a criar temas para WP. Mas infelizmente isso é uma realidade em alguns CMS: você precisa usar uma estrutura engessada, e acaba não podendo gerenciar seus arquivos da melhor forma.</p>
+<p>Hoje vamos ver como o WordPress se comporta com relação a isso!</p>
+<a id="more"></a>
+
+<h2 id="Tipos_de_conteúdo">Tipos de conteúdo</h2>
+<p>Como vocế já deve saber, o WordPress teve seu início como uma plataforma de blog. E até hoje ele ainda serve muito bem para esse propósito. Mas hoje, ele é muito mais do que isso: o WordPress é um framework que te oferece várias ferramentas para que você crie qualquer tipo de conteúdo que possa ser gerenciado pelo <a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/" target="_blank" rel="external">Painel</a>!</p>
+<p>O WordPress trata todo tipo de conteúdo como “post”. Então, quando nos referirmos a “post”, estaremos falando de qualquer tipo de conteúdo que tenha alguma “postagem”, e não os posts de um blog, - a menos que isso seja dito - ok?</p>
+<p>O WordPress tem 5 tipos de conteúdo por padrão:</p>
+<ul>
+<li>Post (Post Type “post”);</li>
+<li>Page (Post Type “page”);</li>
+<li>Attachment (Post Type “attachment”);</li>
+<li>Revision(Post Type “revision”);</li>
+<li>Navigation Menu (Post Type “nav_menu_item”).</li>
+</ul>
+<h3 id="Post">Post</h3>
+<p><strong>Post</strong> é um tipo de conteúdo normalmente usado para mostrar conteúdo de um blog. Eles são ordenados por data decrescente, ou seja, o mais recente aparece primeiro. Eles também são usados para criação dos <a href="http://codex.wordpress.org/Glossary#Feed" target="_blank" rel="external">Feeds</a>.</p>
+<h3 id="Pages">Pages</h3>
+<p><strong>Page</strong> é um tipo de conteúdo parecido com o <strong>post</strong>, mas ele é ordenado hierarquicamente, ou seja, páginas podem ter páginas filhas, e sua ordem, mostrada no site, é a ordem que você deixa no Painel. <strong>Pages</strong> ainda podem usar <strong>template pages</strong>, onde você pode criar um template e setar como uma página irá ficar.</p>
+<h3 id="Attachment">Attachment</h3>
+<p><strong>Attachment</strong> é um tipo especial de conteúdo, que guarda informações de todos os arquivos que foram “subidos” para o site.</p>
+<h3 id="Revision">Revision</h3>
+<p><strong>Revision</strong> é usado para fazer revisões de posts. Nesse tipo de conteúdo, os posts que são automaticamente salvos, ficam com uma cópia anterior nesse tipo de conteúdo, para que, se você fez alguma besteira, você tenha a opção de voltar algumas versões atrás.</p>
+<h3 id="Navigation_Menu">Navigation Menu</h3>
+<p>Esse é um tipo de conteúdo que guarda informações de cada item do menu no <strong>Painel</strong>.</p>
+<h2 id="Custom_Post_Types_(CPT)">Custom Post Types (CPT)</h2>
+<p><strong>Tipos de post personalizados</strong> ou <strong>Tipos de conteúdo personalizados</strong>, são os tipos de conteúdo que você pode criar. Quando você cria um CPT, você escolhe se ele vai ser no estilo dos <strong>posts</strong> (cronológico) ou no estilo de <strong>pages</strong> (hierárquico). Entraremos mais a fundo nesse assunto quando estivermos criando nossos próprios “Post Types” (ou “Content Types”, como alguns gostam de chamar)! o/</p>
+<p>No próximo post, veremos como é a estrutura de templates do WordPress, e como isso afeta os tipos de conteúdo!</p>
+<p>Até a pŕóxima! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
+<p><em>Como eu posso estruturar meus arquivos dentro do WordPress? Ele tem algum padrão a ser seguido? Posso criar arquivos novos, ou só posso usar os arquivos padrão?</em></p>
+<p>Essas são algumas dúvidas quando se está começando a criar temas para WP. Mas infelizmente isso é uma realidade em alguns CMS: você precisa usar uma estrutura engessada, e acaba não podendo gerenciar seus arquivos da melhor forma.</p>
+<p>Hoje vamos ver como o WordPress se comporta com relação a isso!</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
+    
+      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - Licenças]]></title>
     <link href="http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/"/>
     <id>http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/</id>
     <published>2015-02-02T00:00:00.000Z</published>
-    <updated>2015-02-02T09:31:44.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-license.png" alt=""></p>
+    <updated>2015-02-03T02:18:35.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-license.png" alt=""></p>
 <p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
 <p>Quem responde a essas perguntas são as <em>licenças!</em></p>
 <a id="more"></a>
@@ -31,14 +90,14 @@
 <p>Algumas das mais utilizadas conhecidas são: MIT, GPL, LGPL, BSD.</p>
 <p><em>Mas o que o Github tem a ver com isso?</em></p>
 <p>Quando você cria um novo repositório, o Github te dá a opção de adicionar uma licença:</p>
-<p><img src="/uploads/2015/02/license.png" alt=""></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/license.png" alt=""></p>
 <p><em>Mas eu já tenho meu projeto, e não tenho uma licença ainda? Como escolher?</em></p>
 <p>Se você já criou seu repositório, você tem a opção de criar o arquivo de licença através do link <code>+</code>, mostrado abaixo:</p>
-<p><img src="/uploads/2015/02/new-license.png" alt=""></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/new-license.png" alt=""></p>
 <p>Será mostrada a tela para criar um novo arquivo:</p>
-<p><img src="/uploads/2015/02/new-file-github.png" alt=""></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/new-file-github.png" alt=""></p>
 <p>Coloque o nome do arquivo como <code>LICENSE</code>, e veja a mágica acontecer:</p>
-<p><img src="/uploads/2015/02/new-file-github-license.png" alt=""></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/new-file-github-license.png" alt=""></p>
 <p>Agora é só escolher uma licença, e salvar. Ao fazer isso, já fica registrado um novo commit com a alteração :D</p>
 <p>Para saber mais sobre lincenças, segue alguns links interessantes:</p>
 <ul>
@@ -52,7 +111,7 @@
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="/uploads/2015/02/github-secrets-license.png" alt=""></p>
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-license.png" alt=""></p>
 <p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
 <p>Quem responde a essas perguntas são as <em>licenças!</em></p>
 ]]>
@@ -72,7 +131,7 @@
     <link href="http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/"/>
     <id>http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/</id>
     <published>2015-02-01T00:00:00.000Z</published>
-    <updated>2015-02-02T09:14:26.000Z</updated>
+    <updated>2015-02-02T09:34:15.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-clean-repository.png" alt=""></p>
 <p>Uma dica simples, mas funcional!</p>
 <a id="more"></a>
@@ -1707,102 +1766,6 @@
       <category term="workflow" scheme="http://blog.da2k.com.br/tags/workflow/"/>
     
       <category term="frontend" scheme="http://blog.da2k.com.br/categories/frontend/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WordPress: o arquivo functions.php]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/"/>
-    <id>http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</id>
-    <published>2015-01-14T00:00:00.000Z</published>
-    <updated>2015-01-20T02:59:11.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-functions-php.jpg" alt="WordPress - O arquivo functions.php"></p>
-<p>O <strong>functions.php</strong> é o canal que liga o seu tema a todas as coisas legais que o WP tem a oferecer! Códigos personalizados, estrutura de arquivos… todo tipo de manipulação que você imagina no seu site WordPress, você faz através do <strong>functions.php</strong>. Vamos conhecê-lo? ;)</p>
-<a id="more"></a>
-
-<p>O <strong>functions.php</strong> é um arquivo que fica na raiz do seu tema WordPress, e ele é carregado antes de qualquer arquivo de template do tema.</p>
-<p>Sem perder tempo, vamos então criá-lo!</p>
-<h2 id="Segurança">Segurança</h2>
-<p>Uma pequena pausa para tratar de uma melhoria para segurança: no post anterior, comentei sobre como previnir acesso direto a um arquivo do seu tema, lembra? Pois o <strong>Pedro Diaz</strong> fez um comentário muito relevante:</p>
-<blockquote>
-<p>Uma dúvida: eu poderia colocar este código em um arquivo .php e somente dar um include nos outros arquivos?</p>
-</blockquote>
-<p>E a resposta é: SIM, é possível!</p>
-<p>Para manter a organização do nosso tema, vamos adicionar nossos códigos personalizados em um diretório chamado <code>functions</code>, e criar um arquivo chamado <code>security.php</code>. A estrutura de arquivos do nosso tema deve estar assim:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── .editorconfig</div><div class="line">├── footer.php</div><div class="line">├── functions</div><div class="line">│   └── security.php</div><div class="line">├── functions.php</div><div class="line">├── header.php</div><div class="line">├── index.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
-
-<p>Criamos o arquivo <code>functions.php</code> e o arquivo <code>security.php</code>. Então transferimos nosso código que faz o redirect para esse arquivo <code>security.php</code>:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="keyword">if</span>( ! defined( <span class="string">'ABSPATH'</span> ) ) {</div><div class="line">    header( <span class="string">'Location: /00-opensource/wordpress/'</span> );</div><div class="line">    <span class="keyword">exit</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p><em>Ei, você esqueceu de fechar o <code>&lt;?php</code></em>?</p>
-<p>Não! Essa é uma boa prática no desenvolvimento com PHP. Sempre que você tiver um arquivo que só irá conter código PHP, você não precisa (e não deve) fechar com a tag <code>?&gt;</code>, pois, se esse arquivo tiver a tag de fechamento e você esquecer um espaço ou quebra de linha após essa tag; e ele for carregado antes de qualquer outro arquivo que faça alguma modificação de <code>headers</code>, você terá um erro como esse:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">Erro</span> PHP: Cannot modify header information – headers already sent</div></pre></td></tr></table></figure>
-
-<p>Agora você precisa somente fazer o include do arquivo <code>security.php</code> nos seus arquivos, ao invés de adicionar o <code>if</code> todo :)</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor">&lt;?php</span> <span class="keyword">require_once</span> <span class="string">'functions/security.php'</span> <span class="preprocessor">?&gt;</span></div></pre></td></tr></table></figure>
-
-<p>Só não esqueça que, se você estiver dentro de diretórios, vai precisar passar o caminho relativo ao arquivo. Mas use isso como você achar melhor, ok? ;)</p>
-<h2 id="Suporte_para_funcionalidades">Suporte para funcionalidades</h2>
-<p>O WordPress tem várias <a href="http://codex.wordpress.org/Function_Reference/add_theme_support" target="_blank" rel="external">funcionalidades legais</a>, mas que não vêm ativadas por padrão, pois consumiriam muitos recursos se estivessem ativadas e você não precisasse delas. Então, você ativa essas funcionalidades conforme a sua necessidade.</p>
-<p>Se você olhar no Painel, por exemplo, na tela de edição de post, você terá as seguintes opções:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/single-post.png" alt="Single post"></p>
-<p>Vamos adicionar a funcionalidade de <strong>Post Thumbnails</strong>, para que possamos adicionar uma imagem ao nosso post. No seu <code>functions.php</code>:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="keyword">require_once</span> <span class="string">'functions/security.php'</span>;</div><div class="line">  </div><div class="line">add_action( <span class="string">'after_setup_theme'</span>, <span class="string">'setup_features'</span> );</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setup_features</span><span class="params">()</span> </span>{</div><div class="line">    add_theme_support( <span class="string">'post-thumbnails'</span> );</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>E temos como resultado:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/featured-image.png" alt="Imagem destacada"></p>
-<p>Agora temos essa nova funcionalidade disponível para todos os nossos <em>tipos de conteúdo</em>!</p>
-<p><em>E como eu uso isso?</em></p>
-<p>Na sua <code>index.php</code>, adicione o código:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post() ?&gt;</div><div class="line">    &lt;?php</div><div class="line">        <span class="keyword">if</span>( has_post_thumbnail() ) {</div><div class="line">            the_post_thumbnail();</div><div class="line">        }</div><div class="line">    ?&gt;</div><div class="line">    <span class="comment">// ...</span></div></pre></td></tr></table></figure>
-
-<p>Adicionei o loop novamente (linha 1) só para que você possa se encontrar para saber onde deve adicionar o código.</p>
-<p><strong>Uma outra boa prática que preciso comentar aqui:</strong> percebeu que eu abri novamente uma tag PHP, ainda que na linha de cima eu já tinha uma linha só com código PHP? Por que eu não utilizei o mesmo escopo, deixando o código como abaixo?</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( have_posts() ) : <span class="keyword">while</span>( have_posts() ) : the_post();</div><div class="line">    <span class="keyword">if</span>( has_post_thumbnail() ) {</div><div class="line">        the_post_thumbnail();</div><div class="line">    }</div><div class="line">    ?&gt;</div><div class="line">    <span class="comment">// ...</span></div></pre></td></tr></table></figure>
-
-<p>Bom, por essa implementação, você já pode perceber que o alinhamento das indentações não bate. Procure sempre manter as indentações bem definidas. Sempre que você precisar fazer uma validação PHP usando <code>if</code> por exemplo, e vai precisar imprimir código HTML dentro desse <code>if</code>, use a notação com <code>:</code>, dessa forma, e abra um novo escopo de tags:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( verifique_alguma_coisa() ) : ?&gt;</div><div class="line">    &lt;h1&gt;Título&lt;/h1&gt;</div><div class="line">&lt;?php <span class="keyword">endif</span> ?&gt;</div></pre></td></tr></table></figure>
-
-<p>Dessa forma o código fica muito mais limpo e consistente, pois você sabe onde o <code>if</code> termina, por causa do <code>endif</code>. Se usar com chaves, já fica ruim de visualizar:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php <span class="keyword">if</span>( verifique_alguma_coisa() ) { ?&gt;</div><div class="line">    &lt;h1&gt;Título&lt;/h1&gt;</div><div class="line">&lt;?php } ?&gt;</div></pre></td></tr></table></figure>
-
-<p>Da mesma forma, quando precisamos adicionar um código PHP indentado, mas precisamos fechar o PHP para adicionar HTML. Quando indentar, abrar um novo escopo de tags <code>&lt;?php ?&gt;</code>, para que seu código se mantenha o mais legível possível.</p>
-<p><strong>Fica a dica!</strong></p>
-<p>Agora temos duas novas funções: <code>has_post_thumbnail()</code> e <code>the_post_thumbnail()</code>. Os nomes são bem semânticos, não?</p>
-<p><code>has_post_thumbnail()</code> retorna <code>true</code> se o post tem uma imagem destacada, e <code>false</code> se não houver. E <code>the_post_thumbnail()</code>, gera uma tag de imagem, com a imagem destacada que você adicionar no seu post. Se não houver imagem, continua a exibição normal do post :)</p>
-<p>Para ver o código completo até aqui, siga esse repositório: <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br</a></p>
-<p>Lembra que comentamos sobre <em>hooks</em>? No código mais acima, podemos ver o hook <code>after_setup_theme</code> em ação.</p>
-<p><em>Como ele funciona?</em></p>
-<p>Os desenvolvedores do WordPress “largam” algumas chamadas aos <em>hooks</em> (ganchos) no meio do <em>core</em> do WP, para que você possa “pendurar” os seus próprios códigos. Nesse caso, dizemos ao WordPress que, quando chegar no local do código onde está posicionado o <em>hook</em> <code>after_setup_theme</code>, ele deve executar a função <code>setup_features</code>, passada no segundo parâmetro.</p>
-<p>O WordPress tem vários <em>hooks</em> no <em>core</em>, que podem ser encontrados aqui: <a href="http://codex.wordpress.org/Plugin_API/Hooks" target="_blank" rel="external">http://codex.wordpress.org/Plugin_API/Hooks</a></p>
-<p>Mas não se preocupe com isso agora. Veremos isso mais a fundo nos próximos posts, inclusive aprenderemos como criar nossos próprios hooks :D</p>
-<p>Bom, paramos por aqui, mas saiba que estamos apenas começando! Temos muitas coisas legais ainda pra ver! Continue acompanhando a série!</p>
-<p>Até o próximo post :D</p>
-<blockquote>
-
-<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
-<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</a></p>
-<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</a></p>
-</blockquote>
-
-
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-functions-php.jpg" alt="WordPress - O arquivo functions.php"></p>
-<p>O <strong>functions.php</strong> é o canal que liga o seu tema a todas as coisas legais que o WP tem a oferecer! Códigos personalizados, estrutura de arquivos… todo tipo de manipulação que você imagina no seu site WordPress, você faz através do <strong>functions.php</strong>. Vamos conhecê-lo? ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
-    
-      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
     
   </entry>
   
