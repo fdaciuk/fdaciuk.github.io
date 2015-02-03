@@ -3,12 +3,12 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
-    <lastmod>2015-02-03T02:58:20.000Z</lastmod>
+    <lastmod>2015-02-03T03:01:07.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/</loc>
-    <lastmod>2015-02-03T02:18:35.000Z</lastmod>
+    <lastmod>2015-02-03T02:59:08.000Z</lastmod>
   </url>
   
   <url>
@@ -42,12 +42,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
     <lastmod>2015-01-25T11:03:17.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
     <lastmod>2015-01-25T11:03:17.000Z</lastmod>
   </url>
   
@@ -72,12 +72,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</loc>
     <lastmod>2015-01-21T02:32:05.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</loc>
     <lastmod>2015-01-21T02:32:05.000Z</lastmod>
   </url>
   
@@ -107,18 +107,13 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
-    <lastmod>2015-01-15T01:40:05.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</loc>
     <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</loc>
-    <lastmod>2015-01-14T02:41:59.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
+    <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   
   <url>
@@ -127,22 +122,22 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</loc>
+    <lastmod>2015-01-14T02:41:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -157,7 +152,17 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -167,22 +172,17 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
