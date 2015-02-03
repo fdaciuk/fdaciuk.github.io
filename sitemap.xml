@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
+    <lastmod>2015-02-03T03:12:02.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
-    <lastmod>2015-02-03T03:04:10.000Z</lastmod>
+    <lastmod>2015-02-03T03:06:06.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</loc>
-    <lastmod>2015-02-03T03:03:53.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
-    <lastmod>2015-02-03T03:03:32.000Z</lastmod>
+    <lastmod>2015-02-03T03:06:06.000Z</lastmod>
   </url>
   
   <url>
@@ -132,12 +132,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-03T03:04:35.629Z</updated>
+  <updated>2015-02-03T03:12:34.440Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,9 +19,9 @@
     <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
     <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
     <published>2015-02-03T00:00:00.000Z</published>
-    <updated>2015-02-03T03:03:32.000Z</updated>
+    <updated>2015-02-03T03:12:02.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
-<p><em>O que eu posso fazer com WordPres?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
+<p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
 <p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
 <a id="more"></a>
 
@@ -65,7 +65,7 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
-<p><em>O que eu posso fazer com WordPres?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
+<p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
 <p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
 ]]>
     
@@ -1250,7 +1250,7 @@
     <link href="http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/"/>
     <id>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</id>
     <published>2015-01-21T00:00:00.000Z</published>
-    <updated>2015-02-03T03:03:53.000Z</updated>
+    <updated>2015-02-03T03:06:06.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part2.jpg" alt="WordPress: Conhecendo o Painel"></p>
 <p>Na primeira parte vimos várias funcionalidades do Painel do WP. Nesse post vamos continuar a saga e desvendar tudo o que podemos usar para personalizar nosso tema! Bora? ;)</p>
 <a id="more"></a>
