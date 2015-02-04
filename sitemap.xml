@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</loc>
+    <lastmod>2015-02-04T03:16:25.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
-    <lastmod>2015-02-03T03:12:02.000Z</lastmod>
+    <lastmod>2015-02-03T03:14:00.000Z</lastmod>
   </url>
   
   <url>
@@ -107,12 +112,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
     <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</loc>
     <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   
@@ -132,12 +137,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
