@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-04T03:17:53.910Z</updated>
+  <updated>2015-02-05T03:05:05.804Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,104 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Segredos do Github - Hospedando seu site no Github]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"/>
+    <id>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</id>
+    <published>2015-02-05T00:00:00.000Z</published>
+    <updated>2015-02-05T03:04:53.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
+<p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
+<p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
+<a id="more"></a>
+
+<p>Uma ponto importante que eu preciso frizar antes de começar: o <strong>Github</strong> só aceita arquivos estáticos. Não adianta querer usar o <strong>Github</strong> para hospedar um site em <strong>PHP</strong> que não vai funcionar, blz? ;)</p>
+<p>Ele só vai executar os arquivos <em>estáticos</em> gerados - HTML, CSS e JS, imagens, fontes, etc.</p>
+<p>Para se aproveitar dessa feature, você pode cair em duas situações:</p>
+<p>1) <em>Tenho um site pessoal que quero hospedar no <strong>Github</strong></em><br>2) <em>Tenho um projeto Open Source, em um repositório dentro da minha conta, e quero criar um site para ele.</em></p>
+<h2 id="Site_Pessoal">Site Pessoal</h2>
+<p>Para o seu site pessoal, você deve fazer o seguinte:</p>
+<ul>
+<li>crie um novo repositório na sua conta, com o seguinte padrão:</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">username.github.io</div></pre></td></tr></table></figure>
+
+<p>Obviamente, trocando <code>username</code> pelo seu nome de usuário no <strong>Github</strong>. No meu caso, ficou <code>fdaciuk.github.io</code>. O repositório é esse: <a href="https://github.com/fdaciuk/fdaciuk.github.io/" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/</a></p>
+<p>Fazendo isso, você pode subir seus arquivos estáticos para a branch <strong>master</strong> normalmente, e acessá-los pelo endereço:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://username.github.io</div></pre></td></tr></table></figure>
+
+<p>De novo: trocando o <code>username</code> pelo seu nome de usuário!</p>
+<h2 id="Site_para_projeto_open_source">Site para projeto open source</h2>
+<p>Se você já tem um projeto open source no Github, e quer criar um site para ele, você precisa fazer o seguinte:</p>
+<ul>
+<li>crie uma branch orfã - em branco - chamada <code>gh-pages</code>.</li>
+<li>suba os arquivos para essa branch.</li>
+</ul>
+<p>Para criar uma nova branch em branco, use o seguinte comando:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --orphan gh-pages</div></pre></td></tr></table></figure>
+
+<p>Só lembre de <strong>NUNCA</strong> fazer merge dessa branch na master. Os arquivos das duas branches serão completamente diferentes! Na <code>master</code>, ficarão os arquivos do seu projeto. Na <code>gh-pages</code>, somente os estáticos do site do projeto.</p>
+<p>Você conseguirá acessar pelo seguinte endereço:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://username.github.io/repositoryname</div></pre></td></tr></table></figure>
+
+<p>Não precisa falar do <code>username</code> de novo, né? :P</p>
+<p>E troque o <code>repositoryname</code> pelo nome do seu repositório.</p>
+<p>Para facilitar, veja como fica o acesso ao site do <a href="https://github.com/wpbrasil/odin" target="_blank" rel="external">Odin</a>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://wpbrasil.github.io/odin</div></pre></td></tr></table></figure>
+
+<p>Onde temos a conta da organização <code>wpbrasil</code> e o repositório cadastrado como <code>odin</code>. Fácil, não?</p>
+<h2 id="Usando_um_domínio_personalizado">Usando um domínio personalizado</h2>
+<p>Para usar um domínio personalizado, você só precisa criar um arquivo chamado <code>CNAME</code>, - na branch onde estão os estáticos do seus site - e o conteúdo dele deve ser o seu domínio. </p>
+<p>O <code>CNAME</code> do meu blog está com o conteúdo assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blog.da2k.com.br</div></pre></td></tr></table></figure>
+
+<p>Não precisa do <code>http(s)</code>.</p>
+<p>Depois você só precisa configurar para que o seu domínio aponte para os DNS do <strong>Github</strong>. Para fazer isso, siga esse tutorial: <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="external">https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/</a></p>
+<p>Você pode usar tanto um domínio principal, como um subdomínio :)</p>
+<h2 id="Geradores_de_estáticos">Geradores de estáticos</h2>
+<p>E já respondendo à pergunta: Não! Você não precisa criar todos os seus arquivos HTML manualmente!</p>
+<p>Existem milhares de ferramentas que geram estáticos, onde você escreve em uma linguagem específica - NodeJS, Ruby, etc - e o framework gera toda a estrutura dos estáticos para você. Aqui no blog, eu estou usando o <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>. Inclusive, fiz <a href="http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/" target="_blank" rel="external">um post</a>, mostrando como é simples usá-lo para começar um blog :D</p>
+<p>O <strong>Hexo</strong> tem um plugin que gera um <code>sitemap.xml</code> e um <code>atom.xml</code>, onde fica o feed. </p>
+<p>Eu posso criar templates para as páginas, usando <strong>EJS</strong>, <strong>Jade</strong> ou <strong>Markdown</strong>, posso usar <strong>Stylus</strong> para pré-processar o CSS, me aproveitar de partials para não ficar repetindo código, etc. No final, tudo é compilado para HTML, CSS e JS.</p>
+<p>E para escrever os posts, posso utilizar <strong>Markdown</strong> &lt;3</p>
+<p>Ele gera também uma estrutura de URLs amigáveis, que você pode escolher. Ou seja, é perfeito para SEO :)</p>
+<p>Se quiser outras opções de geradores de estáticos, veja esses links:</p>
+<ul>
+<li><a href="https://github.com/pinceladasdaweb/Static-Site-Generators" target="_blank" rel="external">https://github.com/pinceladasdaweb/Static-Site-Generators</a></li>
+<li><a href="https://www.staticgen.com/" target="_blank" rel="external">https://www.staticgen.com/</a></li>
+<li><a href="https://staticsitegenerators.net/" target="_blank" rel="external">https://staticsitegenerators.net/</a></li>
+<li><a href="http://www.modernstatic.com/" target="_blank" rel="external">http://www.modernstatic.com/</a></li>
+</ul>
+<p><em>Have fun</em> :)</p>
+<h2 id="Jekyll">Jekyll</h2>
+<p>Um outro detalhe importante, é que o <strong>Github</strong> consegue compilar seus estáticos sozinho, se você estiver usando o <strong>Jekyll</strong>. O <a href="https://github.com/willianjusten" target="_blank" rel="external">Willian Justen</a> já mostrou porque é interessante usar o <strong>Jekyll</strong> com o <strong>Github</strong>, nesse <a href="http://willianjusten.com.br/por-que-usar-jekyll/" target="_blank" rel="external">ótimo post</a>! E <a href="http://willianjusten.com.br/perguntas-e-respostas-jekyll/" target="_blank" rel="external">nesse outro</a> ele tira algumas dúvidas sobre a ferramenta. Vale muito a leitura!</p>
+<p><em>That’s all folks!</em> Até a próxima :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
+<p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
+<p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Git e Github - Do clone ao pull request]]></title>
     <link href="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"/>
     <id>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</id>
     <published>2015-02-04T00:00:00.000Z</published>
-    <updated>2015-02-04T03:16:25.000Z</updated>
+    <updated>2015-02-05T01:50:38.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/git-clone-pull-request.jpg" alt=""></p>
 <p>Você tem uma conta no Github, acompanha projetos open source, gostaria de colaborar com algum deles, mas não sabe como fazer? Como criar uma nova feature? Como preparar o repositório? O que é <em>git push</em>?</p>
 <p>Se você tem essas dúvidas, esse artigo é pra você!</p>
@@ -122,7 +215,7 @@
 <p><img src="http://blog.da2k.com.br/uploads/2015/02/contributors-list.png" alt="Lista de colaboradores"></p>
 <p>Como você viu na imagem acima, aparece quantos commits você fez, quanto código você adicionou e quanto você removeu!</p>
 <h2 id="Manter_o_projeto_sempre_atualizado">Manter o projeto sempre atualizado</h2>
-<p>Para que o seu projeto tenha sempre as últimas alterações do repositório principal, siga as instruções <a href="">desse link</a>.</p>
+<p>Para que o seu projeto tenha sempre as últimas alterações do repositório principal, siga as instruções <a href="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/" target="_blank" rel="external">desse link</a>.</p>
 <p>Agora você não tem mais desculpas para não colaborar com algum projeto no <strong>Github</strong>! Cada vez que você colabora para um projeto <em>open source</em>, você ganha conhecimento e cresce como profissional! Siga a <a href="https://www.youtube.com/watch?v=dkLCn2S03ws" target="_blank" rel="external">dica do E.T. Bilú</a>: busque conhecimento!</p>
 <p>Ficou alguma dúvida? Comente!</p>
 <blockquote>
@@ -1787,64 +1880,6 @@
     <summary type="html">
     <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-tables-and-task-lists.jpg" alt="Segredos do Github"></p>
 <p>Continuando a série, hoje vou mostrar algumas outras features legais que você pode usar no Github: <strong>tabelas</strong> e <strong>task lists</strong>!</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="markdown" scheme="http://blog.da2k.com.br/tags/markdown/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - Variáveis]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/"/>
-    <id>http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/</id>
-    <published>2015-01-16T00:00:00.000Z</published>
-    <updated>2015-01-17T03:02:25.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github.png" alt="Segredos do Github"></p>
-<p>Hoje estarei dando início a uma nova série de posts chamada <strong>Segredos do Github</strong>. Essa série trará dicas de coisas <em>secretas</em> que vão dar um <em>up</em> na sua forma de utilizar a rede social mais adorada pelos nerds do mundo todo: o <a href="https://github.com" target="_blank" rel="external">Github</a>!</p>
-<a id="more"></a>
-
-<p>E o primeiro post será sobre… <strong>variáveis</strong>! Isso mesmo! Sabia que é possível utilizar variáveis nos seus arquivos Markdown?</p>
-<p>Vou mostrar como e porque você deveria utilizar!</p>
-<p>Imagine que o seu Markdown tem vários links. Vou dar um exemplo do meu repositório do <a href="https://github.com/fdaciuk/getmodule" target="_blank" rel="external">getmodule</a>:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="header"># Get Module</span></div><div class="line">  </div><div class="line"><span class="blockquote">&gt; Include local NodeJS modules relative to your root path</span></div><div class="line">  </div><div class="line">[<span class="link_label">![NPM version</span>](<span class="link_url">https://badge.fury.io/js/getmodule.svg?style=flat</span>)](<span class="link_url">https://npmjs.org/package/getmodule</span>)</div><div class="line">[<span class="link_label">![Build Status</span>](<span class="link_url">https://travis-ci.org/fdaciuk/getmodule.svg</span>)](<span class="link_url">https://travis-ci.org/fdaciuk/getmodule</span>)</div><div class="line">[<span class="link_label">![Coverage Status</span>](<span class="link_url">https://img.shields.io/coveralls/fdaciuk/getmodule.svg?style=flat</span>)](<span class="link_url">https://coveralls.io/r/fdaciuk/getmodule?branch=master</span>)</div><div class="line">[<span class="link_label">![Code Climate</span>](<span class="link_url">https://codeclimate.com/github/fdaciuk/getmodule/badges/gpa.svg?style=flat</span>)](<span class="link_url">https://codeclimate.com/github/fdaciuk/getmodule</span>)</div><div class="line">[<span class="link_label">![NPM</span>](<span class="link_url">https://nodei.co/npm/getmodule.png?downloads=true&downloadRank=true&stars=true</span>)](<span class="link_url">https://nodei.co/npm/getmodule/</span>)</div></pre></td></tr></table></figure>
-
-<p>Como você pode ver, no início do arquivo <strong>README.md</strong>, eu tenho alguns badges com links apontando para versão do módulo no <a href="https://www.npmjs.com/" target="_blank" rel="external">NPM</a>, Status do <a href="https://travis-ci.com/" target="_blank" rel="external">TravisCI</a>, Status do <a href="http://blog.da2k.com.br/2015/01/07/code-coverage-em-javascript/" target="_blank" rel="external">Code Coverage</a> no <a href="https://coveralls.io/" target="_blank" rel="external">Coveralls</a>, <a href="https://codeclimate.com/" target="_blank" rel="external">Code Climate</a>, etc. </p>
-<p>Isso acaba ficando bastante verboso no seu arquivo e, se você precisar usar a mesma URL em outro lugar do seu <strong>README</strong>, terá que repetí-la.</p>
-<h2 id="Variáveis">Variáveis</h2>
-<p>Mas podemos usar um segredo guardado a sete chaves pelos Ninjas do Github, que são as variáveis! </p>
-<p><em>Tá, fala logo, como que usa isso! ¬¬</em></p>
-<p>Calma, vou dizer :P</p>
-<p>No final do seu arquivo, você coloca as suas variáveis nesse formato:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="link_reference">nome-da-variavel</span>]:<span class="link_url"> valor-da-variavel</span></div></pre></td></tr></table></figure>
-
-<p>E para usar, só fazer assim:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[nome-da-variavel]</div></pre></td></tr></table></figure>
-
-<p>No caso do arquivo Markdown acima, aquele trecho de código ficaria assim:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="header"># Get Module</span></div><div class="line">  </div><div class="line"><span class="blockquote">&gt; Include local NodeJS modules relative to your root path</span></div><div class="line">  </div><div class="line">[<span class="link_label">![NPM version</span>][<span class="link_reference">npm-version-image</span>]][<span class="link_reference">npm-version-url</span>]</div><div class="line">[<span class="link_label">![Build Status</span>][<span class="link_reference">travis-image</span>]][<span class="link_reference">travis-url</span>]</div><div class="line">[<span class="link_label">![Coverage Status</span>][<span class="link_reference">coveralls-image</span>]][<span class="link_reference">coveralls-url</span>]</div><div class="line">[<span class="link_label">![Code Climate</span>][<span class="link_reference">codeclimate-image</span>]][<span class="link_reference">codeclimate-url</span>]</div><div class="line">[<span class="link_label">![NPM</span>][<span class="link_reference">npm-image</span>]][<span class="link_reference">npm-url</span>]</div><div class="line">  </div><div class="line">[<span class="link_reference">npm-version-image</span>]:<span class="link_url"> https://badge.fury.io/js/getmodule.svg?style=flat</span><span class="link_url"></span></div><div class="line">[npm-version-url]: https://npmjs.org/package/getmodule<span class="link_url"></span></div><div class="line">[travis-image]: https://travis-ci.org/fdaciuk/getmodule.svg<span class="link_url"></span></div><div class="line">[travis-url]: https://travis-ci.org/fdaciuk/getmodule<span class="link_url"></span></div><div class="line">[coveralls-image]: https://img.shields.io/coveralls/fdaciuk/getmodule.svg?style=flat<span class="link_url"></span></div><div class="line">[coveralls-url]: https://coveralls.io/r/fdaciuk/getmodule?branch=master<span class="link_url"></span></div><div class="line">[npm-image]: https://nodei.co/npm/getmodule.png?downloads=true&downloadRank=true&stars=true<span class="link_url"></span></div><div class="line">[npm-url]: https://nodei.co/npm/getmodule/<span class="link_url"></span></div><div class="line">[codeclimate-image]: https://codeclimate.com/github/fdaciuk/getmodule/badges/gpa.svg?style=flat<span class="link_url"></span></div><div class="line">[codeclimate-url]: https://codeclimate.com/github/fdaciuk/getmodule</div></pre></td></tr></table></figure>
-
-<p>Da hora não? ;)</p>
-<p>Curtiu? Paia? Comente!</p>
-<h3 id="Update">Update</h3>
-<p>Como algumas pessoas comentaram, isso não é algo específico do Github, mas funciona em alguns outros lugares que seguem a <a href="http://daringfireball.net/projects/markdown/syntax#link" target="_blank" rel="external">especificação do Markdown</a>.</p>
-<p>Ou seja: o foco da série é no Github, mas você pode encontrar também outros lugares onde essas dicas também funcionarão :D</p>
-<p>Até o próximo post falando sobre os <strong>Segredos do Github</strong> :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github.png" alt="Segredos do Github"></p>
-<p>Hoje estarei dando início a uma nova série de posts chamada <strong>Segredos do Github</strong>. Essa série trará dicas de coisas <em>secretas</em> que vão dar um <em>up</em> na sua forma de utilizar a rede social mais adorada pelos nerds do mundo todo: o <a href="https://github.com" target="_blank" rel="external">Github</a>!</p>
 ]]>
     
     </summary>
