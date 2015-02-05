@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</loc>
-    <lastmod>2015-02-05T03:04:53.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</loc>
+    <lastmod>2015-02-05T03:07:54.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</loc>
-    <lastmod>2015-02-05T01:50:38.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</loc>
+    <lastmod>2015-02-05T03:07:54.000Z</lastmod>
   </url>
   
   <url>
@@ -117,12 +117,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</loc>
     <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
     <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   

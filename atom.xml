@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-05T03:05:05.804Z</updated>
+  <updated>2015-02-05T03:12:24.980Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"/>
     <id>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</id>
     <published>2015-02-05T00:00:00.000Z</published>
-    <updated>2015-02-05T03:04:53.000Z</updated>
+    <updated>2015-02-05T03:07:54.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
 <p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
 <p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
@@ -112,7 +112,7 @@
     <link href="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"/>
     <id>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</id>
     <published>2015-02-04T00:00:00.000Z</published>
-    <updated>2015-02-05T01:50:38.000Z</updated>
+    <updated>2015-02-05T03:07:54.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/git-clone-pull-request.jpg" alt=""></p>
 <p>Você tem uma conta no Github, acompanha projetos open source, gostaria de colaborar com algum deles, mas não sabe como fazer? Como criar uma nova feature? Como preparar o repositório? O que é <em>git push</em>?</p>
 <p>Se você tem essas dúvidas, esse artigo é pra você!</p>
