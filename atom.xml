@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-05T03:12:24.980Z</updated>
+  <updated>2015-02-06T01:12:01.890Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,18 +15,105 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Javascript - o operador void]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/"/>
+    <id>http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/</id>
+    <published>2015-02-06T00:00:00.000Z</published>
+    <updated>2015-02-06T01:11:51.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/undefined.png" alt=""></p>
+<p>Você já deve ter visto em alguns links por aí algo como <code>&lt;a href=&quot;javascript:void(0)&quot;&gt;&lt;/a&gt;</code>, não? Mas você sabe para quê usamos o <code>void</code> em Javascript? E sabe quando podemos usá-lo? Vem descobrir :D</p>
+<a id="more"></a>
+
+<p>Segundo a <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/void" target="_blank" rel="external">documentação da MDN</a>:</p>
+<blockquote>
+<p>O operador <code>void</code> avalia uma expressão dada, e retorna undefined.</p>
+</blockquote>
+<p>Ou seja: qualquer valor passado após <code>void</code> será avalidado, mas o valor retornado sempre será <code>undefined</code>.</p>
+<p>Vamos ver na prática como isso funciona. Execute no console:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnOne</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnOne(); <span class="comment">// 1</span></div></pre></td></tr></table></figure>
+
+<p>Agora, se você usar o <code>void</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnUndefined</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">void</span> <span class="number">1</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnUndefined(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+
+<p>O número <code>1</code> é avaliado, mas o valor retornado é <code>undefined</code>.</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/gente-qual-a-necessidade-disso.jpg" alt=""></p>
+<p>Só lembrando que o <code>void</code> não é uma função, e sim um <code>operador</code>. Os parênteses são opcionais.</p>
+<p><em>Não daria para retornar direto <code>undefined</code>?</em></p>
+<p>Nesse caso, sim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnUndefined</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnUndefined(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+
+<p><em>Então pra quê eu vou usar o <code>void</code>?</em></p>
+<p>Javascript é uma linguagem de <em>tipagem fraca</em>, ou <em>tipagem dinâmica</em>. Isso significa que você não precisa dizer ao Javascript que uma variável vai receber um número ou uma string, ou que uma função irá retornar um valor booleano.<br>Você simplesmente atribui valores à variáveis e retorna valores em funções, e o Javascript se vira com o resto.</p>
+<p>Para entender melhor o <code>void</code>, é necessário entender um pouco sobre tipagem.</p>
+<p>Por exemplo: se fossemos escrever um <code>Hello World</code> em Java, ele seria algo assim:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class HelloWorld {</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>( String args[] ) {</div><div class="line">    System.out.println( <span class="string">"Hello World!"</span> );</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>O Java é uma linguagem imperativa, orientada a objetos. Por isso é necessário sempre criar uma <code>class</code> para qualquer coisa que você queira fazer. </p>
+<p>Mas o que eu quero mostrar está na primeira linha dentro da classe:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>( String args[] )</div></pre></td></tr></table></figure>
+
+<p>Essa linha cria um método estático (<code>static</code>), público (<code>public</code>), chamado <code>main</code>, e que não retorna nada (<code>void</code>). Ou seja: posso colocar qualquer código dentro desse método que será executado normalmente. Agora, seu eu colocar no final desse método um <code>return 1</code>, por exemplo, na hora de tentar compilar, vai dar esse erro:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HelloWorld.java:<span class="number">4</span>: error: incompatible types: unexpected <span class="keyword">return</span> value</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">           ^</div><div class="line"><span class="number">1</span> error</div></pre></td></tr></table></figure>
+
+<p>Porque o Java não espera nenhum valor retornado para esse método.</p>
+<p>Enfim, não quero ensinar Java, mas sim mostrar que, para não retornar nenhum valor em linguagens de tipagem forte, é necessário deixar explícito no método o <code>void</code>.</p>
+<p>Em Javascript não precisamos disso, mas tem alguns casos em que ele pode vir a ser útil.</p>
+<p>Exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fillBodyRed</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">document</span>.querySelector( <span class="string">'body'</span> ).style.background = <span class="string">'red'</span>;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHypsterStyle</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( isHypsterStyle() ) {</div><div class="line">    fillBodyRed();</div><div class="line">  }</div><div class="line">}</div><div class="line"></div><div class="line">handleDOM();</div></pre></td></tr></table></figure>
+
+<p>No exemplo acima, executamos a função <code>handleDOM()</code>, que verifica se <code>isHypsterStyle</code> está setado e chama a função <code>fillBodyRed</code>, que preenche o <code>background</code> do <code>body</code> de vermelho.</p>
+<p>A única função que retorna algum valor, é a <code>isHypsterStyle()</code>, para verificar se o estilo foi setado na função <code>handleDOM()</code>.</p>
+<p>Podemos melhorar a função <code>handleDOM()</code>, removendo o <code>if</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  isHypsterStyle() && fillBodyRed();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Ao passar o código acima pelo <a href="http://jshint.com/" target="_blank" rel="external">JSHint</a>, ele vai acusar um <em>warning</em>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Expected an assignment or <span class="function"><span class="keyword">function</span> <span class="title">call</span> <span class="title">and</span> <span class="title">instead</span> <span class="title">saw</span> <span class="title">an</span> <span class="title">expression</span>.</span></div></pre></td></tr></table></figure>
+
+<p>Ou seja: nós estamos utilizando um operador lógico (<code>&amp;&amp;</code>), que normalmente é usado para testar expressões. Uma expressão normalmente retorna um valor. Se a expressão retorna um valor, para me aproveitar desse valor, eu preciso usar um <code>return</code> dentro da <code>function</code>, para que eu possa invocar essa função para obter esse valor, ou então atribuir à uma variável, por exemplo, para que eu possa usar o valor no futuro.</p>
+<p>Como nossa função <code>fillBodyRed()</code> não retorna nada, mas é ela que será executada se <code>isHypsterStyle()</code> for <code>true</code>, precisamos de uma forma de avaliar essa expressão para remover o <em>warning</em>.</p>
+<p>Poderíamos usar o <code>return</code>, mas não faria sentido pois não temos valor a retornar. É aqui que entra o <code>void</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">void</span> ( isHypsterStyle() && fillBodyRed() );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Agora nós avaliamos a expressão e não retornamos nada. Esse é um uso válido do <code>void</code>. </p>
+<h2 id="IIFE">IIFE</h2>
+<p>Como você já deve ter visto no post sobre <a href="http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/" target="_blank" rel="external">invocação de funções</a>, para que uma função anônima seja invocada, ela também precisa ser transformada em uma expressão. Logo, também podemos usar o <code>void</code> nesse caso:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  ...</div><div class="line">}();</div></pre></td></tr></table></figure>
+
+<p>Normalmente quem trabalha com frontend tem seu primeiro contato com uma linguagem de programação através do Javascript, e acabam não entendendo algumas coisas, como é o caso do <code>void</code>. Espero que o seu uso tenha ficado claro :D</p>
+<p>Até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/undefined.png" alt=""></p>
+<p>Você já deve ter visto em alguns links por aí algo como <code>&lt;a href=&quot;javascript:void(0)&quot;&gt;&lt;/a&gt;</code>, não? Mas você sabe para quê usamos o <code>void</code> em Javascript? E sabe quando podemos usá-lo? Vem descobrir :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="void" scheme="http://blog.da2k.com.br/tags/void/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - Hospedando seu site no Github]]></title>
     <link href="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"/>
     <id>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</id>
     <published>2015-02-05T00:00:00.000Z</published>
-    <updated>2015-02-05T03:07:54.000Z</updated>
+    <updated>2015-02-05T21:58:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
 <p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
 <p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
 <a id="more"></a>
 
 <p>Uma ponto importante que eu preciso frizar antes de começar: o <strong>Github</strong> só aceita arquivos estáticos. Não adianta querer usar o <strong>Github</strong> para hospedar um site em <strong>PHP</strong> que não vai funcionar, blz? ;)</p>
-<p>Ele só vai executar os arquivos <em>estáticos</em> gerados - HTML, CSS e JS, imagens, fontes, etc.</p>
+<p>Ele só vai servir os arquivos <em>estáticos</em> gerados - HTML, CSS e JS, imagens, fontes, etc.</p>
 <p>Para se aproveitar dessa feature, você pode cair em duas situações:</p>
 <p>1) <em>Tenho um site pessoal que quero hospedar no <strong>Github</strong></em><br>2) <em>Tenho um projeto Open Source, em um repositório dentro da minha conta, e quero criar um site para ele.</em></p>
 <h2 id="Site_Pessoal">Site Pessoal</h2>
@@ -1831,66 +1918,6 @@
       <category term="amd" scheme="http://blog.da2k.com.br/tags/amd/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - Tabelas e Task lists]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/"/>
-    <id>http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/</id>
-    <published>2015-01-17T00:00:00.000Z</published>
-    <updated>2015-01-19T00:45:12.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-tables-and-task-lists.jpg" alt="Segredos do Github"></p>
-<p>Continuando a série, hoje vou mostrar algumas outras features legais que você pode usar no Github: <strong>tabelas</strong> e <strong>task lists</strong>!</p>
-<a id="more"></a>
-
-<h2 id="Task_lists">Task lists</h2>
-<p>Sabe aquela <em>issue</em> que você abriu no Github e precisa quebrá-la em partes, mas não quer criar uma <em>issue</em> para cada coisa? Você pode usar as <strong>task lists!</strong></p>
-<p>Basta você usar a notação <code>- [ ] Texto da task</code> (com um espaço dentro dos colchetes) para criar um checkbox desmarcado, ou então <code>- [x] Texto da task</code>, para um checkbox marcado. Exemplo:</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">- </span>[ ] Comprar arroz</div><div class="line"><span class="bullet">- </span>[ ] Comprar feijão</div><div class="line"><span class="bullet">- </span>[ ] Comprar batata</div><div class="line"><span class="bullet">- </span>[x] Comprar macarrão</div></pre></td></tr></table></figure>
-
-<p>Que resulta nisso:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/task-list-markdown.png" alt=""></p>
-<p>Agora você não se perde mais xD</p>
-<h2 id="Tabelas">Tabelas</h2>
-<p>Para criar tabelas, também é bem simples:</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alimentos | Preço</div><div class="line"><span class="horizontal_rule">--------- | ------</span></div><div class="line">Arroz     | R$ 10</div><div class="line">Feijão    | R$ 8</div><div class="line">Batata    | R$ 7</div><div class="line">Macarrão  | R$ 8</div></pre></td></tr></table></figure>
-
-<p>O título da tabela é marcado com os traços <code>-</code> abaixo da palavra. O pipe <code>|</code> cria as colunas. Não é necessário alinhar com espaços, mas visualmente fica melhor. Não precisa fazer se tiver preguiça :P</p>
-<p><strong>O resultado:</strong></p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/table.png" alt="Tabela"></p>
-<p><em>O preço ficou estranho alinhado à esquerda. Pra ficar alinhado à direita, tenho que fazer manualmente?</em></p>
-<p>Não! Você consegue alinhar usando <code>:</code> nos traços que ficam abaixo do título da tabela. </p>
-<p>Se usar <code>:</code> no lado esquerdo, o alinhamento será feito à esquerda (padrão);<br>Se usar <code>:</code> no lado direito, o alinhamento será feito à direita;<br>E para centralizar, use dos dois lados.</p>
-<p><strong> Preço alinhado à direita:</strong></p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alimentos | Preço</div><div class="line"><span class="horizontal_rule">--------- | ------:</span></div><div class="line">Arroz     | R$ 10</div><div class="line">Feijão    | R$ 8</div><div class="line">Batata    | R$ 7</div><div class="line">Macarrão  | R$ 8</div></pre></td></tr></table></figure>
-
-<p><strong>Resultado:</strong></p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/table-right.png" alt="Preços alinhados à direita"></p>
-<p><strong>Nome dos alimentos centralizados e preço à direita:</strong></p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alimentos | Preço</div><div class="line">:-------: | ------:</div><div class="line">Arroz     | R$ 10</div><div class="line">Feijão    | R$ 8</div><div class="line">Batata    | R$ 7</div><div class="line">Macarrão  | R$ 8</div></pre></td></tr></table></figure>
-
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/table-center-right.png" alt="Nome dos alimentos centralizados e preços alinhados à direita"></p>
-<p>Era isso! Até o próximo post :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/secrets-of-github-tables-and-task-lists.jpg" alt="Segredos do Github"></p>
-<p>Continuando a série, hoje vou mostrar algumas outras features legais que você pode usar no Github: <strong>tabelas</strong> e <strong>task lists</strong>!</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="markdown" scheme="http://blog.da2k.com.br/tags/markdown/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
     
   </entry>
   

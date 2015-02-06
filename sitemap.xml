@@ -2,12 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</loc>
-    <lastmod>2015-02-05T03:07:54.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/</loc>
+    <lastmod>2015-02-06T01:11:51.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</loc>
+    <lastmod>2015-02-05T21:58:59.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</loc>
     <lastmod>2015-02-05T03:07:54.000Z</lastmod>
   </url>
   
@@ -62,12 +67,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
     <lastmod>2015-01-25T11:03:17.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
     <lastmod>2015-01-25T11:03:17.000Z</lastmod>
   </url>
   
@@ -127,12 +132,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</loc>
     <lastmod>2015-01-14T02:41:59.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/13/javascript-brincando-com-numeros/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/12/wordpress-estrutura-inicial-do-tema-padroes-de-codificacao-e-uso-do-editor/</loc>
     <lastmod>2015-01-14T02:41:59.000Z</lastmod>
   </url>
   
@@ -142,7 +147,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -167,7 +172,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -187,7 +192,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/</loc>
+    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
