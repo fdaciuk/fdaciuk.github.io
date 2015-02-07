@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-06T01:12:01.890Z</updated>
+  <updated>2015-02-07T04:55:07.632Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,98 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Javascript - assistindo mudanças no DOM sem temporizadores]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/07/javascript-assistindo-mudancas-no-dom-sem-temporizadores/"/>
+    <id>http://blog.da2k.com.br/2015/02/07/javascript-assistindo-mudancas-no-dom-sem-temporizadores/</id>
+    <published>2015-02-07T00:00:00.000Z</published>
+    <updated>2015-02-07T04:54:57.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/Oo.png" alt=""></p>
+<p>Existem basicamente duas formas de ouvir mudanças em um elemento no DOM: ou você usa eventos, ou, em casos mais extremos, temporizadores.</p>
+<p><em>Como saber quando um atributo de um elemento mudou? Como saber se os filhos de um elemento foram alterados? Não tem outra forma de fazer, que não seja usando temporizadores?</em></p>
+<p>Sim, tem! E é isso que eu quero mostrar nesse post! Vem comigo :D</p>
+<a id="more"></a>
+
+<p>Quando uma ação é executada em algum elemento do DOM (click, mouseenter, mousedown, etc.), é possível atribuir um evento a esse elemento, que irá disparar uma função de callback para que você possa manipular o elemento no momento certo.</p>
+<p>Mas, e quando temos, por exemplo, uma mudança de atributo? Ou ainda, uma mudança na árvore do DOM, onde você precisa saber exatamente quando esses eventos ocorrem para tomar alguma decisão? Como fazer?</p>
+<p>Provavelmente você logo pensa: </p>
+<p><em><a href="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/" target="_blank" rel="external">Temporizadores</a>! Vou usar um <code>setInterval()</code> ou um <code>setTimeout()</code> recursivo, e, a cada x milissegundos, eu executo uma função :D</em></p>
+<p>Funciona, mas não é a melhor solução. Se você tiver muitos temporizadores executando juntos, você pode acabar deixando sua aplicação lenta, e até travar o navegador do usuário!</p>
+<p><em>Como eu posso então resolver isso de forma elegante?</em></p>
+<h2 id="MutationObserver">MutationObserver</h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank" rel="external">MutationObserver</a> nos dá um caminho para reagir à mudanças no DOM. Ele foi projetado para substituir o <a href="https://developer.mozilla.org/en-US/docs/DOM/Mutation_events" target="_blank" rel="external">Mutation Events</a>, que foi definido na especificação de Eventos do DOM 3.</p>
+<p>O <code>MUtationObserver</code> é um construtor, e funciona de forma parecida com o <code>addEventListener</code>, com a diferença que ele não é atribuído mais de uma vez por elemento, se for utilizada a mesma instância.</p>
+<p>Com o <code>addEventListener</code>, se você atribuir duas vezes um listener para o evento de <code>click</code>, ao clicar nesse elemento, a função de callback será disparada duas vezes. Isso não acontece com o <code>MutationObserver</code>. Independente de quantas vezes você atribuí-lo ao mesmo elemento, o callback executará só uma vez.</p>
+<h2 id="Construtor">Construtor</h2>
+<p>Para começarmos a observar as mudanças em um elemento, primeiro precisamos instanciar o construtor:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> observer = <span class="keyword">new</span> MutationObserver( callback );</div></pre></td></tr></table></figure>
+
+<p>A função de <em>callback</em> é executada a cada mudança no DOM, e ela pode receber dois argumentos: o primeiro é um array de objetos, cada um do tipo <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver#MutationRecord" target="_blank" rel="external">MutationRecord</a>. O segundo é uma instância do <code>MutationObserer</code>.</p>
+<h2 id="Métodos_da_instância">Métodos da instância</h2>
+<h3 id="observe()"><code>observe()</code></h3>
+<p>O <code>observe()</code> registra a instância do <code>MutationObserver</code> para receber notificações do DOM para um nó específico:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observer.observe( target, options );</div></pre></td></tr></table></figure>
+
+<p><strong>Parâmetro target</strong>:</p>
+<p>O <code>target</code> é o nó que será observado por mudanças.</p>
+<p>O <code>options</code> é um objeto que especifíca as mudanças que devem ser observadas.</p>
+<p>Por exemplo:</p>
+<p>Se eu quiser verificar quando um nó descendente (filho) for adicionado ou removido, ou quando um atributo for adicionado / alterado ou removido, eu posso usar da seguinte maneira:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"mydiv"</span> <span class="attribute">data-js</span>=<span class="value">"div"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="div"]'</span> );</div><div class="line"><span class="keyword">var</span> observer = <span class="keyword">new</span> MutatioObserver( handleMutationObserver );</div><div class="line"><span class="keyword">var</span> config = { childList: <span class="literal">true</span>, attributes: <span class="literal">true</span> };</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMutationObserver</span><span class="params">( mutations )</span> </span>{</div><div class="line">  mutations.forEach(<span class="function"><span class="keyword">function</span><span class="params">(mutation)</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( mutation.type );</div><div class="line">  });</div><div class="line">}</div><div class="line">  </div><div class="line">observer.observe( target, config );</div></pre></td></tr></table></figure>
+
+<p>No meu HTML, adicionei uma div com um atributo <code>data-js=&quot;div&quot;</code> e uma classe <code>mydiv</code>.</p>
+<p>No JS, atribuímos esse nó para a variável <code>target</code>.<br>A variável <code>observer</code> será nosso observador. Então instanciamos o <code>MutationObserver</code> nessa varíável, passando como parâmetro a função de callback <code>handleMutationObserver</code>.</p>
+<p>Depois criamos mais uma variável que receberá as configurações do que deve ser observado no elemento.<br><code>childList</code> verifica mudanças nos filhos do nó correspondente. Se algum nó for adicionado ou removido do nó principal (<code>target</code>), será disparada a função de callback. Isso é válido também para nós de texto, não precisa ser somente tags.</p>
+<p><code>attributes</code> observa os atributos do elemento. Se algo mudar, o callback também é disparado.</p>
+<p>Para ver todos os parâmetros que você pode utilizar, consulte <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver#MutationObserverInit" target="_blank" rel="external">esse link</a>.</p>
+<p>Faça o teste, jogando o código acima no seu console! :D<br>Só troque o <code>target</code> para um elemento válido :)</p>
+<p>Se você não quiser mais observar um elemento, pode usar o método <code>disconnect()</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observer.disconnect();</div></pre></td></tr></table></figure>
+
+<h2 id="Compatibilidade_de_browsers">Compatibilidade de browsers</h2>
+<p>Por ser algo relativamente novo, o <code>MutationObserver</code> só funciona em browsers modernos:</p>
+<ul>
+<li>Chrome - 18+;</li>
+<li>Firefox - 14+;</li>
+<li>IE - 11+;</li>
+<li>Opera - 15+;</li>
+<li>Safari - 6+;</li>
+</ul>
+<h2 id="Polyfill">Polyfill</h2>
+<p>Para funcionar em todos os browsers, você pode usar um polyfill, feito com temporizadores. Não é o mais recomendado, mas funciona. O polyfill você encontra <a href="https://github.com/megawac/MutationObserver.js" target="_blank" rel="external">nesse link</a>.</p>
+<p>É possível fazer muita coisa com o MutationObserver. Recomendo que você dê uma lida na documentação completa dele aqui: <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver</a></p>
+<p>Até a próxima! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/Oo.png" alt=""></p>
+<p>Existem basicamente duas formas de ouvir mudanças em um elemento no DOM: ou você usa eventos, ou, em casos mais extremos, temporizadores.</p>
+<p><em>Como saber quando um atributo de um elemento mudou? Como saber se os filhos de um elemento foram alterados? Não tem outra forma de fazer, que não seja usando temporizadores?</em></p>
+<p>Sim, tem! E é isso que eu quero mostrar nesse post! Vem comigo :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="mutation observer" scheme="http://blog.da2k.com.br/tags/mutation-observer/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Javascript - o operador void]]></title>
     <link href="http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/"/>
     <id>http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/</id>
     <published>2015-02-06T00:00:00.000Z</published>
-    <updated>2015-02-06T01:11:51.000Z</updated>
+    <updated>2015-02-07T00:42:06.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/undefined.png" alt=""></p>
 <p>Você já deve ter visto em alguns links por aí algo como <code>&lt;a href=&quot;javascript:void(0)&quot;&gt;&lt;/a&gt;</code>, não? Mas você sabe para quê usamos o <code>void</code> em Javascript? E sabe quando podemos usá-lo? Vem descobrir :D</p>
 <a id="more"></a>
@@ -43,7 +130,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnUndefined</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnUndefined(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
 
 <p><em>Então pra quê eu vou usar o <code>void</code>?</em></p>
-<p>Javascript é uma linguagem de <em>tipagem fraca</em>, ou <em>tipagem dinâmica</em>. Isso significa que você não precisa dizer ao Javascript que uma variável vai receber um número ou uma string, ou que uma função irá retornar um valor booleano.<br>Você simplesmente atribui valores à variáveis e retorna valores em funções, e o Javascript se vira com o resto.</p>
+<p>Javascript é uma linguagem de <em>tipagem fraca</em> e <em>dinâmica</em>. Isso significa que você não precisa dizer ao Javascript que uma variável vai receber um número ou uma string, ou que uma função irá retornar um valor booleano.<br>Você simplesmente atribui valores à variáveis e retorna valores em funções, e o Javascript se vira com o resto.</p>
 <p>Para entender melhor o <code>void</code>, é necessário entender um pouco sobre tipagem.</p>
 <p>Por exemplo: se fossemos escrever um <code>Hello World</code> em Java, ele seria algo assim:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class HelloWorld {</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>( String args[] ) {</div><div class="line">    System.out.println( <span class="string">"Hello World!"</span> );</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
@@ -69,7 +156,7 @@
 <p>Ao passar o código acima pelo <a href="http://jshint.com/" target="_blank" rel="external">JSHint</a>, ele vai acusar um <em>warning</em>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Expected an assignment or <span class="function"><span class="keyword">function</span> <span class="title">call</span> <span class="title">and</span> <span class="title">instead</span> <span class="title">saw</span> <span class="title">an</span> <span class="title">expression</span>.</span></div></pre></td></tr></table></figure>
 
-<p>Ou seja: nós estamos utilizando um operador lógico (<code>&amp;&amp;</code>), que normalmente é usado para testar expressões. Uma expressão normalmente retorna um valor. Se a expressão retorna um valor, para me aproveitar desse valor, eu preciso usar um <code>return</code> dentro da <code>function</code>, para que eu possa invocar essa função para obter esse valor, ou então atribuir à uma variável, por exemplo, para que eu possa usar o valor no futuro.</p>
+<p>Ou seja: nós estamos utilizando um operador lógico (<code>&amp;&amp;</code>), em <em>short circuit</em>, que normalmente é usado para testar expressões. Uma expressão normalmente retorna um valor. Se a expressão retorna um valor, para me aproveitar desse valor, eu preciso usar um <code>return</code> dentro da <code>function</code>, para que eu possa invocar essa função para obter esse valor, ou então atribuir à uma variável, por exemplo, para que eu possa usar o valor no futuro.</p>
 <p>Como nossa função <code>fillBodyRed()</code> não retorna nada, mas é ela que será executada se <code>isHypsterStyle()</code> for <code>true</code>, precisamos de uma forma de avaliar essa expressão para remover o <em>warning</em>.</p>
 <p>Poderíamos usar o <code>return</code>, mas não faria sentido pois não temos valor a retornar. É aqui que entra o <code>void</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">void</span> ( isHypsterStyle() && fillBodyRed() );</div><div class="line">}</div></pre></td></tr></table></figure>
@@ -1797,127 +1884,6 @@
       <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
     
       <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[RequireJS - Carregando Javacript sob demanda]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"/>
-    <id>http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/</id>
-    <published>2015-01-18T00:00:00.000Z</published>
-    <updated>2015-01-18T14:11:37.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/requirejs.png" alt="RequireJS"></p>
-<p>Quando você tem uma aplicação onde vai usar muito código Javascript, é sempre importante pensar na performance. Mas além disso, para que sua aplicação possa escalar, seu código precisa ser modular.</p>
-<p>Nesse momento surgem as dúvidas:<br><em>- Escrevo todo o meu código em um arquivo só, e minifico para não sobrecarregar os requests do browser?</em><br><em>- Separo em vários arquivos para facilitar o desenvolvimento, sem me preocupar com a quantidade de requests http?</em></p>
-<p><em>Qual a melhor solução?</em></p>
-<a id="more"></a>
-
-<p>A resposta correta é: depende do seu projeto. Você vai precisar medir isso e ver o que é mais viável no seu caso. O problema que temos hoje é que, quando você adiciona vários scripts no seu app, ao baixar um arquivo <code>css</code> ou <code>js</code>, o browser bloqueia a renderização do navegador até que o arquivo seja baixado e parseado. Feito isso, a renderização continua, e faz o mesmo ao encontrar o próximo script.</p>
-<p>Isso deixa sua aplicação muito lenta, pois cada request pode levar em torno de 20ms a 120ms, dependendo do tamanho do arquivo, para executar esse processo. Se saber mais sobre performance, e porque isso acontece, leia <a href="http://csswizardry.com/2013/01/front-end-performance-for-web-designers-and-front-end-developers/" target="_blank" rel="external">este artigo.</a>.</p>
-<h2 id="RequireJS">RequireJS</h2>
-<p>Mas ao carregarmos nossos scripts assincronamente, o browser não bloqueia a renderização, mas faz o download e parse dos arquivos em segundo plano, disponibilizando-os assim que estiverem prontos.</p>
-<p>E o <a href="http://requirejs.org/" target="_blank" rel="external"><strong>RequireJS</strong></a> nos ajuda exatamente com isso: usando uma estrutura modular, baseada no <a href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/" target="_blank" rel="external">AMD</a>, você usa <em>Dependency Injection</em>, para que os scripts necessários sejam carregados de forma assincrona, sob demanda, ou seja, você só vai carregar um arquivo quando realmente precisar dele!</p>
-<p>A configuração inicial do RequireJS é um pouco chata, mas vou mostrar o passo-a-passo para que você possa utilizar ele em seus projetos sem maiores problemas :D</p>
-<h2 id="Obtendo_o_RequireJS">Obtendo o RequireJS</h2>
-<p>Você pode baixar o RequireJS à partir <a href="http://requirejs.org/docs/download.html#requirejs" target="_blank" rel="external">desse link</a>. Pode baixar a <a href="http://requirejs.org/docs/release/2.1.15/minified/require.js" target="_blank" rel="external">versão minificada aqui</a>.</p>
-<p>Com o Require em mãos, vamos criar a seguinte estrutura de diretórios:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── index.html</div><div class="line">└── js</div><div class="line">    ├── App.js</div><div class="line">    ├── boot.js</div><div class="line">    ├── controllers</div><div class="line">    │   └── HomeController.js</div><div class="line">    └── vendor</div><div class="line">        ├── jquery.js</div><div class="line">        ├── lodash.js</div><div class="line">        └── require.js</div></pre></td></tr></table></figure>
-
-<p>No diretório <code>js/vendor/</code> é onde iremos centralizar <em>libs</em> de terceiros. Baixe o <a href="http://jquery.com/" target="_blank" rel="external">jQuery</a> e a <a href="https://lodash.com/" target="_blank" rel="external">LoDash</a>, e adicione nesse diretório.</p>
-<p>Na <code>index.html</code>:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"pt-br"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>RequireJS<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">data-main</span>=<span class="value">"js/boot"</span> <span class="attribute">src</span>=<span class="value">"js/vendor/require.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
-
-<p>Se você reparar na linha <code>9</code>, onde adicionamos o script do RequireJS, temos um atributo <code>data-main</code>. Esse atributo diz ao Require que, quando ele for baixado, esse é o arquivo que deve ser executado: <code>js/boot.js</code>. Então é nesse arquivo que nós iremos fazer nossas configurações iniciais. </p>
-<p>O Require faz a adição do <code>.js</code> no final do arquivo, então sempre chame-o sem a extensão.</p>
-<p>Se você abrir a aba <code>Network</code> no seu navegador, com a <code>index.html</code> do nosso projeto aberta, pode constatar que os dois arquivos foram baixados corretamente:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/bootjs.png" alt="boot.js"></p>
-<p>Agora no <code>js/boot.js</code>, vamos iniciar as configurações:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>([ <span class="string">'vendor/jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'jQuery carregado!'</span>, $( <span class="built_in">document</span> ) );</div><div class="line">  });</div><div class="line">})();</div></pre></td></tr></table></figure>
-
-<p>O <strong>RequireJS</strong> tem 3 funções:</p>
-<ul>
-<li><code>require()</code> / <code>requirejs()</code> - Injeta um arquivo;</li>
-<li><code>define()</code> - Cria um componente no padrão AMD.</li>
-</ul>
-<p>Para fazer a injeção de dependências, você pode usar tanto o <code>require()</code> quanto o <code>requirejs()</code>, que fazem exatamente a mesma coisa. </p>
-<p><em>E pra quê duas funções que fazem a mesma coisa?</em></p>
-<p>Porque você pode estar usando alguma outra lib que use a função <code>require()</code>. Nesse caso, o <strong>RequireJS</strong> não sobrescreve essa função, mas te dá a opção de usar <code>requirejs()</code> no lugar, mantendo tudo sob controle :)</p>
-<p>A sintaxe das funções <code>require()</code> e <code>requirejs()</code> é a seguinte:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>( deps, callback );</div></pre></td></tr></table></figure>
-
-<p>E a sintaxe da função <code>define()</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">define( <span class="string">'moduleName'</span>, deps, callback );</div></pre></td></tr></table></figure>
-
-<p>A única diferença das funções <code>require()</code> e <code>requirejs()</code> para a função <code>define()</code>, é que na <code>define()</code> você pode - opcionalmente - adicionar o nome do seu módulo.</p>
-<p><em>E como saber quando usar <code>define</code> e quando usar <code>require</code> ou <code>requirejs</code>?</em></p>
-<p>A regra basicamente é essa:</p>
-<ul>
-<li><code>define</code> será usado sempre no início de novos arquivos - levando em consideração que cada módulo será um arquivo;</li>
-<li><code>require</code> ou <code>requirejs</code>, se você precisar injetar uma dependência no corpo de um módulo já existente.</li>
-</ul>
-<p>Ainda confuso? Quando estivermos criando nossos módulos, você vai entender melhor :)</p>
-<h2 id="Entendendo_os_parâmetros">Entendendo os parâmetros</h2>
-<p>O parâmetro <code>moduleName</code>, na função <code>define()</code>, é o nome do seu módulo.</p>
-<p>No parâmetro <code>deps</code>, você vai passar um array de dependências. Coloque o caminho completo dos arquivos, tomando como base o caminho do arquivo chamado no atributo <code>data-main</code> do seu script. No nosso caso, o <code>js/boot.js</code>. E não é necessário adicionar o <code>.js</code> no final do arquivo.</p>
-<p><strong>Nota:</strong> ainda que você vá utilizar somente uma dependência, é necessário utilizar a notação de array. Se não houver dependências (quando utilizar o <code>define()</code>), esse parâmetro é opcional. Nesse caso, passe somente a função de callback. E se você não tiver dependências e precisar retornar, por exemplo, somente um objeto, você pode passar ele diretamente para a função <code>define()</code>, sem precisar instanciar a função de callback:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">define({</div><div class="line">  color: <span class="string">'black'</span>,</div><div class="line">  size: <span class="string">'large'</span></div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p><em>Quer dizer que só no <code>require()</code> e <code>requirejs()</code> as dependências são obrigatórias?</em></p>
-<p>Se não há a necessidade de injetar dependências, então você não precisará do <code>require</code> ;)</p>
-<p>E o parâmetro <code>callback</code> é uma função que será executada assim que todas as dependências forem resolvidas (ou um objeto, como mostrado acima).</p>
-<h2 id="require-config()"><code>require.config()</code></h2>
-<p>As funções <code>require</code> e <code>requirejs</code> - a partir daqui vou parar de citar as duas. Quando eu me referir a <code>require</code>, estou falando das duas, ok? ;) - têm um método <code>config()</code>, onde você pode configurar algumas coisas para facilitar a injeção de dependências. Vamos adicionar essas configurações no nosso <code>js/boot.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>.config({</div><div class="line">    baseUrl: <span class="string">'./js'</span>,</div><div class="line">    paths: {</div><div class="line">      jquery: [</div><div class="line">        <span class="string">'https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min'</span>,</div><div class="line">        <span class="string">'vendor/jquery'</span></div><div class="line">      ],</div><div class="line">      lodash: <span class="string">'vendor/lodash'</span></div><div class="line">    }</div><div class="line">  });</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'jQuery carregado!'</span>, $( <span class="built_in">document</span> ) );</div><div class="line">  });</div><div class="line">})();</div></pre></td></tr></table></figure>
-
-<p>Primeiro vou explicar o parâmetro na função de callback do <code>require()</code>.</p>
-<h2 id="Parâmetros_do_callback">Parâmetros do callback</h2>
-<p>Quando uma dependência é injetada, o retorno dessa dependência pode ser obtido a partir dos parâmetros na função de callback. Os parâmetros do callback devem ser passados <strong>na mesma ordem</strong> das dependências injetadas.</p>
-<p>No nosso primeiro exemplo, no início do artigo, fizemos a injeção do jQuery, mas não passamos parâmetro algum no callback. O código funciona corretamente porque o jQuery passa para o objeto <code>window</code> os objetos <code>jQuery</code> e <code>$</code>. Logo, você pode usar esses objetos globais. Mas, por questões de boas práticas e performance, é melhor você usar sempre objetos e variáveis locais. Nesse caso, no último exemplo, passamos como parâmetro para a função de callback o <code>$</code>, que recebe o <code>jquery</code> injetado, para que possamos usar <code>$</code> localmente.</p>
-<p>Injetamos também a <code>lodash</code>, e passamos como parâmetro no callback o <code>_</code>, para ser usado também localmente.</p>
-<h2 id="Agora_sim,_o_método_config()">Agora sim, o método <code>config()</code></h2>
-<p>Como já havia dito, para fazer a injeção de dependências, o <strong>RequireJS</strong> toma como base o caminho do arquivo passado no parâmetro <code>data-main</code> do nosso script. Mas nós podemos passar um parâmetro <code>baseUrl</code> para setar manualmente esse caminho. A partir daí, todos os caminhos de scripts injetados tomam essa URL como base. Você pode passar tanto caminhos absolutos como relativos.</p>
-<p>Para usar caminhos relativos com o <code>baseUrl</code>, a base será o caminho do HTML onde está inserido o <code>&lt;script&gt;</code> que chama o <strong>RequireJS</strong>.</p>
-<p>A propriedade <code>paths</code> é um objeto, que recebe como chave uma referência para o módulo que será injetado, e como valor, a URL desse módulo. Isso facilita na hora da injeção, para que você não precise passar todo o caminho da dependência.</p>
-<p>Se você voltar no primeiro exemplo, vai ver que injetamos o jQuery com <code>vendor/jquery</code>. Nesse segundo exemplo, usamos somente <code>jquery</code>, pois no <code>paths</code> já setamos o caminho completo.</p>
-<p>Você deve ter percebido também que podemos usar um array como valor da dependência. O que o <strong>RequireJS</strong> faz nesse caso é tentar carregar os arquivos na ordem que está no array. Se a primeira URL falhar, ele tenta carregar a segunda, e assim por diante. No caso do jQuery, a vantagem é poder usar um CDN e, se esse método falhar, chamamos a lib localmente, em <code>vendor/jquery</code>.</p>
-<p>A ideia de usar o <strong>RequreJS</strong> é basicamente essa. Mas para facilitar a visualização, vamos escrever um pouco mais de código, pois ainda não vimos a função <code>define()</code> em ação.</p>
-<p>No nosso arquivo <code>js/App.js</code> coloque o seguinte código:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define([ <span class="string">'jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Carregou App.js'</span> );</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>E no arquivo <code>js/boot.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>.config({</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  });</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">    <span class="built_in">require</span>([ <span class="string">'App'</span> ]);</div><div class="line">  });</div><div class="line">})();</div></pre></td></tr></table></figure>
-
-<p>Perceba que podemos aninhar os métodos <code>require</code> para garantir que, ao carregar <code>js/App.js</code>, o <code>jquery</code> e a <code>lodash</code> já estejam carregados!</p>
-<p>No arquivo <code>js/App.js</code>, nós usamos o <code>define</code> para definir esse módulo. Porque não utilizamos o <code>require</code>?</p>
-<p>Por que esse módulo ainda não existe, e está sendo definido. Se eu precisar injetar dependências dentro do módulo, que dependam das dependências passadas no array do primeiro parâmetro, aí sim eu vou usar o <code>require()</code>. Ficou mais claro o uso deles agora?</p>
-<p><em>Hey, mas você passou o <code>jquery</code> como dependência do módulo <code>App</code>. Isso não vai fazer o <strong>RequireJS</strong> trabalhar dobrado e baixar duas vezes o jQuery?</em></p>
-<p>Não. Em cada módulo você deve injetar todas as dependências que você precisa usar internamente nele, ou que você precisa que estejam carregadas para usá-lo. O <strong>RequireJS</strong> se encarrega de - se essa dependência já tiver sido carregada antes - usar o arquivo que foi carregado da primeira vez.</p>
-<p>Nesse nosso exemplo, o arquivo <code>js/boot.js</code> vai fazer o boot do <strong>RequireJS</strong>, e o <code>js/App.js</code> vai controlar toda a nossa aplicação.</p>
-<p>Dentro do <code>js/App.js</code>, você pode escrever qualquer código Javascript para chamar os seus scripts sob demanda, somente quando necessário.</p>
-<p>Vou deixar <a href="https://github.com/fdaciuk/workflow-requirejs" target="_blank" rel="external">nesse repositório</a> um exemplo de <em>workflow</em> com <strong>RequireJS</strong>, tomando como base os exemplos passados nesse artigo, mas com algumas coisas a mais, para que você possa se basear nele para montar seu próprio <em>workflow</em>, dependendo do seu projeto, ok?</p>
-<p>Ficou com dúvidas? Poste nos comentários!</p>
-<p>Até o próximo artigo!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/requirejs.png" alt="RequireJS"></p>
-<p>Quando você tem uma aplicação onde vai usar muito código Javascript, é sempre importante pensar na performance. Mas além disso, para que sua aplicação possa escalar, seu código precisa ser modular.</p>
-<p>Nesse momento surgem as dúvidas:<br><em>- Escrevo todo o meu código em um arquivo só, e minifico para não sobrecarregar os requests do browser?</em><br><em>- Separo em vários arquivos para facilitar o desenvolvimento, sem me preocupar com a quantidade de requests http?</em></p>
-<p><em>Qual a melhor solução?</em></p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="requirejs" scheme="http://blog.da2k.com.br/tags/requirejs/"/>
-    
-      <category term="amd" scheme="http://blog.da2k.com.br/tags/amd/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
   </entry>
   

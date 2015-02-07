@@ -118,7 +118,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnUndefined</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnUndefined(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
 
 <p><em>Então pra quê eu vou usar o <code>void</code>?</em></p>
-<p>Javascript é uma linguagem de <em>tipagem fraca</em>, ou <em>tipagem dinâmica</em>. Isso significa que você não precisa dizer ao Javascript que uma variável vai receber um número ou uma string, ou que uma função irá retornar um valor booleano.<br>Você simplesmente atribui valores à variáveis e retorna valores em funções, e o Javascript se vira com o resto.</p>
+<p>Javascript é uma linguagem de <em>tipagem fraca</em> e <em>dinâmica</em>. Isso significa que você não precisa dizer ao Javascript que uma variável vai receber um número ou uma string, ou que uma função irá retornar um valor booleano.<br>Você simplesmente atribui valores à variáveis e retorna valores em funções, e o Javascript se vira com o resto.</p>
 <p>Para entender melhor o <code>void</code>, é necessário entender um pouco sobre tipagem.</p>
 <p>Por exemplo: se fossemos escrever um <code>Hello World</code> em Java, ele seria algo assim:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class HelloWorld {</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>( String args[] ) {</div><div class="line">    System.out.println( <span class="string">"Hello World!"</span> );</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
@@ -144,7 +144,7 @@
 <p>Ao passar o código acima pelo <a href="http://jshint.com/" target="_blank" rel="external">JSHint</a>, ele vai acusar um <em>warning</em>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Expected an assignment or <span class="function"><span class="keyword">function</span> <span class="title">call</span> <span class="title">and</span> <span class="title">instead</span> <span class="title">saw</span> <span class="title">an</span> <span class="title">expression</span>.</span></div></pre></td></tr></table></figure>
 
-<p>Ou seja: nós estamos utilizando um operador lógico (<code>&amp;&amp;</code>), que normalmente é usado para testar expressões. Uma expressão normalmente retorna um valor. Se a expressão retorna um valor, para me aproveitar desse valor, eu preciso usar um <code>return</code> dentro da <code>function</code>, para que eu possa invocar essa função para obter esse valor, ou então atribuir à uma variável, por exemplo, para que eu possa usar o valor no futuro.</p>
+<p>Ou seja: nós estamos utilizando um operador lógico (<code>&amp;&amp;</code>), em <em>short circuit</em>, que normalmente é usado para testar expressões. Uma expressão normalmente retorna um valor. Se a expressão retorna um valor, para me aproveitar desse valor, eu preciso usar um <code>return</code> dentro da <code>function</code>, para que eu possa invocar essa função para obter esse valor, ou então atribuir à uma variável, por exemplo, para que eu possa usar o valor no futuro.</p>
 <p>Como nossa função <code>fillBodyRed()</code> não retorna nada, mas é ela que será executada se <code>isHypsterStyle()</code> for <code>true</code>, precisamos de uma forma de avaliar essa expressão para remover o <em>warning</em>.</p>
 <p>Poderíamos usar o <code>return</code>, mas não faria sentido pois não temos valor a retornar. É aqui que entra o <code>void</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">void</span> ( isHypsterStyle() && fillBodyRed() );</div><div class="line">}</div></pre></td></tr></table></figure>
@@ -242,7 +242,7 @@
   
     <li><a href="/categories/html/">html</a><small>1</small></li>
   
-    <li><a href="/categories/javascript/">javascript</a><small>21</small></li>
+    <li><a href="/categories/javascript/">javascript</a><small>22</small></li>
   
     <li><a href="/categories/wordpress/">wordpress</a><small>8</small></li>
   
@@ -255,7 +255,7 @@
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/1postperday/">1postperday</a><small>38</small></li>
+    <li><a href="/tags/1postperday/">1postperday</a><small>39</small></li>
   
     <li><a href="/tags/amd/">amd</a><small>2</small></li>
   
@@ -304,6 +304,8 @@
     <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
   
     <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
   
     <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
   
