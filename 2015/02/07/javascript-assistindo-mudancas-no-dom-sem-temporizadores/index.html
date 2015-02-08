@@ -132,7 +132,7 @@ Sim, tem! E é isso que eu quero mostrar nesse post! Vem comigo :D">
 
 
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="div"]'</span> );</div><div class="line"><span class="keyword">var</span> observer = <span class="keyword">new</span> MutatioObserver( handleMutationObserver );</div><div class="line"><span class="keyword">var</span> config = { childList: <span class="literal">true</span>, attributes: <span class="literal">true</span> };</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMutationObserver</span><span class="params">( mutations )</span> </span>{</div><div class="line">  mutations.forEach(<span class="function"><span class="keyword">function</span><span class="params">(mutation)</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( mutation.type );</div><div class="line">  });</div><div class="line">}</div><div class="line">  </div><div class="line">observer.observe( target, config );</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = <span class="built_in">document</span>.querySelector( <span class="string">'[data-js="div"]'</span> );</div><div class="line"><span class="keyword">var</span> observer = <span class="keyword">new</span> MutationObserver( handleMutationObserver );</div><div class="line"><span class="keyword">var</span> config = { childList: <span class="literal">true</span>, attributes: <span class="literal">true</span> };</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMutationObserver</span><span class="params">( mutations )</span> </span>{</div><div class="line">  mutations.forEach(<span class="function"><span class="keyword">function</span><span class="params">(mutation)</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( mutation.type );</div><div class="line">  });</div><div class="line">}</div><div class="line">  </div><div class="line">observer.observe( target, config );</div></pre></td></tr></table></figure>
 
 <p>No meu HTML, adicionei uma div com um atributo <code>data-js=&quot;div&quot;</code> e uma classe <code>mydiv</code>.</p>
 <p>No JS, atribuímos esse nó para a variável <code>target</code>.<br>A variável <code>observer</code> será nosso observador. Então instanciamos o <code>MutationObserver</code> nessa varíável, passando como parâmetro a função de callback <code>handleMutationObserver</code>.</p>
@@ -244,6 +244,8 @@ Sim, tem! E é isso que eu quero mostrar nesse post! Vem comigo :D">
   
     <li><a href="/categories/javascript/">javascript</a><small>22</small></li>
   
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
     <li><a href="/categories/wordpress/">wordpress</a><small>8</small></li>
   
   </ul>
@@ -255,7 +257,7 @@ Sim, tem! E é isso que eu quero mostrar nesse post! Vem comigo :D">
   <h3 class="title">Tags</h3>
   <ul class="entry">
   
-    <li><a href="/tags/1postperday/">1postperday</a><small>39</small></li>
+    <li><a href="/tags/1postperday/">1postperday</a><small>40</small></li>
   
     <li><a href="/tags/amd/">amd</a><small>2</small></li>
   
