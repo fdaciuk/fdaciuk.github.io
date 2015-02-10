@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-10T08:37:06.895Z</updated>
+  <updated>2015-02-10T09:02:10.050Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
     <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
     <published>2015-02-10T00:00:00.000Z</published>
-    <updated>2015-02-10T03:01:20.000Z</updated>
+    <updated>2015-02-10T09:01:42.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
 <p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
 <a id="more"></a>
@@ -48,7 +48,7 @@
 
 <p>Cada <em>controller</em> conterá uma <em>classe PHP</em>, que irá responder por uma página específica, ou por URL. No nosso caso, estamos criando primeiramente um controller que vai gerenciar nossa <code>single.php</code>.</p>
 <p>Vamos agora fazer algumas mudanças na <code>single.php</code>. Primeiro de tudo, vamos criar nossa interface. Nosso <code>single</code> deve ficar assim:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">require_once 'functions/security.php';</div><div class="line">get_header();</div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;?php echo $single_post-&gt;thumbnail ?&gt;</div><div class="line"></div><div class="line">&lt;h2&gt;</div><div class="line">    &lt;?php echo $single_post-&gt;title ?&gt;</div><div class="line">&lt;/h2&gt;</div><div class="line"></div><div class="line">&lt;div class="content"&gt;</div><div class="line">    &lt;?php echo $single_post-&gt;content ?&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;?php get_footer() ?&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span></span></div><div class="line"><span class="keyword">require_once</span> <span class="string">'functions/security.php'</span>;</div><div class="line">get_header();</div><div class="line"><span class="preprocessor">?&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$single_post</span><span class="variable">-&gt;thumbnail</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="title">h2</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$single_post</span><span class="variable">-&gt;title</span> <span class="preprocessor">?&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$single_post</span><span class="variable">-&gt;content</span> <span class="preprocessor">?&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> get_footer() <span class="preprocessor">?&gt;</span></span></div></pre></td></tr></table></figure>
 
 <p><em>O que é significa “ter uma interface” o por que precisamos de uma?</em></p>
 <p>A interface são os métodos e propriedades públicas da classe que vai controlar o conteúdo mostrado na nossa <code>single</code>. Primeiramente nós colocamos na nossa <em>view</em>, o que nós esperamos que seja retornado. </p>
