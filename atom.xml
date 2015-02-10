@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-08T03:25:55.794Z</updated>
+  <updated>2015-02-10T02:59:59.145Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,161 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[WordPress - Separando as responsabilidades]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
+    <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
+    <published>2015-02-10T00:00:00.000Z</published>
+    <updated>2015-02-10T02:57:37.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
+<p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
+<a id="more"></a>
+
+<p>Pra começar, acompanhe o tema que estamos desenvolvendo juntos: <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br</a></p>
+<p>A grande vantagem de trabalhar com o WordPress, é que ele não nos prende a uma estrutura específica. Precisamos seguir algumas convenções, mas podemos facilmente organizar nossos arquivos e separar como cada coisa é feita de forma bem fácil.</p>
+<p>Esse formato que vou mostrar hoje, é como eu uso nos meus projetos. É importante que fique claro que, existem várias formas de fazer o que veremos hoje. Essa não é a forma “absolutamente certa”, mas é como resolve os problemas pra mim.</p>
+<p>Chega de lenga-lenga, vamos ao que interessa: código!</p>
+<h2 id="Single">Single</h2>
+<p>No último post, vimos que, no <strong>WordPress</strong>, temos alguns Tipos de Conteúdo padrão, mas que também podemos criar os nossos próprios. Hoje veremos o template <code>single.php</code>.</p>
+<p>Então, antes de qualquer coisa, crie esse arquivo na raiz do seu tema. Nossa estrutura agora deve estar assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── footer.php</div><div class="line">├── /functions</div><div class="line">│   └── security.php</div><div class="line">├── functions.php</div><div class="line">├── header.php</div><div class="line">├── index.php</div><div class="line">├── single.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
+
+<p>Fazendo isso, vamos começar a brincadeira! O <code>single.php</code> serve para mostrar uma postagem específica.<br>Quando você acessa a URL de um post, por exemplo, o WordPress procura usa esse template para renderizar o post.</p>
+<p>Mas o <code>single.php</code> vai muito além disso: segundo a <a href="http://codex.wordpress.org/Template_Hierarchy" target="_blank" rel="external">hierarquia de templates</a> do <strong>WordPress</strong>, quando você acessa a URL de uma postagem (seja do <em>Post Type</em> “post” ou qualquer outro criado por você), a busca pelo template é feita na seguinte ordem:</p>
+<p>Primeiro o <strong>WordPress</strong> procura na raiz da sua aplicação, um arquivo chamado <code>single-{post-type}.php</code>, onde `{post-type} é o nome do seu <em>Post Type</em>.</p>
+<p>Exemplo: imagine que você tem um <em>Post Type</em> chamado filmes, e você quer acessar a URL que leva para o filme <strong>The Avengers</strong>. Ao acessar a URL <code>http://seusite.com.br/filmes/the-avengers/</code>, o <strong>WordPress</strong> irá verificar se no seu tema você tem um arquivo chamado <code>single-filmes.php</code>.</p>
+<p>Se esse arquivo não existir, o WordPress vai procurar o arquivo <code>single.php</code> (que é o que estamos vendo agora). Se encontrar, é nese arquivo que a postagem será renderizada. Senão, a renderização é feita na <code>index.php</code>.</p>
+<p>Perceba que a <code>index.php</code> é o fallback para todos os templates, por isso é importante mantê-la no seu projeto, ainda que você quase não a use, ou use pouco. Fazendo a cópia da <code>index.php</code> na <code>single.php</code>, nossa <code>single</code> deve estar com essa estrutura:</p>
+<p><a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br/blob/7e61f6f73153641a438a4b8ca09da7bb9e2361f3/index.php" target="_blank" rel="external">Estrutura da single.php</a></p>
+<p>Mantivemos essa estrutura, pois precisamos apenas mostrar um post. Não é necessário o loop aqui, somente as <em>template tags</em>.</p>
+<h2 id="Interface">Interface</h2>
+<p>Para separar as responsabilidades, não podemos deixar lógica alguma na nossa view. Os templates que o WordPress disponibiliza não deveriam ter nenhuma lógica ou regra de negócio. Isso precisa ficar em arquivos à parte.</p>
+<p>No nosso caso, vamos utilizar <em>controllers</em> para nos ajudar a organizar as coisas. Crie no diretório <code>functions/</code>, um outro diretório chamado <code>controllers</code>. E dentro desse diretório, crie um arquivo chamado <code>controller-single.php</code>. A nossa estrutura agora deveria estar assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── footer.php</div><div class="line">├── /functions</div><div class="line">│   ├── /controllers</div><div class="line">│   │   └── controller-single.php</div><div class="line">│   └── security.php</div><div class="line">├── functions.php</div><div class="line">├── header.php</div><div class="line">├── index.php</div><div class="line">├── single.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
+
+<p>Cada <em>controller</em> conterá uma <em>classe PHP</em>, que irá responder por uma página específica, ou por URL. No nosso caso, estamos criando primeiramente um controller que vai gerenciar nossa <code>single.php</code>.</p>
+<p>Vamos agora fazer algumas mudanças na <code>single.php</code>. Primeiro de tudo, vamos criar nossa interface. Nosso <code>single</code> deve ficar assim:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">require_once 'functions/security.php';</div><div class="line">get_header();</div><div class="line">?&gt;</div><div class="line"></div><div class="line">&lt;?php echo $single_post-&gt;thumbnail ?&gt;</div><div class="line"></div><div class="line">&lt;h2&gt;</div><div class="line">    &lt;?php echo $single_post-&gt;title ?&gt;</div><div class="line">&lt;/h2&gt;</div><div class="line"></div><div class="line">&lt;div class="content"&gt;</div><div class="line">    &lt;?php echo $single_post-&gt;content ?&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;?php get_footer() ?&gt;</div></pre></td></tr></table></figure>
+
+<p><em>O que é significa “ter uma interface” o por que precisamos de uma?</em></p>
+<p>A interface são os métodos e propriedades públicas da classe que vai controlar o conteúdo mostrado na nossa <code>single</code>. Primeiramente nós colocamos na nossa <em>view</em>, o que nós esperamos que seja retornado. </p>
+<p>Podemos ver nesse exemplo que:</p>
+<ul>
+<li>a variável <code>$single_post</code> recebe um objeto;</li>
+<li>esperamos que sejam retornadas 3 informações: <code>thumbnail</code>, <code>title</code> e <code>content</code>, como propriedades do objeto <code>$single_post</code>.</li>
+</ul>
+<p><em>Mas de onde vêm esses dados?</em></p>
+<p>Do <em>controller</em>! É ele que vai cuidar de toda a lógica para que nossa <em>view</em> se mantenha assim, limpa! A <em>view</em> deve somente “cuspir” as informações. Nada de zona na view! Nada de lógica de PHP e estruturas gigantes! Vamos separar as responsabilidades para que nosso código fique legível e fácil de editar!</p>
+<p>No próximo post, vamos ver como ficará nosso <em>controller</em>, e como ele irá tratar as informações para devolver à <em>view</em>!</p>
+<p>Ficou com alguma dúvida? Comente!</p>
+<p>Até a próxima! :D</p>
+<blockquote>
+
+<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</a></p>
+<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+</blockquote>
+
+
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
+<p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="serir temas wordpress" scheme="http://blog.da2k.com.br/tags/serir-temas-wordpress/"/>
+    
+      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Segredos do Github - Branches]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/"/>
+    <id>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</id>
+    <published>2015-02-09T00:00:00.000Z</published>
+    <updated>2015-02-10T02:59:41.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-branches.png" alt=""></p>
+<p>Quando você cria uma nova feature para o seu projeto, normalmente você também cria uma nova branch, e depois faz merge com a branch principal. Depois de um tempo, fica notória a necessidade de comparar as alterações que foram feitas. </p>
+<p><em>Existe uma forma fácil de fazer isso com o <strong>Github</strong></em>? Adivinha? ;)</p>
+<a id="more"></a>
+
+<p>Na página do seu repositório, você pode ver todas as branches clicando no link <strong>Branches</strong>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/branches.png" alt=""></p>
+<p>Clicando nesse link, você tem a lista com todas as branches do seu projeto. Por aqui, você consegue acessar a página de comparação de branches ou deletar uma branch com o clique de um botão.</p>
+<h2 id="Comparando_branches">Comparando branches</h2>
+<p>Para comparar alterações feitas em branches diferentes, você pode fazer direto pela URL, acessando:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/{user}/{repo}/compare/{range}</div></pre></td></tr></table></figure>
+
+<p>Onde, no <code>{range}</code>, você troca pela branch principal, seguida de 3 pontos, e logo após, o nome da branch que você quer comparar. Por exemplo: nesse caso, quero ver quais alterações existem na branch <code>repeat</code>, que ainda não tem na <code>master</code>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/{user}/{repo}/compare/master...repeat</div></pre></td></tr></table></figure>
+
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/compare-branches.png" alt=""></p>
+<p>Fazendo isso, se for possível, eu já vou ver um botão de <em>Pull Request</em>, para que eu possa enviar a sugestão de fazer marge direto na <code>master</code>. Consigo ver também os commits de quem fez as alterações e quais arquivos foram alterados :D</p>
+<h2 id="Comparando_a_mesma_branch_por_data">Comparando a mesma branch por data</h2>
+<p>Também é possível comparar a mesma branch, mas com uma data anterior:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/{user}/{repo}/compare/master@{<span class="number">30</span>.days.ago}...master</div></pre></td></tr></table></figure>
+
+<p>Acessando a URL acima, eu consigo ver quais foram as alterações que ocorreram nos últimos 30 dias na branch master! Isso pode ser útil para você preencher o seu <em>changelog</em>, pois dá pra saber todas as mudanças que foram feitas nesse período de tempo :D</p>
+<p>Podemos usar também com o formato de data - <code>YYYY-DD-MM</code>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/{user}/{repo}/compare/master@{<span class="number">2014.25</span>.<span class="number">12</span>}...master</div></pre></td></tr></table></figure>
+
+<p>Agora eu sei tudo que foi alterado desde o natal de 2014 :D</p>
+<h2 id="visualizações_diff_e_patch">visualizações diff e patch</h2>
+<p>Você ainda pode usar as comparações nos formatos <code>diff</code> e <code>patch</code>, colocando essa “extensão” no final da URL:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">https://github.com/{user}/{repo}/compare/master@{<span class="number">2014.25</span>.<span class="number">12</span>}...master.diff</div><div class="line">https://github.com/{user}/{repo}/compare/master@{<span class="number">2014.25</span>.<span class="number">12</span>}...master.patch</div></pre></td></tr></table></figure>
+
+<h2 id="Comparando_branches_de_repositórios_forkados">Comparando branches de repositórios forkados</h2>
+<p>Agora, você forkou um projeto, criou uma nova branch e desenvolveu uma nova feature, ou arrumou um bug. Como fazer a comparação com o repositório original?</p>
+<p>Simples! Só fazer assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/{user}/{repo}/compare/{user-original-repo}:{branch}...{own-branch}</div></pre></td></tr></table></figure>
+
+<p>Onde:</p>
+<ul>
+<li><code>{user-original-repo}</code> é o usuário do repositório original e <code>{branch}</code> que vem logo após ele, é a branch no repositório original;</li>
+<li><code>{own-branch}</code> é a branch no seu repositório, que você quer comparar.</li>
+</ul>
+<p>No caso do Odin, que eu forkei, eu quero comparar a minha master, com a master do projeto original. Eu posso fazer assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/fdaciuk/odin/compare/wpbrasil:master...master</div></pre></td></tr></table></figure>
+
+<p>Claro que, para todas essas ações, você tem botões na interface do <strong>Github</strong> que facilitam a navegação. Mas, em alguns momentos, é muito mais fácil digitar direto na URL do que clicar em um botão xD</p>
+<p>Era isso! Até a próxima :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-branches.png" alt=""></p>
+<p>Quando você cria uma nova feature para o seu projeto, normalmente você também cria uma nova branch, e depois faz merge com a branch principal. Depois de um tempo, fica notória a necessidade de comparar as alterações que foram feitas. </p>
+<p><em>Existe uma forma fácil de fazer isso com o <strong>Github</strong></em>? Adivinha? ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="braches" scheme="http://blog.da2k.com.br/tags/braches/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Aprenda Markdown]]></title>
     <link href="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"/>
     <id>http://blog.da2k.com.br/2015/02/08/aprenda-markdown/</id>
     <published>2015-02-08T00:00:00.000Z</published>
-    <updated>2015-02-08T03:25:30.000Z</updated>
+    <updated>2015-02-08T03:29:10.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/markdown.png" alt=""></p>
 <p><strong>Markdown</strong> é uma ferramenta de conversão de <em>text-to-HTML</em>. Com ele é possível você marcar títulos, listas, tabelas, etc., de forma muito mais limpa, legível e precisa, do que se fosse fazer com HTML.<br>Ainda não sabe tudo o que é possível fazer com Markdown? Então esse post é pra você! Vem comigo que eu te mostro :)</p>
 <a id="more"></a>
@@ -213,7 +363,7 @@
     <link href="http://blog.da2k.com.br/2015/02/07/javascript-assistindo-mudancas-no-dom-sem-temporizadores/"/>
     <id>http://blog.da2k.com.br/2015/02/07/javascript-assistindo-mudancas-no-dom-sem-temporizadores/</id>
     <published>2015-02-07T00:00:00.000Z</published>
-    <updated>2015-02-07T23:31:26.000Z</updated>
+    <updated>2015-02-08T03:29:10.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/Oo.png" alt=""></p>
 <p>Existem basicamente duas formas de ouvir mudanças em um elemento no DOM: ou você usa eventos, ou, em casos mais extremos, temporizadores.</p>
 <p><em>Como saber quando um atributo de um elemento mudou? Como saber se os filhos de um elemento foram alterados? Não tem outra forma de fazer, que não seja usando temporizadores?</em></p>
@@ -612,7 +762,7 @@
     <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
     <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
     <published>2015-02-03T00:00:00.000Z</published>
-    <updated>2015-02-03T03:14:00.000Z</updated>
+    <updated>2015-02-10T01:40:25.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
 <p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
 <p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
@@ -647,7 +797,7 @@
 
 <p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
 <p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-2/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-2/</a></p>
-<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</a></p>
 </blockquote>
 
 
@@ -1835,204 +1985,6 @@
       <category term="clean code" scheme="http://blog.da2k.com.br/tags/clean-code/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WordPress: conhecendo o Painel - Parte 2]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/"/>
-    <id>http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</id>
-    <published>2015-01-21T00:00:00.000Z</published>
-    <updated>2015-02-03T03:06:06.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part2.jpg" alt="WordPress: Conhecendo o Painel"></p>
-<p>Na primeira parte vimos várias funcionalidades do Painel do WP. Nesse post vamos continuar a saga e desvendar tudo o que podemos usar para personalizar nosso tema! Bora? ;)</p>
-<a id="more"></a>
-
-<h2 id="Adicionar_midia">Adicionar midia</h2>
-<p>Ainda dentro da página de <strong>Adicionar novo post</strong>, para adicionar imagens, galerias, URLs embedadas, clique no botão <strong>Adicionar midia</strong>:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-add-media.png" alt=""></p>
-<p>Você verá uma janela modal como essa:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-media-modal.png" alt=""></p>
-<p>Aqui você consegue arrastar/soltar ou clicar no botão e selecionar arquivos em vários formatos para subir. O WordPress faz upload desses arquivos no diretório <code>wp-content/uploads</code>, organizando os diretórios por <code>ano/mês</code>.</p>
-<p>Todos os arquivos que você faz upload por essa tela, podem ser vistos no menu <strong>Midia</strong>.</p>
-<p>Ao selecionar uma imagem, temos algumas opções como setar Título, <em>alt</em> (texto alternativo), descrição para a imagem, tamanho que será inserido no post, etc. Mas também temos a opção de editar a imagem ali mesmo:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-selected-image-options.png" alt=""></p>
-<p>Com essa opção de edição, podemos recortar, girar, fazer um <em>flip</em> na imagem e redimensionar:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-edit-media.jpg" alt=""></p>
-<p>Para recortar, clique e arraste com o mouse em cima da imagem. O primeiro botão será habilitado. Clique nele para recortar. Salve.</p>
-<p>Agora você pode inserir sua imagem editada diretamente pelo Painel! :)</p>
-<h2 id="Aparência">Aparência</h2>
-<p>Escolhendo a opção <strong>Personalizar</strong>:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-customize.png" alt=""></p>
-<p>O WP nos dá várias opções para personalizarmos nosso tema, e esse poder aumenta quando estamos usando as funções do WP!</p>
-<h2 id="Menus">Menus</h2>
-<p>Quando você ainda não tem nenhum menu, essa tela é mostrada, para que você possa criá-lo: </p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-new-menu.png" alt=""></p>
-<p>Simplesmente escolha um nome e crie um menu. Depois você poderá relacionar esse menu com alguma área de menu disponível no seu site. Isso também é controlado pelo tema:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-menu-position.png" alt=""></p>
-<p>E adicionando um item ao menu, você ainda tem algumas opções. Essa é a tela de <strong>Opções de tela</strong>:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-menu-options.png" alt=""></p>
-<p>Que deixa o seu item de menu assim:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-item-menu.png" alt=""></p>
-<p>Com essas opções, você já consegue dar um <em>up</em> ao seu menu padrão! Ainda tem muitas outras customizações possíveis, quando se extende a classe <em>Walker</em> do menu. Mas isso é assunto para um próximo post :D</p>
-<h2 id="Plugins">Plugins</h2>
-<p>Plugins são parte essencial do WordPress. Com eles, você pode extender funcionalidades para usar em qualquer projeto! Quem sabe em breve não começamos uma série falando só sobre plugins? ;)</p>
-<h2 id="Usuários">Usuários</h2>
-<p>Nessa tela você adiciona informações específicas referentes ao seu perfil de usuário, ou aos usuários cadastrados no site, se você tiver permissão para tal.</p>
-<p>É possível adicionar alguns campos personalizados na tela de Perfil de Usuário. Vamos ver como fazer isso também, em breve!</p>
-<h2 id="Ferramentas">Ferramentas</h2>
-<p>Em Ferramentas, você tem algumas opções que facilitam na hora de publicar um novo post, importar conteúdo de outra instalação ou outro CMS e exportar os dados do seu site.</p>
-<p>E, finalmente:</p>
-<h2 id="Configurações">Configurações</h2>
-<p>Essa área você precisa conhecer muito bem. Tem muita coisa aqui, então vamos aos poucos:</p>
-<h3 id="Geral">Geral</h3>
-<p><strong>Título do Site</strong> e <strong>Descrição</strong> são autodescritivos. Você adiciona um título geral para o seu site, e uma descrição curta para o mesmo. Você pode usar isso em vários lugares, como nas metatags <strong>title</strong> e <strong>meta content</strong> para ser mostrado pelos buscadores ao procurarem conteúdo relacionado com seu site!</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-address.png" alt=""></p>
-<p>Aqui temos duas opções de configuração de URL: <strong>Endereço do WordPress</strong> e <strong>Endereço do site</strong>.</p>
-<p>Normalmente essas duas URLs são iguais. Mas vou explicar o porquê de ter duas:</p>
-<h3 id="Endereço_do_WordPress">Endereço do WordPress</h3>
-<p>É o endereço onde estão os arquivos do WordPress. Imagine que você instalou o WP em <code>http://seusite.com.br/wordpress</code>. Esse deve ser o endereço nesse campo.</p>
-<h3 id="Endereço_do_site">Endereço do site</h3>
-<p>Mas você não quer que o seu site seja acessado via <code>http://seusite.com.br/wordpress</code>, e sim pela raiz, em <code>http://seusite.com.br</code>. Fazendo algumas pequenas configurações, você passa a URL da raiz do seu site nesse campo e consegue fazer com que o WordPress continue instalado em <code>/wordpress</code>, mas responda na raiz ao acessar seu site :)</p>
-<p>Não esqueça de setar corretamente as opções de fuso horário, para que as postagens do seu blog e os seus agendamentos de posts possam estar no horário e data corretos:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-location.png" alt=""></p>
-<h3 id="Escrita,_Leitura_e_discussão">Escrita, Leitura e discussão</h3>
-<p>Basicamente algumas configurações para formatação de posts, categoria padrão para posts. Em leitura, você pode escolher um template que será sua home, - mostraremos em breve - quantidade de posts por página, etc.</p>
-<p>E discussão é sobre os comentários. Tem várias coisas ali que podemos configurar. Veremos com calma quando estivermos desenvolvendo a parte de comentários do nosso tema.</p>
-<h3 id="Midia">Midia</h3>
-<p>O WP tem 3 formatos padrão de imagens: miniatura, médio e grande. Quando você faz upload de uma imagem, o WP mantém o tamanho default da imagem, e gera outras três imagens com esses tamanhos (se a imagem original for maior que eles, obviamente).</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-image-size.png" alt=""></p>
-<p>Se não precisar de algum desses formatos, você pode deixá-los com valor <strong>zero (0)</strong>, que o WP não vai gerar imagens novas com esse tamanho.</p>
-<p>Para criar novos tamanhos, temos funções que poderemos utilizar no nosso tema.</p>
-<p>Uma das coisas mais importantes sobre o Painel, mas que poucas pessoas sabem, é que o WordPress utiliza o tamanho médio setado nessa tela para mostrar as miniaturas em todo o Painel. Quando você vai adicionar uma imagem no post, sabe as miniaturas que aparecem? Elas são geradas com base nessa configuração.</p>
-<p>Sabe as miniaturas que aparecem na tela de Mídia? Mesma coisa. Então, nunca zere os valores do formato <strong>médio</strong>.</p>
-<h3 id="Links_permanentes">Links permanentes</h3>
-<p>Para que seu site possa trabalhar com URLs amigáveis, selecione um formato de permalinks diferente do padrão. </p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-permalinks.png" alt=""></p>
-<p>Fazendo isso, você ainda libera duas outras URLs por padrão: <code>/admin</code> e <code>/login</code> agora acessam o Painel do WP, ao invés de precisar lembrar de <code>/wp-admin</code> ou <code>/wp-login.php</code> :D</p>
-<p>Você também pode, opcionalmente, selecionar uma estrutura para as categorias e tags:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-base-category-tags.png" alt=""></p>
-<p>Se alguma opção ficou para trás, voltaremos para vê-la quando precisarmos dela ao desenvolver nosso tema :)</p>
-<p>Tudo isso pode parecer besteira, mas muitos desenvolvedores se batem por não conhecer essas simples opções, que dão ao cliente final um poder gigantesco de personalização do seu tema, sem que o dev tenha muito mais trabalho por isso :)</p>
-<p>Espero que esteja gostando da série! No próximo artigo, iremos voltar com o <em>hands on</em>! Temos muito código pra escrever!</p>
-<p>Até lá! :D</p>
-<blockquote>
-
-<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
-<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</a></p>
-<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</a></p>
-</blockquote>
-
-
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part2.jpg" alt="WordPress: Conhecendo o Painel"></p>
-<p>Na primeira parte vimos várias funcionalidades do Painel do WP. Nesse post vamos continuar a saga e desvendar tudo o que podemos usar para personalizar nosso tema! Bora? ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
-    
-      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WordPress: conhecendo o Painel - Parte 1]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/"/>
-    <id>http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/</id>
-    <published>2015-01-20T00:00:00.000Z</published>
-    <updated>2015-01-21T02:32:05.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part1.jpg" alt="WordPress: Conhecendo o Painel"></p>
-<p>Para que possamos usar o máximo de recursos possíveis no nosso tema, precisamos conhecer de onde eles vêm. Que tal fazer um <em>tour</em> pelo Painel do WordPress e conhecer tudo o que podemos fazer lá dentro? Vem comigo :D</p>
-<a id="more"></a>
-
-<p>Para entrar no Painel, precisamos acessar a área de login - em <code>/wp-admin</code> ou <code>/wp-login.php</code>.</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-login.png" alt="WordPress Login"></p>
-<p>Entramos com o usuário e senha criados na instalação do nosso site. E temos a seguinte tela:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-panel.png" alt="Painel logado"></p>
-<p>Como nosso tema ainda está <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">no início</a>, e ele está ativo, ainda não temos todas as opções possíveis do painel disponíveis. Então vamos ativar o tema padrão do WP e ver as funcionalidades que ele nos oferece no Painel!</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-themes.png" alt="Aparência &gt; Temas"></p>
-<p>Ativando o tema padrão, já podemos ver algumas opções a mais no menu <strong>Aparência</strong>:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-appearance-menu.png" alt="Painel com mais opções"></p>
-<p>Mas vamos começar do início!</p>
-<h2 id="Painel">Painel</h2>
-<p>Começando pelo painel, você deve ter reparado nos itens <strong>“Opções de tela”</strong> e <strong>“Ajuda”</strong>, na lateral superior direita, né? Mas alguma vez você se interessou em clicar ali? Experimente!</p>
-<p>Em <strong>Opções de tela</strong>, temos alguns checkboxes:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-screen-options.png" alt="Opções de tela"></p>
-<p>Você pode marcá-los ou desmarcá-los para mostrar os widgets que aparecem nessa tela! Se você reparar, na maior parte das telas dentro do Painel do WP, você tem esse link <strong>Opções de tela</strong>, que tem as opções personalizadas para cada tela, em específico. Por exemplo: quando você está editando algum post, essa opção mostra todos os <em>metaboxes</em> disponíveis para o post :)</p>
-<p>O menu <strong>Ajuda</strong> também tem algumas opções interessantes. Se você não sabe para que serve qualquer um desses widgets mostrados, nesse menu você vai encontrar a resposta ;)</p>
-<p>Fique ligado nas telas que têm essas opções. Elas podem ser a resposta que você está a algum tempo procurando!</p>
-<h2 id="Posts">Posts</h2>
-<p>Na listagem de posts, temos as opções:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-list-posts.png" alt="Listagem de posts"></p>
-<p>No link <strong>Opções de tela</strong>, temos as opções que aparecem na coluna da tabela. É importante frisar que, quando você marca ou desmarca alguma dessas opções, o WordPress se lembra da próxima vez que você entra nessa tela, e traz exatamente como você deixou quando saiu :)</p>
-<p>Ao passar o mouse sobre um post, nos é mostrado um menu com algumas opções: “Editar”, “Edição Rápida”, “Lixeira”, “Ver”.</p>
-<p><strong>Editar</strong> faz o mesmo efeito de clicar no título do post: abre para edição;</p>
-<p><strong>Edição Rápida</strong> abre algumas opções que você pode editar rapidamente:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-quick-edition.png" alt="Edição Rápida"></p>
-<p><strong>Lixeira</strong> é óbvio;</p>
-<p><strong>Ver</strong> mostra o template renderizando esse post no seu tema.</p>
-<p>Ainda na tabela, se você clicar no ícone dos comentários, você é direcionado para a página de comentários, com os mesmos filtrados somente para esse post :D<br>Mais uma vez, o link <strong>Ajuda</strong> pode tirar algumas dúvidas básicas que alguém pode não saber.</p>
-<h2 id="Adicionar_novo_post">Adicionar novo post</h2>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-post-metabox.png" alt="Metabox novo post"></p>
-<p>Essas caixas - marcada em vermelho na imagem acima - na tela de “Novo Post”, são as <em>metaboxes</em>. São caixas com algumas metainformações relacionadas ao post. Normalmente são utilizadas para categorizar o post.</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-post-category-tag.png" alt="Taxonomias padrão"></p>
-<p>Você provavelmente já conhece essas metaboxes acima: <strong>Categorias</strong> e <strong>Tags</strong>. Elas são taxonomias padrão do WP.</p>
-<p><em>O que são taxonomias?</em></p>
-<blockquote>
-
-<p><strong>Taxonomia</strong> (do grego τασσεῖν ou tassein = “para classificar” e νόμος ou nomos = lei, ciência, administrar), foi a ciência de classificar organismos vivos (alfa taxonomia). Mais tarde a palavra foi aplicada em um sentido mais abrangente, podendo aplicar-se a uma das duas: classificação de coisas ou aos princípios subjacentes da classificação. Quase tudo - objetos animados, inanimados, lugares e eventos - pode ser classificado de acordo com algum esquema taxonômico. </p>
-<footer><strong>Wikipedia</strong><cite><a href="http://pt.wikipedia.org/wiki/Taxonomia_(geral)" target="_blank" rel="external">pt.wikipedia.org/wiki/&hellip;</a></cite></footer></blockquote>
-
-
-<p>Então as taxonomias, dentro do WP, servem para classificar, ou categorizar o seu conteúdo. Você pode criar suas próprias taxonomias baseadas no padrão de <strong>Categorias</strong> ou <strong>Tags</strong>, que o WP oferece, ou então criar uma nova <em>metabox</em> e adicionar qualquer tipo de campo de formulário necessário para fazer uma categorização personalizada: <em>select</em>, <em>radio button</em>, <em>checkbox</em>, etc. Veremos como fazer isso nos próximos posts da série.</p>
-<h2 id="O_editor">O editor</h2>
-<p>No editor de texto do WordPress, temos algumas features bem interessantes. Uma delas é o <strong>oEmbed</strong>.</p>
-<p>Essa feature nos permite <em>embedar</em> facilmente algumas coisas, somente pela URL.</p>
-<p>Por exemplo, um vídeo do Youtube. Escolha um vídeo qualquer, copie a URL e cole no editor. Olha só o que acontece:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-oembed-youtube.png" alt="oEmbed Youtube"></p>
-<p>Automagicamente, o vídeo é embedado e renderizado! Em tempo real! Você pode dar o play no vídeo ali mesmo!</p>
-<p>Não era esse vídeo que você queria adicionar? Clicando em cima do vídeo, você ainda tem duas opções: <strong>editar</strong> ou <strong>remover</strong>:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-oembed-youtube-edit-remove.png" alt="Editar ou remover oEmbed"></p>
-<p>Tudo isso sem plugin algum! Coisa linda, não? ;)</p>
-<p><em>Que legal! E dá pra fazer isso só com o Youtube?</em></p>
-<p>Claro que não jovem! Você consegue embedar <a href="http://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F" target="_blank" rel="external">milhares de outras coisas</a>, incluindo um <em>tweet</em>, por exemplo:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-oembed-twitter.png" alt="oEmbed Twitter"></p>
-<p>E você ainda pode <strong>criar</strong> seu próprio <em>embed</em>! Vamos aprender a fazer isso também :D</p>
-<p>Tá curtindo a série? Então fica ligado que continuaremos falando sobre o Painel no próximo post, trazendo mais novidades! Até lá :D</p>
-<blockquote>
-
-<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
-<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/14/wordpress-o-arquivo-functions-php/</a></p>
-<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/21/wordpress-conhecendo-o-painel-parte-2/</a></p>
-</blockquote>
-
-
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/wordpress-meet-the-panel-part1.jpg" alt="WordPress: Conhecendo o Painel"></p>
-<p>Para que possamos usar o máximo de recursos possíveis no nosso tema, precisamos conhecer de onde eles vêm. Que tal fazer um <em>tour</em> pelo Painel do WordPress e conhecer tudo o que podemos fazer lá dentro? Vem comigo :D</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
-    
-      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
     
   </entry>
   
