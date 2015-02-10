@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-10T02:59:59.145Z</updated>
+  <updated>2015-02-10T03:05:36.188Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
     <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
     <published>2015-02-10T00:00:00.000Z</published>
-    <updated>2015-02-10T02:57:37.000Z</updated>
+    <updated>2015-02-10T03:01:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
 <p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
 <a id="more"></a>
@@ -95,7 +95,7 @@
     <link href="http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/"/>
     <id>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</id>
     <published>2015-02-09T00:00:00.000Z</published>
-    <updated>2015-02-10T02:59:41.000Z</updated>
+    <updated>2015-02-10T03:01:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-branches.png" alt=""></p>
 <p>Quando você cria uma nova feature para o seu projeto, normalmente você também cria uma nova branch, e depois faz merge com a branch principal. Depois de um tempo, fica notória a necessidade de comparar as alterações que foram feitas. </p>
 <p><em>Existe uma forma fácil de fazer isso com o <strong>Github</strong></em>? Adivinha? ;)</p>
@@ -762,7 +762,7 @@
     <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
     <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
     <published>2015-02-03T00:00:00.000Z</published>
-    <updated>2015-02-10T01:40:25.000Z</updated>
+    <updated>2015-02-10T03:01:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
 <p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
 <p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>

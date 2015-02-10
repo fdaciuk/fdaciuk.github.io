@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</loc>
-    <lastmod>2015-02-10T02:59:41.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
+    <lastmod>2015-02-10T03:01:20.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</loc>
-    <lastmod>2015-02-10T02:57:37.000Z</lastmod>
+    <lastmod>2015-02-10T03:01:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</loc>
+    <lastmod>2015-02-10T03:01:20.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
-    <lastmod>2015-02-10T01:42:03.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
-    <lastmod>2015-02-10T01:40:25.000Z</lastmod>
+    <lastmod>2015-02-10T03:01:20.000Z</lastmod>
   </url>
   
   <url>
@@ -102,12 +102,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/</loc>
     <lastmod>2015-01-23T01:10:07.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/22/clean-code-em-javascript-troque-seu-if-gigante-por-metodos/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/</loc>
     <lastmod>2015-01-23T01:10:07.000Z</lastmod>
   </url>
   
