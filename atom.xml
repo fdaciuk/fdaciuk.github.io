@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-11T03:13:56.142Z</updated>
+  <updated>2015-02-11T03:35:08.016Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/"/>
     <id>http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</id>
     <published>2015-02-11T00:00:00.000Z</published>
-    <updated>2015-02-11T03:13:30.000Z</updated>
+    <updated>2015-02-11T03:34:03.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-controller.jpg" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">post anterior</a>, criamos a interface para nossa view. Hoje veremos como criar a base que vai controlar o conteúdo retornado! Vem comigo? ;)</p>
 <a id="more"></a>
@@ -126,6 +126,14 @@
 <p>Executando agora nosso site, podemos ver que tudo funciona como deveria!</p>
 <p>Essa é a forma que eu uso hoje para separar responsabilidades! Gostou? Achou fácil? Difícil? Quero saber sua opinião, e como você estrutura seus temas no WP! Comente! :D</p>
 <blockquote>
+
+<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</a></p>
+<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+</blockquote>
+
+
+<blockquote>
 <p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
 <p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
 </blockquote>
@@ -150,7 +158,7 @@
     <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
     <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
     <published>2015-02-10T00:00:00.000Z</published>
-    <updated>2015-02-10T09:05:56.000Z</updated>
+    <updated>2015-02-11T03:33:23.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
 <p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
 <a id="more"></a>
@@ -197,7 +205,7 @@
 
 <p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
 <p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</a></p>
-<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</a></p>
 </blockquote>
 
 

@@ -3,12 +3,17 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</loc>
-    <lastmod>2015-02-11T03:13:30.000Z</lastmod>
+    <lastmod>2015-02-11T03:34:03.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</loc>
-    <lastmod>2015-02-10T09:05:56.000Z</lastmod>
+    <lastmod>2015-02-11T03:33:23.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
+    <lastmod>2015-02-11T03:33:01.000Z</lastmod>
   </url>
   
   <url>
@@ -18,11 +23,6 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</loc>
-    <lastmod>2015-02-10T03:01:20.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</loc>
     <lastmod>2015-02-10T03:01:20.000Z</lastmod>
   </url>
   
@@ -172,22 +172,22 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -212,12 +212,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
