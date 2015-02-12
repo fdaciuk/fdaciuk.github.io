@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-11T03:35:08.016Z</updated>
+  <updated>2015-02-12T02:22:35.319Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,71 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Elimine os comentários]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/12/elimine-os-comentarios/"/>
+    <id>http://blog.da2k.com.br/2015/02/12/elimine-os-comentarios/</id>
+    <published>2015-02-12T00:00:00.000Z</published>
+    <updated>2015-02-12T02:21:49.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/comments.png" alt=""></p>
+<p><em>Comments are evil</em>. Você provavelmente já deve ter ouvido isso. Comentários mentem. Eles enganam você. Eles querem te pegar.</p>
+<a id="more"></a>
+
+<p>Já usei muito comentário nos meus códigos. Muito mesmo. Mas, apesar de negar no início, tive que aceitar que isso é uma má prática. E eu vou te explicar o por quê. Depois de ler esse post, você poderá tirar suas próprias conclusões :)</p>
+<h2 id="Comentários_mentem">Comentários mentem</h2>
+<p>Para que seu código seja considerado um <em>Código Limpo</em>, ele precisa ser legível, e qualquer programador que o leia precisa entender qual era a sua intenção com aquele código. </p>
+<p>Aí você está codando um algoritmo mega complicado, e pensa: </p>
+<p><em>Vou deixar uns comentários aqui, pro próximo programador que ler isso saiba o que eu quis dizer! Ou até pra que eu mesmo lembre do que eu estava fazendo daqui a alguns dias!</em></p>
+<p>Agora responda pra mim: de todas as vezes que você já editou código na sua vida, onde tinha comentários falando sobre o que o código fazia, quantas vezes você leu o comentário? E quantas vezes você lembrou de atualizar o comentário, para que correspondesse ao seu novo código?</p>
+<p>Vocẽ tem costume de fazer isso? Seus comentários refletem exatamente o código que você fez e alterou milhares de vezes depois? Duvido! E digo isso por experiência própria.</p>
+<p><strong>Comentários mentem</strong>, pois eles tem um tempo de vida muito curto. A probabilidade de você simplesmente ignorar um comentário - já que os editores normalmente os deixam em uma cor quase apagada - é muito grande.</p>
+<p>Olhe esse exemplo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** </span></div><div class="line"> * Sempre retorna true</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isAvailable</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>É um exemplo besta, mas serve para reflexão: será que, depois de mudar o retorno da função, você mudaria o comentário? Não, seja sincero! Pare e pense.<br>Óbvio que não! O comentário iria ficar pra sempre ali, naquela mentira, enganando a si mesmo e a quem se atrever a ler, servindo apenas como lixo para confundir.</p>
+<p>Aí você me diz: <em>Então como eu vou fazer pra lembrar daquele algoritmo dificílimo que eu escrevi? Se eu não comentar, amanhã eu já nem sei o que eu fiz!</em></p>
+<p>Se isso acontece com você, provavelmente você está fazendo alguma coisa errada. Eu sei que é duro ouvir isso, mas é a realidade. Antes de querer me bater, respire, pense… e aceite, pois é a realidade.</p>
+<p>Um amigo me disse o seguinte sobre comentários:</p>
+<p><em>Você só deve usar comentários no seu código se ele estiver tão ruim, mas tão ruim, que nem você consiga entender o que você fez.</em></p>
+<p><em>Você precisa pensar assim: “Não consegui escrever um código decente e legível, sou um derrotado pois vou precisar escrever um comentário para dizer o que o meu código faz!”</em></p>
+<p>Eu sei que é bastante duro, talvez você só compreenda com o tempo, mas é necessário entender o mal que faz um comentário no seu código.</p>
+<p><em>Mas eu só comento no final das minhas funções, pois elas ficam muito grandes e eu precisaria usar a rolagem para saber qual é a função que está terminando naquele fechamento de chaves!</em></p>
+<p>Se a sua função está ficando tão grande, a ponto de você precisar comentar no final dela, é sinal de que ela precisa de um <em>refactory</em>. Deixe-a mais enxuta. Ela provavelmente tem muitas responsabilidades e faz mais de uma coisa. Quebre em funções menores. Vai facilitar muito a sua leitura.</p>
+<p>Imagine esse código:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Verifica se o empregado tem direito aos benefícios</span></div><div class="line"><span class="keyword">if</span>( ( employee.flags && HOURLY_FLAG ) && ( employee.age &gt; <span class="number">65</span> ) )</div></pre></td></tr></table></figure>
+
+<p>Porque já não escrever dessa forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>( employee.isElegibleForFullBenefits() )</div></pre></td></tr></table></figure>
+
+<p>Precisa de comentário pra saber o que está sendo testado nesse <code>if</code>? O método deixa a intenção muito clara. Com isso, podemos ver que comentários podem ser desculpas para código ruim. Na maior parte das vezes, podemos melhorar nosso código somente criando uma função / método, como feito acima.</p>
+<p>Fazendo isso, você deixa seu código realmente limpo. Qualquer programador que ler seu código, vai conseguir facilmente entender o que você pretendia fazer :)</p>
+<p>Já recomendei uma vez, mas recomendo novamente a leitura do livro <strong>Clean Code</strong>, que fala detalhadamente sobre esse assunto! Com certeza você será um programador um pouco melhor quando parar de usar comentários :D</p>
+<p>Sei que é um assunto bastante polêmico, mas gostaria de ouvir de você: o que você pensa sobre comentários? Tem uma opinião diferente? Comente! Vamos fazer uma discussão saudável sobre o assunto ;)</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/comments.png" alt=""></p>
+<p><em>Comments are evil</em>. Você provavelmente já deve ter ouvido isso. Comentários mentem. Eles enganam você. Eles querem te pegar.</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="clean code" scheme="http://blog.da2k.com.br/tags/clean-code/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[WordPress - controlando a exibição dos dados]]></title>
     <link href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/"/>
     <id>http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</id>
     <published>2015-02-11T00:00:00.000Z</published>
-    <updated>2015-02-11T03:34:03.000Z</updated>
+    <updated>2015-02-11T03:36:31.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-controller.jpg" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">post anterior</a>, criamos a interface para nossa view. Hoje veremos como criar a base que vai controlar o conteúdo retornado! Vem comigo? ;)</p>
 <a id="more"></a>
@@ -158,7 +218,7 @@
     <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
     <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
     <published>2015-02-10T00:00:00.000Z</published>
-    <updated>2015-02-11T03:33:23.000Z</updated>
+    <updated>2015-02-11T03:36:31.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
 <p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
 <a id="more"></a>
@@ -1993,78 +2053,6 @@
       <category term="gulpjs" scheme="http://blog.da2k.com.br/tags/gulpjs/"/>
     
       <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Como criar Extensões para o Google Chrome]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/"/>
-    <id>http://blog.da2k.com.br/2015/01/23/como-criar-extensoes-para-o-google-chrome/</id>
-    <published>2015-01-23T00:00:00.000Z</published>
-    <updated>2015-01-23T01:10:07.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/chrome-extensions.jpg" alt="Chrome Extension"></p>
-<p>Sabe quando você está usando um aplicativo web, e percebe que falta alguma funcionalidade que, ao seu ver, você conseguiria resolver facilmente com <strong>Javascript</strong>? Mas como você não trabalha na empresa que criou o aplicativo, você fica de mãos atadas e diz: “- Eu mesmo vou fazer um aplicativo desses. Do zero!”, mas não faz, porque vai tomar muito tempo, ae você procrastina e continua chorando porque aquele app deveria ter a funcionalidade que você quer?</p>
-<p><strong>Seus problemas acarabam!</strong> Agora você pode criar uma <strong>Chrome Extension</strong>, usando somente Javascript (que lindo isso cara *_* ) e EXTENDENDO as funcionalidades do aplicativo que você usa conforme a sua necessidade! </p>
-<p>Curtiu a ideia? Quer aprender a fazer? Vem comigo xD</p>
-<a id="more"></a>
-
-<h2 id="Motivação">Motivação</h2>
-<p>O que me motivou a criar uma <em>Chrome Extension</em> foi o <a href="http://grooveshark.com/" target="_blank" rel="external">Grooveshark</a>. É a ferramenta que mais gosto pra passar o dia todo ouvindo música - sem propagandas - e programando :D</p>
-<p>Só que ele tem um problema: a cada <strong>x</strong> minutos (não tenho certeza se é 15 ou 30), ele pára de tocar e pergunta: “- Você ainda está aí?”; e para voltar a tocar, você precisa clicar no botão “Resume” ¬¬</p>
-<p>Sério, já passei algumas horas do dia com o fone apertando o ouvindo, no silêncio, porque estava focando em algum código, e quando percebi o Grooveshark já havia parado a muito tempo.</p>
-<p>Então pensei comigo: “- Por que não criar uma extensão do Chrome que clique nesse botão <strong>Resume</strong> pra mim?” E <a href="https://github.com/fdaciuk/dont-stop-grooveshark/" target="_blank" rel="external">foi exatamente o que eu fiz!</a></p>
-<h2 id="Por_onde_começar">Por onde começar</h2>
-<p>O Google tem um <a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">guia</a> para que você possa desenvolver sua própria extensão, mas como está em Inglês, resolvi escrever esse artigo, até pra mostrar algumas <a href="#Surpresinha"><em>surpresinhas</em></a> que você não espera quando vai fazer uma treta dessas xD</p>
-<p>Vamos começar então criando um diretório para nossa extensão e um arquivo <code>manifest.json</code>.</p>
-<h2 id="O_arquivo_manifest-json">O arquivo manifest.json</h2>
-<p>Esse arquivo não é nada mais que um JSON, onde ficarão os metadados relacionados à sua extensão: nome da extensão, descrição, versão, permissões, etc. <a href="https://developer.chrome.com/extensions/manifest" target="_blank" rel="external">Nesse link</a> você encontra todos os metadados que podem ser incluídos no <code>manifest.json</code>.</p>
-<p>Vou mostrar os exemplos baseados no <a href="https://github.com/fdaciuk/dont-stop-grooveshark/" target="_blank" rel="external"><strong>Don’t stop Grooveshark</strong></a>. O <code>manifest.json</code> ficará assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">  <span class="string">"name"</span>: <span class="string">"Don't stop Grooveshark"</span>,</div><div class="line">  <span class="string">"version"</span>: <span class="string">"0.0.2"</span>,</div><div class="line">  <span class="string">"manifest_version"</span>: <span class="number">2</span>,</div><div class="line">  <span class="string">"description"</span>: <span class="string">"Google Chrome Extension that don't leaves Grooveshark stop playing."</span>,</div><div class="line">  <span class="string">"icons"</span> : {</div><div class="line">    <span class="string">"16"</span> : <span class="string">"icon128.png"</span>,</div><div class="line">    <span class="string">"48"</span> : <span class="string">"icon128.png"</span>,</div><div class="line">    <span class="string">"128"</span> : <span class="string">"icon128.png"</span></div><div class="line">  },</div><div class="line">  <span class="string">"content_scripts"</span>: [{</div><div class="line">    <span class="string">"matches"</span>: [ <span class="string">"*://grooveshark.com/*"</span> ],</div><div class="line">    <span class="string">"js"</span>: [ <span class="string">"dont-stop-grooveshark.js"</span> ]</div><div class="line">  }]</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Vou comentar os parâmetros que não são tão óbvios, ok?</p>
-<h3 id="mainfest_version">mainfest_version</h3>
-<p>Esse parâmetro recebe um número inteiro, que representa a versão do mainfesto que o sua extensão está usando. A partir do <em>Chrome 18</em>, a versão <code>1</code> foi depreciada. Você deveria sempre usar a <code>2</code> a partir de então.</p>
-<h3 id="icons">icons</h3>
-<p>O ícone da sua extensão, que será mostrado na Chrome Store, ou quando sua extensão for mostrada na barra de extensões do <em>Chrome</em>.</p>
-<p>É recomendado que você tenha ao menos o tamanho de ícone em <code>128x128px</code>. Se possível, passe todos os tamanhos pedidos (16x16, 48x48, 128x128), pois o <em>Chrome</em> irá selecionar o que for mais apropriado para o momento que ele precisar ser apresentado.</p>
-<h3 id="content_scripts">content_scripts</h3>
-<p><em><strong>Content scripts</strong> is where the magic happens!</em> Aqui é o lugar onde você pode adicionar seus próprios <em>scripts</em> ou <em>css</em> e adicioná-los à alguma página na web.</p>
-<p>A propriedade <code>matches</code> recebe um array de domínios que sua extensão precisa de permissão para acessar. </p>
-<p>A propriedade <code>js</code> recebe um array de arquivos JS que serão incluídos quando esses domínios forem acessados.</p>
-<p>Você ainda pode ter uma propriedade <code>css</code>, que também receberá um array de arquivos CSS para estilizar a página do(s) domínio(s) setado(s) em <code>matches</code>.</p>
-<p>Basicamente é isso que você vai precisar. Se estiver pensando em fazer uma extensão um pouco mais complexa, talvez você precise setar mais alguns parâmetros, que podem ser encontrados <a href="https://developer.chrome.com/extensions/content_scripts" target="_blank" rel="external">nesse link</a>.</p>
-<h2 id="A_magia">A magia</h2>
-<p>No caso do <strong>Don’t stop Grooveshark</strong>, o que eu preciso que seja feito é que, sempre que aparecer na tela aquela mensagem perguntando se eu ainda estou ali, o botão de <strong>Resume</strong> deve receber um clique automaticamente.</p>
-<p>O código utilizado no arquivo <code>dont-stop-grooveshark.js</code> é o seguinte:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( doc )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( <span class="string">"Don't stop Grooveshark! ;)"</span> );</div><div class="line">  <span class="keyword">var</span> $resumePlaybackButton;</div><div class="line">  </div><div class="line">  <span class="built_in">window</span>.setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $resumePlaybackButton = doc.querySelector( <span class="string">'[data-translate-text="LB_INTERACTION_TIME_RESUME"]'</span> );</div><div class="line">    <span class="keyword">if</span>( ! $resumePlaybackButton ) {</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    }</div><div class="line">    </div><div class="line">    $resumePlaybackButton.click();</div><div class="line">  }, <span class="number">3000</span>);</div><div class="line">})( <span class="built_in">document</span> );</div></pre></td></tr></table></figure>
-
-<p>A única referência que eu tenho para o botão de <strong>Resume</strong>, é um atributo <code>data-translate-text</code>, com o conteúdo <code>LB_INTERACTION_TIME_RESUME</code>. Então o que eu faço é, a cada 3 segundos, verificar se esse botão está na tela e dar um clique nele. Se ele não estiver, não faço nada. :)</p>
-<h2 id="Conclusão">Conclusão</h2>
-<p>Tendo acesso direto a um app, e a possibilidade de injetar Javascript, você pode fazer QUALQUER COISA que quiser! Existem algumas extensões que precisam de uma tela específica para setar algumas configurações. Isso também é possível fazer, mas vou deixar pra mostrar isso em um próximo artigo :D</p>
-<h2 id="Surpresinha">Surpresinha</h2>
-<p>Para subir uma <em>Chrome Extension</em> para o <a href="">respositório oficial</a>, você precisa pagar <strong>U$ 5</strong> <del>doletas</del>. Apesar do preço baixo, - e você só precisar pagar esse valor uma única vez - ele serve como uma “segurança” para que muitos desenvolvedores não postem qualquer porcaria lá (apesar de já ter :P). Imagina se não cobrassem :P</p>
-<p>Depois desse pagamento, você pode fazer quantas extensões quiser, e subir à vontade!</p>
-<p>Por hoje é isso! </p>
-<p>E aí: para qual app você vai fazer a sua extensão? :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/chrome-extensions.jpg" alt="Chrome Extension"></p>
-<p>Sabe quando você está usando um aplicativo web, e percebe que falta alguma funcionalidade que, ao seu ver, você conseguiria resolver facilmente com <strong>Javascript</strong>? Mas como você não trabalha na empresa que criou o aplicativo, você fica de mãos atadas e diz: “- Eu mesmo vou fazer um aplicativo desses. Do zero!”, mas não faz, porque vai tomar muito tempo, ae você procrastina e continua chorando porque aquele app deveria ter a funcionalidade que você quer?</p>
-<p><strong>Seus problemas acarabam!</strong> Agora você pode criar uma <strong>Chrome Extension</strong>, usando somente Javascript (que lindo isso cara *_* ) e EXTENDENDO as funcionalidades do aplicativo que você usa conforme a sua necessidade! </p>
-<p>Curtiu a ideia? Quer aprender a fazer? Vem comigo xD</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="chrome extension" scheme="http://blog.da2k.com.br/tags/chrome-extension/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
