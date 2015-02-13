@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-13T09:17:29.469Z</updated>
+  <updated>2015-02-13T09:18:57.672Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/"/>
     <id>http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/</id>
     <published>2015-02-13T00:00:00.000Z</published>
-    <updated>2015-02-13T09:16:58.000Z</updated>
+    <updated>2015-02-13T09:18:38.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/scalability.jpg" alt=""></p>
 <p>Aí você está lá, todo pomposo, trabalhando no seu projeto, escrevendo seu JS tudo em um arquivo só, achando que vai ficar com pouco código, usando uma global aqui, outra global ali, e quando vê… já está com 4.000 linhas de código, todo perdido sem saber o que fazer! E você pensa: <em>“Porque eu não modularizei isso???”</em></p>
 <p>Já dizia Renato Aragão: “<em>Se não fosse comigo, eu ria…</em>“</p>
@@ -77,7 +77,7 @@
 
 <p>Que deixaria nosso <code>controller</code> pronto para uso somente se estivermos na home. Olhando dessa forma, dá pra ver que faz bastante sentido trocar esse <code>if</code> por uma rota, quando necessário :)</p>
 <p>Outra coisa bastante importante é a ordem das propriedades e métodos. Sempre que tiver uma propriedade que precise ser compartilhada por todo o <code>controller</code>, ou <code>service</code>, etc., você declara ela no início do arquivo, logo abaixo das declarações de <code>$public</code> e <code>$private</code>, e sempre como propriedade de <code>$private</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $public = {};</div><div class="line"><span class="keyword">var</span> $private = {};</div><div class="line"></div><div class="line">$private.buttonSend = doc.querySelector( <span class="string">'[data-js="button-send"]'</span> );</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $public = {};</div><div class="line"><span class="keyword">var</span> $private = {};</div><div class="line">  </div><div class="line">$private.buttonSend = doc.querySelector( <span class="string">'[data-js="button-send"]'</span> );</div></pre></td></tr></table></figure>
 
 <p>Se precisar que elas sejam inicializadas em algum momento específico, você pode criar um método <code>initVars</code> ou <code>iniProps</code>, chamando esse método no <code>init</code>, e fazer a declaração delas ali dentro.</p>
 <p>Métodos públicos devem vir sempre antes dos métodos privados, logo após as declarações de propriedades. Isso porque vai facilitar para você visualizar o que é público logo no início do arquivo.</p>
