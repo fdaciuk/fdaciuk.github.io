@@ -3,7 +3,7 @@
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/</loc>
-    <lastmod>2015-02-13T09:13:30.000Z</lastmod>
+    <lastmod>2015-02-13T09:16:58.000Z</lastmod>
   </url>
   
   <url>
@@ -37,22 +37,22 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/08/aprenda-markdown/</loc>
-    <lastmod>2015-02-08T03:29:10.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2015/02/07/javascript-assistindo-mudancas-no-dom-sem-temporizadores/</loc>
     <lastmod>2015-02-08T03:29:10.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/</loc>
-    <lastmod>2015-02-07T04:55:41.000Z</lastmod>
+    <loc>http://blog.da2k.com.br/2015/02/08/aprenda-markdown/</loc>
+    <lastmod>2015-02-08T03:29:10.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</loc>
+    <lastmod>2015-02-07T04:55:41.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/</loc>
     <lastmod>2015-02-07T04:55:41.000Z</lastmod>
   </url>
   
@@ -102,12 +102,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
     <lastmod>2015-01-25T11:03:17.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
     <lastmod>2015-01-25T11:03:17.000Z</lastmod>
   </url>
   
@@ -157,12 +157,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</loc>
     <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/15/como-ser-um-dev-frontend-usando-linux/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
     <lastmod>2015-01-15T01:40:05.000Z</lastmod>
   </url>
   
@@ -177,36 +177,6 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</loc>
-    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
@@ -217,7 +187,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
@@ -227,12 +197,42 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/03/22/disqus-uma-thread-para-mais-de-uma-url/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/05/19/wordcamp-belo-horizonte-2014-minhas-impressoes/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/10/debugar-javascript-no-browser/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/01/meta-tags-x-ua-compatible-e-charset/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/09/wordpress-estrutura-basica-de-um-tema/</loc>
+    <lastmod>2015-01-12T08:23:35.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/</loc>
     <lastmod>2015-01-12T08:23:35.000Z</lastmod>
   </url>
   
