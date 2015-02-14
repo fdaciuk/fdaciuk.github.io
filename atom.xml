@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-14T04:52:55.578Z</updated>
+  <updated>2015-02-14T04:54:10.502Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/"/>
     <id>http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/</id>
     <published>2015-02-14T00:00:00.000Z</published>
-    <updated>2015-02-14T04:51:42.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-gists.png" alt=""></p>
+    <updated>2015-02-14T04:53:56.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-gists.png" alt=""></p>
 <p>Para pequenos trechos de código, não existe ferramenta melhor que os <strong>gists</strong> do Github! Mas você pode ir um pouco além! Quer ver? Vem comigo :)</p>
 <a id="more"></a>
 
@@ -44,7 +44,7 @@
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="/uploads/2015/02/github-secrets-gists.png" alt=""></p>
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-gists.png" alt=""></p>
 <p>Para pequenos trechos de código, não existe ferramenta melhor que os <strong>gists</strong> do Github! Mas você pode ir um pouco além! Quer ver? Vem comigo :)</p>
 ]]>
     
@@ -63,7 +63,7 @@
     <link href="http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/"/>
     <id>http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/</id>
     <published>2015-02-13T00:00:00.000Z</published>
-    <updated>2015-02-14T00:15:18.000Z</updated>
+    <updated>2015-02-14T04:53:24.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/scalability.jpg" alt=""></p>
 <p>Aí você está lá, todo pomposo, trabalhando no seu projeto, escrevendo seu JS tudo em um arquivo só, achando que vai ficar com pouco código, usando uma global aqui, outra global ali, e quando vê… já está com 4.000 linhas de código, todo perdido sem saber o que fazer! E você pensa: <em>“Porque eu não modularizei isso???”</em></p>
 <p>Já dizia Renato Aragão: “<em>Se não fosse comigo, eu ria…</em>“</p>
