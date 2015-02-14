@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-13T09:18:57.672Z</updated>
+  <updated>2015-02-14T04:52:55.578Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,55 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Segredos do Github - Gists]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/"/>
+    <id>http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/</id>
+    <published>2015-02-14T00:00:00.000Z</published>
+    <updated>2015-02-14T04:51:42.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-gists.png" alt=""></p>
+<p>Para pequenos trechos de código, não existe ferramenta melhor que os <strong>gists</strong> do Github! Mas você pode ir um pouco além! Quer ver? Vem comigo :)</p>
+<a id="more"></a>
+
+<p>Se você não sabia, é possível adicionar arquivos e criar pequenos trechos de código, - que seria muito pouco pra um repositório completo - usando os <a href="https://gist.github.com/" target="_blank" rel="external">gists</a>.</p>
+<p>Você pode criar quantos arquivos achar necessário, clicando no botão <strong>Add file</strong>.</p>
+<p>O nome mostrado no <strong>gist</strong> é o nome do primeiro arquivo. Eles são organizados em ordem alfabética.</p>
+<p><em>Já conheço os gists! O que tem de mais nisso?</em></p>
+<h2 id="Embed">Embed</h2>
+<p>Se você quiser fazer <em>embed</em> de um <strong>gist</strong> na sua aplicação, você só precisa adicionar a extensão <code>.pibb</code> na URL, e você terá a versão HTML, somente com os os arquivos do gist :)</p>
+<p>Ou então, copiar o <code>script</code> de Embed na que aparece na sidebar, na lateral direita.</p>
+<h2 id="Versionamento_do_gist">Versionamento do gist</h2>
+<p>Você pode tratar seus <strong>gists</strong> também como repositórios, pois eles podem ser clonados como qualquer outro projeto:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://gist.github.com/<span class="number">53207</span>bdb787e41ec0fa7.git</div></pre></td></tr></table></figure>
+
+<p>A única questão é que os <strong>gists</strong> não suportam diretórios. Se precisar criar uma esturuta de diretórios, a melhor coisa é criar um repositório no <strong>Github</strong> mesmo.</p>
+<p>Para saber mais sobre os gists, leia <a href="https://help.github.com/articles/creating-gists/" target="_blank" rel="external">https://help.github.com/articles/creating-gists/</a> :)</p>
+<p>Essa foi uma dica bem rápida, mas espero que ajude :)</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/uploads/2015/02/github-secrets-gists.png" alt=""></p>
+<p>Para pequenos trechos de código, não existe ferramenta melhor que os <strong>gists</strong> do Github! Mas você pode ir um pouco além! Quer ver? Vem comigo :)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Escalando Javascript no browser]]></title>
     <link href="http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/"/>
     <id>http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/</id>
     <published>2015-02-13T00:00:00.000Z</published>
-    <updated>2015-02-13T09:18:38.000Z</updated>
+    <updated>2015-02-14T00:15:18.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/scalability.jpg" alt=""></p>
 <p>Aí você está lá, todo pomposo, trabalhando no seu projeto, escrevendo seu JS tudo em um arquivo só, achando que vai ficar com pouco código, usando uma global aqui, outra global ali, e quando vê… já está com 4.000 linhas de código, todo perdido sem saber o que fazer! E você pensa: <em>“Porque eu não modularizei isso???”</em></p>
 <p>Já dizia Renato Aragão: “<em>Se não fosse comigo, eu ria…</em>“</p>
@@ -66,7 +110,7 @@
 <h2 id="Conteúdo_dos_arquivos">Conteúdo dos arquivos</h2>
 <p>O conteúdo dos arquivos também deve manter uma convenção, para que fique fácil adicionar novos arquivos e dar manutenção nos já existentes. A estrutura base dos arquivos provavelmente vai ser a mesma, mudando apenas alguns detalhes.</p>
 <p>Por exemplo: um <code>controller</code> teria uma estrutura parecida com essa:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win, doc, Module, undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">ControllerHome</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    <span class="keyword">var</span> $private = {};</div><div class="line">  </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      $private.initEvents();</div><div class="line">    };</div><div class="line">  </div><div class="line">    $private.initEvents = <span class="function"><span class="keyword">function</span> <span class="title">initEvents</span><span class="params">()</span> </span>{</div><div class="line">      doc.querySelector( <span class="string">'[data-js="send-form"]'</span> )</div><div class="line">        .addEventListener( <span class="string">'click'</span>, Module.ServiceSendForm.submit, <span class="literal">false</span> );</div><div class="line">    };</div><div class="line">  </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  Module = Module || {};</div><div class="line">  Module.ControllerHome = ControllerHome();</div><div class="line">})( <span class="built_in">window</span>, <span class="built_in">document</span>, <span class="built_in">window</span>.Module );</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win, doc, undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">ControllerHome</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    <span class="keyword">var</span> $private = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      $private.initEvents();</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.initEvents = <span class="function"><span class="keyword">function</span> <span class="title">initEvents</span><span class="params">()</span> </span>{</div><div class="line">      doc.querySelector( <span class="string">'[data-js="send-form"]'</span> )</div><div class="line">        .addEventListener( <span class="string">'click'</span>, Module.ServiceSendForm.submit, <span class="literal">false</span> );</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  win.Module = win.Module || {};</div><div class="line">  win.Module.ControllerHome = ControllerHome();</div><div class="line">})( <span class="built_in">window</span>, <span class="built_in">document</span> );</div></pre></td></tr></table></figure>
 
 <p>Começa com uma <strong>IIFE</strong>, gera uma função <code>ControllerHome</code>, para gerenciar tudo o que for feito na home. Como algumas áreas do site são comuns, - normalmente cabeçalho, rodapé e sidebar - você pode ainda criar um <code>ControllerCommon</code> para gerenciar envio de newsletter, busca, etc. Coisas que são comuns em todas as áreas da aplicação.</p>
 <p>Dentro da função principal, temos dois objetos: <code>$private</code> e <code>$public</code>, retornando sempre o <code>$public</code>, para deixar público somente o que for necessário chamar de fora, ou de outro arquivo. Para <code>controllers</code>, o que ficará público basicamente será só o método <code>init</code> mesmo.</p>
@@ -92,7 +136,7 @@
 <p><em>Por que fazer dessa forma?</em></p>
 <p>Porque assim você garante que não haverá efeitos colaterais, se alguém trocar o valor de alguma propriedade que estiver sendo usada internamente no seu código.</p>
 <p>Para obter e setar valores, use métodos <code>get</code> e <code>set</code>. No <code>get</code> você retorna a propriedade privada definida. No <code>set</code>, você seta o valor passado, e retorna o próprio objeto, que é retornado na função principal, para que você possa encadear métodos:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$public set = <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">( key, value )</span> </span>{</div><div class="line">  $private[ key ] = value;</div><div class="line">  <span class="keyword">return</span> $public;</div><div class="line">};</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$public.set = <span class="function"><span class="keyword">function</span> <span class="title">set</span><span class="params">( key, value )</span> </span>{</div><div class="line">  $private[ key ] = value;</div><div class="line">  <span class="keyword">return</span> $public;</div><div class="line">};</div></pre></td></tr></table></figure>
 
 <p>Fazendo isso, você pode setar várias coisas de uma vez só:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Module.pagination</div><div class="line">  .set( <span class="string">'initialPage'</span>, <span class="number">1</span> )</div><div class="line">  .set( <span class="string">'buttonNextSelector'</span>, <span class="string">'[data-js="button-next"]'</span> );</div></pre></td></tr></table></figure>
@@ -1850,56 +1894,6 @@
     <summary type="html">
     <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-images.png" alt="Segredos do Github - Imagens"></p>
 <p>Imagens? Isso é segredo? ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - Shortcuts]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/"/>
-    <id>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</id>
-    <published>2015-01-25T00:00:00.000Z</published>
-    <updated>2015-01-25T11:03:17.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-shortcuts.jpg" alt="Github Shortcuts"></p>
-<p>Atalhos sempre agilizam o trabalho com qualquer ferramenta. Hoje vou mostrar alguns atalhos interessantes do Github :D</p>
-<a id="more"></a>
-
-<h2 id="Buscando_arquivos">Buscando arquivos</h2>
-<p>Quando você está visualizando um repositório, você pode pressionar <code>t</code> e começar a digitar um nome de arquivo que contenha nesse diretório, que o arquivo será buscado recursivamente em todos os diretórios:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-search.png" alt="Github search"></p>
-<p>Usando as setas <code>↑</code> e <code>↓</code>, você navega pelos arquivos encontrados. E pressionando <code>enter</code>, você abre o arquivo :)<br>Esse comando funciona na listagem de arquivos de um repositório.</p>
-<h2 id="Branch_selector">Branch selector</h2>
-<p>Se você trabalha com várias <em>branchs</em>, pode usar o <code>w</code>, na tela principal do repositório, para abrir o <em>Branch Selector</em>. O campo de busca de branchs receberá foco. Pressionando <code>tab</code>, você navega nas abas <em>branches</em> e <em>tags</em>. Pressionando <code>enter</code> em cima da aba, ela é selecionada:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/branch-selector.png" alt="Branch selector"></p>
-<h2 id="Command_bar">Command bar</h2>
-<p>Pressionando <code>s</code>, o barra de busca recebe foco para que você possa encontrar conteúdos dentro do Github:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/command-bar.png" alt="Command bar"></p>
-<p>Mais dicas interessantes sobre a <em>Command bar</em> você encontra em <a href="https://help.github.com/articles/searching-github/" target="_blank" rel="external">https://help.github.com/articles/searching-github/</a></p>
-<h2 id="Labels">Labels</h2>
-<p>Na tela de  <em>issues</em>, pressionando <code>l</code>, você pode filtrar as <em>issues</em> por labels. Pode navegar por elas usando as setas <code>↑</code> e <code>↓</code> e pressionar <code>enter</code>para selecionar:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/labels.png" alt="Labels"></p>
-<h2 id="Congelar_uma_alteração_de_arquivo">Congelar uma alteração de arquivo</h2>
-<p>Ao visualizar um arquivo, se você pressionar <code>y</code>, a URL irá mudar para uma que “congela” como o arquivo está atualmente. Se esse arquivo mudar, você pode usar essa URL para ver exatamente como estava o arquivo antes das alterações :)</p>
-<h2 id="Todos_os_atalhos">Todos os atalhos</h2>
-<p>E por último, mas não menos importante, se você pressionar <code>?</code> em qualquer lugar, será mostrada a tela com todos os atalhos disponíveis no Github :D</p>
-<p>Inicialmente são mostrados somente os mais utilizados. Mas clicando no link <strong>Show all</strong>, você pode ver todos os atalhos! (<em>Mr. Óbvio ataca novamente!</em> :P)</p>
-<p>Até a próxima!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-shortcuts.jpg" alt="Github Shortcuts"></p>
-<p>Atalhos sempre agilizam o trabalho com qualquer ferramenta. Hoje vou mostrar alguns atalhos interessantes do Github :D</p>
 ]]>
     
     </summary>
