@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-14T12:34:30.257Z</updated>
+  <updated>2015-02-15T13:01:28.445Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,137 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Escrevendo CSS com Stylus]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"/>
+    <id>http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/</id>
+    <published>2015-02-15T00:00:00.000Z</published>
+    <updated>2015-02-15T13:01:16.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus.png" alt=""></p>
+<p><em>Ué, vai falar de CSS? Cadê os artigos de Javascript?</em><br>E se eu te disser que <strong>Stylus</strong> é Javascript, você acredita? Duvida? Vem comigo então ;)</p>
+<a id="more"></a>
+
+<p>CSS é feio, é verboso, é estático, difícil de organizar, tem muita repetição na escrita. E quando você diminui a repetição, acaba aumentando o acoplamento, e deixando difícil de escalar. Infelizmente a ferramenta que você usa para deixar sua aplicação bonita tem todos esses defeitos. </p>
+<p>Mas como escrever CSS de uma forma dinâmica e modular, que fique fácil para organizar e escalar?</p>
+<p>Claro: <strong>pré-processadores!</strong></p>
+<p>A maior parte dos devs que conheço trabalham com <em>SASS</em> ou <em>Less</em>, - que por sinal, são ótimas ferramentas - e talvez pela popularidade delas, acabam deixando de experimentar outras ferramentas que poderiam facilitar ainda mais o seu dia-a-dia. Sim, estou falando do <strong>Stylus!</strong></p>
+<p><em>O Stylus é melhor que o SASS e o Less?</em></p>
+<p>Bom, eu já usei os três, logo, tenho argumentos o bastante sobre os prós e contras de cada um. E, como <strong>opinião pessoal</strong>, eu prefiro o Stylus. E nessa <strong>nova série</strong> de posts eu vou mostrar porquê!</p>
+<h2 id="Preparando_o_ambiente">Preparando o ambiente</h2>
+<p>Antes de qualquer coisa, precisamos deixar nosso ambiente preparado para usar o Stylus. Só precisamos de uma ferramenta para usá-lo, e você já deve saber qual é, não?</p>
+<p>Isso mesmo, o <strong>NodeJS</strong>!</p>
+<p>Provavelmente você já o tem instalado. Se não tiver, <a href="http://nodejs.org/" target="_blank" rel="external">faça o download</a> e instale :)</p>
+<p>Como o <strong>Node</strong> instalado, instale o <strong>Stylus</strong> de modo global:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g stylus</div></pre></td></tr></table></figure>
+
+<p>E já temos nosso ambiente pronto :D</p>
+<h2 id="Estrutura_de_diretórios_para_nosso_teste">Estrutura de diretórios para nosso teste</h2>
+<p>Crie um diretório onde iremos colocar os arquivos do <strong>Stylus</strong> e os CSS compilados.</p>
+<p>Dentro desse diretório, crie dois diretórios: <code>stylus</code> e <code>css</code>, e um arquivo <code>main.styl</code> dentro de <code>stylus</code>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── /css</div><div class="line">└── /stylus</div><div class="line">    └── main.styl</div></pre></td></tr></table></figure>
+
+<p>Todo arquivo do <strong>stylus</strong> deve ter a extensão <code>.styl</code>.</p>
+<p>Fazendo isso, podemos executar o comando abaixo para assistir os arquivos do <strong>stylus</strong> e compilar:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stylus --watch stylus/main.styl --out css/</div></pre></td></tr></table></figure>
+
+<p>No <strong>Stylus</strong>, você só precisa assistir ao arquivo principal. Todos os arquivos importados à partir dele serão também automaticamente assistidos. Qualquer alteração nesses arquivos irá compilar o CSS final :)</p>
+<h2 id="Stylus_na_prática">Stylus na prática</h2>
+<p>Agora estamos prontos para presenciar todo o poder do <strong>Stylus</strong>! Coloque os códigos mostrados ao longo do post no arquivo <code>stylus/main.styl</code> (a menos que seja dito o contrário), e acompanhe o resultado gerado em <code>css/main.css</code> :)</p>
+<h3 id="Seletores">Seletores</h3>
+<p>Uma das diferenças do <strong>Stylus</strong> para outros pré-processadores, é que as chaves e dois-pontos e ponto-e-vírgula não são obrigatórios. Mas ainda assim, você pode usá-los, se quiser.</p>
+<p>Com <strong>Less</strong>, você precisa deles sempre. Com <strong>SASS</strong>, você tem duas sintaxes: <code>.scss</code>, onde você escreve no formato do CSS, e <code>.sass</code>, onde você escreve baseado na indentação, sem ponto-e-vírgula e sem chaves.</p>
+<p>Em <strong>Stylus</strong>, todos os formatos abaixo são válidos:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line">  </div><div class="line"><span class="tag">main</span></div><div class="line">  <span class="tag">color</span> <span class="id">#fff</span></div><div class="line">  </div><div class="line"><span class="tag">div</span></div><div class="line">  <span class="tag">color</span>: <span class="id">#fff</span></div></pre></td></tr></table></figure>
+
+<p>E detalhe: você pode utilizar isso no mesmo arquivo. Experimente! Escrevendo isso no <strong>Stylus</strong>, o resultado em <code>main.css</code> será:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">main</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Você pode também unir estilos iguais, de duas formas: separando por vírgula, como no CSS, ou colocando um abaixo do outro:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">body, main, <span class="keyword">div</span></div><div class="line">  color <span class="comment">#fff</span></div><div class="line">  </div><div class="line">body</div><div class="line">main</div><div class="line"><span class="keyword">div</span></div><div class="line">  color <span class="comment">#fff</span></div></pre></td></tr></table></figure>
+
+<p>Os dois compilam o mesmo resultado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span>,</div><div class="line"><span class="tag">main</span>,</div><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Para fazer referência ao seletor pai (<strong>parent reference</strong>), você pode usar o <code>&amp;</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a </div><div class="line">  <span class="keyword">color</span> <span class="preprocessor">#000</span></div><div class="line">  </div><div class="line">  &:hover</div><div class="line">    <span class="keyword">color</span>: <span class="preprocessor">#f00</span></div></pre></td></tr></table></figure>
+
+<p>Compila para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Se você precisar usar o símbolo <code>&amp;</code> explicitamente em um seletor, você pode escapá-lo com a barra invertida:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.foo[title*=<span class="string">'\&'</span>]</div><div class="line">  font-<span class="keyword">size</span>: <span class="number">3</span>em</div></pre></td></tr></table></figure>
+
+<p>Vai compilar o <code>&amp;</code> literalmente:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class">.foo</span><span class="attr_selector">[title*='&']</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">3em</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p><em>Mas isso eu consigo fazer no <strong>SASS</strong> e no <strong>Less</strong> também!</em></p>
+<p>Sim! Mas ainda tem mais! :D</p>
+<p>Uma das <em>features</em> mais legais, - em minha opinião - é o <strong>Root reference</strong>. Em alguns momentos você precisa, por exemplo, que o mesmo estilo do <code>a:hover</code> seja o estilo também do <code>input:focus</code>. Como fazer isso sem duplicar o código? Usando o <strong>root reference</strong>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span></div><div class="line">  <span class="attribute">color</span> <span class="id">#000</span></div><div class="line">  </div><div class="line">  &<span class="pseudo">:hover</span></div><div class="line">  <span class="tag">input</span><span class="pseudo">:focus</span></div><div class="line">    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span></span></div></pre></td></tr></table></figure>
+
+<p>Se você compilar o código acima, ele ficará errado, pois o <strong>Stylus</strong> vai supor que o <code>input:focus</code> está dentro de <code>a</code>, por causa da indentanção:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">a</span><span class="pseudo">:hover</span>,</div><div class="line"><span class="tag">a</span> <span class="tag">input</span><span class="pseudo">:focus</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Usando <strong>root reference</strong>, com a barra (<code>/</code>), você diz ao <strong>Stylus</strong> para ignorar a indentação e compilar aquele seletor como se ele estivesse na raiz:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a</div><div class="line">  <span class="keyword">color</span> <span class="preprocessor">#000</span></div><div class="line">  </div><div class="line">  &:hover</div><div class="line">  /input:focus</div><div class="line">    <span class="keyword">color</span>: <span class="preprocessor">#f00</span></div></pre></td></tr></table></figure>
+
+<p>Fazendo isso, nós temos o resultado esperado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">a</span><span class="pseudo">:hover</span>,</div><div class="line"><span class="tag">input</span><span class="pseudo">:focus</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Legal não? Isso é exclusivo do <strong>Stylus</strong> xD</p>
+<h2 id="Variáveis">Variáveis</h2>
+<p><strong>SASS</strong> e <strong>Less</strong> também têm variáveis, mas cada pré-processador tem uma forma de tratá-las. Em <strong>Less</strong>, elas devem começar com um <code>@</code>, e é usado o sinal <code>:</code> para atribuir valores. No <strong>SASS</strong>, as variáveis começam com <code>$</code>. A atribuição é igual ao <strong>Less</strong>.</p>
+<p>Em <strong>Stylus</strong>, você tem liberdade para escrever suas variáveis como quiser, e usa-se o sinal <code>=</code> para atribuição:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">color</span> = #<span class="number">000</span></div><div class="line">font-<span class="keyword">size</span> = <span class="number">14</span>px</div><div class="line">body</div><div class="line">  <span class="keyword">color</span> <span class="keyword">color</span></div><div class="line">  font-<span class="keyword">size</span> font-<span class="keyword">size</span></div></pre></td></tr></table></figure>
+
+<p>Vai compilar para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">14px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Mas isso pode ser ficar um pouco confuso, já que os nomes podem ser os mesmos das propriedades. Temos então a opção de usar o <code>$</code> como prefixo da variável, como no <strong>SASS</strong>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$color</span> = #<span class="number">000</span></div><div class="line"><span class="variable">$font</span>-<span class="keyword">size</span> = <span class="number">14</span>px</div><div class="line">body</div><div class="line">  <span class="keyword">color</span> <span class="variable">$color</span></div><div class="line">  font-<span class="keyword">size</span> <span class="variable">$font</span>-<span class="keyword">size</span></div></pre></td></tr></table></figure>
+
+<p>E assim fica melhor :)</p>
+<p>No <strong>Stylus</strong>, temos uma outra feature legal chamada <strong>Property Lookup</strong>, onde você pode definir variáveis locais no momento da atribuição do valor à uma propriedade:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span></div><div class="line">  <span class="attribute">width</span><span class="value">: w = <span class="number">150px</span></span></div><div class="line">  height: h = <span class="number">120px</span></div><div class="line">  margin-left: <span class="function">-</span>( w / <span class="number">2</span> )</div><div class="line">  margin-top: <span class="function">-</span>( h / <span class="number">2</span> )</div></pre></td></tr></table></figure>
+
+<p>Só coloquei os dois-pontos para facilitar a leitura. Eles continuam opcionais, ainda nesse caso.<br>E o resultado disso é:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">150px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">120px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">75px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> -<span class="number">60px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Mas no lugar de definir novas variáveis, você ainda pode usar a própria propriedade como variável, usando o símbolo <code>@</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span></div><div class="line">  <span class="attribute">width</span> 150px</div><div class="line">  <span class="attribute">height</span> 120px</div><div class="line">  <span class="attribute">margin-left</span><span class="value">: <span class="function">-</span>( @width / <span class="number">2</span> )</span></div><div class="line">  margin-top: <span class="function">-</span>( @height / <span class="number">2</span> )</div></pre></td></tr></table></figure>
+
+<p>Doido, não? :D</p>
+<p>Por hoje é só! Esse post foi só pra dar um gostinho :P</p>
+<p>Acompanhe os próximos posts da série para descobrir todos os super-poderes do <strong>Stylus</strong>!</p>
+<p>Ficou com alguma dúvida? Comente!</p>
+<p>Até o próximo! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus.png" alt=""></p>
+<p><em>Ué, vai falar de CSS? Cadê os artigos de Javascript?</em><br>E se eu te disser que <strong>Stylus</strong> é Javascript, você acredita? Duvida? Vem comigo então ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="stylus" scheme="http://blog.da2k.com.br/tags/stylus/"/>
+    
+      <category term="pré-processadores" scheme="http://blog.da2k.com.br/tags/pre-processadores/"/>
+    
+      <category term="css" scheme="http://blog.da2k.com.br/categories/css/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - Gists]]></title>
     <link href="http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/"/>
     <id>http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/</id>
     <published>2015-02-14T00:00:00.000Z</published>
-    <updated>2015-02-14T12:33:26.000Z</updated>
+    <updated>2015-02-14T12:58:10.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-the-gists.png" alt=""></p>
 <p>Para pequenos trechos de código, não existe ferramenta melhor que os <strong>gists</strong> do Github! Mas você pode ir um pouco além! Quer ver? Vem comigo :)</p>
 <a id="more"></a>
@@ -1819,90 +1945,6 @@
       <category term="rsync" scheme="http://blog.da2k.com.br/tags/rsync/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - Imagens]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/"/>
-    <id>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</id>
-    <published>2015-01-26T00:00:00.000Z</published>
-    <updated>2015-01-25T11:03:17.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-images.png" alt="Segredos do Github - Imagens"></p>
-<p>Imagens? Isso é segredo? ;)</p>
-<a id="more"></a>
-
-<h2 id="Emojis">Emojis</h2>
-<p>Nada como alegrar aquela mensagem de commit, o comentário de uma <em>issue</em> ou um <em>pull request</em> com os famosos <strong>Emojis</strong>! Para usar, basta você colocar o nome do emoji entre dois-pontos: <code>:emoji-name:</code>.</p>
-<p>E sim, isso funciona nas mensagens de commit! Experimente! </p>
-<p>Para saber quais são os Emojis disponíveis, acesse <a href="http://www.emoji-cheat-sheet.com/" target="_blank" rel="external">http://www.emoji-cheat-sheet.com/</a> ou <a href="https://github.com/scotch-io/All-Github-Emoji-Icons" target="_blank" rel="external">https://github.com/scotch-io/All-Github-Emoji-Icons</a> :)</p>
-<p>O <em>Top 5O</em> dos Emojis são:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Emoji</th>
-<th style="text-align:center">Código</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><img src="https://assets-cdn.github.com/images/icons/emoji/shipit.png" alt=""></td>
-<td style="text-align:center">:shipit:</td>
-</tr>
-<tr>
-<td style="text-align:center"><img src="https://assets-cdn.github.com/images/icons/emoji/sparkles.png" alt=""></td>
-<td style="text-align:center">:sparkles:</td>
-</tr>
-<tr>
-<td style="text-align:center"><img src="https://assets-cdn.github.com/images/icons/emoji/-1.png" alt=""></td>
-<td style="text-align:center">:-1:</td>
-</tr>
-<tr>
-<td style="text-align:center"><img src="https://assets-cdn.github.com/images/icons/emoji/+1.png" alt=""></td>
-<td style="text-align:center">:+1:</td>
-</tr>
-<tr>
-<td style="text-align:center"><img src="https://assets-cdn.github.com/images/icons/emoji/clap.png" alt=""></td>
-<td style="text-align:center">:clap:</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Imagens_/_GIFs">Imagens / GIFs</h2>
-<p>Você pode usar qualquer imagem ou gif em qualquer lugar que aceite markdown no Github: <em>issues</em>, <em>pull requests</em>, arquivos Markdown. Se quiser pegar a imagem de algum repositório, pode usar o seguinte formato:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![<span class="link_label">Alt Text</span>](<span class="link_url">https://github.com/{user}/{repo}/raw/{branch}/path/to/image.gif</span>)</div></pre></td></tr></table></figure>
-
-<p>Trocando as informações acima pelas corretas da sua imagem :)</p>
-<p><img src="https://camo.githubusercontent.com/fca1eaa46baa3573f6e2d993f6fe1f95a6329ae9/687474703a2f2f7777772e73686561776f6e672e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031332f30382f6b656570686174696e2e676966" alt=""></p>
-<h2 id="Upload_de_imagens">Upload de imagens</h2>
-<p>Quando abrir uma <em>issue</em> ou <em>pull request</em>, você pode adicionar uma local, de 3 formas:</p>
-<ul>
-<li>Arrastando a imagem para área onde você digita o texto da <em>issue</em> / <em>pull request</em>;</li>
-<li>Colando a imagem da sua área de transferência (<code>Ctrl + C</code> ou <code>Cmd + C</code>);</li>
-</ul>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-upload.png" alt="Upload de imagens no Github"></p>
-<ul>
-<li>Ou ainda clicando no link apresentado:</li>
-</ul>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-upload-click-link.png" alt="Upload de imagens no Github clicando no link"></p>
-<p>E era isso!</p>
-<p>Até a próxima! :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-images.png" alt="Segredos do Github - Imagens"></p>
-<p>Imagens? Isso é segredo? ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
     
   </entry>
   

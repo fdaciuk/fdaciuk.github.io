@@ -1,0 +1,445 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Escrevendo CSS com Stylus | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Ué, vai falar de CSS? Cadê os artigos de Javascript?E se eu te disser que Stylus é Javascript, você acredita? Duvida? Vem comigo então ;)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Escrevendo CSS com Stylus"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/02/stylus.png" />
+  
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-15T00:00:00.000Z"><a href="/2015/02/15/escrevendo-css-com-stylus/">15 de fevereiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Escrevendo CSS com Stylus</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus.png" alt=""></p>
+<p><em>Ué, vai falar de CSS? Cadê os artigos de Javascript?</em><br>E se eu te disser que <strong>Stylus</strong> é Javascript, você acredita? Duvida? Vem comigo então ;)</p>
+<a id="more"></a>
+
+<p>CSS é feio, é verboso, é estático, difícil de organizar, tem muita repetição na escrita. E quando você diminui a repetição, acaba aumentando o acoplamento, e deixando difícil de escalar. Infelizmente a ferramenta que você usa para deixar sua aplicação bonita tem todos esses defeitos. </p>
+<p>Mas como escrever CSS de uma forma dinâmica e modular, que fique fácil para organizar e escalar?</p>
+<p>Claro: <strong>pré-processadores!</strong></p>
+<p>A maior parte dos devs que conheço trabalham com <em>SASS</em> ou <em>Less</em>, - que por sinal, são ótimas ferramentas - e talvez pela popularidade delas, acabam deixando de experimentar outras ferramentas que poderiam facilitar ainda mais o seu dia-a-dia. Sim, estou falando do <strong>Stylus!</strong></p>
+<p><em>O Stylus é melhor que o SASS e o Less?</em></p>
+<p>Bom, eu já usei os três, logo, tenho argumentos o bastante sobre os prós e contras de cada um. E, como <strong>opinião pessoal</strong>, eu prefiro o Stylus. E nessa <strong>nova série</strong> de posts eu vou mostrar porquê!</p>
+<h2 id="Preparando_o_ambiente">Preparando o ambiente</h2>
+<p>Antes de qualquer coisa, precisamos deixar nosso ambiente preparado para usar o Stylus. Só precisamos de uma ferramenta para usá-lo, e você já deve saber qual é, não?</p>
+<p>Isso mesmo, o <strong>NodeJS</strong>!</p>
+<p>Provavelmente você já o tem instalado. Se não tiver, <a href="http://nodejs.org/" target="_blank" rel="external">faça o download</a> e instale :)</p>
+<p>Como o <strong>Node</strong> instalado, instale o <strong>Stylus</strong> de modo global:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g stylus</div></pre></td></tr></table></figure>
+
+<p>E já temos nosso ambiente pronto :D</p>
+<h2 id="Estrutura_de_diretórios_para_nosso_teste">Estrutura de diretórios para nosso teste</h2>
+<p>Crie um diretório onde iremos colocar os arquivos do <strong>Stylus</strong> e os CSS compilados.</p>
+<p>Dentro desse diretório, crie dois diretórios: <code>stylus</code> e <code>css</code>, e um arquivo <code>main.styl</code> dentro de <code>stylus</code>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── /css</div><div class="line">└── /stylus</div><div class="line">    └── main.styl</div></pre></td></tr></table></figure>
+
+<p>Todo arquivo do <strong>stylus</strong> deve ter a extensão <code>.styl</code>.</p>
+<p>Fazendo isso, podemos executar o comando abaixo para assistir os arquivos do <strong>stylus</strong> e compilar:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stylus --watch stylus/main.styl --out css/</div></pre></td></tr></table></figure>
+
+<p>No <strong>Stylus</strong>, você só precisa assistir ao arquivo principal. Todos os arquivos importados à partir dele serão também automaticamente assistidos. Qualquer alteração nesses arquivos irá compilar o CSS final :)</p>
+<h2 id="Stylus_na_prática">Stylus na prática</h2>
+<p>Agora estamos prontos para presenciar todo o poder do <strong>Stylus</strong>! Coloque os códigos mostrados ao longo do post no arquivo <code>stylus/main.styl</code> (a menos que seja dito o contrário), e acompanhe o resultado gerado em <code>css/main.css</code> :)</p>
+<h3 id="Seletores">Seletores</h3>
+<p>Uma das diferenças do <strong>Stylus</strong> para outros pré-processadores, é que as chaves e dois-pontos e ponto-e-vírgula não são obrigatórios. Mas ainda assim, você pode usá-los, se quiser.</p>
+<p>Com <strong>Less</strong>, você precisa deles sempre. Com <strong>SASS</strong>, você tem duas sintaxes: <code>.scss</code>, onde você escreve no formato do CSS, e <code>.sass</code>, onde você escreve baseado na indentação, sem ponto-e-vírgula e sem chaves.</p>
+<p>Em <strong>Stylus</strong>, todos os formatos abaixo são válidos:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line">  </div><div class="line"><span class="tag">main</span></div><div class="line">  <span class="tag">color</span> <span class="id">#fff</span></div><div class="line">  </div><div class="line"><span class="tag">div</span></div><div class="line">  <span class="tag">color</span>: <span class="id">#fff</span></div></pre></td></tr></table></figure>
+
+<p>E detalhe: você pode utilizar isso no mesmo arquivo. Experimente! Escrevendo isso no <strong>Stylus</strong>, o resultado em <code>main.css</code> será:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">main</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Você pode também unir estilos iguais, de duas formas: separando por vírgula, como no CSS, ou colocando um abaixo do outro:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">body, main, <span class="keyword">div</span></div><div class="line">  color <span class="comment">#fff</span></div><div class="line">  </div><div class="line">body</div><div class="line">main</div><div class="line"><span class="keyword">div</span></div><div class="line">  color <span class="comment">#fff</span></div></pre></td></tr></table></figure>
+
+<p>Os dois compilam o mesmo resultado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span>,</div><div class="line"><span class="tag">main</span>,</div><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Para fazer referência ao seletor pai (<strong>parent reference</strong>), você pode usar o <code>&amp;</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a </div><div class="line">  <span class="keyword">color</span> <span class="preprocessor">#000</span></div><div class="line">  </div><div class="line">  &:hover</div><div class="line">    <span class="keyword">color</span>: <span class="preprocessor">#f00</span></div></pre></td></tr></table></figure>
+
+<p>Compila para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Se você precisar usar o símbolo <code>&amp;</code> explicitamente em um seletor, você pode escapá-lo com a barra invertida:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">.foo[title*=<span class="string">'\&'</span>]</div><div class="line">  font-<span class="keyword">size</span>: <span class="number">3</span>em</div></pre></td></tr></table></figure>
+
+<p>Vai compilar o <code>&amp;</code> literalmente:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class">.foo</span><span class="attr_selector">[title*='&']</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">3em</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p><em>Mas isso eu consigo fazer no <strong>SASS</strong> e no <strong>Less</strong> também!</em></p>
+<p>Sim! Mas ainda tem mais! :D</p>
+<p>Uma das <em>features</em> mais legais, - em minha opinião - é o <strong>Root reference</strong>. Em alguns momentos você precisa, por exemplo, que o mesmo estilo do <code>a:hover</code> seja o estilo também do <code>input:focus</code>. Como fazer isso sem duplicar o código? Usando o <strong>root reference</strong>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span></div><div class="line">  <span class="attribute">color</span> <span class="id">#000</span></div><div class="line">  </div><div class="line">  &<span class="pseudo">:hover</span></div><div class="line">  <span class="tag">input</span><span class="pseudo">:focus</span></div><div class="line">    <span class="attribute">color</span><span class="value">: <span class="hexcolor">#f00</span></span></div></pre></td></tr></table></figure>
+
+<p>Se você compilar o código acima, ele ficará errado, pois o <strong>Stylus</strong> vai supor que o <code>input:focus</code> está dentro de <code>a</code>, por causa da indentanção:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">a</span><span class="pseudo">:hover</span>,</div><div class="line"><span class="tag">a</span> <span class="tag">input</span><span class="pseudo">:focus</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Usando <strong>root reference</strong>, com a barra (<code>/</code>), você diz ao <strong>Stylus</strong> para ignorar a indentação e compilar aquele seletor como se ele estivesse na raiz:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a</div><div class="line">  <span class="keyword">color</span> <span class="preprocessor">#000</span></div><div class="line">  </div><div class="line">  &:hover</div><div class="line">  /input:focus</div><div class="line">    <span class="keyword">color</span>: <span class="preprocessor">#f00</span></div></pre></td></tr></table></figure>
+
+<p>Fazendo isso, nós temos o resultado esperado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">a</span><span class="pseudo">:hover</span>,</div><div class="line"><span class="tag">input</span><span class="pseudo">:focus</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Legal não? Isso é exclusivo do <strong>Stylus</strong> xD</p>
+<h2 id="Variáveis">Variáveis</h2>
+<p><strong>SASS</strong> e <strong>Less</strong> também têm variáveis, mas cada pré-processador tem uma forma de tratá-las. Em <strong>Less</strong>, elas devem começar com um <code>@</code>, e é usado o sinal <code>:</code> para atribuir valores. No <strong>SASS</strong>, as variáveis começam com <code>$</code>. A atribuição é igual ao <strong>Less</strong>.</p>
+<p>Em <strong>Stylus</strong>, você tem liberdade para escrever suas variáveis como quiser, e usa-se o sinal <code>=</code> para atribuição:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">color</span> = #<span class="number">000</span></div><div class="line">font-<span class="keyword">size</span> = <span class="number">14</span>px</div><div class="line">body</div><div class="line">  <span class="keyword">color</span> <span class="keyword">color</span></div><div class="line">  font-<span class="keyword">size</span> font-<span class="keyword">size</span></div></pre></td></tr></table></figure>
+
+<p>Vai compilar para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">14px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Mas isso pode ser ficar um pouco confuso, já que os nomes podem ser os mesmos das propriedades. Temos então a opção de usar o <code>$</code> como prefixo da variável, como no <strong>SASS</strong>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$color</span> = #<span class="number">000</span></div><div class="line"><span class="variable">$font</span>-<span class="keyword">size</span> = <span class="number">14</span>px</div><div class="line">body</div><div class="line">  <span class="keyword">color</span> <span class="variable">$color</span></div><div class="line">  font-<span class="keyword">size</span> <span class="variable">$font</span>-<span class="keyword">size</span></div></pre></td></tr></table></figure>
+
+<p>E assim fica melhor :)</p>
+<p>No <strong>Stylus</strong>, temos uma outra feature legal chamada <strong>Property Lookup</strong>, onde você pode definir variáveis locais no momento da atribuição do valor à uma propriedade:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span></div><div class="line">  <span class="attribute">width</span><span class="value">: w = <span class="number">150px</span></span></div><div class="line">  height: h = <span class="number">120px</span></div><div class="line">  margin-left: <span class="function">-</span>( w / <span class="number">2</span> )</div><div class="line">  margin-top: <span class="function">-</span>( h / <span class="number">2</span> )</div></pre></td></tr></table></figure>
+
+<p>Só coloquei os dois-pontos para facilitar a leitura. Eles continuam opcionais, ainda nesse caso.<br>E o resultado disso é:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">150px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">120px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> -<span class="number">75px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">margin-top</span>:<span class="value"> -<span class="number">60px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Mas no lugar de definir novas variáveis, você ainda pode usar a própria propriedade como variável, usando o símbolo <code>@</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span></div><div class="line">  <span class="attribute">width</span> 150px</div><div class="line">  <span class="attribute">height</span> 120px</div><div class="line">  <span class="attribute">margin-left</span><span class="value">: <span class="function">-</span>( @width / <span class="number">2</span> )</span></div><div class="line">  margin-top: <span class="function">-</span>( @height / <span class="number">2</span> )</div></pre></td></tr></table></figure>
+
+<p>Doido, não? :D</p>
+<p>Por hoje é só! Esse post foi só pra dar um gostinho :P</p>
+<p>Acompanhe os próximos posts da série para descobrir todos os super-poderes do <strong>Stylus</strong>!</p>
+<p>Ficou com alguma dúvida? Comente!</p>
+<p>Até o próximo! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/css/">css</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/stylus/">stylus</a>, <a href="/tags/pre-processadores/">pré-processadores</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>1</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>12</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>1</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>24</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>10</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>47</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>1</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>5</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>11</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>7</small></li>
+  
+    <li><a href="/tags/serir-temas-wordpress/">serir temas wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>1</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>1</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>3</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
