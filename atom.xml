@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-15T13:01:28.445Z</updated>
+  <updated>2015-02-15T14:03:41.011Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,65 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Acabando com SPAM nos seus formulários]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/16/acabando-com-spam-nos-seus-formularios/"/>
+    <id>http://blog.da2k.com.br/2015/02/16/acabando-com-spam-nos-seus-formularios/</id>
+    <published>2015-02-16T00:00:00.000Z</published>
+    <updated>2015-02-15T14:02:26.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/spam.png" alt=""></p>
+<p>Independente da linguagem de backend que você utiliza, <em>SPAMs</em> são sempre um problema. É você colocar um formulário no seu site, e começar a receber milhões de e-mails de robôs. Tem solução pra isso? Sim! E não é captcha!</p>
+<p>Quer saber o que é? Vem que eu te mostro :D</p>
+<a id="more"></a>
+
+<p>Essa é uma dica rápida, mas que pode acabar acabar com a dor de cabeça de muita gente.</p>
+<p>Quando você tem esse tipo de problema, a primeira coisa que vêm à cabeça é: <em>Vou colocar um captcha!</em></p>
+<p>Aí você percebe que os e-mails recebidos começam a diminuir, só que a balança pende para o lado errado: humanos deixam de enviar mensagens, pois não conseguem ler um captcha direito. Já robôs <a href="">conseguem descobrir praticamente 100% dos captchas atuais</a>, e enviam mensagens com links, propagandas, etc., loucamente!</p>
+<p>Aí você pensa: _Vou colocar então um campo para o usuário efetuar uma ação simples: uma soma, por exemplo. Você coloca dois números aleatórios e manda a pessoa colocar o resultado em um <code>input</code>. Já melhorou um pouco a usabilidade, mas se você para pra pensar, o usuário nada tem a ver com os SPAMs que você recebe.</p>
+<p>Porque dificultar para o usuário enviar uma mensagem, sendo que os robôs vão continuar enviando SPAMs?</p>
+<p>Quando estamos programando, em alguns momentos precisamos pensar “ao contrário”, ou fora da caixa. Imagine esse exemplo (em JS):</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserDataById</span><span class="params">( id )</span> </span>{</div><div class="line">  <span class="keyword">if</span>( id ) {</div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      name: getUserName(),</div><div class="line">      address: getUserAddress(),</div><div class="line">      accountInfo: getUserAccountInfo()</div><div class="line">    };</div><div class="line">  }</div><div class="line">  <span class="keyword">else</span> {</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Se nós pensássemos ao contrário, poderíamos tirar toda a nossa lógica de dentro do <code>if</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserDataById</span><span class="params">( id )</span> </span>{</div><div class="line">  <span class="keyword">var</span> userdata = {};</div><div class="line">  <span class="keyword">if</span>( !id )</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> {</div><div class="line">    name: getUserName(),</div><div class="line">    address: getUserAddress(),</div><div class="line">    accountInfo: getUserAccountInfo()</div><div class="line">  };</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Ao invés de verificar se o <code>id</code> existe para pegar todos os dados, e se não existir, retornar <code>false</code>, fazemos o contrário: se o <code>id</code> não existir, retorna <code>false</code> de uma vez. O resto só vai acontecer se o <code>id</code> existir!</p>
+<p>Para formulários, podemos pensar da mesma forma! Se você perceber, os robôs preenchem todos os campos do seu formulário. Então o que você pode fazer é o seguinte: crie um campo <code>input</code>, e esconda-o com CSS. O seu usuário não verá esse campo, logo, ele não será preenchido. Já um robô, que vai consultar seu HTML, vai ver o campo, e vai preenchê-lo! Então você só precisa validar no backend: se o campo foi preenchido, você não faz nada. Caso contrário, você envia o e-mail :D</p>
+<p>É importante deixar nesse campo um <code>placeholder</code>, avisando o usuário que ele não deve preencher o campo, caso ele desabilite o CSS por qualquer motivo e o seu campo fique visível.</p>
+<p>Tive problemas com vários formulários em sites e, após fazer isso, o problema foi resolvido em 100% dos casos!</p>
+<p>Mas eu não descobri isso sozinho. Eu peguei a ideia de um formulário do <strong>Mailchimp</strong>, que faz exatamente isso!</p>
+<p>Grande sacada, não?</p>
+<p>O que achou da dica? Já conhecia? Tem uma técnica melhor? Compartilhe conosco! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/spam.png" alt=""></p>
+<p>Independente da linguagem de backend que você utiliza, <em>SPAMs</em> são sempre um problema. É você colocar um formulário no seu site, e começar a receber milhões de e-mails de robôs. Tem solução pra isso? Sim! E não é captcha!</p>
+<p>Quer saber o que é? Vem que eu te mostro :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="spam" scheme="http://blog.da2k.com.br/tags/spam/"/>
+    
+      <category term="formularios" scheme="http://blog.da2k.com.br/tags/formularios/"/>
+    
+      <category term="tips" scheme="http://blog.da2k.com.br/tags/tips/"/>
+    
+      <category term="html" scheme="http://blog.da2k.com.br/categories/html/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Escrevendo CSS com Stylus]]></title>
     <link href="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"/>
     <id>http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/</id>
     <published>2015-02-15T00:00:00.000Z</published>
-    <updated>2015-02-15T13:01:16.000Z</updated>
+    <updated>2015-02-15T13:19:53.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus.png" alt=""></p>
 <p><em>Ué, vai falar de CSS? Cadê os artigos de Javascript?</em><br>E se eu te disser que <strong>Stylus</strong> é Javascript, você acredita? Duvida? Vem comigo então ;)</p>
 <a id="more"></a>
@@ -1842,107 +1896,6 @@
       <category term="gulpjs" scheme="http://blog.da2k.com.br/tags/gulpjs/"/>
     
       <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[GulpJS - deploy com Rsync]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/"/>
-    <id>http://blog.da2k.com.br/2015/01/27/gulpjs-deploy-com-rsync/</id>
-    <published>2015-01-27T00:00:00.000Z</published>
-    <updated>2015-01-27T02:38:57.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulp-rsync.png" alt=""></p>
-<p>Fazer deploy via FTP é um trabalho bem chato e custoso. Agora que já sabemos <a href="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/" target="_blank" rel="external">como usar o <strong>GulpJS</strong></a>, que tal utilizá-lo para fazer deploy do nosso projeto via <strong>SSH</strong>, usando <strong>Rsync</strong>, e com apenas um simples comando, sincronizar nosso ambiente local com o ambiente de produção? Duvida? Vem ver! ;)</p>
-<a id="more"></a>
-
-<p>E pra começar, vou mostrar que pra usar o <strong>Gulp</strong>, você não precisa ficar preso a um plugin específico. No <a href="http://gulpjs.com/plugins/" target="_blank" rel="external">repositório de plugins do <strong>GulpJS</strong></a>, se buscar por <strong>rsync</strong>, você vai encontrar o plugin <a href="https://www.npmjs.com/package/gulp-rsync/" target="_blank" rel="external">gulp-rsync</a>, mas não vamos utilizá-lo :P</p>
-<p>Vamos usar um módulo do <strong>NodeJS</strong>, chamado <a href="https://github.com/jedrichards/rsyncwrapper" target="_blank" rel="external">rsyncwrapper</a>.</p>
-<h2 id="Começando_do_começo">Começando do começo</h2>
-<p>Vamos criar a estrutura do nosso projeto:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── build</div><div class="line">│   ├── // ... arquivos que irão para o servidor ...</div><div class="line">├── gulpfile.js</div><div class="line">└── package.json</div></pre></td></tr></table></figure>
-
-<p>Como você já sabe, o <code>package.json</code> deve ter somente <code>{}</code> como conteúdo.</p>
-<p>No diretório <code>build</code>, você vai colocar os arquivos que quer que sejam enviados ao seu servidor.</p>
-<blockquote>
-<p><strong>OBSERVAÇÃO IMPORTANTE:</strong> para fazer deploy com <strong>Rsync</strong>, você precisa ter acesso <strong>SSH</strong> liberado no seu servidor! (melhor avisar, antes que alguém comente dizendo que não funcionou :P)</p>
-</blockquote>
-<p>Sabendo disso, vamos instalar os módulos necessários: </p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp rsyncwrapper</div></pre></td></tr></table></figure>
-
-<p>Acho que isso eu não falei ainda, mas você pode instalar vários módulos de uma só vez :D<br>Nesse caso, estamos instalando o <code>gulp</code> e o <code>rsyncwrapper</code> ao mesmo tempo, e salvando no <code>package.json</code>.</p>
-<p>E vamos configurar nosso <code>gulpfile.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span></div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Essa é a configuração mais simples para usar o <code>rsync</code>. Adicionamos ao nosso <code>gulpfile.js</code> o <code>gulp</code> e o <code>rsyncwrapper</code>, chamando o método <code>rsync</code>, mas sem invocá-lo.</p>
-<p>Dentro da <code>task</code>, passamos um objeto como parâmetro da função <code>rsync</code>, com duas propriedades:</p>
-<ul>
-<li><strong>src</strong>: Caminho dos arquivos que serão “deployados” para o servidor;</li>
-<li><strong>dest</strong>: Caminho NO SERVIDOR que receberá os arquivos.</li>
-<li><strong>recursive</strong>: Passa recursivamente pelos diretórios em <code>src</code> para enviar os arquivos.</li>
-</ul>
-<p>O formato para o <code>dest</code> é o seguinte:</p>
-<ul>
-<li>nome do seu usuário;</li>
-<li>arroba (<code>@</code>);</li>
-<li>seu domínio;</li>
-<li>dois-pontos;</li>
-<li>caminho no servidor que receberá os arquivos.</li>
-</ul>
-<p>Listei para ficar fácil você saber o que precisa ser mantido, e o que você precisa editar. Não sei se precisava, mas enfim…</p>
-<p>Fazendo isso, pode rodar o comando <code>gulp</code> no terminal e conferir os arquivos no seu servidor!</p>
-<p><em>Mas não tenho nenhum feedback visual! Como vou saber quando terminou de enviar os arquivos?</em></p>
-<p>O <strong>rsyncwrapper</strong> tem algumas propriedades que podemos utilizar para facilitar nossa vida. Vamos a elas. Altere seu <code>gulpfile.js</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span>,</div><div class="line">    args: [ <span class="string">'--verbose'</span> ]</div><div class="line">  }, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( stdout, <span class="string">'END!'</span> );</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Passamos no primeiro parâmetro um objeto para a função <code>rsync</code>, com as propriedades <code>src</code> e <code>dest</code>. Como segundo parâmetro, podemos passar uma função de callback que será executada assim que todos os arquivos forem enviados!</p>
-<p>Adicionamos também um parâmetro <code>args</code>, que receberá argumentos, como se você estivesse usando o <strong>rsync</strong> na linha de comando xD</p>
-<p>Podemos passar para essa propriedade, um array de argumentos. Para conhecer todos os argumentos disponíveis para o <strong>rsync</strong>, visite <a href="https://rsync.samba.org/ftp/rsync/rsync.html" target="_blank" rel="external">https://rsync.samba.org/ftp/rsync/rsync.html</a></p>
-<p><em>Tá ficando bom! Mas eu tenho muitos arquivos! Eu posso acompanhar um a um, enquanto estiverem subindo?</em></p>
-<p>Sim! O <strong>rsyncwrapper</strong> tem um método <code>onStdout</code>, que recebe um parâmetro com o Buffer do arquivo que está sendo enviado. Vamos ver como utilizá-lo (vou colocar só a função <code>rsync</code> agora):</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">rsync({</div><div class="line">  src: <span class="string">'./build/'</span>,</div><div class="line">  dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">  recursive: <span class="literal">true</span>,</div><div class="line">  args: [ <span class="string">'--verbose'</span> ],</div><div class="line">  onStdout: <span class="function"><span class="keyword">function</span><span class="params">( data )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( data.toString() );</div><div class="line">  }</div><div class="line">}, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'END!'</span> );</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Usamos a forma mais bruta para mostrar o nome do arquivo: convertê-lo para <code>String</code>, usando o <code>.toString()</code>. Agora, a cada arquivo que subir, será mostrado o nome no terminal, para que você possa acompanhar o progresso :D</p>
-<p>Removi também do função de callback o <code>stdout</code>, para não mostrar duplicado o retorno.</p>
-<h2 id="Extras">Extras</h2>
-<p>Ainda podemos deixar melhor :D</p>
-<p>Temos uma propriedade <code>exclude</code>, que recebe um array de arquivos que você NÃO quer enviar. Exemplo: você quer ignorar um <code>.htaccess</code>, ou qualquer outro arquivo? Adicione-o ao array em <code>exclude</code>. Ficaria algo como:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exclude: [ <span class="string">'.htaccess'</span>, <span class="string">'.editorconfig'</span>, <span class="string">'node_modules'</span> ]</div></pre></td></tr></table></figure>
-
-<p>Você pode usar também as propriedades <code>delete: true</code> ou <code>deleteAll: true</code>.</p>
-<p><code>deleteAll</code> vai sincronizar os arquivos em <code>src</code> com o <code>dest</code>. Se você remover algo local, ele vai remover do servidor também. Bruto assim.</p>
-<p><code>delete</code> também sincroniza, porém ele ignora os arquivos em <code>exclude</code>. Se você tem, por exemplo, localmente um diretório <code>node_modules</code> que não quer enviar para o servidor, mas tem um diretório com o mesmo nome no servidor, mas não quer deletá-lo, usando o <code>delete</code> esse diretório se manterá lá. Caso contrário, use o <code>deleteAll</code>.</p>
-<blockquote>
-<p>Muito cuidado com essas opções! Você pode perder seus dados importantes se não configurar corretamente! Faça testes antes e verifique se está tudo ok antes de continuar!</p>
-</blockquote>
-<p>Podemos também setar um formato de comparação, usando <code>compareMode: &#39;checksum&#39;</code> ou <code>compareMode: &#39;sizeOnly</code>. <code>checksum</code> compara por um checksum de 128bit. <code>sizeOnly</code> só verifica se o tamanho do arquivo mudou. Recomendo que use o <code>checksum</code>, pois é mais preciso.</p>
-<p>Adicionando algumas dessas opções, nosso <code>gulpfile.js</code> ficaria assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> rsync = <span class="built_in">require</span>( <span class="string">'rsyncwrapper'</span> ).rsync;</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  rsync({</div><div class="line">    src: <span class="string">'./build/'</span>,</div><div class="line">    dest: <span class="string">'user@domain.com:/path/on/your/server'</span>,</div><div class="line">    recursive: <span class="literal">true</span>,</div><div class="line">    args: [ <span class="string">'--verbose'</span> ],</div><div class="line">    deleteAll: <span class="literal">true</span>,</div><div class="line">    compareMode: <span class="string">'checksum'</span>,</div><div class="line">    onStdout: <span class="function"><span class="keyword">function</span><span class="params">( data )</span> </span>{</div><div class="line">      <span class="built_in">console</span>.log( data.toString() );</div><div class="line">    }</div><div class="line">  }, <span class="function"><span class="keyword">function</span><span class="params">( error, stdout, stderr, cmd )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'END!'</span> );</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>Para ver todas as opções do <strong>rsyncwrapper</strong>, acesse: <a href="https://github.com/jedrichards/rsyncwrapper" target="_blank" rel="external">https://github.com/jedrichards/rsyncwrapper</a></p>
-<p>Por hoje é isso! Mas ainda temos muita coisa de Gulp para mostrar! Continue acompanhando :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulp-rsync.png" alt=""></p>
-<p>Fazer deploy via FTP é um trabalho bem chato e custoso. Agora que já sabemos <a href="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/" target="_blank" rel="external">como usar o <strong>GulpJS</strong></a>, que tal utilizá-lo para fazer deploy do nosso projeto via <strong>SSH</strong>, usando <strong>Rsync</strong>, e com apenas um simples comando, sincronizar nosso ambiente local com o ambiente de produção? Duvida? Vem ver! ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="deploy" scheme="http://blog.da2k.com.br/tags/deploy/"/>
-    
-      <category term="gulpjs" scheme="http://blog.da2k.com.br/tags/gulpjs/"/>
-    
-      <category term="ssh" scheme="http://blog.da2k.com.br/tags/ssh/"/>
-    
-      <category term="rsync" scheme="http://blog.da2k.com.br/tags/rsync/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
