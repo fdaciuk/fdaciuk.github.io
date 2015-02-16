@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-15T14:03:41.011Z</updated>
+  <updated>2015-02-16T11:19:05.770Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,26 +19,26 @@
     <link href="http://blog.da2k.com.br/2015/02/16/acabando-com-spam-nos-seus-formularios/"/>
     <id>http://blog.da2k.com.br/2015/02/16/acabando-com-spam-nos-seus-formularios/</id>
     <published>2015-02-16T00:00:00.000Z</published>
-    <updated>2015-02-15T14:02:26.000Z</updated>
+    <updated>2015-02-16T11:18:19.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/spam.png" alt=""></p>
 <p>Independente da linguagem de backend que você utiliza, <em>SPAMs</em> são sempre um problema. É você colocar um formulário no seu site, e começar a receber milhões de e-mails de robôs. Tem solução pra isso? Sim! E não é captcha!</p>
 <p>Quer saber o que é? Vem que eu te mostro :D</p>
 <a id="more"></a>
 
-<p>Essa é uma dica rápida, mas que pode acabar acabar com a dor de cabeça de muita gente.</p>
+<p>Essa é uma dica rápida, mas que pode acabar com a dor de cabeça de muita gente.</p>
 <p>Quando você tem esse tipo de problema, a primeira coisa que vêm à cabeça é: <em>Vou colocar um captcha!</em></p>
-<p>Aí você percebe que os e-mails recebidos começam a diminuir, só que a balança pende para o lado errado: humanos deixam de enviar mensagens, pois não conseguem ler um captcha direito. Já robôs <a href="">conseguem descobrir praticamente 100% dos captchas atuais</a>, e enviam mensagens com links, propagandas, etc., loucamente!</p>
-<p>Aí você pensa: _Vou colocar então um campo para o usuário efetuar uma ação simples: uma soma, por exemplo. Você coloca dois números aleatórios e manda a pessoa colocar o resultado em um <code>input</code>. Já melhorou um pouco a usabilidade, mas se você para pra pensar, o usuário nada tem a ver com os SPAMs que você recebe.</p>
+<p>Aí você percebe que os e-mails recebidos começam a diminuir, só que a balança pende para o lado errado: humanos deixam de enviar mensagens, pois não conseguem ler um captcha direito. Já robôs <a href="https://vimeo.com/77431982" target="_blank" rel="external">conseguem descobrir praticamente 100% dos captchas atuais</a>, e enviam mensagens com links, propagandas, etc., loucamente!</p>
+<p>Aí você pensa: <em>Vou colocar então um campo para o usuário efetuar uma ação simples: uma soma, por exemplo.</em> Você coloca dois números aleatórios e manda a pessoa colocar o resultado em um <code>input</code>. Já melhorou um pouco a usabilidade, mas se você parar pra pensar, o usuário nada tem a ver com os SPAMs que você recebe.</p>
 <p>Porque dificultar para o usuário enviar uma mensagem, sendo que os robôs vão continuar enviando SPAMs?</p>
 <p>Quando estamos programando, em alguns momentos precisamos pensar “ao contrário”, ou fora da caixa. Imagine esse exemplo (em JS):</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserDataById</span><span class="params">( id )</span> </span>{</div><div class="line">  <span class="keyword">if</span>( id ) {</div><div class="line">    <span class="keyword">return</span> {</div><div class="line">      name: getUserName(),</div><div class="line">      address: getUserAddress(),</div><div class="line">      accountInfo: getUserAccountInfo()</div><div class="line">    };</div><div class="line">  }</div><div class="line">  <span class="keyword">else</span> {</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<p>Se nós pensássemos ao contrário, poderíamos tirar toda a nossa lógica de dentro do <code>if</code>:</p>
+<p>Se nós pensássemos “de forma invertida”, poderíamos tirar toda a nossa lógica de dentro do <code>if</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserDataById</span><span class="params">( id )</span> </span>{</div><div class="line">  <span class="keyword">var</span> userdata = {};</div><div class="line">  <span class="keyword">if</span>( !id )</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> {</div><div class="line">    name: getUserName(),</div><div class="line">    address: getUserAddress(),</div><div class="line">    accountInfo: getUserAccountInfo()</div><div class="line">  };</div><div class="line">}</div></pre></td></tr></table></figure>
 
 <p>Ao invés de verificar se o <code>id</code> existe para pegar todos os dados, e se não existir, retornar <code>false</code>, fazemos o contrário: se o <code>id</code> não existir, retorna <code>false</code> de uma vez. O resto só vai acontecer se o <code>id</code> existir!</p>
 <p>Para formulários, podemos pensar da mesma forma! Se você perceber, os robôs preenchem todos os campos do seu formulário. Então o que você pode fazer é o seguinte: crie um campo <code>input</code>, e esconda-o com CSS. O seu usuário não verá esse campo, logo, ele não será preenchido. Já um robô, que vai consultar seu HTML, vai ver o campo, e vai preenchê-lo! Então você só precisa validar no backend: se o campo foi preenchido, você não faz nada. Caso contrário, você envia o e-mail :D</p>
-<p>É importante deixar nesse campo um <code>placeholder</code>, avisando o usuário que ele não deve preencher o campo, caso ele desabilite o CSS por qualquer motivo e o seu campo fique visível.</p>
+<p>É importante deixar nesse campo um <code>placeholder</code>, avisando ao usuário que ele não deve preencher o campo, caso ele desabilite o CSS por qualquer motivo, e o seu campo fique visível.</p>
 <p>Tive problemas com vários formulários em sites e, após fazer isso, o problema foi resolvido em 100% dos casos!</p>
 <p>Mas eu não descobri isso sozinho. Eu peguei a ideia de um formulário do <strong>Mailchimp</strong>, que faz exatamente isso!</p>
 <p>Grande sacada, não?</p>
