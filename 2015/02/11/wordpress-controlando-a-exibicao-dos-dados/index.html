@@ -127,7 +127,9 @@
 </ul>
 <p>Toda propriedade de uma classe, fica acessível para todos os métodos da classe, ou seja, se criarmos um outro método dentro da nossa classe, nós vamos conseguir acessar o valor de <code>$this-&gt;thumbnail</code>, por exemplo, dentro desse novo método, sem precisar usar o <code>global</code>. Isso deixa o código muito mais limpo e organizado.</p>
 <p>Bom, isso foi só uma introdução pra contextualizar, pra quem ainda não conhece orientação a objetos. Se ainda ficar alguma dúvida, você pode perguntar nos comentários, ok? Vamos em frente? ;)</p>
-<h2 id="Sobre_o_contéudo">Sobre o contéudo</h2>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Sobre_o_conteúdo">Sobre o conteúdo</h2>
 <p>Ainda temos um conteúdo fictício, que colocamos só para ver as coisas funcionando. Precisamos usar o conteúdo do post mesmo. Mas antes disso, vamos alterar um pouco nosso código.</p>
 <p>Nós conseguimos instanciar a classe <code>Controller_Single()</code> dentro de <code>single.php</code>, porque, dentro da estrutura do WordPress, ele carrega o arquivo <code>functions.php</code> antes de qualquer template dentro do seu tema. Então, tudo o que você adiciona no <code>functions.php</code>, automaticamente fica disponível em todos os seus templates.</p>
 <p>Mas nesse caso, nós não iremos instanciar essa classe diretamente na nossa view. Vamos fazer uso dos <a href="http://codex.wordpress.org/Plugin_API/Hooks" target="_blank" rel="external"><em>hooks</em></a>, para que possamos chamar os dados da single somente quando realmente eles forem necessários. Com isso, vamos aprender também como criar nossos próprios <em>hooks</em> personalizados!</p>

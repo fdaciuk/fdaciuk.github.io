@@ -106,6 +106,8 @@
 <p>Cada uma dessas URLs gerava sua própria thread de comentários. Não deveria, pois fazem parte do mesmo post, apenas com alguns parâmetros a mais.</p>
 <h2 id="Como_resolver?">Como resolver?</h2>
 <p>Fazendo uma pesquisa na API do Disqus, vi que o problema é bem simples de resolver :)</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
 <h2 id="A_solução_xD">A solução xD</h2>
 <p>Você precisa apenas definir uma variável chamada <code>disqus_url</code> com a URL absoluta do seu post. Se você não fizer isso, o Disqus vai usar <code>window.location.href</code>, e consequentemente para cada chamada de query string diferente, ele vai gerar uma nova thread.</p>
 <p>Coloque essa variável no início do código que o Disqus gera <strong>(linha 5)</strong>:</p>

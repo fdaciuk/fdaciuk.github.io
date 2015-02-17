@@ -486,6 +486,16 @@ article footer .addthis {
 article footer .addthis iframe {
   margin-top: 0;
 }
+.ads-da2k {
+  margin: 40px 0;
+  position: relative;
+  left: -77px;
+  width: 900px;
+}
+.ads-da2k a,
+.ads-da2k img {
+  display: block;
+}
 #comment {
   padding: 20px;
   background: #fff;

@@ -114,6 +114,8 @@ Eles permitem que você escreva seus códigos de forma modular, seguindo algumas
 <p>O segundo parâmetro é um array de dependências desse módulo, também opcional. No nosso exemplo, colocamos como dependência a biblioteca jQuery.</p>
 <p>E o terceiro parãmetro é a função de callback que define o módulo e retorna o seu conteúdo. Essa função é obrigatória. Ela será chamada assim que todas as dependências do array no segundo parâmetro forem baixadas, e estiverem prontas para uso. </p>
 <p>As dependências normalmente retornam valores. Para usar os valores retornados, você deve passar como parâmetros da função as variáveis que irão receber os valores das dependências, sempre na mesma ordem do array.</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
 <p>Por exemplo, se no seu módulo você vai precisar utilizar o jQuery e a LoDash, você pode fazer a chamada da seguinte forma:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">  <span class="comment">// código do seu módulo</span></div><div class="line">});</div></pre></td></tr></table></figure>
 
