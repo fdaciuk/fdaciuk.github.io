@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-17T03:29:19.667Z</updated>
+  <updated>2015-02-17T23:20:32.067Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,72 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Stylus - Usando Mixins]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/17/stylus-usando-mixins/"/>
+    <id>http://blog.da2k.com.br/2015/02/17/stylus-usando-mixins/</id>
+    <published>2015-02-17T00:00:00.000Z</published>
+    <updated>2015-02-17T23:19:35.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-mixins.png" alt=""></p>
+<p>Depois do <a href="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/" target="_blank" rel="external">primeiro post mostrando toda a lindeza do Stylus</a>, como ele funciona, e as vantagens que ele tem sobre outros pré-processadores, nesse novo artigo da série, vamos ver como utilizar todo o poder dos mixins dentro do Stylus! Bora? ;)</p>
+<a id="more"></a>
+
+<h2 id="Mixins">Mixins</h2>
+<p>Você define <em>mixins</em> e <em>functions</em> no <strong>Stylus</strong> da mesma maneira, mas eles tem diferentes tipos de aplicações.</p>
+<p><em>Mixins</em> são invocados como <strong>declarações</strong> (<em>statements</em>). Um mixin vai servir basicamente para adicionar um trecho de código CSS no seu seletor. Veja o exemplo:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function">border-radius</span>(n)</div><div class="line">  -webkit-<span class="attribute">border-radius</span> n</div><div class="line">  -moz-<span class="attribute">border-radius</span> n</div><div class="line">  <span class="attribute">border-radius</span> n</div><div class="line">  </div><div class="line"><span class="tag">img</span></div><div class="line">  <span class="function">border-radius</span>(10px)</div></pre></td></tr></table></figure>
+
+<p>Compila para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">img</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">10px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">10px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">10px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Criamos um <em>mixin</em> chamado <code>border-radius</code>, que recebe no parâmetro <code>n</code>, um valor para <em>border-radius</em>. Quando invocamos o <em>mixin</em> dentro do nosso seletor, ele imprime tudo o que foi declarado no corpo desse <em>mixin</em>.</p>
+<p>Nós podemos ainda invocar o <em>mixin</em> sem os parênteses:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="title">img</span></div><div class="line">  border-radius 10px</div></pre></td></tr></table></figure>
+
+<p>Que irá compilar o mesmo resultado :)</p>
+<p>Note que, dentro do <em>mixin</em> <code>border-radius</code>, temos uma chamada à propriedade CSS <code>border-radius</code>, mas ela é tratada como uma propriedade CSS mesmo, e não como a invocação de uma função recursiva. O Stylus é muito esperto! :D</p>
+<p>Mas ainda podemos ir além: sabendo que <strong>Stylus</strong> é Javascript, podemos nos aproveitar do <code>arguments</code> para passar vários valores para o <em>mixin</em>, assim como faríamos com funções em <strong>Javascript</strong>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">border-radius()</div><div class="line">  -<span class="ruby">webkit-border-radius arguments</span></div><div class="line">  -<span class="ruby">moz-border-radius arguments</span></div><div class="line">  border-radius arguments</div><div class="line">  </div><div class="line">img</div><div class="line">  border-radius 10px/12px 10px</div><div class="line">  </div><div class="line">div</div><div class="line">    border-radius 10px 10px/12px 20px 5px</div></pre></td></tr></table></figure>
+
+<p>E isso vai compilar para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">img</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">10px</span>/<span class="number">12px</span> <span class="number">10px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">10px</span>/<span class="number">12px</span> <span class="number">10px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">10px</span>/<span class="number">12px</span> <span class="number">10px</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">-webkit-border-radius</span>:<span class="value"> <span class="number">10px</span> <span class="number">10px</span>/<span class="number">12px</span> <span class="number">20px</span> <span class="number">5px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">-moz-border-radius</span>:<span class="value"> <span class="number">10px</span> <span class="number">10px</span>/<span class="number">12px</span> <span class="number">20px</span> <span class="number">5px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">10px</span> <span class="number">10px</span>/<span class="number">12px</span> <span class="number">20px</span> <span class="number">5px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p><code>arguments</code> é um valor implítico em funções <strong>Javascript</strong>, onde é definido uma coleção dos argumentos passados para a função. Dessa forma, você não precisa ter um valor de parâmetros definido para o seu mixin :D</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Parent_Reference">Parent Reference</h2>
+<p>Podemos usar <em>Parent Reference</em>, que vimos no artigo anterior, também nos <em>mixins</em>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function">primary-button</span>()</div><div class="line">  <span class="attribute">background</span> <span class="id">#fc0</span></div><div class="line">  <span class="attribute">color</span> <span class="id">#fff</span></div><div class="line">  </div><div class="line">  &<span class="pseudo">:hover</span></div><div class="line">    <span class="attribute">color</span> <span class="id">#f00</span></div><div class="line">    <span class="attribute">background</span> <span class="id">#e2e2e2</span></div><div class="line">  </div><div class="line"><span class="class">.button-send</span></div><div class="line">  <span class="function">primary-button</span>()</div></pre></td></tr></table></figure>
+
+<p>Que irá compilar:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class">.button-send</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#fc0</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fff</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.button-send</span><span class="pseudo">:hover</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#e2e2e2</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Temos outras milhões de possibilidades de uso para os mixins!<br>Para saber mais, visite: <a href="http://learnboost.github.io/stylus/docs/mixins.html" target="_blank" rel="external">http://learnboost.github.io/stylus/docs/mixins.html</a></p>
+<p>Dúvidas? Comente!</p>
+<p>Até o próximo! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-mixins.png" alt=""></p>
+<p>Depois do <a href="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/" target="_blank" rel="external">primeiro post mostrando toda a lindeza do Stylus</a>, como ele funciona, e as vantagens que ele tem sobre outros pré-processadores, nesse novo artigo da série, vamos ver como utilizar todo o poder dos mixins dentro do Stylus! Bora? ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="css" scheme="http://blog.da2k.com.br/categories/css/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Acabando com SPAM nos seus formulários]]></title>
     <link href="http://blog.da2k.com.br/2015/02/16/acabando-com-spam-nos-seus-formularios/"/>
     <id>http://blog.da2k.com.br/2015/02/16/acabando-com-spam-nos-seus-formularios/</id>
     <published>2015-02-16T00:00:00.000Z</published>
-    <updated>2015-02-17T03:16:00.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/spam.png" alt=""></p>
 <p>Independente da linguagem de backend que você utiliza, <em>SPAMs</em> são sempre um problema. É você colocar um formulário no seu site, e começar a receber milhões de e-mails de robôs. Tem solução pra isso? Sim! E não é captcha!</p>
 <p>Quer saber o que é? Vem que eu te mostro :D</p>
@@ -36,7 +97,7 @@
 <p>Se nós pensássemos “de forma invertida”, poderíamos tirar toda a nossa lógica de dentro do <code>if</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserDataById</span><span class="params">( id )</span> </span>{</div><div class="line">  <span class="keyword">var</span> userdata = {};</div><div class="line">  <span class="keyword">if</span>( !id )</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> {</div><div class="line">    name: getUserName(),</div><div class="line">    address: getUserAddress(),</div><div class="line">    accountInfo: getUserAccountInfo()</div><div class="line">  };</div><div class="line">}</div></pre></td></tr></table></figure>
 
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <p>Ao invés de verificar se o <code>id</code> existe para pegar todos os dados, e se não existir, retornar <code>false</code>, fazemos o contrário: se o <code>id</code> não existir, retorna <code>false</code> de uma vez. O resto só vai acontecer se o <code>id</code> existir!</p>
 <p>Para formulários, podemos pensar da mesma forma! Se você perceber, os robôs preenchem todos os campos do seu formulário. Então o que você pode fazer é o seguinte: crie um campo <code>input</code>, e esconda-o com CSS. O seu usuário não verá esse campo, logo, ele não será preenchido. Já um robô, que vai consultar seu HTML, vai ver o campo, e vai preenchê-lo! Então você só precisa validar no backend: se o campo foi preenchido, você não faz nada. Caso contrário, você envia o e-mail :D</p>
@@ -75,7 +136,7 @@
     <link href="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/"/>
     <id>http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/</id>
     <published>2015-02-15T00:00:00.000Z</published>
-    <updated>2015-02-17T03:12:41.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus.png" alt=""></p>
 <p><em>Ué, vai falar de CSS? Cadê os artigos de Javascript?</em><br>E se eu te disser que <strong>Stylus</strong> é Javascript, você acredita? Duvida? Vem comigo então ;)</p>
 <a id="more"></a>
@@ -148,7 +209,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">a</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">a</span><span class="pseudo">:hover</span>,</div><div class="line"><span class="tag">input</span><span class="pseudo">:focus</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#f00</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
 
 <p>Legal não? Isso é exclusivo do <strong>Stylus</strong> xD</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Variáveis">Variáveis</h2>
 <p><strong>SASS</strong> e <strong>Less</strong> também têm variáveis, mas cada pré-processador tem uma forma de tratá-las. Em <strong>Less</strong>, elas devem começar com um <code>@</code>, e é usado o sinal <code>:</code> para atribuir valores. No <strong>SASS</strong>, as variáveis começam com <code>$</code>. A atribuição é igual ao <strong>Less</strong>.</p>
@@ -203,7 +264,7 @@
     <link href="http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/"/>
     <id>http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/</id>
     <published>2015-02-14T00:00:00.000Z</published>
-    <updated>2015-02-17T03:09:25.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-the-gists.png" alt=""></p>
 <p>Para pequenos trechos de código, não existe ferramenta melhor que os <strong>gists</strong> do Github! Mas você pode ir um pouco além! Quer ver? Vem comigo :)</p>
 <a id="more"></a>
@@ -215,7 +276,7 @@
 <h2 id="Embed">Embed</h2>
 <p>Se você quiser fazer <em>embed</em> de um <strong>gist</strong> na sua aplicação, você só precisa adicionar a extensão <code>.pibb</code> na URL, e você terá a versão HTML, somente com os os arquivos do gist :)</p>
 <p>Ou então, copiar o <code>script</code> de Embed na que aparece na sidebar, na lateral direita.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Versionamento_do_gist">Versionamento do gist</h2>
 <p>Você pode tratar seus <strong>gists</strong> também como repositórios, pois eles podem ser clonados como qualquer outro projeto:</p>
@@ -249,7 +310,7 @@
     <link href="http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/"/>
     <id>http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/</id>
     <published>2015-02-13T00:00:00.000Z</published>
-    <updated>2015-02-17T03:12:59.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/scalability.jpg" alt=""></p>
 <p>Aí você está lá, todo pomposo, trabalhando no seu projeto, escrevendo seu JS tudo em um arquivo só, achando que vai ficar com pouco código, usando uma global aqui, outra global ali, e quando vê… já está com 4.000 linhas de código, todo perdido sem saber o que fazer! E você pensa: <em>“Porque eu não modularizei isso???”</em></p>
 <p>Já dizia Renato Aragão: “<em>Se não fosse comigo, eu ria…</em>“</p>
@@ -293,7 +354,7 @@
 <p>E, por fim, o <code>app.js</code>, que é o cara que vai chamar os <code>controllers</code> na hora em que eles tiverem que aparecer. Em alguns casos, podemos usar também um diretório <code>routes</code>, e fazer as rotas conversarem diretamente com os <code>controllers</code>.</p>
 <p>Mas isso depende de cada projeto. Essa estrutura é uma base para facilitar a modularização. Ainda dentro de cada diretório desses, podemos criar outros para organizar melhor, conforme à necessidade.</p>
 <p>E, se você quiser fazer um <em>bundle</em>, juntando tudo em um arquivo só, você pode concatenar todos os arquivos, exatamente nessa ordem :)</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Conteúdo_dos_arquivos">Conteúdo dos arquivos</h2>
 <p>O conteúdo dos arquivos também deve manter uma convenção, para que fique fácil adicionar novos arquivos e dar manutenção nos já existentes. A estrutura base dos arquivos provavelmente vai ser a mesma, mudando apenas alguns detalhes.</p>
@@ -360,7 +421,7 @@
     <link href="http://blog.da2k.com.br/2015/02/12/elimine-os-comentarios/"/>
     <id>http://blog.da2k.com.br/2015/02/12/elimine-os-comentarios/</id>
     <published>2015-02-12T00:00:00.000Z</published>
-    <updated>2015-02-17T03:13:22.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/comments.png" alt=""></p>
 <p><em>Comments are evil</em>. Você provavelmente já deve ter ouvido isso. Comentários mentem. Eles enganam você. Eles querem te pegar.</p>
 <a id="more"></a>
@@ -384,7 +445,7 @@
 <p><em>Você precisa pensar assim: “Não consegui escrever um código decente e legível, sou um derrotado pois vou precisar escrever um comentário para dizer o que o meu código faz!”</em></p>
 <p>Eu sei que é bastante duro, talvez você só compreenda com o tempo, mas é necessário entender o mal que faz um comentário no seu código.</p>
 <p><em>Mas eu só comento no final das minhas funções, pois elas ficam muito grandes e eu precisaria usar a rolagem para saber qual é a função que está terminando naquele fechamento de chaves!</em></p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <p>Se a sua função está ficando tão grande, a ponto de você precisar comentar no final dela, é sinal de que ela precisa de um <em>refactory</em>. Deixe-a mais enxuta. Ela provavelmente tem muitas responsabilidades e faz mais de uma coisa. Quebre em funções menores. Vai facilitar muito a sua leitura.</p>
 <p>Imagine esse código:</p>
@@ -422,7 +483,7 @@
     <link href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/"/>
     <id>http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</id>
     <published>2015-02-11T00:00:00.000Z</published>
-    <updated>2015-02-17T03:06:12.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-controller.jpg" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">post anterior</a>, criamos a interface para nossa view. Hoje veremos como criar a base que vai controlar o conteúdo retornado! Vem comigo? ;)</p>
 <a id="more"></a>
@@ -455,7 +516,7 @@
 </ul>
 <p>Toda propriedade de uma classe, fica acessível para todos os métodos da classe, ou seja, se criarmos um outro método dentro da nossa classe, nós vamos conseguir acessar o valor de <code>$this-&gt;thumbnail</code>, por exemplo, dentro desse novo método, sem precisar usar o <code>global</code>. Isso deixa o código muito mais limpo e organizado.</p>
 <p>Bom, isso foi só uma introdução pra contextualizar, pra quem ainda não conhece orientação a objetos. Se ainda ficar alguma dúvida, você pode perguntar nos comentários, ok? Vamos em frente? ;)</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Sobre_o_conteúdo">Sobre o conteúdo</h2>
 <p>Ainda temos um conteúdo fictício, que colocamos só para ver as coisas funcionando. Precisamos usar o conteúdo do post mesmo. Mas antes disso, vamos alterar um pouco nosso código.</p>
@@ -563,7 +624,7 @@
     <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
     <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
     <published>2015-02-10T00:00:00.000Z</published>
-    <updated>2015-02-17T02:58:00.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
 <p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
 <a id="more"></a>
@@ -585,7 +646,7 @@
 <p>Perceba que a <code>index.php</code> é o fallback para todos os templates, por isso é importante mantê-la no seu projeto, ainda que você quase não a use, ou use pouco. Fazendo a cópia da <code>index.php</code> na <code>single.php</code>, nossa <code>single</code> deve estar com essa estrutura:</p>
 <p><a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br/blob/7e61f6f73153641a438a4b8ca09da7bb9e2361f3/index.php" target="_blank" rel="external">Estrutura da single.php</a></p>
 <p>Mantivemos essa estrutura, pois precisamos apenas mostrar um post. Não é necessário o loop aqui, somente as <em>template tags</em>.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Interface">Interface</h2>
 <p>Para separar as responsabilidades, não podemos deixar lógica alguma na nossa view. Os templates que o WordPress disponibiliza não deveriam ter nenhuma lógica ou regra de negócio. Isso precisa ficar em arquivos à parte.</p>
@@ -641,7 +702,7 @@
     <link href="http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/"/>
     <id>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</id>
     <published>2015-02-09T00:00:00.000Z</published>
-    <updated>2015-02-17T03:09:31.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-branches.png" alt=""></p>
 <p>Quando você cria uma nova feature para o seu projeto, normalmente você também cria uma nova branch, e depois faz merge com a branch principal. Depois de um tempo, fica notória a necessidade de comparar as alterações que foram feitas. </p>
 <p><em>Existe uma forma fácil de fazer isso com o <strong>Github</strong></em>? Adivinha? ;)</p>
@@ -659,7 +720,7 @@
 
 <p><img src="http://blog.da2k.com.br/uploads/2015/02/compare-branches.png" alt=""></p>
 <p>Fazendo isso, se for possível, eu já vou ver um botão de <em>Pull Request</em>, para que eu possa enviar a sugestão de fazer marge direto na <code>master</code>. Consigo ver também os commits de quem fez as alterações e quais arquivos foram alterados :D</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Comparando_a_mesma_branch_por_data">Comparando a mesma branch por data</h2>
 <p>Também é possível comparar a mesma branch, mas com uma data anterior:</p>
@@ -717,7 +778,7 @@
     <link href="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"/>
     <id>http://blog.da2k.com.br/2015/02/08/aprenda-markdown/</id>
     <published>2015-02-08T00:00:00.000Z</published>
-    <updated>2015-02-17T03:15:51.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/markdown.png" alt=""></p>
 <p><strong>Markdown</strong> é uma ferramenta de conversão de <em>text-to-HTML</em>. Com ele é possível você marcar títulos, listas, tabelas, etc., de forma muito mais limpa, legível e precisa, do que se fosse fazer com HTML.<br>Ainda não sabe tudo o que é possível fazer com Markdown? Então esse post é pra você! Vem comigo que eu te mostro :)</p>
 <a id="more"></a>
@@ -790,7 +851,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">strong</span>&gt;</span>Da2k<span class="tag">&lt;/<span class="title">strong</span>&gt;</span> é a pronúncia para <span class="tag">&lt;<span class="title">strong</span>&gt;</span>Daciuk:<span class="tag">&lt;/<span class="title">strong</span>&gt;</span> DA-TWO-K!</div><div class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
 
 <p>O mais utilizado para forte ênfase (<code>&lt;strong&gt;</code>) são dois asteriscos.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Links_(&lt;a&gt;)">Links (<code>&lt;a&gt;</code>)</h2>
 <p>Para gerar links, você usa <code>[]()</code>. Dentro dos colchetes você coloca o texto do link, e dentro dos parênteses, você coloca a URL:</p>
@@ -913,7 +974,7 @@
     <link href="http://blog.da2k.com.br/2015/02/07/javascript-assistindo-mudancas-no-dom-sem-temporizadores/"/>
     <id>http://blog.da2k.com.br/2015/02/07/javascript-assistindo-mudancas-no-dom-sem-temporizadores/</id>
     <published>2015-02-07T00:00:00.000Z</published>
-    <updated>2015-02-17T03:11:31.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/Oo.png" alt=""></p>
 <p>Existem basicamente duas formas de ouvir mudanças em um elemento no DOM: ou você usa eventos, ou, em casos mais extremos, temporizadores.</p>
 <p><em>Como saber quando um atributo de um elemento mudou? Como saber se os filhos de um elemento foram alterados? Não tem outra forma de fazer, que não seja usando temporizadores?</em></p>
@@ -960,7 +1021,7 @@
 <p>Se você não quiser mais observar um elemento, pode usar o método <code>disconnect()</code>:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">observer.disconnect();</div></pre></td></tr></table></figure>
 
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Compatibilidade_de_browsers">Compatibilidade de browsers</h2>
 <p>Por ser algo relativamente novo, o <code>MutationObserver</code> só funciona em browsers modernos:</p>
@@ -1002,7 +1063,7 @@
     <link href="http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/"/>
     <id>http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/</id>
     <published>2015-02-06T00:00:00.000Z</published>
-    <updated>2015-02-17T03:10:53.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/undefined.png" alt=""></p>
 <p>Você já deve ter visto em alguns links por aí algo como <code>&lt;a href=&quot;javascript:void(0)&quot;&gt;&lt;/a&gt;</code>, não? Mas você sabe para quê usamos o <code>void</code> em Javascript? E sabe quando podemos usá-lo? Vem descobrir :D</p>
 <a id="more"></a>
@@ -1026,7 +1087,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnUndefined</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnUndefined(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
 
 <p><em>Então pra quê eu vou usar o <code>void</code>?</em></p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <p>Javascript é uma linguagem de <em>tipagem fraca</em> e <em>dinâmica</em>. Isso significa que você não precisa dizer ao Javascript que uma variável vai receber um número ou uma string, ou que uma função irá retornar um valor booleano.<br>Você simplesmente atribui valores à variáveis e retorna valores em funções, e o Javascript se vira com o resto.</p>
 <p>Para entender melhor o <code>void</code>, é necessário entender um pouco sobre tipagem.</p>
@@ -1091,7 +1152,7 @@
     <link href="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"/>
     <id>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</id>
     <published>2015-02-05T00:00:00.000Z</published>
-    <updated>2015-02-17T03:09:19.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
 <p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
 <p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
@@ -1113,7 +1174,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://username.github.io</div></pre></td></tr></table></figure>
 
 <p>De novo: trocando o <code>username</code> pelo seu nome de usuário!</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Site_para_projeto_open_source">Site para projeto open source</h2>
 <p>Se você já tem um projeto open source no Github, e quer criar um site para ele, você precisa fazer o seguinte:</p>
@@ -1186,7 +1247,7 @@
     <link href="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"/>
     <id>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</id>
     <published>2015-02-04T00:00:00.000Z</published>
-    <updated>2015-02-17T03:12:31.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/git-clone-pull-request.jpg" alt=""></p>
 <p>Você tem uma conta no Github, acompanha projetos open source, gostaria de colaborar com algum deles, mas não sabe como fazer? Como criar uma nova feature? Como preparar o repositório? O que é <em>git push</em>?</p>
 <p>Se você tem essas dúvidas, esse artigo é pra você!</p>
@@ -1243,7 +1304,7 @@
 <p>Ok. Agora podemos trabalhar! Vamos codar o que for necessário para deixar essa feature funcionando!</p>
 <p><em>Tá, mas porque eu preciso criar uma nova branch? Se tudo irá para a master, porque não posso codar direto ali?</em></p>
 <p>Como eu disse, a branch <strong>master</strong> é a branch com o código final do projeto, estável. Criando uma nova branch, se você submeter o <em>pull request</em> para o repositório original, mas ele não for aceito, as alterações não estarão na sua branch master. Dessa forma, se você quiser manter sempre os dois repositórios atualizados e sincronizados, você só precisa apagar a branch que você criou e fez a feature. As duas <strong>master</strong> vão continuar iguaizinhas :)</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Dicas_para_um_bom_Pull_Request">Dicas para um bom Pull Request</h2>
 <p>Quando você for fazer um <em>pull request</em>, a pessoa que é responsável pelo repositório terá de conferir se o código que você está enviando está de acordo com os padrões definidos para aquele projeto. Por isso, tenha em mente que o seu <em>pull request</em> deve ter <strong>pouco código</strong>. Se a funcionalidade que você quer implementar for muito grande, quebre em partes menores, e envie <em>pull requests</em> pequenos, com o mínimo de alterações possíveis. </p>
@@ -1320,7 +1381,7 @@
     <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
     <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
     <published>2015-02-03T00:00:00.000Z</published>
-    <updated>2015-02-17T03:05:29.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
 <p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
 <p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
@@ -1345,7 +1406,7 @@
 <p><strong>Attachment</strong> é um tipo especial de conteúdo, que guarda informações de todos os arquivos que foram “subidos” para o site.</p>
 <h3 id="Revision">Revision</h3>
 <p><strong>Revision</strong> é usado para fazer revisões de posts. Nesse tipo de conteúdo, os posts que são automaticamente salvos, ficam com uma cópia anterior nesse tipo de conteúdo, para que, se você fez alguma besteira, você tenha a opção de voltar algumas versões atrás.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h3 id="Navigation_Menu">Navigation Menu</h3>
 <p>Esse é um tipo de conteúdo que guarda informações de cada item do menu no <strong>Painel</strong>.</p>
@@ -1387,7 +1448,7 @@
     <link href="http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/"/>
     <id>http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/</id>
     <published>2015-02-02T00:00:00.000Z</published>
-    <updated>2015-02-17T03:08:58.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-license.png" alt=""></p>
 <p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
 <p>Quem responde a essas perguntas são as <em>licenças!</em></p>
@@ -1400,7 +1461,7 @@
 <p><em>Mas o que o Github tem a ver com isso?</em></p>
 <p>Quando você cria um novo repositório, o Github te dá a opção de adicionar uma licença:</p>
 <p><img src="http://blog.da2k.com.br/uploads/2015/02/license.png" alt=""></p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <p><em>Mas eu já tenho meu projeto, e não tenho uma licença ainda? Como escolher?</em></p>
 <p>Se você já criou seu repositório, você tem a opção de criar o arquivo de licença através do link <code>+</code>, mostrado abaixo:</p>
@@ -1442,7 +1503,7 @@
     <link href="http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/"/>
     <id>http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/</id>
     <published>2015-02-01T00:00:00.000Z</published>
-    <updated>2015-02-17T03:08:44.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-clean-repository.png" alt=""></p>
 <p>Uma dica simples, mas funcional!</p>
 <a id="more"></a>
@@ -1459,7 +1520,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin :nome_da_branch</div></pre></td></tr></table></figure>
 
 <p>Com os dois pontos (<code>:</code>) na frente do nome da branch, o resultado é o mesmo :D</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="Removendo_branchs_localmente">Removendo branchs localmente</h2>
 <p>E para remover branchs localmente, o comando é:</p>
@@ -1492,7 +1553,7 @@
     <link href="http://blog.da2k.com.br/2015/01/31/segredos-do-github-incentivar-a-contribuicao-para-seus-projetos-open-source/"/>
     <id>http://blog.da2k.com.br/2015/01/31/segredos-do-github-incentivar-a-contribuicao-para-seus-projetos-open-source/</id>
     <published>2015-01-31T00:00:00.000Z</published>
-    <updated>2015-02-17T03:09:06.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-contributing.png" alt=""></p>
 <p>Contribuir para projetos open source é algo que nos faz crescer muito como profissionais. Temos a oportunidade de aprender coisas novas e praticar o que muitas vezes não utilizamos comumente no nosso dia-a-dia. Como o Github nos ajuda com isso?</p>
 <a id="more"></a>
@@ -1501,7 +1562,7 @@
 <p>Nenhuma forma está errada! São apenas diferentes modos de escrever o mesmo código! Mas se um mesmo código tiver várias dessas formas misturadas, o projeto vai acabar virando uma zona!</p>
 <p>Então, normalmente você coloca no <strong>README.md</strong> do seu repositório uma área de <strong>Como contribuir</strong>, citando os padrões que você utilizou no código, mostrando como criar uma nova feature, etc.</p>
 <p>Mas no momento de empolgação, muitas vezes os devs nem chegam nessa parte do seu <strong>README</strong>, e acabam enviando <em>pull requests</em> com seus próprios padrões.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="O_arquivo_CONTRIBUTING-md">O arquivo CONTRIBUTING.md</h2>
 <p>Uma feature bem simples do Github, mas que pode ajudar a organizar melhor a colaboração nos seus projetos, é você adicionar um arquivo chamado <code>CONTRIBUTING.md</code>.</p>
@@ -1538,7 +1599,7 @@
     <link href="http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/"/>
     <id>http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/</id>
     <published>2015-01-30T00:00:00.000Z</published>
-    <updated>2015-02-17T03:11:13.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/functions-invoke.jpg" alt=""></p>
 <p>Funções são objetos de primeira classe em <strong>Javascript</strong>. É o que faz do <strong>Javascript</strong> a <em>coisa fofa</em> que ele é hoje. Por isso, é muito importante saber todas as formas das quais podemos invocar funções, e como isso afeta nossos programas. Já sabe? Não sabe? Não sabe se sabe? Vem ver então!</p>
 <a id="more"></a>
@@ -1695,7 +1756,7 @@
 <p>E o resultado é exatamente o mesmo! Agora você me pergunta:</p>
 <p><em>E precisa de duas abordagens diferentes pra fazer a mesma coisa?</em></p>
 <p>Sim! Imagine se você precisa passar como argumentos de uma função vários parâmetros que você precisa iterar em um <code>for</code>. Como você faria? Não tem como passar os parâmetros, separados por vírgula. O que você faz então é: cria um array, coloca todos os parâmetros dentro desse array, e invoca a função com <code>apply()</code>. Simples, não?</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <h2 id="O_método_bind()">O método bind()</h2>
 <p>Apesar de não servir para invocação de funções, acho que é bastante importante falar sobre o método <code>bind()</code>. Esse método faz a mesma coisa que os dois citados acima (<code>call()</code> e <code>apply()</code>), tem a mesma sintaxe de <code>call()</code>, com a diferença que ele não invoca a função, mas somente <em>injeta</em> o contexto e os argumentos para que a função possa ser chamada no futuro já com essas configurações pré-definidas.</p>
@@ -1770,7 +1831,7 @@
     <link href="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"/>
     <id>http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/</id>
     <published>2015-01-29T00:00:00.000Z</published>
-    <updated>2015-02-17T03:10:42.000Z</updated>
+    <updated>2015-02-17T03:30:20.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/javascript-timers.jpg" alt=""></p>
 <p>Você provavelmente já conhece os métodos <code>setInterval()</code> e <code>setTimeout()</code>. Mas você sabe a exatamente a diferença entre eles? Sabe como eles realmente funcionam? Vem descobrir :)</p>
 <a id="more"></a>
@@ -1793,7 +1854,7 @@
 <p>Para usar com o <code>setTimeout()</code>, poderíamos fazer algo assim:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTimer</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> timer = setTimeout( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( counter++ );</div><div class="line">    <span class="keyword">if</span>( counter &lt; <span class="number">11</span> ) {</div><div class="line">      myTimer();</div><div class="line">    }</div><div class="line">  }, <span class="number">1000</span> );</div><div class="line">}</div><div class="line">  </div><div class="line">myTimer();</div></pre></td></tr></table></figure>
 
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
 
 <p>Como o <code>setTimeout()</code> executa somente uma vez, precisamos utilizar uma função recursiva para que temporizador continue executando até que ele encha o saco e nós possamos mandá-lo parar de chamar a função! xD</p>
 <p>Bom, até aqui, provavelmente você já sabia de tudo. Mas você sabe em que momento usar <code>setInterval()</code> e quando usar <code>setTimeout()</code>? E porquê?</p>
@@ -1851,91 +1912,6 @@
       <category term="setInterval" scheme="http://blog.da2k.com.br/tags/setinterval/"/>
     
       <category term="setTimeout" scheme="http://blog.da2k.com.br/tags/settimeout/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[GulpJS - entendendo o método watch()]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/"/>
-    <id>http://blog.da2k.com.br/2015/01/28/gulpjs-entendendo-o-metodo-watch/</id>
-    <published>2015-01-28T00:00:00.000Z</published>
-    <updated>2015-02-17T03:12:13.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs-watch.jpg" alt=""></p>
-<p>Apesar de simples, o método <code>watch()</code> do <strong>GulpJS</strong> tem algumas particularidades que o tornam bastante poderoso!</p>
-<a id="more"></a>
-
-<h2 id="Sintaxe">Sintaxe</h2>
-<p>O método <code>watch()</code> tem duas possíveis sintaxes:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( glob, [, opts], tasks );</div></pre></td></tr></table></figure>
-
-<p>e:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( glob, [, opts, cb]);</div></pre></td></tr></table></figure>
-
-<p>Na primeira sintaxe, temos:</p>
-<h3 id="glob">glob</h3>
-<p>Tipo: <code>String</code> ou <code>Array</code></p>
-<p>Um simples <em>glob</em> ou array de <em>globs</em>, que indicam quais arquivos devem ser assistidos, para saber quando foram alterados.</p>
-<p>Exemplo de uso:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( <span class="string">'src/js/**/*.js'</span> );</div></pre></td></tr></table></figure>
-
-<p>Onde todos os arquivos <code>.js</code>, dentro do diretório <code>src/js</code> serão assistidos, recursivamente.</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/01/recursion.gif" alt="Recursão"></p>
-<p>Outro exemplo, com <code>Array</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch([ <span class="string">'src/js/**/*.js'</span>, <span class="string">'src/stylus/**/*.styl'</span> ]);</div></pre></td></tr></table></figure>
-
-<p>Assiste todos os arquivos <code>.js</code> dentro de <code>src/js</code>, e todos os arquivos <code>.styl</code>, dentro de <code>src/stylus</code>, recursivamente.</p>
-<h3 id="opts">opts</h3>
-<p>Tipo: <code>Object</code></p>
-<p>Opções, que são passadas para a lib <a href="https://github.com/shama/gaze" target="_blank" rel="external">Gaze</a>, que o <strong>GulpJS</strong> usa para fazer o <code>watch</code> dos arquivos. As opções que você pode usar estão disponíveis em <a href="https://github.com/shama/gaze#properties" target="_blank" rel="external">https://github.com/shama/gaze#properties</a></p>
-<h3 id="tasks">tasks</h3>
-<p>Tipo: <code>Array</code></p>
-<p>Um <code>Array</code> de tasks criadas com <code>gulp.task()</code>, que devem ser executadas, quando houver mudanças em qualquer dos arquivos passados em <code>glob</code>.</p>
-<p>Exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.watch( <span class="string">'src/js/**/*.js'</span>, [ <span class="string">'lint'</span>, <span class="string">'uglify'</span> ] );</div></pre></td></tr></table></figure>
-
-<p>As tarefas <code>lint</code> e <code>uglify</code> serão executadas sempre que um arquivo <code>.js</code> em <code>src/js</code> for alterado.</p>
-<p>Você ainda pode usar eventos do <strong>NodeJS</strong>, para ter uma função <code>callback</code> que execute assim que os arquivos forem alterados:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> watcher = gulp.watch( <span class="string">'src/js/**/*.js'</span>, [ <span class="string">'lint'</span>, <span class="string">'uglify'</span> ] );</div><div class="line">watcher.on( <span class="string">'change'</span>, <span class="function"><span class="keyword">function</span><span class="params">( event )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'File'</span> + event.path + <span class="string">' was '</span> + event.type );</div><div class="line">});</div></pre></td></tr></table></figure>
-
-<p>O <code>callback</code> tem como parâmetro o objeto <code>event</code>, que possui as propriedades <code>path</code>, com o caminho do arquivo, e <code>type</code>, com o tipo de evento disparado.</p>
-<p><code>event.type</code> pode ter 3 possíveis valores:</p>
-<ul>
-<li><code>changed</code>: quando um arquivo no caminho assistido é alterado;</li>
-<li><code>deleted</code>: quando um arquivo é deletado do caminho assistido;</li>
-<li><code>added</code>: Quando um novo arquivo é criado no caminho assistido.</li>
-</ul>
-<p>A segunda sintaxe difere apenas no último parâmetro. Você pode passar uma função de <code>callback</code> no lugar de chamar tasks para executar. Essa função tem o mesmo parâmetro <code>event</code> mostrado anteriormente, quando usado com o método <code>.on(&#39;change&#39;)</code>.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6222054/86f1f8d6-b634-11e4-89b3-104d9c1330e6.jpg" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<h2 id="Problemas_com_event-type_added_no_GulpJS">Problemas com <code>event.type added</code> no GulpJS</h2>
-<p>O <strong>GulpJS</strong> executa corretamente os eventos <code>changed</code> e <code>deleted</code>, mas quando você adiciona um novo arquivo, em alguns momentos o <code>added</code> não é disparado.</p>
-<p>Já havia conversado com alguns amigos sobre isso, e estava confiante que era algum bug no <strong>GulpJS</strong>. Fiz algumas pesquisas por cima, mas não cheguei a nenhuma solução. </p>
-<p>O problema era que, ao adicionar um novo arquivo, eu sempre teria que parar o <code>watch()</code>, criar os novos arquivos e então executar novamente o <code>watch()</code>.</p>
-<p>Mas hoje estava trocando uma ideia com o <a href="https://github.com/romuloctba" target="_blank" rel="external">Rômulo</a>, que estava passando pelo mesmo problema. Então, em meio a vários links dizendo que era “um problema mesmo”, “era bug do Gaze”, etc., ele encontrou um link onde dizia exatamente qual era o problema:</p>
-<p>Havia uma <em>issue</em> aberta no Gaze, - que foi fechada, mas o problema continua - dizendo que isso acontecia quando se usava <code>./</code> no início do <code>glob</code>, no <code>watch()</code>. E o problema - e consequentemente, a solução - é exatamente esse!</p>
-<p>Se você não colocar o <code>./</code> no início do <code>glob</code>, o <strong>GulpJS</strong> reconhece corretamente novos arquivos adicionados, sem precisar parar o <code>watch()</code>!</p>
-<p>Uma grande descoberta :D</p>
-<p>Bom, era isso que eu queria mostrar sobre o <code>watch()</code> hoje. O <strong>GulpJS</strong> nos dá muitas possibilidades de personalização, e você ainda vai cansar - ou não - de ler artigos legais sobre o Gulp aqui no blog :D</p>
-<p>Até o próximo!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs-watch.jpg" alt=""></p>
-<p>Apesar de simples, o método <code>watch()</code> do <strong>GulpJS</strong> tem algumas particularidades que o tornam bastante poderoso!</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="gulpjs" scheme="http://blog.da2k.com.br/tags/gulpjs/"/>
-    
-      <category term="nodejs" scheme="http://blog.da2k.com.br/tags/nodejs/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
