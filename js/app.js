@@ -4,7 +4,17 @@
     var $public = {};
 
     $public.init = function init() {
+      $private.initEvents();
       $private.initInfiniteScroll();
+    };
+
+    $private.initEvents = function initEvents() {
+      $( '.ads-da2k a' ).on( 'click', $private.handleAdsClick );
+    };
+
+    $private.handleAdsClick = function handleAdsClick() {
+      var _gaq = window._gaq || [];
+      _gaq.push([ '_trackEvent', 'ADS', 'Curso Javascript Ninja - Origem: ' + $( '#script-main' ).data( 'url' )]);
     };
 
     $private.initInfiniteScroll = function initInfiniteScroll() {
