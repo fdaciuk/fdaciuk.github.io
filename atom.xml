@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-17T23:54:04.804Z</updated>
+  <updated>2015-02-18T02:09:09.188Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -13,6 +13,58 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Segredos do Github - Commits que fecham issues]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/18/segredos-do-github-commits-que-fecham-issues/"/>
+    <id>http://blog.da2k.com.br/2015/02/18/segredos-do-github-commits-que-fecham-issues/</id>
+    <published>2015-02-18T00:00:00.000Z</published>
+    <updated>2015-02-18T02:08:25.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/commits-close-issues.png" alt=""></p>
+<p><em>Abre uma issue, resolve o problema, commita, faz o push. fecha a issue. Abre uma issue, resolve o problema, commita, faz o push. fecha a issue.</em></p>
+<p>Você ainda faz isso? Sai dessa! Vem comigo que eu vou te mostrar uma forma de automatizar esse processo ;)</p>
+<a id="more"></a>
+
+<p>Essa coisa de ficar lembrando de fechar a <em>issue</em> logo após a sua solução, em alguns casos, torna-se bastante chato e repetitivo. </p>
+<p><em>Não tem como automatizar esse isso?</em></p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p>O <strong>Github</strong> tem um <em>segredinho</em>, onde você consegue fechar uma issue através de uma mensagem de commit.</p>
+<p><em>Como é que é?</em></p>
+<p>Isso mesmo que você leu: você pode commitar e, ao mesmo tempo, a <em>issue</em> será fechada!</p>
+<p><em>Como isso?</em></p>
+<p>Você já deve saber que inglês é essencial hoje em dia. Quando você codifica, principalmente se você pretende colaborar com projetos Open Source, você deveria escrever seus nomes de funções, métodos, variáveis, etc., tudo em inglês, correto? Pois assim, mais pessoas poderão ter acesso ao projeto, já que inglês é uma linguagem mundial!</p>
+<p><em>E o que isso tem a ver com o post?</em></p>
+<p>Já ia chegar lá xD<br>O <strong>Github</strong> tem algumas <em>palavras mágicas</em> que você pode usar na sua mensagem de commit, para fechar uma <em>issue</em>. Você porecisa referenciar também, o ID da <em>issue</em> (aquele número que aparece na URL quando você acessa a <em>issue</em>).</p>
+<p>As palavras chave são:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fix, fixes, fixed, close, closes, closed, resolve, resolves, resolved</div></pre></td></tr></table></figure>
+
+<p>Então você pode escrever sua mensagem de commit mais ou menos assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m <span class="string">"Fix error on issue #32"</span></div></pre></td></tr></table></figure>
+
+<p>Usando uma das <em>palavras mágicas</em>, e referenciando a <em>issue</em> com a hash <code>#</code> + número/ID da <em>issue</em>, - essas informações só precisam aparecer na mensagem de commit, não precisam ter uma ordem específica - a <em>issue </em>#32<em> será fechada (nesse caso)</em>.</p>
+<p>Bom, uma dica bem simples, mas que pode te poupar um bom trabalho com seus projetos <em>open source</em> :D</p>
+<p>Um abraço e até a próxima!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/commits-close-issues.png" alt=""></p>
+<p><em>Abre uma issue, resolve o problema, commita, faz o push. fecha a issue. Abre uma issue, resolve o problema, commita, faz o push. fecha a issue.</em></p>
+<p>Você ainda faz isso? Sai dessa! Vem comigo que eu vou te mostrar uma forma de automatizar esse processo ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
+    
+      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Stylus - Usando Mixins]]></title>
@@ -1821,97 +1873,6 @@
       <category term="funções" scheme="http://blog.da2k.com.br/tags/funcoes/"/>
     
       <category term="functional programming" scheme="http://blog.da2k.com.br/tags/functional-programming/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Javascript - Usando temporizadores like a Ninja]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"/>
-    <id>http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/</id>
-    <published>2015-01-29T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/javascript-timers.jpg" alt=""></p>
-<p>Você provavelmente já conhece os métodos <code>setInterval()</code> e <code>setTimeout()</code>. Mas você sabe a exatamente a diferença entre eles? Sabe como eles realmente funcionam? Vem descobrir :)</p>
-<a id="more"></a>
-
-<p><code>setInterval()</code> e <code>setTimeout()</code> são funções temporizadoras. Elas executam uma função de <em>callback</em> após determinado tempo.</p>
-<p>O uso delas é assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setTimeout( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Executa uma vez após 1 segundo.'</span> );</div><div class="line">}, <span class="number">1000</span> );</div><div class="line">  </div><div class="line">setInterval( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Executa infinitamente, 1 vez por segundo.'</span> );</div><div class="line">}, <span class="number">1000</span> );</div></pre></td></tr></table></figure>
-
-<p>Como você pode ver, a sintaxe para as duas é a mesma: o primeiro parâmetro é uma função de callback que será executada após <code>x</code> milissegundos, passados no segundo parâmetro.</p>
-<p>A principal diferença entre elas é que:</p>
-<ul>
-<li><code>setInterval()</code> executa infinitamente, até que você execute <code>clearInterval()</code>;</li>
-<li><code>setTimeout()</code> executa apenas uma vez.</li>
-</ul>
-<p>Você pode remover um temporizador, atribuindo ele a uma variável, e depois usando <code>clearInterval( variavel )</code> para o <code>setInterval()</code>, e <code>clearTimeout( variavel )</code> para <code>setTimeout()</code>.</p>
-<p>Um exemplo prático:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( counter &gt;= <span class="number">10</span> ) {</div><div class="line">    clearInterval( timer );</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( counter++ );</div><div class="line">}, <span class="number">1000</span>);</div></pre></td></tr></table></figure>
-
-<p>Colando esse código no seu console, você pode constatar que é printado o valor de 0 a 10, e então o temporizador é removido.</p>
-<p>Para usar com o <code>setTimeout()</code>, poderíamos fazer algo assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTimer</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> timer = setTimeout( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( counter++ );</div><div class="line">    <span class="keyword">if</span>( counter &lt; <span class="number">11</span> ) {</div><div class="line">      myTimer();</div><div class="line">    }</div><div class="line">  }, <span class="number">1000</span> );</div><div class="line">}</div><div class="line">  </div><div class="line">myTimer();</div></pre></td></tr></table></figure>
-
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<p>Como o <code>setTimeout()</code> executa somente uma vez, precisamos utilizar uma função recursiva para que temporizador continue executando até que ele encha o saco e nós possamos mandá-lo parar de chamar a função! xD</p>
-<p>Bom, até aqui, provavelmente você já sabia de tudo. Mas você sabe em que momento usar <code>setInterval()</code> e quando usar <code>setTimeout()</code>? E porquê?</p>
-<p><em>Dá no mesmo, posso usar qualquer uma!</em></p>
-<p>É nesse ponto que fazemos a separação do jovem Padawan para o verdadeiro Ninja: você precisa conhecer o <em>Event Loop</em> do Javascript, e saber como essas funções o afetam.</p>
-<h2 id="Como_funciona_o_Javascript">Como funciona o Javascript</h2>
-<p>O Javascript trabalha em single thread. Aí você me pergunta: <em>então como ele faz concorrência?</em> </p>
-<p>Através do <em>Event Loop!</em></p>
-<p>Cada instrução assíncrona que precisa ser executada em JS, é lançada no <em>Event Loop</em>. Imagine um círculo, com uma única entrada e uma única saída. Todas as instruções entram pelo mesmo lugar, e saem por outro, uma de cada vez.</p>
-<p>Como essas instruções são <em>assíncronas</em>, elas ficam rodando ali no <em>Event Loop</em> até que estejam prontas. Com isso, o JS não bloqueia a thread, podendo executar outras instruções. Quando uma instrução finaliza, o JS dispara um <strong>evento</strong> (daí o nome <em>Event Loop</em>), devolvendo em uma função de <code>callback</code> o resultado dessa instrução.</p>
-<p>Instruções <em>síncronas</em> são executadas diretamente, bloqueando a thread.</p>
-<p>Vamos ver isso na prática:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ ) {</div><div class="line">  <span class="built_in">console</span>.log( i );</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.log( <span class="string">'Terminou o for'</span> );</div></pre></td></tr></table></figure>
-
-<p>Um loop é uma instrução <em>síncrona</em>, bloqueante. Ou seja, enquanto ele estiver executando, a thread ficará bloqueada. Assim que ele terminar, a próxima instrução é executada. Rodando o exemplo acima no seu console, você verá que, primeiro serão impressos os números de 0 a 9, para então mostrar a mensagem <code>Terminou o for</code>.</p>
-<p><em>E como seria uma instrução assíncrona?</em></p>
-<p>Assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log( <span class="string">'Vou executar antes de setInterval() o/'</span> );</div><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( counter &gt;= <span class="number">10</span> ) {</div><div class="line">    clearInterval( timer );</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( counter++ );</div><div class="line">}, <span class="number">1000</span>);</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( <span class="string">'E eu, apesar de estar depois, também vou executar antes do setInterval() xD'</span> );</div></pre></td></tr></table></figure>
-
-<p><em>Porque os console.log() executam antes de setInterval()?</em></p>
-<p>Por que o temporizador é uma função assíncrona. Tanto o <code>setInterval()</code>, quanto o <code>setTimeout()</code>. A função passada como parâmetro não é executada até que o tempo passado no segundo parâmetro se esgote.</p>
-<p>O que acontece basicamente é o seguinte: o primeiro <code>console.log()</code> é automaticamente executado. Depois, o setInterval é colocado no <em>Event Loop</em> e, assim que se passar 1 segundo, e ele for o próximo da fila a ser executado (lembra que o <em>Event Loop</em> só executa uma coisa de cada vez?), o JS vai disparar um evento, fazendo com que a função de callback passada no primeiro parâmetro seja executada.</p>
-<p>O tempo nunca vai garantir que o que está no callback vai ser executado exatamente naquele tempo, pois podem ter outras funções assíncronas no <em>Event Loop</em> sendo disparadas. Logo que a fila é liberada, e chega a vez do temporizador, aí então ele é executado.</p>
-<p>Ficou claro como funciona o <em>Event Loop</em>? Ótimo, vamos seguir!</p>
-<p>Sabendo disso, podemos enfim falar sobre as diferenças de <code>setInterval()</code> e <code>setTimeout()</code>.</p>
-<h2 id="setInterval()">setInterval()</h2>
-<p>Como o <code>setInterval()</code> executa infinitamente, a garantia que temos é que ele vai adicionar uma instrução ao <em>Event Loop</em> a cada um segundo (levando em consideração os exemplos passados).</p>
-<p>Isso significa que, se em 1 segundo a primeira instrução não for executada, - por ter outras instruções no <em>Event Loop</em> - a segunda instrução será adicionada ao <em>Event Loop</em>, ficando duas instruções na fila.</p>
-<p>Imagine agora você com vários temporizadores na tela. Cada <code>setInterval()</code> adicionando várias instruções ao <em>Event Loop</em>. Lembrando que o <em>Event Loop</em> é gerenciado pelo browser, no <em>client side</em>. Pode acontecer de chegar um momento que seu computador não terá memória suficiente para suportar a quantidade de eventos alocados, fazer seu navegador dar <em>crash</em>, e em alguns casos, até travar o computador.</p>
-<p>Isso já aconteceu com você? Então. O problema, provavelmente, era o <code>setInterval()</code>.</p>
-<h2 id="setTimeout()">setTimeout()</h2>
-<p>Agora, analisando por esse lado, e sabendo que o <code>setTimeout()</code> só executa uma vez, - a menos que fizermos uma chamada recursiva para que ele execute mais vezes - podemos concluir que, o <code>setTimeout()</code> só vai adicionar mais uma instrução no <em>Event Loop</em> depois que a primeira instrução for retornada através do evento disparado!</p>
-<p>Se a primeira instrução demorar 5 segundos para disparar o evento, a segunda instrução só será adicionada DEPOIS disso!</p>
-<p>Agora pense no caso do exemplo acima, onde usamos vários <code>setInterval()</code>. Com o <code>setTimeout()</code> não teríamos o mesmo problema, pois cada <code>setTimeout()</code> garante que só uma instrução por <code>setTimeout()</code> será enviada ao <em>Event Loop</em>! É um ganho de performance absurdo! :D</p>
-<p>Então, sempre que estiver na dúvida: </p>
-<p><em><code>setInterval()</code> ou <code>setTimeout()</code> recursivo?</em></p>
-<p>Vá pela segunda opção. É muito mais performática!</p>
-<p>Até o próximo artigo!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/javascript-timers.jpg" alt=""></p>
-<p>Você provavelmente já conhece os métodos <code>setInterval()</code> e <code>setTimeout()</code>. Mas você sabe a exatamente a diferença entre eles? Sabe como eles realmente funcionam? Vem descobrir :)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="temporizadores" scheme="http://blog.da2k.com.br/tags/temporizadores/"/>
-    
-      <category term="setInterval" scheme="http://blog.da2k.com.br/tags/setinterval/"/>
-    
-      <category term="setTimeout" scheme="http://blog.da2k.com.br/tags/settimeout/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
