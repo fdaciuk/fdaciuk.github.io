@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-18T02:16:09.959Z</updated>
+  <updated>2015-02-19T02:02:21.361Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,55 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Acabando com milhões de contas no Gmail]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/19/acabando-com-milhoes-de-contas-no-gmail/"/>
+    <id>http://blog.da2k.com.br/2015/02/19/acabando-com-milhoes-de-contas-no-gmail/</id>
+    <published>2015-02-19T00:00:00.000Z</published>
+    <updated>2015-02-19T02:01:45.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/gmail.png" alt=""></p>
+<p>Cada vez que você cria uma conta em um serviço novo, você cria também um e-mail novo para não correr perigo de receber SPAM na sua conta principal? Pois saiba que, se você usa <strong>Gmail</strong>, você tem uma solução melhor pra isso! Vem comigo! ;)</p>
+<a id="more"></a>
+
+<p>O <strong>Gmail</strong> tem um sistema de segurança que não deixa outras pessoas criarem e-mails parecidos com o seu, - usando pontos - pois isso poderia ser usado para qualquer fim, e o seu nome seria usado sem permissão.</p>
+<p>Por exemplo: se o seu e-mail é: <code>fulaninho.da.silva@gmail.com</code>, ninguém poderá cadastrar e-mails como:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fulaninhodasilva@gmail.com</div><div class="line">fulaninho.dasilva@gmail.com</div><div class="line">fulaninho.d.a.s.i.l.v.a@gmail.com</div></pre></td></tr></table></figure>
+
+<p>Todas as combinações acima são válidas, e serão enviadas para o seu e-mail de cadastro. O <strong>Gmail</strong> cria <em>aliases</em> com pontos, para facilitar a entrega dos e-mails :)</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="O_sinal_de_+">O sinal de <code>+</code></h2>
+<p>Uma outra forma de se aproveitar dos <em>alias</em>, é o sinal de <code>+</code>. Ao invés de criar várias contas diferentes para cada serviço que vocẽ se cadastra, você pode se fazer como abaixo (imagine um cadastro no Facebook):</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fulaninho.da.silva+facebook@gmail.com</div></pre></td></tr></table></figure>
+
+<p>Após adicionar o sinal de <code>+</code>, você pode colocar qualquer sequência de caracteres (letras ou números), que o e-mail ainda será enviado para <code>fulaninho.da.silva@gmail.com</code>. Legal não? :D</p>
+<p>Fazendo isso, você pode, por exemplo, usar os <a href="https://support.google.com/mail/answer/6579?hl=pt-BR" target="_blank" rel="external">filtros</a> para marcar os e-mails que chegarem para esse endereço com a label <code>FACEBOOK</code>. Ou talvez ignorar a caixa de entrada. Dá até pra saber quem está repassando seu e-mail para terceiros com isso! Se chegar um e-mail do Hotel Urbano com o <code>+facebook</code> no final, já sabe quem culpar :P</p>
+<p>Coisa de louco, né? xD</p>
+<p>Sei que a dica é bastante antiga, mas conversei com bastante gente que ainda não conhecia, por isso resolvi fazer o post :)</p>
+<p>E você? Conhece alguma outra maracutaia que dá pra fazer com outro cliente de e-mail? Ou com o Gmail mesmo xD<br>Compartilhe conosco :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/uploads/2015/02/gmail.png" alt=""></p>
+<p>Cada vez que você cria uma conta em um serviço novo, você cria também um e-mail novo para não correr perigo de receber SPAM na sua conta principal? Pois saiba que, se você usa <strong>Gmail</strong>, você tem uma solução melhor pra isso! Vem comigo! ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="tips" scheme="http://blog.da2k.com.br/tags/tips/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Segredos do Github - Commits que fecham issues]]></title>
     <link href="http://blog.da2k.com.br/2015/02/18/segredos-do-github-commits-que-fecham-issues/"/>
     <id>http://blog.da2k.com.br/2015/02/18/segredos-do-github-commits-que-fecham-issues/</id>
     <published>2015-02-18T00:00:00.000Z</published>
-    <updated>2015-02-18T02:15:43.000Z</updated>
+    <updated>2015-02-18T02:16:56.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/commits-close-issues.png" alt=""></p>
 <p><em>Abre uma issue, resolve o problema, commita, faz o push, fecha a issue. Abre uma issue, resolve o problema, commita, faz o push, fecha a issue.</em></p>
 <p>Você ainda faz isso? Sai dessa! Vem comigo que eu vou te mostrar uma forma de automatizar esse processo ;)</p>
@@ -1643,238 +1687,6 @@
       <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
     
       <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Javascript - como invocar funções]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/"/>
-    <id>http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/</id>
-    <published>2015-01-30T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/functions-invoke.jpg" alt=""></p>
-<p>Funções são objetos de primeira classe em <strong>Javascript</strong>. É o que faz do <strong>Javascript</strong> a <em>coisa fofa</em> que ele é hoje. Por isso, é muito importante saber todas as formas das quais podemos invocar funções, e como isso afeta nossos programas. Já sabe? Não sabe? Não sabe se sabe? Vem ver então!</p>
-<a id="more"></a>
-
-<h2 id="Funções_como_objetos_de_primeira_classe">Funções como objetos de primeira classe</h2>
-<p><strong>Objetos de primeira classe</strong> em Javascript, são os tipos de objetos que apresentam capacidades comuns dentro da linguagem, como:</p>
-<ul>
-<li>podem ser criados a partir de literais;</li>
-<li>podem ser atribuídos a variáveis, arrays e propriedades de outros objetos;</li>
-<li>podem ser passados como argumentos para funções;</li>
-<li>podem ser retornados como valores de funções;</li>
-<li>podem ter propriedades, sendo criadas e atribuídas dinamicamente.</li>
-</ul>
-<p>Por isso <strong>funções</strong> são <strong>objetos de primeira classe</strong>; pois, exatamente como qualquer outro tipo de objeto, elas têm as capacidades citadas acima.</p>
-<h2 id="Estrutura_de_uma_função">Estrutura de uma função</h2>
-<p>Uma função é formada por quatro partes:</p>
-<ul>
-<li>A palavra-chave <code>function</code>;</li>
-<li>um nome (opcional);</li>
-<li>os parênteses <code>()</code>, que podem receber - opcionalmente - parâmetros;</li>
-<li>as chaves <code>{}</code>, onde ficará o corpo da função. O corpo também é opcional.</li>
-</ul>
-<p>Então, para que possa ser considerada uma função, ela precisa ao menos ter a seguinte estrutura:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}</div></pre></td></tr></table></figure>
-
-<h2 id="Invocando_funções_como_função">Invocando funções como função</h2>
-<p>Parece um termo meio estranho, mas é assim mesmo. Essa é a forma mais conhecida de invocar funções. Para invocar funções <em>como função</em>, nós utilizamos o operador <code>()</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Hi!'</span>;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( hello() ); <span class="comment">// Hi!</span></div></pre></td></tr></table></figure>
-
-<p>Criamos uma função chamada <code>hello</code> e a invocamos com o operador <code>()</code>. Se não tivéssemos adicionado o operador <code>()</code>, a função seria retornada em seu formato literal. Experimente fazer isso, removendo os parênteses da chamada no <code>console.log()</code> :)</p>
-<p><em>Mas você disse que o nome da função é opcional. Se eu não colocar o nome, como vou invocá-la?</em></p>
-<p>Boa pergunta, meu jovem! Quando uma função não tem nome, a chamamos de <strong>função anônima</strong>. Para invocar uma função anônima, só existe uma forma: utilizando um <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/" target="_blank" rel="external"><em>IIFE</em></a>, ou mais conhecido como <em>invocação de função imediata</em>.</p>
-<p>Para que uma função seja invocada, ela não pode estar no seu estado literal, ela precisa ser uma <em>expressão</em>. Para tornar uma função em uma expressão, podemos fazer das seguintes formas:</p>
-<p><strong>Com o operador <code>()</code></strong>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{})</div></pre></td></tr></table></figure>
-
-<p>Agora essa função é uma expressão, e pode ser invocada:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}())</div></pre></td></tr></table></figure>
-
-<p>Ou ainda:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{})()</div></pre></td></tr></table></figure>
-
-<p>Não faz diferença alguma se os parênteses (operador) estão dentro ou fora dos primeiros parênteses (expressão). O resultado é o mesmo: a função será invocada. Faça o teste. Cole no console do seu navegador e veja o que retorna:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'oi'</span>;</div><div class="line">}());</div><div class="line"><span class="comment">// oi</span></div><div class="line"></div><div class="line">(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'oi'</span>;</div><div class="line">})();</div><div class="line"><span class="comment">// oi</span></div></pre></td></tr></table></figure>
-
-<p>Temos ainda outros operadores que transformam um literal em uma expressão: O <code>+</code>, <code>-</code>, <code>!</code> e <code>~</code>. Como funções são tratadas como qualquer outro tipo de objeto, elas também podem ser convertidas em expressões usando esses operadores.</p>
-<p>Por exemplo, se você tentar invocar uma função no seu formato literal:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}()</div></pre></td></tr></table></figure>
-
-<p>Você terá um erro de sintaxe, pois, para funções literais, o nome é obrigatório para que elas possam ser invocadas. Nesse caso, teríamos que fazer algo como:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span><span class="params">()</span> </span>{}</div><div class="line">hello();</div></pre></td></tr></table></figure>
-
-<p>Pois se tentarmos invocar a função no formato literal, ela continuará dando erro de sintaxe.</p>
-<p>Mas usando os operadores mostrados acima, a função se torna uma expressão, podendo então ser invocada. Todos os exemplos abaixo são válidos para uma <em>IIFE</em>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">!<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}()</div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}()</div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}()</div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}()</div></pre></td></tr></table></figure>
-
-<p>Provavelmente você já deve ter visto essa sintaxe, principalmente em arquivos minificados (talvez um plugin jQuery).</p>
-<p><em>E qual a vantagem de usar um desses operadores no lugar dos parênteses?</em></p>
-<p>Um caractere a menos! Para minificação de código, qualquer caractere a mais já faz diferença!</p>
-<h2 id="Invocando_funções_como_método_de_um_objeto">Invocando funções como método de um objeto</h2>
-<p>Para invocar uma função <em>como método</em>, precisamos de um objeto. Depois, passamos uma função para ele. Quando temos uma função que é retornada por um objeto, nós a chamamos de <code>método</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = {};</div><div class="line">obj.func = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{};</div><div class="line">obj.func();</div></pre></td></tr></table></figure>
-
-<p>Dessa forma, nós estamos trabalhando com <em>orientação a objetos</em> em Javascript! </p>
-<p><em>E qual a diferença de invocar uma função “como função” e invocar “como método” de um objeto?</em></p>
-<p>Em outras linguagens, o <code>this</code> dentro de uma classe representa o objeto que está envolvendo esse parâmetro. Esse <code>this</code> depende da forma como essa classe foi declarada.</p>
-<p>Já em Javascript, o contexto do método (<code>this</code>) depende da forma de como a função é <strong>invocada</strong>.<br>Invocando a função <code>func</code> como método do objeto <code>obj</code>, o <code>this</code> usado dentro da função representa o <code>obj</code>.</p>
-<p>Experimente colar no seu console dessa forma:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = {};</div><div class="line">obj.func = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">};</div><div class="line"><span class="built_in">console</span>.log( obj.func() );</div></pre></td></tr></table></figure>
-
-<p>O retorno será um <em>Objeto</em> (no caso, o <code>obj</code>), contendo o método <code>func</code>.</p>
-<p>Agora, faça o teste sem o objeto:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.log( func() );</div></pre></td></tr></table></figure>
-
-<p>O que é retornado? O <em>Objeto</em> <code>window</code>!</p>
-<p><em>Porque</em>?</p>
-<p>Por que estamos declarando a função no escopo global. Com isso, podemos dizer que toda função é um método. Nesse caso, <code>func</code> foi declarada como um método de <code>window</code>, que é nosso objeto global no browser.</p>
-<p>Para ter uma visão melhor de orientação a objetos aqui, podemos declarar a função <code>func</code> como método do objeto <code>window</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.func = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.func() );</div></pre></td></tr></table></figure>
-
-<p>E o resultado é o mesmo que o anterior! O <code>this</code> é o objeto <code>window</code>. Assim fica mais fácil de entender o <code>this</code>, não? Mas falaremos mais sobre ele um pouco mais à frente :)</p>
-<p>O que você precisa saber aqui é que, dependendo de como você invoca a função, assim o contexto dela será definido.</p>
-<h2 id="Invocando_funções_como_construtores">Invocando funções como construtores</h2>
-<p>Outra forma de invocar funções é como <em>construtores</em>, usando a palavra-chave <code>new</code>. Fazendo isso, criamos um novo objeto vazio, que será o contexto da nossa função. Exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Func</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">this</span>.method = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">  };</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="keyword">var</span> newObj = <span class="keyword">new</span> Func();</div><div class="line"><span class="built_in">console</span>.log( newObj.method() );</div></pre></td></tr></table></figure>
-
-<p>Você pode ver que um construtor nada mais é que uma simples função. Novamente: o que vai mudar aqui é a forma como essa função é invocada. Ao invocar como construtor, um novo objeto é criado e passado como referência ao construtor como o parâmetro <code>this</code>. </p>
-<p>Perceba que na função construtora <code>Func</code> não temos um <code>return</code> diretamente no corpo dela, pois como usamos o <code>new</code> para invocá-la, implicitamente o <code>this</code> já é o novo objeto criado, e este objeto é automaticamente retornado, se não tiver um <code>return</code> explícito na função.</p>
-<p>Para saber se o código acima se refere mesmo ao objeto <code>newObj</code>, criado a partir da função construtora, podemos testar dessa forma:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Func</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">this</span>.method = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">  };</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="keyword">var</span> newObj = <span class="keyword">new</span> Func();</div><div class="line"><span class="built_in">console</span>.log( newObj.method() === newObj );</div></pre></td></tr></table></figure>
-
-<p>O método <code>method</code> retorna o <code>this</code>. Como invocamos com o <code>new</code>, o <code>this</code> deve referenciar o objeto que acabamos de criar <code>newObj</code>. A instrução acima deveria retornar <code>true</code>. :)</p>
-<p>Vamos criar dois objetos diferentes para tirar a prova real:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Func</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">this</span>.method = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">  };</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="keyword">var</span> newObj = <span class="keyword">new</span> Func();</div><div class="line"><span class="keyword">var</span> newObj2 = <span class="keyword">new</span> Func();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log( newObj.method() === newObj );</div><div class="line"><span class="built_in">console</span>.log( newObj2.method() === newObj2 );</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( newObj.method() === newObj2 );</div><div class="line"><span class="built_in">console</span>.log( newObj2.method() === newObj );</div></pre></td></tr></table></figure>
-
-<p>Dessa forma, podemos visualizar melhor a vantagem de utilizar construtores: você cria um único método, genérico e reutilizável, que pode ser referenciado por instâncias diferentes, não precisando repetir código :)</p>
-<p>O resultado é que:</p>
-<ul>
-<li>O método <code>method</code> de <code>newObj</code>, que retorna <code>this</code> é exatamente o objeto <code>newObj</code>;</li>
-<li>O método <code>method</code> de <code>newObj2</code>, que retorna <code>this</code> é exatamente o objeto <code>newObj2</code>.</li>
-</ul>
-<p>Mas fazendo a comparação com o outro objeto, podemos ver que isso é bastante consistente, e o valor retornado é <code>false</code> para os dois casos:</p>
-<ul>
-<li>O método <code>method</code> de <code>newObj</code> não faz referência ao <code>newObj2</code>;</li>
-<li>E nem o método <code>method</code> de <code>newObj2</code> faz referência ao <code>newObj</code>.</li>
-</ul>
-<p><strong>Observação:</strong> por definição, usamos nomes de construtores com a primeira letra maíuscula, para saber que essa função será usada como <em>construtor</em>.</p>
-<h2 id="Invocando_funções_com_call()_e_apply()">Invocando funções com <code>call()</code> e <code>apply()</code></h2>
-<p><em>Invocar funções com outras funções? Pra quê isso?</em></p>
-<p>Função não são objetos? Então! Se elas são objetos, então elas podem ter propriedades e métodos, certo? Vamos começar brincando um pouco:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'oi'</span>;</div><div class="line">}</div><div class="line">  </div><div class="line">func.bye = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'Good bye!'</span>;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( func() ); <span class="comment">// oi</span></div><div class="line"><span class="built_in">console</span>.log( func.bye() ); <span class="comment">// Good bye!</span></div></pre></td></tr></table></figure>
-
-<p><em>Isso é sério? Tá de zua né?</em></p>
-<p>Não tô! Cole o código acima no seu console pra você ver :P</p>
-<p>O primeiro <code>console.log()</code> vai retornar <code>oi</code>, pois é o retorno da função. Depois, usamos das habilidades da função ser um objeto, e criamos um método chamado <code>bye</code>, que recebe uma função, que retorna <code>Good bye!</code>. Essa é uma das maravilhas que a programação funcional te proporciona!</p>
-<p>Agora, voltando ao assunto: sempre que uma função é criada, ela tem algumas propriedades específicas de funções:</p>
-<ul>
-<li>A propriedade <code>name</code>, que retorna como <code>String</code> o nome da função;</li>
-<li>Os métodos <code>call()</code> e <code>apply()</code>, que veremos a seguir.</li>
-</ul>
-<p><strong>Sobre a propriedade <code>name</code>:</strong> se você passa uma função anônima como valor de uma variável, o <code>name</code> vai retornar uma <em>String vazia</em>, pois a função não tem nome. Não confunda o nome da variável com o nome da função, ok?</p>
-<p>Exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>{}</div><div class="line"><span class="built_in">console</span>.log( test.name ); <span class="comment">// "test"</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> test2 = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{};</div><div class="line"><span class="built_in">console</span>.log( test2.name ); <span class="comment">// ""</span></div></pre></td></tr></table></figure>
-
-<h3 id="Os_métodos_call()_e_apply()">Os métodos <code>call()</code> e <code>apply()</code></h3>
-<p>Esses dois métodos fazem exatamente a mesma coisa: invocam uma função, onde você pode passar o contexto que você quiser. Eles só diferem na sintaxe.</p>
-<p>O <code>call()</code>, recebe como primeiro parâmetro o contexto da função, e os outros parâmetros - pode passar quantos quiser - serão passados como argumentos para a função referenciada.</p>
-<p>Exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">( arg1, arg2 )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span> + <span class="string">' - '</span> + arg1 + <span class="string">' - '</span> + arg2;</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.log( func.call( <span class="string">'contexto'</span>, <span class="number">10</span>, <span class="string">'oie'</span> ) ); <span class="comment">// contexto - 10 - oie</span></div></pre></td></tr></table></figure>
-
-
-
-<p>Veja que o <code>this</code> da função é retornado como a string <code>contexto</code>, pois foi o que eu passei no primeiro parâmetro. Depois, no segundo e terceiro parâmetros de <code>call()</code>, ele transportou para a função como primeiro e segundo argumentos, respectivamente. </p>
-<p>Lembrando que o contexto é você quem decide. Você poderia passar um objeto, por exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.method();</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="keyword">var</span> obj = {</div><div class="line">  method: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="string">'method de obj'</span>;</div><div class="line">  }</div><div class="line">};</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( func.call( obj ) ); <span class="comment">// method de obj</span></div></pre></td></tr></table></figure>
-
-<p>Veja que agora não passamos nenhum parâmetro para função <code>func</code>, através do método <code>call()</code>. Só passamos como contexto da função, o objeto <code>obj</code>. Esse objeto tem um método chamado <code>method</code>.</p>
-<p>Como agora <code>obj</code> é o contexto de <code>func</code>, o <code>this</code> dentro de <code>func</code> faz referência a <code>obj</code>. Por isso podemos retornar <code>this.method();</code> dentro de <code>func</code>. Ficou claro?</p>
-<p>O método <code>apply()</code> faz exatamente a mesma coisa que <code>call()</code>. A diferença está nos parâmetros passados: <code>apply()</code> recebe apenas dois parâmetros: o primeiro é o contexto, igual <code>call()</code>, e o segundo é um <code>Array</code> de argumentos que serão passados para a função. Usando o mesmo exemplo de <code>call()</code>, mas com <code>apply()</code>, ficaria assim: </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">( arg1, arg2 )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span> + <span class="string">' - '</span> + arg1 + <span class="string">' - '</span> + arg2;</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.log( func.apply( <span class="string">'contexto'</span>, [ <span class="number">10</span>, <span class="string">'oie'</span> ]) ); <span class="comment">// contexto - 10 - oie</span></div></pre></td></tr></table></figure>
-
-<p>E o resultado é exatamente o mesmo! Agora você me pergunta:</p>
-<p><em>E precisa de duas abordagens diferentes pra fazer a mesma coisa?</em></p>
-<p>Sim! Imagine se você precisa passar como argumentos de uma função vários parâmetros que você precisa iterar em um <code>for</code>. Como você faria? Não tem como passar os parâmetros, separados por vírgula. O que você faz então é: cria um array, coloca todos os parâmetros dentro desse array, e invoca a função com <code>apply()</code>. Simples, não?</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<h2 id="O_método_bind()">O método bind()</h2>
-<p>Apesar de não servir para invocação de funções, acho que é bastante importante falar sobre o método <code>bind()</code>. Esse método faz a mesma coisa que os dois citados acima (<code>call()</code> e <code>apply()</code>), tem a mesma sintaxe de <code>call()</code>, com a diferença que ele não invoca a função, mas somente <em>injeta</em> o contexto e os argumentos para que a função possa ser chamada no futuro já com essas configurações pré-definidas.</p>
-<p>Exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">( arg1, arg2 )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span> + <span class="string">' - '</span> + arg1 + <span class="string">' - '</span> + arg2;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="keyword">var</span> funcConfig = func.bind( <span class="string">'contexto'</span>, <span class="number">10</span>, <span class="string">'oie'</span>);</div><div class="line"><span class="built_in">console</span>.log( funcConfig() ); <span class="comment">// contexto - 10 - oie</span></div></pre></td></tr></table></figure>
-
-<p>Mas esse método acaba sendo um pouco lento, pois ele é novo, e ainda não foi muito bem implementado pelos navegadores. Uma alternativa, é, novamente, se aproveitar da programação funcional, e criar um <em>polyfill</em> para usar como <code>bind()</code>. Podemos fazer algo assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> func = <span class="built_in">arguments</span>[<span class="number">0</span>];</div><div class="line">  <span class="keyword">var</span> that = <span class="built_in">arguments</span>[<span class="number">1</span>];</div><div class="line">  <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call( <span class="built_in">arguments</span>, <span class="number">2</span> );</div><div class="line">  <span class="keyword">return</span> func.apply( that, args );</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">( arg1, arg2 )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span> + <span class="string">' - '</span> + arg1 + <span class="string">' - '</span> + arg2;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( bind( func, <span class="string">'contexto'</span>, <span class="number">10</span>, <span class="string">'oie'</span> ) );</div></pre></td></tr></table></figure>
-
-<p>Criamos a função que faz o papel do método <code>bind()</code>. Essa função vai receber 3 ou mais parâmetros, um pouco diferente do <code>bind()</code> nativo, que recebe 2 ou mais: o primeiro parâmetro é a função, onde serão injetados o contexto e os argumentos. O segundo segue o padrão normal: o contexto e depois os argumentos, no mesmo formato de <code>call()</code>.</p>
-<p><em>Mas na função <code>bind()</code> você não passou nenhum parâmetro! Como pode isso funcionar? E o que é aquele <code>arguments</code>?</em></p>
-<p>Vamos ver agora! :D</p>
-<h2 id="arguments_e_this"><code>arguments</code> e <code>this</code></h2>
-<p>Toda função recebe - implicitamente - dois parâmetros: <code>this</code> e <code>arguments</code>. </p>
-<p>O <code>this</code>, como já vimos, se refere ao contexto da função. Já o <code>arguments</code> recebe uma coleção de argumentos que foram passados para a função.</p>
-<p><em>Porque você disse “coleção”? Ele não é um <code>Array</code>?</em></p>
-<p>Não! Apesar de você poder utilizar a mesma notação do <code>Array</code>, pegando o primeiro argumento passado para a função com <code>arguments[0]</code>, e também podendo ver a quantidade de argumentos passados com a propriedade <code>length</code>, podendo ser usado como <code>arguments.length</code>, as semelhanças com array acabam aqui.</p>
-<p>Com isso nós temos um problema: nós não podemos usar os métodos de um <code>Array</code> comum na coleção <code>arguments</code>!</p>
-<p>Mas, de novo, a lindeza da linguagem funcional aparece, e mostra quão poderoso é o Javascript. Baseado em <strong>Herança Prototipal (<em>Prototypal Inheritance</em>)</strong>, nós podemos invocar os métodos do <code>Array</code>, utilizando <code>call()</code> ou <code>apply()</code> para passar o nosso <em>pseudo-array</em> como contexto da função!</p>
-<p><em>Hã?</em></p>
-<p>Vou exemplificar:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"><span class="built_in">console</span>.log( arr.slice( <span class="number">1</span> ) ); <span class="comment">// [ 2, 3 ]</span></div></pre></td></tr></table></figure>
-
-<p>O método <code>slice()</code> remove a quantidade de itens, passada como parâmetro, a partir do início do array. </p>
-<p>Invocando esse método com <code>call()</code>, ele ficaria assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</div><div class="line"><span class="built_in">console</span>.log( arr.slice.call( arr, <span class="number">1</span> ) ); <span class="comment">// [ 2, 3 ]</span></div></pre></td></tr></table></figure>
-
-<p>Ou seja, o contexto é o próprio array, que usei como objeto, e repeti, passando-o no primeiro parâmetro, então não há necessidade de eu chamar assim. Mas no caso da nossa função <code>bind()</code> acima, o <code>arguments</code> não é um <code>Array</code>, logo, não podemos usar o método <code>slice()</code>.</p>
-<p><em>Duvido!</em></p>
-<p>Tente! A função ficaria assim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> func = <span class="built_in">arguments</span>[<span class="number">0</span>];</div><div class="line">  <span class="keyword">var</span> that = <span class="built_in">arguments</span>[<span class="number">1</span>];</div><div class="line">  <span class="keyword">var</span> args = <span class="built_in">arguments</span>.slice( <span class="number">2</span> );</div><div class="line">  <span class="keyword">return</span> func.apply( that, args );</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span><span class="params">( arg1, arg2 )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span> + <span class="string">' - '</span> + arg1 + <span class="string">' - '</span> + arg2;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( bind( func, <span class="string">'contexto'</span>, <span class="number">10</span>, <span class="string">'oie'</span> ) );</div></pre></td></tr></table></figure>
-
-<p>E você vai tomar um erro na cara! Porque eu te disse que o <code>arguments</code> não é um <code>Array</code> :P</p>
-<p>Então o que fazemos é (explicando a função <code>bind()</code> toda): </p>
-<ul>
-<li>Declaramos algumas variáveis no início, pra facilitar a visualização. <code>func</code> recebe o primeiro parâmetro (<code>arguments[0]</code>);</li>
-<li><code>that</code> recebe o <code>this</code>, que é o contexto, passado no segundo parâmetro (<code>arguments[1]</code>);</li>
-<li><code>args</code> recebe todos os outros parâmetros, menos os dois primeiros, por isso precisamos usar o <code>slice</code>.</li>
-<li>e finalmente, retornamos a função passada no primeiro parâmetro, invocando ela com <code>apply()</code> para que possamos passar o contexto que está em <code>that</code> e o <code>Array</code> de argumentos em <code>args</code>. Aqui só precisamos da notação de <code>Array</code>, então não precisamos converter novamente :)</li>
-</ul>
-<p>Entendeu a ideia do nosso bind? É uma função que retorna uma outra função. Para que a segunda função seja invocada junto da primeira chamada, vocẽ teria que fazer algo como:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bind( func, <span class="string">'contexto'</span>, <span class="number">10</span>, <span class="string">'oie'</span> )();</div></pre></td></tr></table></figure>
-
-<p>A primeira chamada do operador <code>()</code> passa os parâmetros para dentro da função. Mas o retorno dela é uma função literal, por isso precisamos usar novamente o operador <code>()</code>, para que, dessa vez, a função que é o retorno seja executada!</p>
-<p>Espero que tenha ficado claro como funciona a invocação de funções em Javascript, o método <code>bind()</code> e os parâmetros implícitos <code>this</code> e <code>arguments</code>.</p>
-<p>Se ficou alguma dúvida, poste nos comentários!</p>
-<p>Até o próximo! :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/functions-invoke.jpg" alt=""></p>
-<p>Funções são objetos de primeira classe em <strong>Javascript</strong>. É o que faz do <strong>Javascript</strong> a <em>coisa fofa</em> que ele é hoje. Por isso, é muito importante saber todas as formas das quais podemos invocar funções, e como isso afeta nossos programas. Já sabe? Não sabe? Não sabe se sabe? Vem ver então!</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="funções" scheme="http://blog.da2k.com.br/tags/funcoes/"/>
-    
-      <category term="functional programming" scheme="http://blog.da2k.com.br/tags/functional-programming/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
     
   </entry>
   
