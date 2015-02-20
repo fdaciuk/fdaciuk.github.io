@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/02/20/os-segredos-da-iife/</loc>
+    <lastmod>2015-02-20T02:49:29.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/02/19/acabando-com-milhoes-de-contas-no-gmail/</loc>
-    <lastmod>2015-02-19T09:16:00.000Z</lastmod>
+    <lastmod>2015-02-19T09:17:31.000Z</lastmod>
   </url>
   
   <url>
@@ -14,11 +19,6 @@
   <url>
     <loc>http://blog.da2k.com.br/2015/02/17/stylus-usando-mixins/</loc>
     <lastmod>2015-02-17T23:21:07.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
-    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
   <url>
@@ -37,12 +37,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/04/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-2-3/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/05/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-3-3/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -157,6 +157,11 @@
   </url>
   
   <url>
+    <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
+    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
@@ -172,7 +177,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</loc>
+    <loc>http://blog.da2k.com.br/2015/02/08/aprenda-markdown/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -227,7 +232,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/08/aprenda-markdown/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/02/caminhos-relativos-no-nodejs/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   

@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-19T09:16:33.739Z</updated>
+  <updated>2015-02-20T02:49:46.255Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,91 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Os segredos da IIFE]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/20/os-segredos-da-iife/"/>
+    <id>http://blog.da2k.com.br/2015/02/20/os-segredos-da-iife/</id>
+    <published>2015-02-20T00:00:00.000Z</published>
+    <updated>2015-02-20T02:49:29.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/iife.png" alt=""></p>
+<p>Quando uma <em>função imediata</em> é invocada, muita coisa pode estar acontecendo por trás dessa chamada. Quer descobrir o que é? Então me acompanhe na leitura :D</p>
+<a id="more"></a>
+
+<p>Pra quem não conhece, a <em>IIFE</em> ou <em>Imediately Invoked Function Expression</em> (Expressão de Função Invocada Imediatamente), faz exatamente isso: no momento em que ela é interpretada, ela é imediatamente invocada, para que o seu conteúdo seja executado!</p>
+<p><em>E porque é tão importante usar IIFE?</em></p>
+<h2 id="Formato_da_IIFE">Formato da IIFE</h2>
+<p>Antes de qualquer coisa, vou mostrar como se utiliza uma <strong>IIFE</strong>. Para uma função simples, você pode invocá-la da seguinte maneira:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'hi!'</span>;</div><div class="line">}</div><div class="line">  </div><div class="line">sayHi();</div></pre></td></tr></table></figure>
+
+<p>Quando você cria uma função, ela não faz nada até que seja invocada. Quando criamos a função <code>sayHi()</code>, ela só vai responder com um <code>&quot;hi!&quot;</code> quando a invocarmos! Na linha <code>5</code> do código acima, nós estamos usando os parênteses <code>()</code> para invocar a função. Quando fazemos isso, nos é retornado a string <code>hi!</code>.</p>
+<p>Ou seja, essa função precisa de um momento específico para ser invocada.</p>
+<p>A <strong>IIFE</strong> é invocada imediatamente. Mas para que façamos a invocação de uma função imediata, precisamos transformá-la em uma expressão. Nesse caso, vamos utilizar os parênteses para transformar a função em uma expressão, e depois usar novamente os parênteses para invocá-la:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win, undefined )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'hi!'</span>;</div><div class="line">})( <span class="built_in">window</span> );</div></pre></td></tr></table></figure>
+
+<p>Essa é uma <strong>IIFE</strong>! É uma função anônima, logo, ela não pderia ser invocada, pois não tem um nome. Mas quando a transformamos em uma expressão, podemos invocá-la assim que ela é interpretada. Se executar esse código no seu console, você verá como resultado, a string <code>&quot;hi!&quot;</code>!</p>
+<p>Você pode ler <a href="http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/" target="_blank" rel="external">esse post</a> se tiver interesse em saber mais sobre invocações de funções :)</p>
+<p><em>Mas porque eu usaria uma <strong>IIFE</strong>? E o ponto-e-vírgula no ínicio? E aqueles parâmetros? E porque o <code>undefined</code> como parâmetro?</em></p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Porque_usar_IIFE">Porque usar IIFE</h2>
+<p>Escopo. O Javascript tem um problema bastante grave, que é a questão do escopo. Tudo o que você declara fora de uma função, faz parte do escopo global. Algumas linguagens colocam escopo a partir de blocos (<code>if</code>, <code>while</code>, <code>for</code>, etc). Mas em Javascript, se você declarar uma variável dentro de um <code>if</code>, você ainda será capaz de consultar o seu valor, pois o escopo é definido por um bloco de <strong>função</strong>.</p>
+<p>Então, o motivo de usar uma <strong>IIFE</strong> é para que o seu código não fique sujando o escopo global, e evitar que suas variáveis possam colidir com outras de mesmo nome, que estão no mesmo escopo.</p>
+<p>Criando uma função, a função ou variável criada ali dentro (utilizando o <code>var</code>), fará parte do escopo <strong>local</strong>, e não poderá ser acessada de fora, a não ser que, explicitamente, você a exporte.</p>
+<h2 id="Ponto-e-vírgula_no_início_da_IIFE">Ponto-e-vírgula no início da IIFE</h2>
+<p>O ponto-e-vírgula no início da <strong>IIFE</strong> é usado como segurança. Como vocẽ deve saber, você precisa colocar um ponto-e-vírgula sempre ao final de cada expressão. Mas ele não é obrigatório.</p>
+<p>Então, imagine você concatenando todos os seus scripts, junto com as libs de terceiros que você usa. E imagine que uma lib qualquer tem, na última linha do seu código, a seguinte expressão:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export = service</div></pre></td></tr></table></figure>
+
+<p>Sem colocar o ponto-e-vírgula no final. Quando você chamar a sua <strong>IIFE</strong> sem o ponto-e-vírgula no início, a sua expressão vai juntar com o <code>service</code>, fazendo-o se transformar em uma função, e causando um efeito colateral indesejado:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export = service(<span class="function"><span class="keyword">function</span><span class="params">( win, undefined )</span> </span>{</div><div class="line">  <span class="comment">// ...</span></div><div class="line">})( <span class="built_in">window</span> );</div></pre></td></tr></table></figure>
+
+<p>Entende a “gravidez”(:P) do problema? Agora, e se você colocar o ponto-e-virgula?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export = service;(<span class="function"><span class="keyword">function</span><span class="params">( win, undefined )</span> </span>{</div><div class="line">  <span class="comment">// ...</span></div><div class="line">})( <span class="built_in">window</span> );</div></pre></td></tr></table></figure>
+
+<p>Aí sim, tudo irá funcionar como o esperado! :D</p>
+<h2 id="Parâmetros">Parâmetros</h2>
+<p>Como qualquer função normal, você pode, ao invocar a <strong>IIFE</strong>, passar parâmetros para ela. O motivo de passar parâmetros é também escopo. Você pode passar um parâmetro que está no escopo global, para que ele seja usado como uma variável local. Um exemplo bastante comum é o jQuery:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="comment">// ... Aqui, $ é local. :)</span></div><div class="line">})( jQuery );</div></pre></td></tr></table></figure>
+
+<p>Assim você injeta como parâmetro o objeto global <code>jQuery</code>, e recebe na <strong>IIFE</strong> como <code>$</code>, localmente, que agora pode ser usado sem medo de conflitar com qualquer outra lib que utilizar <code>$</code>. xD</p>
+<h2 id="O_undefined_na_IIFE">O undefined na IIFE</h2>
+<p>Muitas pessoas não sabem, mas o <code>undefined</code> não é um operador, como o <code>new</code> ou o <code>void</code>, mas sim uma variável global, que tem valor indefinido (<code>undefined</code>).</p>
+<p>Por esse motivo, no EcmaScript 3, era permitido mudar o valor de <code>undefined</code>.</p>
+<p>O código abaixo era perfeitamente válido:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="literal">undefined</span> = <span class="literal">true</span>;</div><div class="line"><span class="keyword">var</span> a = <span class="literal">undefined</span>;</div><div class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+
+<p>Bizarro, não? Já na EcmaScript 5, com o <em>strict mode</em> ativado, (<code>&quot;use strict&quot;</code>), esse problema é resolvido, e <code>undefined</code> se torna imutável. Maaaas, como nem todo código usa o <code>&quot;use strict&quot;</code>, e você nunca sabe se alguém pode ter mexido no valor de <code>undefined</code>, nós passamos na <strong>IIFE</strong> o parâmetro <code>undefined</code> sem referenciar objeto algum. Logo, o seu valor, localmente - dentro da <strong>IIFE</strong> - será <code>undefined</code>!</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="literal">undefined</span> = <span class="literal">true</span>;</div><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win, undefined )</span> </span>{</div><div class="line">  <span class="keyword">var</span> a = <span class="literal">undefined</span>;</div><div class="line">  <span class="built_in">console</span>.log( a ); <span class="comment">// undefined</span></div><div class="line">})( <span class="built_in">window</span> );</div><div class="line">  </div><div class="line"><span class="keyword">var</span> b = <span class="literal">undefined</span>;</div><div class="line"><span class="built_in">console</span>.log( b ); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+
+<p>Compreendeu o problema? Usando a <strong>IIFE</strong>, você está sempre seguro desse valor :D</p>
+<p>Era isso que eu queria mostrar hoje, espero que o assunto tenha ficado claro! :)</p>
+<p>Se não ficou, poste nos comentários! :)</p>
+<p>Até o próximo :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/iife.png" alt=""></p>
+<p>Quando uma <em>função imediata</em> é invocada, muita coisa pode estar acontecendo por trás dessa chamada. Quer descobrir o que é? Então me acompanhe na leitura :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="functional programming" scheme="http://blog.da2k.com.br/tags/functional-programming/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Acabando com milhões de contas no Gmail]]></title>
     <link href="http://blog.da2k.com.br/2015/02/19/acabando-com-milhoes-de-contas-no-gmail/"/>
     <id>http://blog.da2k.com.br/2015/02/19/acabando-com-milhoes-de-contas-no-gmail/</id>
     <published>2015-02-19T00:00:00.000Z</published>
-    <updated>2015-02-19T09:16:00.000Z</updated>
+    <updated>2015-02-19T09:17:31.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/gmail.png" alt=""></p>
 <p>Cada vez que você cria uma conta em um serviço novo, você cria também um e-mail novo para não correr perigo de receber SPAM na sua conta principal? Pois saiba que, se você usa <strong>Gmail</strong>, você tem uma solução melhor pra isso! Vem comigo! ;)</p>
 <a id="more"></a>
@@ -1632,52 +1712,6 @@
     <summary type="html">
     <![CDATA[<p><img src="/uploads/2015/02/github-secrets-clean-repository.png" alt=""></p>
 <p>Uma dica simples, mas funcional!</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - incentivar a contribuição para seus projetos open source]]></title>
-    <link href="http://blog.da2k.com.br/2015/01/31/segredos-do-github-incentivar-a-contribuicao-para-seus-projetos-open-source/"/>
-    <id>http://blog.da2k.com.br/2015/01/31/segredos-do-github-incentivar-a-contribuicao-para-seus-projetos-open-source/</id>
-    <published>2015-01-31T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-contributing.png" alt=""></p>
-<p>Contribuir para projetos open source é algo que nos faz crescer muito como profissionais. Temos a oportunidade de aprender coisas novas e praticar o que muitas vezes não utilizamos comumente no nosso dia-a-dia. Como o Github nos ajuda com isso?</p>
-<a id="more"></a>
-
-<p>Cada pessoa que cria um projeto open source tem sua forma de escrever seus códigos, organizar a estrutura de arquivos, etc. Se o projeto é interessante, outras pessoas acabam ficando interessadas em contribuir. Mas a frustração vem quando descobrimos que cada um escreve seu código de uma forma: alguns usam tabs, outros espaços; uns preferem 4 espaços, outros preferem 2; colocar espaço entre o <code>if</code> e os <code>()</code> ou não, escrever o<code>else</code> em uma nova linha, ou na mesma linha do fechamento do <code>}</code>, etc.</p>
-<p>Nenhuma forma está errada! São apenas diferentes modos de escrever o mesmo código! Mas se um mesmo código tiver várias dessas formas misturadas, o projeto vai acabar virando uma zona!</p>
-<p>Então, normalmente você coloca no <strong>README.md</strong> do seu repositório uma área de <strong>Como contribuir</strong>, citando os padrões que você utilizou no código, mostrando como criar uma nova feature, etc.</p>
-<p>Mas no momento de empolgação, muitas vezes os devs nem chegam nessa parte do seu <strong>README</strong>, e acabam enviando <em>pull requests</em> com seus próprios padrões.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<h2 id="O_arquivo_CONTRIBUTING-md">O arquivo CONTRIBUTING.md</h2>
-<p>Uma feature bem simples do Github, mas que pode ajudar a organizar melhor a colaboração nos seus projetos, é você adicionar um arquivo chamado <code>CONTRIBUTING.md</code>.</p>
-<p>Nesse arquivo você coloca tudo o que a pessoa que vai colaborar com o seu projeto precisa saber.</p>
-<p><em>Mas se o dev nem chega a ler o <strong>README</strong>, como ele vai saber que tem um arquivo separado com as informações de como contribuir?</em></p>
-<p>É aí que está o pulo do gato! Quando você cria esse arquivo, sempre que alguém for criar uma nova <em>issue</em> ou enviar um <em>pull request</em>, olha o que vai aparecer pra ele:</p>
-<p><img src="https://camo.githubusercontent.com/b38f439e43db12ebcbf6f6f2b8afe88862d31e47/687474703a2f2f692e696d6775722e636f6d2f726e38334e58672e706e67" alt=""></p>
-<p>O “<strong>guidelines for contributing</strong>“ que aparece na mensagem acima, é linkado diretamente com o seu arquivo <strong>CONTRIBUTING.md</strong>! Assim, sempre que alguém for colaborar, ele verá esse aviso, e ainda que não leia o <strong>README</strong>, verá que existem alguns padrões a serem seguidos para que ele possa contribuir! :D</p>
-<p>Claro que pode acontecer do dev nem clicar pra ler, mas com certeza ele verá o aviso ;)</p>
-<p>Já conhecia essa feature? Bacana, não? :D</p>
-<p>Até a próxima!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/01/github-secrets-contributing.png" alt=""></p>
-<p>Contribuir para projetos open source é algo que nos faz crescer muito como profissionais. Temos a oportunidade de aprender coisas novas e praticar o que muitas vezes não utilizamos comumente no nosso dia-a-dia. Como o Github nos ajuda com isso?</p>
 ]]>
     
     </summary>
