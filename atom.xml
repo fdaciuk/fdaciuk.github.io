@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-20T02:49:46.255Z</updated>
+  <updated>2015-02-21T13:07:10.563Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,105 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Sourcemaps - Debugando JS e CSS minificados]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/21/sourcemaps-debugando-js-e-css-minificados/"/>
+    <id>http://blog.da2k.com.br/2015/02/21/sourcemaps-debugando-js-e-css-minificados/</id>
+    <published>2015-02-21T00:00:00.000Z</published>
+    <updated>2015-02-21T13:06:23.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/sourcemaps.jpg" alt=""></p>
+<p>Sabe quando você está usando uma lib qualquer (jQuery, bootstrap, etc), e abre o console do seu navegador, você percebe uma mensagem de erro 404, pois o browser está tentando baixar um arquivo <code>jquery.js.map</code> ou <code>bootstrap.css.map</code>? <em>Afinal de contas: pra que serve esse arquivo <code>.map</code>? Algum dia na MINHA VIDA eu vou precisar dele?</em> </p>
+<p>Vem descobrir! ;) </p>
+<a id="more"></a>
+
+<h2 id="O_problema">O problema</h2>
+<p>É praticamente impossível debugar JS e CSS minificados. Sempre que acontece um erro, e você precisa saber qual a linha de referência de um comando em um arquivo, você “desminifica” o CSS ou JS, e o inclui na sua aplicação para debugar.</p>
+<h2 id="Então_qual_é_a_solução?">Então qual é a solução?</h2>
+<p><strong>Sourcemaps</strong>! Sim, aquele arquivo <code>.map</code> que fica dando erro 404 no seu console é que vai resolver seu problema! :D</p>
+<h2 id="Como_funcionam_os_sourcemaps">Como funcionam os sourcemaps</h2>
+<p>Quando você tem um código minificado, e adiciona a ele uma referência a um <em>sourcemap</em>, o <em>sourcemap</em> faz uma varredura no arquivo, e gera todas as referências a número de linha, nomes de variáveis e funções, etc., para que você possa debugar no arquivo “desminificado”.</p>
+<p>Complicado? Com um exemplo prático vai ficar mais fácil de entender :D</p>
+<h2 id="Criando_a_estrutura_de_arquivos">Criando a estrutura de arquivos</h2>
+<p>Vamos criar a seguinte estrutura para o nosso teste com <strong>sourcemaps</strong>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── gulpfile.js</div><div class="line">├── index.html</div><div class="line">├── package.json</div><div class="line">├── public</div><div class="line">└── src</div><div class="line">    └── js</div><div class="line">        ├── app.js</div><div class="line">        └── controllers</div><div class="line">            └── controller-home.js</div></pre></td></tr></table></figure>
+
+<p>No diretório <code>src</code> ficarão nossos fontes, e no <code>public</code>, os arquivos concatenados e minificados.</p>
+<p>Vamos utilizar o <strong>Gulp</strong> para fazer as tarefas de concatenação, minificação e geração do <strong>sourcemaps</strong>. Se você ainda não conhece o <strong>Gulp</strong>, e quer saber mais sobre, acesse: <a href="http://blog.da2k.com.br/tags/gulpjs/" target="_blank" rel="external">http://blog.da2k.com.br/tags/gulpjs/</a></p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Instalando_os_plugins_do_Gulp_necessários">Instalando os plugins do Gulp necessários</h2>
+<p>Instale os seguintes plugins:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp gulp-concat gulp-uglify gulp-sourcemaps gulp-load-plugins</div></pre></td></tr></table></figure>
+
+<h2 id="Chamando_os_arquivos_na_index">Chamando os arquivos na index</h2>
+<p>Agora precisamos montar nossa <code>index.html</code> para receber os arquivos CSS e JS minificados, para que possamos debugá-los! A index deve ter esse código:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Sourcemaps<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://even.tc/curso-javascript-ninja"</span> <span class="attribute">data-js</span>=<span class="value">"link"</span>&gt;</span></div><div class="line">    Curso Javascript Ninja!</div><div class="line">  <span class="tag">&lt;/<span class="title">a</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"public/js/main.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Bem básico! Só para que possamos ter os arquivos incluídos :D </p>
+<h2 id="Códigos_para_os_JS">Códigos para os JS</h2>
+<p>Vamos agora colocar um pouco de código nos nossos arquivos JS. Primeiro o <code>main.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( Module, undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">app</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    <span class="keyword">var</span> $private = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      Module.controllerHome.init();</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  app().init();</div><div class="line">})( <span class="built_in">window</span>.Module );</div></pre></td></tr></table></figure>
+
+<p>Depois, o <code>controllers/controller-home.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win, doc, undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">controllerHome</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> $public = {};</div><div class="line">    <span class="keyword">var</span> $private = {};</div><div class="line">    </div><div class="line">    $public.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      $private.initEvents();</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.initEvents = <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">var</span> $link = doc.querySelector( <span class="string">'[data-js="link"]'</span> );</div><div class="line">      $link.addEventListener( <span class="string">'click'</span>, $private.handleClickLink, <span class="literal">false</span> );</div><div class="line">    };</div><div class="line">    </div><div class="line">    $private.handleClickLink = <span class="function"><span class="keyword">function</span> <span class="title">handleClickLink</span><span class="params">( e )</span> </span>{</div><div class="line">      e.preventDefault();</div><div class="line">      Module.redirectService( <span class="keyword">this</span>.href );</div><div class="line">    };</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> $public;</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">window</span>.Module = <span class="built_in">window</span>.Module || {};</div><div class="line">  <span class="built_in">window</span>.Module.controllerHome = controllerHome();</div><div class="line">})( <span class="built_in">window</span>, <span class="built_in">document</span> );</div></pre></td></tr></table></figure>
+
+<p>E então, vamos configurar nosso <strong>Gulpfile</strong>.</p>
+<h2 id="Configurando_Gulpfile-js">Configurando Gulpfile.js</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="pi">'use strict'</span>;</div><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> g = <span class="built_in">require</span>( <span class="string">'gulp-load-plugins'</span> )();</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src([</div><div class="line">    <span class="string">'src/js/controllers/**/*.js'</span>,</div><div class="line">    <span class="string">'src/js/app.js'</span></div><div class="line">  ])</div><div class="line">  .pipe( g.concat( <span class="string">'main.js'</span> ) )</div><div class="line">  .pipe( g.uglify() )</div><div class="line">  .pipe( gulp.dest( <span class="string">'public/js'</span> ) );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Esse <code>gulpfile.js</code> vai concatenar e minificar todos os JS em um único arquivo. O <code>gulp-load-plugins</code> vai carregar todos os plugins instalados que tem o prefixo <code>gulp-*</code>, e vai colocar em um objeto, que nós chamamos de <code>g</code>. O padrão para nome dos métodos é remover o prefixo <code>gulp-</code>, remover o traço e usar <em>camelCase</em>. </p>
+<p>Por exemplo: o plugin <em>gulp-uglify</em> pode ser chamado com <code>g.uglify()</code>. Se estivéssemos usando CSS aqui, e adicionássemos o plugin <code>gulp-minify-css</code>, ele poderia ser chamado com o comando <code>g.minifyCss()</code>.</p>
+<p>Executando o comando <code>gulp</code> no terminal, os arquivos serão concatenados, minificados, e colocados nos diretório <code>public/js</code>.</p>
+<p>Acessando nossa <code>index.html</code>, já podemos começar a ver como estão os arquivos. Antes de qualquer coisa, abra o <em>console</em> do seu navegador e então, clique no link. Será mostrado o seguinte erro:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/js-error.png" alt=""></p>
+<p>Vamos então debugá-lo, clicando no link <code>main.js</code> indicado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/js-error-source.png" alt=""></p>
+<p><em>Ops! Como faz pra achar o erro agora? O arquivo está minificado!</em></p>
+<p>É hora de ver como funcionam os <strong>sourcemaps</strong>! Vamos modificar um pouco nosso <strong>Gulpfile</strong>, e adicionar o suporte aos <strong>sourcemaps</strong> no nosso JS:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src([</div><div class="line">    <span class="string">'src/js/controllers/**/*.js'</span>,</div><div class="line">    <span class="string">'src/js/app.js'</span></div><div class="line">  ])</div><div class="line">  .pipe( g.sourcemaps.init() )</div><div class="line">  .pipe( g.concat( <span class="string">'main.js'</span> ) )</div><div class="line">  .pipe( g.uglify() )</div><div class="line">  .pipe( g.sourcemaps.write( <span class="string">'.'</span> ) )</div><div class="line">  .pipe( gulp.dest( <span class="string">'public/js'</span> ) );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Na linha <code>6</code>, logo após adicionar nossos <em>source files</em>, nós iniciamos o <strong>sourcemaps</strong>, para que ele tenha a referência de todos os arquivos. Após isso, concatenamos e minificamos o arquivo e, antes de gravá-lo em disco, executamos o método <code>write</code> do <code>sourcemaps</code> para que o arquivo <code>main.js.map</code> seja salvo no mesmo local do <code>main.js</code>.</p>
+<p>Os plugins que ficam entre o <code>sourcemaps.init()</code> e <code>sourcemaps.write()</code> devem ter suporte para <code>sourcemaps</code>. Para ver quais são todos os plugins do <strong>Gulp</strong> suportados, acesse <a href="https://github.com/floridoo/gulp-sourcemaps/wiki/Plugins-with-gulp-sourcemaps-support" target="_blank" rel="external">esse link</a>.</p>
+<p>Feito isso, vamos gerar novamente nosso arquivo minificado, mas dessa vez, com o arquivo <code>.map</code>. Execute <code>gulp</code> no seu terminal.</p>
+<p>Com o comando executado, se você abrir o diretório <code>public/js</code>, verá que o arquivo <code>main.js.map</code> está lá! E abrindo o <code>main.js</code>, você pode ver, no final dele, um comentário com a referência ao seu <code>.map</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//# sourceMappingURL=main.js.map</span></div></pre></td></tr></table></figure>
+
+<p>Agora, recarregue a <code>index.html</code>, e clique no link novamente. Vai continuar dando o mesmo erro. Mas perae, agora a referência de arquivo mudou:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/error-js-sourcemaps-controllerjs.png" alt=""></p>
+<p>O erro apontou para o arquivo <code>controller-home.js</code>! E na linha <code>19</code>, exatamente onde acontece o erro! :D</p>
+<p>Isso acontece porque o <code>sourcemaps</code> guardou a referência desse arquivo, então ele sabe exatamente onde aconteceu o erro :D</p>
+<p>Agora, clique no link com o nome do arquivo, e veja a mágica na aba <em>Sources</em>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/error-js-sourcemaps-line19.png" alt=""></p>
+<p>Agora chega de sofrer para debugar códigos :D</p>
+<p>Lembrando que isso é uma feature do browser, e você pode desabilitá-la a qualquer momento, se não tiver o arquivo <code>.map</code> de alguma lib que está dando erro 404 na sua aplicação. No Chrome, você pode clicar na <strong>Engrenagem</strong>, que aparece na <em>Dev Tools</em>, e desmarcar a opção <strong>Enable Javascript source maps</strong>.</p>
+<p>Chega por hoje! Amanhã tem mais :D</p>
+<p>Ficou com alguma dúvida? Comente!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/sourcemaps.jpg" alt=""></p>
+<p>Sabe quando você está usando uma lib qualquer (jQuery, bootstrap, etc), e abre o console do seu navegador, você percebe uma mensagem de erro 404, pois o browser está tentando baixar um arquivo <code>jquery.js.map</code> ou <code>bootstrap.css.map</code>? <em>Afinal de contas: pra que serve esse arquivo <code>.map</code>? Algum dia na MINHA VIDA eu vou precisar dele?</em> </p>
+<p>Vem descobrir! ;) </p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="sourcemaps" scheme="http://blog.da2k.com.br/tags/sourcemaps/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Os segredos da IIFE]]></title>
     <link href="http://blog.da2k.com.br/2015/02/20/os-segredos-da-iife/"/>
     <id>http://blog.da2k.com.br/2015/02/20/os-segredos-da-iife/</id>
     <published>2015-02-20T00:00:00.000Z</published>
-    <updated>2015-02-20T02:49:29.000Z</updated>
+    <updated>2015-02-20T02:50:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/iife.png" alt=""></p>
 <p>Quando uma <em>função imediata</em> é invocada, muita coisa pode estar acontecendo por trás dessa chamada. Quer descobrir o que é? Então me acompanhe na leitura :D</p>
 <a id="more"></a>
@@ -1662,56 +1756,6 @@
     <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-license.png" alt=""></p>
 <p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
 <p>Quem responde a essas perguntas são as <em>licenças!</em></p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - mantendo a ordem no seu repositório]]></title>
-    <link href="http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/"/>
-    <id>http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/</id>
-    <published>2015-02-01T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/github-secrets-clean-repository.png" alt=""></p>
-<p>Uma dica simples, mas funcional!</p>
-<a id="more"></a>
-
-<p>Quando você cria uma nova feature para um projeto open source, normalmente você cria uma branch nova, faz suas alterações, faz o <em>push</em> para o seu repositório nessa nova branch e então envia um <em>pull request</em>.</p>
-<p>Quando o <em>pull request</em> é aceito, você faz o <a href="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/" target="_blank" rel="external">processo para atualizar o seu repositório com o repositório forkado</a> e tudo fica 100% como deveria!</p>
-<p>Mas, com o tempo, sua lista de branchs no <strong>Github</strong> vai aumentando, mas você não vai mais precisar delas, pois seu <em>pull request</em> já foi aceito. Como limpar a sujeira e deixar somente as branchs que você precisa?</p>
-<h2 id="Removendo_branchs_do_Github">Removendo branchs do Github</h2>
-<p>Para remover uma branch do <strong>Github</strong>, você pode usar o comando no seu terminal:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin nome_da_branch --delete</div></pre></td></tr></table></figure>
-
-<p>Isso irá deletar a branch do <strong>Github</strong>!</p>
-<p>Você pode ainda fazer assim:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin :nome_da_branch</div></pre></td></tr></table></figure>
-
-<p>Com os dois pontos (<code>:</code>) na frente do nome da branch, o resultado é o mesmo :D</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<h2 id="Removendo_branchs_localmente">Removendo branchs localmente</h2>
-<p>E para remover branchs localmente, o comando é:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch -D nome_da_branch</div></pre></td></tr></table></figure>
-
-<p>Dica rápida, mas ajuda a organizar a casa :D</p>
-<p>Até a próxima!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="/uploads/2015/02/github-secrets-clean-repository.png" alt=""></p>
-<p>Uma dica simples, mas funcional!</p>
 ]]>
     
     </summary>
