@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-22T14:45:08.335Z</updated>
+  <updated>2015-02-22T14:57:23.028Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/"/>
     <id>http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/</id>
     <published>2015-02-22T00:00:00.000Z</published>
-    <updated>2015-02-22T14:43:45.000Z</updated>
+    <updated>2015-02-22T14:45:49.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin.png" alt=""></p>
 <p>Sempre que se pensa em formulários com <strong>WordPress</strong>, a primeira coisa que vem à mente é: <em>vou usar um plugin!</em> E realmente, existem plugins muito bons para fazer isso. Mas, em alguns momentos, você precisa de um controle maior no seu código. </p>
 <p><em>Mas é possível criar formulários “na mão”, de forma fácil?</em><br>Claro que sim! O que não é fácil de fazer com <strong>WordPress</strong>? ;)<br>Vem comigo que eu te mostro como faz!</p>
@@ -79,7 +79,7 @@
     <link href="http://blog.da2k.com.br/2015/02/21/sourcemaps-debugando-js-e-css-minificados/"/>
     <id>http://blog.da2k.com.br/2015/02/21/sourcemaps-debugando-js-e-css-minificados/</id>
     <published>2015-02-21T00:00:00.000Z</published>
-    <updated>2015-02-21T13:10:29.000Z</updated>
+    <updated>2015-02-22T14:45:49.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/sourcemaps.jpg" alt=""></p>
 <p>Sabe quando você está usando uma lib qualquer (jQuery, bootstrap, etc), e abre o console do seu navegador, você percebe uma mensagem de erro 404, pois o browser está tentando baixar um arquivo <code>jquery.js.map</code> ou <code>bootstrap.css.map</code>? <em>Afinal de contas: pra que serve esse arquivo <code>.map</code>? Algum dia na MINHA VIDA eu vou precisar dele?</em> </p>
 <p>Vem descobrir! ;) </p>
@@ -813,7 +813,7 @@
     <link href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/"/>
     <id>http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</id>
     <published>2015-02-11T00:00:00.000Z</published>
-    <updated>2015-02-22T14:43:05.000Z</updated>
+    <updated>2015-02-22T14:45:49.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-controller.jpg" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">post anterior</a>, criamos a interface para nossa view. Hoje veremos como criar a base que vai controlar o conteúdo retornado! Vem comigo? ;)</p>
 <a id="more"></a>
@@ -954,7 +954,7 @@
     <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
     <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
     <published>2015-02-10T00:00:00.000Z</published>
-    <updated>2015-02-22T14:42:46.000Z</updated>
+    <updated>2015-02-22T14:45:49.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
 <p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
 <a id="more"></a>
@@ -1711,7 +1711,7 @@
     <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
     <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
     <published>2015-02-03T00:00:00.000Z</published>
-    <updated>2015-02-22T14:42:44.000Z</updated>
+    <updated>2015-02-22T14:45:49.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
 <p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
 <p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
