@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-21T13:13:28.393Z</updated>
+  <updated>2015-02-22T14:45:08.335Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -13,6 +13,66 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[WordPress - Criando um formulário de contato sem plugin - Parte 1]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/"/>
+    <id>http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/</id>
+    <published>2015-02-22T00:00:00.000Z</published>
+    <updated>2015-02-22T14:43:45.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin.png" alt=""></p>
+<p>Sempre que se pensa em formulários com <strong>WordPress</strong>, a primeira coisa que vem à mente é: <em>vou usar um plugin!</em> E realmente, existem plugins muito bons para fazer isso. Mas, em alguns momentos, você precisa de um controle maior no seu código. </p>
+<p><em>Mas é possível criar formulários “na mão”, de forma fácil?</em><br>Claro que sim! O que não é fácil de fazer com <strong>WordPress</strong>? ;)<br>Vem comigo que eu te mostro como faz!</p>
+<a id="more"></a>
+
+<p>Nessa primeira parte, vamos montar nossa <em>view</em>, o template onde ficará o formulário de contato.</p>
+<p>Temos várias formas de fazer isso no WordPress, mas, inicialmente, vamos fazer da forma tradicional: no Painel, crie um nova página chamada <strong>Contato</strong>, que tenha como slug <strong>contato</strong>. Então, crie na raiz do tema um arquivo chamado <code>page-contato.php</code>.</p>
+<p>Lembrando que você pode acompanhar as alterações do arquivos dessa série “Criando temas com WordPress”, através <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">deste repositório</a>, no <strong>Github</strong>.</p>
+<p>Agora, o código da <code>page-contato.php</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span></span></div><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/functions/security.php'</span>;</div><div class="line">get_header();</div><div class="line">the_post();</div><div class="line"><span class="variable">$post_response</span> = apply_filters( <span class="string">'send_contact_form'</span>, <span class="keyword">false</span> );</div><div class="line"><span class="preprocessor">?&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">if</span>( <span class="variable">$post_response</span> ) : <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"alert alert-&lt;?php echo $post_response-&gt;status ?&gt;"</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$post_response</span><span class="variable">-&gt;message</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">endif</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">action</span>=<span class="value">"&lt;?php echo get_permalink() ?&gt;"</span> <span class="attribute">method</span>=<span class="value">"post"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"field-name"</span>&gt;</span>Nome<span class="tag">&lt;/<span class="title">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">name</span>=<span class="value">"field_name"</span> <span class="attribute">id</span>=<span class="value">"field-name"</span> <span class="attribute">placeholder</span>=<span class="value">"Nome"</span> <span class="attribute">required</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"field-email"</span>&gt;</span>E-mail<span class="tag">&lt;/<span class="title">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"email"</span> <span class="attribute">name</span>=<span class="value">"field_email"</span> <span class="attribute">id</span>=<span class="value">"field-email"</span> <span class="attribute">placeholder</span>=<span class="value">"E-mail"</span> <span class="attribute">required</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"fake-field"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"field-mail"</span>&gt;</span>NÃO preencha esse campo, ou seu e-mail não será enviado<span class="tag">&lt;/<span class="title">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"email"</span> <span class="attribute">name</span>=<span class="value">"field_mail"</span> <span class="attribute">id</span>=<span class="value">"field-mail"</span> <span class="attribute">placeholder</span>=<span class="value">"NÃO preencha esse campo, ou seu e-mail não será enviado"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"field-subject"</span>&gt;</span>Assunto<span class="tag">&lt;/<span class="title">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">name</span>=<span class="value">"field_subject"</span> <span class="attribute">id</span>=<span class="value">"field-subject"</span> <span class="attribute">placeholder</span>=<span class="value">"Assunto"</span> <span class="attribute">class</span>=<span class="value">"[ input-text ] contact-form__list-item__input"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"field-message"</span>&gt;</span>Mensagem<span class="tag">&lt;/<span class="title">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">name</span>=<span class="value">"field_message"</span> <span class="attribute">id</span>=<span class="value">"field-message"</span> <span class="attribute">cols</span>=<span class="value">"30"</span> <span class="attribute">rows</span>=<span class="value">"10"</span> <span class="attribute">placeholder</span>=<span class="value">"Mensagem"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"submit"</span>&gt;</span>Enviar<span class="tag">&lt;/<span class="title">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">form</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> get_footer() <span class="preprocessor">?&gt;</span></span></div></pre></td></tr></table></figure>
+
+<p>Deixei o mínimo de código possível para que um formulário de contato possa funcionar corretamente. Obviamente que, quando você for fazer, vai utilizar classes para estilizar os campos. Como esse não é o foco do post, vamos deixar tão simples quanto possível :)</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Explicando_o_código">Explicando o código</h2>
+<p>Até a linha <code>4</code>, nada que não tenhamos visto até aqui: adicionamos o arquivo <code>security.php</code>, que vai impedir que nosso arquivo seja acesso diretamente, adicionamos o <code>header</code> padrão do nosso tema, e chamamos a função <code>the_post()</code>, que vai nos permitir usar as <em>Template Tags</em>, trazendo resultados específicos para essa página de contato.</p>
+<p>Na linha <code>5</code>, a variável <code>$post_response</code> vai nos retornar o resultado do envio do e-mail. Lembra como fizemos nos posts anteriores? Primeiro, definimos a interface da nossa <em>view</em>, depois, fazemos o código que resopnde à essa interface :)</p>
+<p>O <code>$post_response</code> será um objeto que nos retornará o <em>status</em> do envio: <em>success</em> ou <em>error</em>. Com isso, podemos mostrar ao usuário uma mensagem personalizada, e estilizada com uma cor que defina o <em>status</em>. Posso mostrar a mensagem em verde, por exemplo, para sucesso, e vermelho para erro. </p>
+<p>Por isso eu deixei, na linha <code>9</code>, uma classe na <code>div</code>. O status será concatenado à classe <code>alert</code>. Então podemos estilizar essa mensagem, baseando-se nas classes <code>alert-success</code> e <code>alert-error</code>.</p>
+<p>Na linha <code>10</code>, será mostrada a mensagem de sucesso ou erro.</p>
+<p>Mas antes disso, na linha <code>8</code>, verificamos se <code>$post_response</code> tem a mensagem e o status. Se não houver (ou seja, se retornar <code>false</code>), a <code>div</code> com a mensagem nem é mostrada. Nós faremos com que <code>$post_response</code> seja <code>true</code> somente se o formulário for enviado :)</p>
+<p>Na linha <code>14</code>, colocamos como <code>action</code> do nosso formulário o link dessa página mesmo. Ou seja: ao submeter o formulário, o usuário será redirecionado para essa mesma página, com a diferença que ele verá a mensagem de erro ou sucesso após o <em>submit</em>.</p>
+<p>Da linha <code>15</code> até a linha <code>37</code>, adicionamos os campos do nosso formulário. Teremos 4 campos principais: <strong>nome</strong>, <strong>email</strong>, <strong>assunto</strong> e <strong>mensagem</strong>. Além desses, criamos um campo <em>fake</em>, para nos livrarmos de <a href="http://blog.da2k.com.br/2015/02/16/acabando-com-spam-nos-seus-formularios/" target="_blank" rel="external">robôs que enviam SPAM através de formulários.</a></p>
+<p>Nossa <em>view</em> está pronta! Nos próximos artigos, veremos como criar o código que vai tratar os nossos dados e submeter esse formulário!</p>
+<p>Até lá :D</p>
+<blockquote>
+
+<p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</a></p>
+<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+</blockquote>
+
+
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin.png" alt=""></p>
+<p>Sempre que se pensa em formulários com <strong>WordPress</strong>, a primeira coisa que vem à mente é: <em>vou usar um plugin!</em> E realmente, existem plugins muito bons para fazer isso. Mas, em alguns momentos, você precisa de um controle maior no seu código. </p>
+<p><em>Mas é possível criar formulários “na mão”, de forma fácil?</em><br>Claro que sim! O que não é fácil de fazer com <strong>WordPress</strong>? ;)<br>Vem comigo que eu te mostro como faz!</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
+    
+      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Sourcemaps - Debugando JS e CSS minificados]]></title>
@@ -753,7 +813,7 @@
     <link href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/"/>
     <id>http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</id>
     <published>2015-02-11T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
+    <updated>2015-02-22T14:43:05.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-controller.jpg" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">post anterior</a>, criamos a interface para nossa view. Hoje veremos como criar a base que vai controlar o conteúdo retornado! Vem comigo? ;)</p>
 <a id="more"></a>
@@ -863,9 +923,9 @@
 <p>Essa é a forma que eu uso hoje para separar responsabilidades! Gostou? Achou fácil? Difícil? Quero saber sua opinião, e como você estrutura seus temas no WP! Comente! :D</p>
 <blockquote>
 
-<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
 <p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</a></p>
-<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/</a></p>
 </blockquote>
 
 
@@ -894,7 +954,7 @@
     <link href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"/>
     <id>http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</id>
     <published>2015-02-10T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
+    <updated>2015-02-22T14:42:46.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
 <p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
 <a id="more"></a>
@@ -941,7 +1001,7 @@
 <p>Até a próxima! :D</p>
 <blockquote>
 
-<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
 <p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</a></p>
 <p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</a></p>
 </blockquote>
@@ -961,7 +1021,7 @@
     
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
     
-      <category term="serir temas wordpress" scheme="http://blog.da2k.com.br/tags/serir-temas-wordpress/"/>
+      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
     
       <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
     
@@ -1651,7 +1711,7 @@
     <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
     <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
     <published>2015-02-03T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
+    <updated>2015-02-22T14:42:44.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
 <p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
 <p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
@@ -1686,7 +1746,7 @@
 <p>Até a pŕóxima! :D</p>
 <blockquote>
 
-<p><strong>Link para o índice: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
 <p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-2/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-2/</a></p>
 <p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</a></p>
 </blockquote>
@@ -1710,61 +1770,6 @@
       <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
     
       <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - Licenças]]></title>
-    <link href="http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/"/>
-    <id>http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/</id>
-    <published>2015-02-02T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-license.png" alt=""></p>
-<p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
-<p>Quem responde a essas perguntas são as <em>licenças!</em></p>
-<a id="more"></a>
-
-<p>Não vou entrar em muitos detalhes sobre as licenças, pois o post é sobre como o Github nos ajuda com elas. Mas é necessário uma pequena divagação sobre o assunto.</p>
-<p>Quando você coloca seu código na internet, ele fica disponível para milhões de pessoas o aproveitarem como bem entenderem. Algumas irão utilizar seu código, citando que você é o autor, outras simplesmente irão copiá-lo, como se fossem os próprios autores. Enfim, internet é terra de ninguém, e todos sabemos disso. </p>
-<p>O que te “garante” algo é a licença que você disponibiliza junto com seu código. Existem vários tipos de licenças.</p>
-<p>Algumas das mais utilizadas conhecidas são: MIT, GPL, LGPL, BSD.</p>
-<p><em>Mas o que o Github tem a ver com isso?</em></p>
-<p>Quando você cria um novo repositório, o Github te dá a opção de adicionar uma licença:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/license.png" alt=""></p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<p><em>Mas eu já tenho meu projeto, e não tenho uma licença ainda? Como escolher?</em></p>
-<p>Se você já criou seu repositório, você tem a opção de criar o arquivo de licença através do link <code>+</code>, mostrado abaixo:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/new-license.png" alt=""></p>
-<p>Será mostrada a tela para criar um novo arquivo:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/new-file-github.png" alt=""></p>
-<p>Coloque o nome do arquivo como <code>LICENSE</code>, e veja a mágica acontecer:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/new-file-github-license.png" alt=""></p>
-<p>Agora é só escolher uma licença, e salvar. Ao fazer isso, já fica registrado um novo commit com a alteração :D</p>
-<p>Para saber mais sobre lincenças, segue alguns links interessantes:</p>
-<ul>
-<li><a href="http://ccsl.ime.usp.br/files/relatorio-licencas.pdf" target="_blank" rel="external">http://ccsl.ime.usp.br/files/relatorio-licencas.pdf</a></li>
-<li><a href="http://www.dirceupauka.com/entendendo-a-licenca-mit" target="_blank" rel="external">http://www.dirceupauka.com/entendendo-a-licenca-mit</a></li>
-</ul>
-<p>Até a próxima!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-secrets-license.png" alt=""></p>
-<p><em>Licença</em> não é só sinônimo de educação (<del>só piada boa!</del>). No mundo do software, o que define como aquele software será distribuído? O software será pago? Outras pessoas poderão distribuí-lo sem problemas, ou terão que pagar por isso? Ou ainda, podem distribuir o software, mas terão que citar o autor?</p>
-<p>Quem responde a essas perguntas são as <em>licenças!</em></p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
     
   </entry>
   
