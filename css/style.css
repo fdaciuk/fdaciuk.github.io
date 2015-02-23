@@ -496,6 +496,32 @@ article footer .addthis iframe {
 .ads-da2k img {
   display: block;
 }
+.bt-sign-me-up-now-container {
+  margin-top: 20px;
+  text-align: center;
+}
+.bt-sign-me-up-now {
+  border: 1px solid #4cae4c;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: #5cb85c;
+  color: #fff;
+  font-size: 20px;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 20px;
+  -webkit-transition: background-color 0.15s ease-in-out;
+  -moz-transition: background-color 0.15s ease-in-out;
+  -o-transition: background-color 0.15s ease-in-out;
+  -ms-transition: background-color 0.15s ease-in-out;
+  transition: background-color 0.15s ease-in-out;
+}
+.bt-sign-me-up-now:hover {
+  background: #449d44;
+  border-color: #398439;
+  text-decoration: none;
+}
 #comment {
   padding: 20px;
   background: #fff;

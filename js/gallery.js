@@ -1,6 +1,10 @@
 (function($){
   // Caption
   $('.entry').each(function(i){
+    if( $( this ).closest( 'article.page' )[0] ) {
+      return;
+    }
+
     $(this).find('img').each(function(){
       var alt = this.alt;
       var $this = $( this );
