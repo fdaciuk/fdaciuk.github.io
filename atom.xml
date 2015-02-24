@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-23T10:04:48.502Z</updated>
+  <updated>2015-02-24T10:09:17.490Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,90 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[WordPress - Criando um formulário de contato sem plugin - Parte 2]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/24/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/"/>
+    <id>http://blog.da2k.com.br/2015/02/24/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/</id>
+    <published>2015-02-24T00:00:00.000Z</published>
+    <updated>2015-02-24T10:08:21.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/wordpress-form-without-plugin2.png" alt=""></p>
+<p>No <a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">post anterior</a>, montamos nossa <em>view</em>, com os campos do formulário, e deixamos preparada a interface que irá receber o retorno do envio.<br>Hoje nós veremos como a <em>view</em> receberá as informações que ela precisa, mantendo a ordem dos nossos arquivos :D</p>
+<a id="more"></a>
+
+<h2 id="Criando_nosso_controller">Criando nosso controller</h2>
+<p>Primeiramente, como temos uma página nova, vamos criar um controller que irá gerenciar todas as informações para essa página. No momento, temos só um formulário de contato. Mas poderíamos ter informações de contato, endereço, etc., em uma sidebar. Então já vamos deixar nossa aplicação escalável, separando corretamente as responsabilidades.</p>
+<p>Crie um novo arquivo chamado <code>controller-contact.php</code> em <code>functions/controllers</code>, e vamos gerar o código padrão para o nosso <em>controller</em>:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/../security.php'</span>;</div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Controller_Contact</span> </span>{</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>{</div><div class="line">        add_filter( <span class="string">'send_contact_form'</span>, <span class="keyword">array</span>( <span class="keyword">new</span> Service_Contact_Form, <span class="string">'send_contact_form'</span> ) );</div><div class="line">    }</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="keyword">new</span> Controller_Contact;</div></pre></td></tr></table></figure>
+
+<p>Usamos a mesma base utilizada para criar nosso <code>controller-single.php</code>. </p>
+<p><em>Hey, o que é aquele <code>new Service_Contact_Form</code>?</em></p>
+<p>Como eu disse acima, vamos separar as responsabilidades das coisas. Se o <em>controller</em> ficar responsável por tratar os dados e exibí-los por toda a nossa página, quanto mais informações tivermos, maior ficará nosso arquivo, e pior para dar manutenção. Então vamos utilizar <em>services</em> que nos ajudarão a organizar o código.</p>
+<p>Os <em>services</em> basicamente servirão para tratar todas a parte “bruta” do código. Cada <em>service</em> terá uma única responsabilidade. Nesse caso, o <code>Service_Contact_Form</code> servirá somente para tratar os dados de envio do nosso formulário. Se houver a necessidade de exibir informações de contato na sidebar, então nós iremos criar outro <em>service</em> para isso.</p>
+<p>Os <code>controllers</code> podem chamar quantos <em>services</em> forem necessários. Por isso nós iremos criar um <em>controller</em> por página, e quantos services forem necessários, para cada <em>controller</em>. </p>
+<p>Agora, explicando a chamada acima:</p>
+<p>Você deve lembrar que, no artigo que falamos sobre <a href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/" target="_blank" rel="external">controlar a exibição dos dados</a> na nossa <em>single</em>, usamos um <code>array</code>, e passamos como primeiro parâmetro o <code>$this</code>, que é a referência para o objeto instanciado à partir daquela classe. Agora, nós estamos usando outra classe, chamada <code>Service_Contact_Form</code>. Por isso, instanciamos ela, e passamos como segundo parâmetro o método que nós esperamos que ela nos retorne os dados, para que sejam enviados à view, no momento em que o <em>hook</em> <code>send_contact_form</code> for ativado.</p>
+<p>Esse <em>hook</em> está no início da nossa <em>view</em>, como vimos no <a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">post anterior</a>.</p>
+<p>Ficou claro até aqui? Vamos seguir então :)</p>
+<p>Agora vamos criar nosso <em>service</em>. Crie um diretório <code>service</code> dentro do diretório <code>functions/</code>, e, dentro desse diretório, crie o arquivo <code>service-contact-form.php</code>.</p>
+<p>Antes de continuarmos, precisamos incluir nossos arquivos para que eles possam ser utilizados na nossa aplicação. Até aqui, o início do nosso <code>functions.php</code> está assim:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/functions/security.php'</span>;</div><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/functions/controllers/controller-single.php'</span>;</div></pre></td></tr></table></figure>
+
+<p>Vamos adicionar nosso <em>controller</em> da página de contato e também o <em>service</em>:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/functions/security.php'</span>;</div><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/functions/services/service-contact-form.php'</span>;</div><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/functions/controllers/controller-single.php'</span>;</div><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/functions/controllers/controller-contact.php'</span>;</div></pre></td></tr></table></figure>
+
+<p>É muito importante a ordem que você inclui suas classes. No nosso caso, vamos sempre chamar os <em>services</em> <strong>antes</strong> dos <em>controllers</em>. Não é necessário manter uma ordem entre os <em>services</em>, ou entre os <em>controllers</em>, pois um <em>service</em> nunca consultará outro <em>service, igualmente um _controller</em> nunca consultará outro <em>controller</em>.</p>
+<p>Agora, vamos começar a criar nosso <em>service</em>. Em <code>functions/services/service-contact-form.php</code>, adicione o seguinte código:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">'/../security.php'</span>;</div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Service_Contact_Form</span> </span>{</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">send_contact_form</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> (object) <span class="keyword">array</span>(</div><div class="line">            <span class="string">'status'</span> =&gt; <span class="string">'success'</span>,</div><div class="line">            <span class="string">'message'</span> =&gt; <span class="string">'Seu e-mail foi enviado com sucesso!'</span></div><div class="line">        );</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Antes de qualquer coisa, precisamos testar se tudo funciona, então, por enquanto, vamos somente retornar os dados necessários à nossa interface.</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p><em>O que tem de diferente nesse arquivo?</em> </p>
+<p>Nosso controller espera um método chamado <code>send_contact_form</code>, dentro da classe <code>Service_Contact_Form</code>, para enviar os dados à nossa <em>view</em>.</p>
+<p>Na <em>view</em>, nós esperamos que a resposta seja um objeto, com as propriedades <code>status</code> e <code>message</code>. Por isso estamos retornando esse valor no nosso método.</p>
+<p><em>Por que aquele <code>(object)</code> ali?</em></p>
+<p>Estava esperando você perguntar! :)</p>
+<p>Como você pode perceber, nosso método retorna um <code>array</code>, mas nossa <em>view</em> espera que o retorno seja um objeto. Além da classe <code>StdClass()</code>, que instancia uma nova classe vazia em PHP, para que você crie seus próprios métodos e propriedades rapidamente, podemos usar esse formato para converter um <code>array</code> para objeto.</p>
+<p>Dessa forma, poderemos acessar corretamente esses dados na <em>view</em>, com:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$post_response</span><span class="variable">-&gt;status</span>; <span class="comment">// "success"</span></div><div class="line"><span class="variable">$post_response</span><span class="variable">-&gt;message</span>; <span class="comment">// "Seu e-mail foi enviado com sucesso!"</span></div></pre></td></tr></table></figure>
+
+<p>Agora é o momento de você usar a sua criatividade e usar CSS para estilizar a mensagem, para que ela fique “apresentável” ao usuário final :) </p>
+<p>Teste mensagens com muito texto, com pouco texto, mude o status para <code>error</code> para saber como deve ser mostrada uma mensagem de erro. Nos próximos artigos continuaremos nossa saga para tratar os dados inputados pelo usuário, tratar algumas regras de segurança, para enfim fazer o envio do e-mail! Não perca os próximos episódios :D</p>
+<p>Até lá!</p>
+<p>Ficou alguma dúvida? Comente! :)</p>
+<blockquote>
+
+<p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/</a></p>
+<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+</blockquote>
+
+
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="/uploads/2015/02/wordpress-form-without-plugin2.png" alt=""></p>
+<p>No <a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">post anterior</a>, montamos nossa <em>view</em>, com os campos do formulário, e deixamos preparada a interface que irá receber o retorno do envio.<br>Hoje nós veremos como a <em>view</em> receberá as informações que ela precisa, mantendo a ordem dos nossos arquivos :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
+    
+      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[WordPress - Criando um formulário de contato sem plugin - Parte 1]]></title>
     <link href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/"/>
     <id>http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/</id>
     <published>2015-02-22T00:00:00.000Z</published>
-    <updated>2015-02-22T14:45:49.000Z</updated>
+    <updated>2015-02-24T09:10:48.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin.png" alt=""></p>
 <p>Sempre que se pensa em formulários com <strong>WordPress</strong>, a primeira coisa que vem à mente é: <em>vou usar um plugin!</em> E realmente, existem plugins muito bons para fazer isso. Mas, em alguns momentos, você precisa de um controle maior no seu código. </p>
 <p><em>Mas é possível criar formulários “na mão”, de forma fácil?</em><br>Claro que sim! O que não é fácil de fazer com <strong>WordPress</strong>? ;)<br>Vem comigo que eu te mostro como faz!</p>
@@ -49,7 +128,7 @@
 
 <p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
 <p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</a></p>
-<p><strong> Próximo post:</strong><br><a href="">EM BREVE!</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/</a></p>
 </blockquote>
 
 
@@ -1703,73 +1782,6 @@
       <category term="git" scheme="http://blog.da2k.com.br/tags/git/"/>
     
       <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[WordPress - Tipos de conteúdo]]></title>
-    <link href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/"/>
-    <id>http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</id>
-    <published>2015-02-03T00:00:00.000Z</published>
-    <updated>2015-02-22T14:45:49.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
-<p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
-<p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
-<a id="more"></a>
-
-<h2 id="Tipos_de_conteúdo">Tipos de conteúdo</h2>
-<p>Como vocế já deve saber, o WordPress teve seu início como uma plataforma de blog. E até hoje ele ainda serve muito bem para esse propósito. Mas hoje, ele é muito mais do que isso: o WordPress é um framework que te oferece várias ferramentas para que você crie qualquer tipo de conteúdo que possa ser gerenciado pelo <a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-1/" target="_blank" rel="external">Painel</a>!</p>
-<p>O WordPress trata todo tipo de conteúdo como “post”. Então, quando nos referirmos a “post”, estaremos falando de qualquer tipo de conteúdo que tenha alguma “postagem”, e não os posts de um blog, - a menos que isso seja dito - ok?</p>
-<p>O WordPress tem 5 tipos de conteúdo por padrão:</p>
-<ul>
-<li>Post (Post Type “post”);</li>
-<li>Page (Post Type “page”);</li>
-<li>Attachment (Post Type “attachment”);</li>
-<li>Revision(Post Type “revision”);</li>
-<li>Navigation Menu (Post Type “nav_menu_item”).</li>
-</ul>
-<h3 id="Post">Post</h3>
-<p><strong>Post</strong> é um tipo de conteúdo normalmente usado para mostrar conteúdo de um blog. Eles são ordenados por data decrescente, ou seja, o mais recente aparece primeiro. Eles também são usados para criação dos <a href="http://codex.wordpress.org/Glossary#Feed" target="_blank" rel="external">Feeds</a>.</p>
-<h3 id="Pages">Pages</h3>
-<p><strong>Page</strong> é um tipo de conteúdo parecido com o <strong>post</strong>, mas ele é ordenado hierarquicamente, ou seja, páginas podem ter páginas filhas, e sua ordem, mostrada no site, é a ordem que você deixa no Painel. <strong>Pages</strong> ainda podem usar <strong>template pages</strong>, onde você pode criar um template e setar como uma página irá ficar.</p>
-<h3 id="Attachment">Attachment</h3>
-<p><strong>Attachment</strong> é um tipo especial de conteúdo, que guarda informações de todos os arquivos que foram “subidos” para o site.</p>
-<h3 id="Revision">Revision</h3>
-<p><strong>Revision</strong> é usado para fazer revisões de posts. Nesse tipo de conteúdo, os posts que são automaticamente salvos, ficam com uma cópia anterior nesse tipo de conteúdo, para que, se você fez alguma besteira, você tenha a opção de voltar algumas versões atrás.</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<h3 id="Navigation_Menu">Navigation Menu</h3>
-<p>Esse é um tipo de conteúdo que guarda informações de cada item do menu no <strong>Painel</strong>.</p>
-<h2 id="Custom_Post_Types_(CPT)">Custom Post Types (CPT)</h2>
-<p><strong>Tipos de post personalizados</strong> ou <strong>Tipos de conteúdo personalizados</strong>, são os tipos de conteúdo que você pode criar. Quando você cria um CPT, você escolhe se ele vai ser no estilo dos <strong>posts</strong> (cronológico) ou no estilo de <strong>pages</strong> (hierárquico). Entraremos mais a fundo nesse assunto quando estivermos criando nossos próprios “Post Types” (ou “Content Types”, como alguns gostam de chamar)! o/</p>
-<p>No próximo post, veremos como é a estrutura de templates do WordPress, e como isso afeta os tipos de conteúdo!</p>
-<p>Até a pŕóxima! :D</p>
-<blockquote>
-
-<p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
-<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-2/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/20/wordpress-conhecendo-o-painel-parte-2/</a></p>
-<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/</a></p>
-</blockquote>
-
-
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/lorem-wordpress.jpg" alt=""></p>
-<p><em>O que eu posso fazer com WordPress?</em> A resposta para isso é: o que a sua imaginação permitir! Além dos tipos de conteúdo que ele traz por padrão, você ainda tem infinitas possibilidades de criação de novos tipos de conteúdo e personalização! </p>
-<p>Hoje vamos conhecer um pouco sobre cada um deles! :D</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="serie temas wordpress" scheme="http://blog.da2k.com.br/tags/serie-temas-wordpress/"/>
-    
-      <category term="wordpress" scheme="http://blog.da2k.com.br/categories/wordpress/"/>
     
   </entry>
   
