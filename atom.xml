@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-24T10:09:17.490Z</updated>
+  <updated>2015-02-24T10:12:11.420Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -19,8 +19,8 @@
     <link href="http://blog.da2k.com.br/2015/02/24/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/"/>
     <id>http://blog.da2k.com.br/2015/02/24/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/</id>
     <published>2015-02-24T00:00:00.000Z</published>
-    <updated>2015-02-24T10:08:21.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="/uploads/2015/02/wordpress-form-without-plugin2.png" alt=""></p>
+    <updated>2015-02-24T10:11:49.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin2.png" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">post anterior</a>, montamos nossa <em>view</em>, com os campos do formulário, e deixamos preparada a interface que irá receber o retorno do envio.<br>Hoje nós veremos como a <em>view</em> receberá as informações que ela precisa, mantendo a ordem dos nossos arquivos :D</p>
 <a id="more"></a>
 
@@ -79,7 +79,7 @@
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p><img src="/uploads/2015/02/wordpress-form-without-plugin2.png" alt=""></p>
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin2.png" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">post anterior</a>, montamos nossa <em>view</em>, com os campos do formulário, e deixamos preparada a interface que irá receber o retorno do envio.<br>Hoje nós veremos como a <em>view</em> receberá as informações que ela precisa, mantendo a ordem dos nossos arquivos :D</p>
 ]]>
     
