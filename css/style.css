@@ -12,6 +12,7 @@
 .entry > table td {
   border: 1px solid #ccc;
   padding: 5px;
+  min-width: 100px;
 }
 * {
   margin: 0;
@@ -327,6 +328,7 @@ article .entry pre {
 article .entry code {
   background: #eee;
   color: #666;
+  display: inline-block;
   padding: 0 5px;
   margin: 0 2px;
   font-size: 0.9em;
@@ -489,8 +491,6 @@ article footer .addthis iframe {
 .ads-da2k {
   margin: 40px 0;
   position: relative;
-  left: -77px;
-  width: 900px;
 }
 .ads-da2k a,
 .ads-da2k img {

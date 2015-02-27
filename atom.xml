@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-24T10:12:11.420Z</updated>
+  <updated>2015-02-27T04:54:58.292Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -15,11 +15,296 @@
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[Javascript - como funcionam as funções recursivas]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/27/javascript-como-funcionam-as-funcoes-recursivas/"/>
+    <id>http://blog.da2k.com.br/2015/02/27/javascript-como-funcionam-as-funcoes-recursivas/</id>
+    <published>2015-02-27T04:54:39.000Z</published>
+    <updated>2015-02-27T04:54:39.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/recursion.jpg" alt=""></p>
+<p><em>O que é <strong>recursão</strong> e como aplicar em <strong>JS</strong>? Como isso pode melhorar meu código?</em> Sexta, no Globo Repórter!<br>Não, pera… vem comigo que eu te mostro AGORA! :D</p>
+<a id="more"></a>
+
+<h2 id="O_que_é_recursão?">O que é recursão?</h2>
+<p>Em desenvolvimento de software, <strong>recursão</strong> é quando você tem uma chamada para um método ou função dela para ela mesma.</p>
+<p><em>Hãn?</em></p>
+<p>Você já colocou um espelho em frente ao outro? A imagem de um refletindo no outro, que reflete no um, que reflete no outro, que reflete… então, isso é um exemplo de recursão :)</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/recursion.gif" alt=""></p>
+<h2 id="Quando_eu_devo_usar_funções_recursivas?">Quando eu devo usar funções recursivas?</h2>
+<p>Quando você precisa executar a mesma tarefa repetidas vezes, pode ser um caso onde a recursão vai ser útil.</p>
+<p>Vamos a um exemplo bastante útil: você vai mostrar uma mensagem a cada vez que um grilo chiar. Você passa como parâmetro da função, quantas vezes você quer que aconteça o chiado, e a função retorna com a palavra <code>chirp</code> a cada vez.</p>
+<p>Sem usar recursão, nossa implementação se pareceria com isso:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">chirp</span><span class="params">(n)</span> </span>{</div><div class="line">  <span class="keyword">var</span> ch = <span class="string">'chirp'</span>;</div><div class="line">  <span class="keyword">if</span>( n &lt; <span class="number">1</span> || <span class="built_in">isNaN</span>(n) ) <span class="keyword">return</span>;</div><div class="line">  <span class="keyword">for</span>( <span class="keyword">var</span> i = n - <span class="number">1</span>; i--; ) {</div><div class="line">    ch += <span class="string">'-chirp'</span>;</div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> ch;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Invocando a função, temos como resultado:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chirp( <span class="number">3</span> ); <span class="comment">// =&gt; "chirp-chirp-chirp"</span></div></pre></td></tr></table></figure>
+
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p>Agora, usando o formato recursivo:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">chirp</span><span class="params">( n )</span> </span>{</div><div class="line">  <span class="keyword">if</span>( n &lt; <span class="number">1</span> || <span class="built_in">isNaN</span>( n ) ) <span class="keyword">return</span>;</div><div class="line">  <span class="keyword">return</span> n &lt; <span class="number">2</span> ? <span class="string">'chirp'</span> : chirp( n - <span class="number">1</span> ) + <span class="string">'-chirp'</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>E a invocação traz o mesmo resultado:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chirp( <span class="number">3</span> ) <span class="comment">// =&gt; "chirp-chirp-chirp"</span></div></pre></td></tr></table></figure>
+
+<p>Se fizermos um teste de mesa, fica mais fácil entender como uma função recursiva funciona:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Valor de <code>n</code></th>
+<th>Retorno da função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Invocação da função (fora)</td>
+<td style="text-align:center">3</td>
+<td><code>n</code> é menor 2? Não. Então invoca a função de novo e aguarda o resultado para concatenar com <code>-chirp</code>.</td>
+</tr>
+<tr>
+<td style="text-align:center">Primeira invocação recursiva</td>
+<td style="text-align:center">2</td>
+<td><code>n</code> é menor que 2? Não. Então invoca a função de novo e aguarda o resultado para concatenar com <code>-chirp</code> de agora, e o <code>-chirp</code> anterior.</td>
+</tr>
+<tr>
+<td style="text-align:center">Segunda invocação recursiva</td>
+<td style="text-align:center">1</td>
+<td><code>n</code> é menor que 2? Sim. Então, retorna <code>chirp</code> e volta com esse resultado para concatenar com os resultados anteriores que haviam ficado aguardando. Pega esse último <code>chirp</code>, concatena com o penúltimo <code>-chirp</code>, e então, concatena isso com o primeiro <code>-chirp</code>. Resultado final: <code>chirp-chirp-chirp</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Você pode perceber que o resultado fica aguardando até que a última chamada recursiva seja concluída, para então concatenar os resultados. Em alguns casos, isso pode se tornar mais lento que a forma não recursiva. Mas dependendo do caso, pode se tornar mais legível, facilitando a manutenção. O uso deve ser avaliado conforme a situação.</p>
+<p>Perceba também que, para obtermos a recursão, nós precisamos basicamente de 2 coisas:</p>
+<ol>
+<li>A função deve se auto-invocar, no interior dela mesma;</li>
+<li>É necessário uma verificação para que possamos concluir a recursão. Caso contrário, teremos um <strong>loop infinito</strong>!</li>
+</ol>
+<p>Esse é o princípio básico da recursão :)</p>
+<p>Espero que tenha ficado claro! Se ainda ficaram dúvidas, poste nos comentários :D</p>
+<p>Até a próxima aventura! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/recursion.jpg" alt=""></p>
+<p><em>O que é <strong>recursão</strong> e como aplicar em <strong>JS</strong>? Como isso pode melhorar meu código?</em> Sexta, no Globo Repórter!<br>Não, pera… vem comigo que eu te mostro AGORA! :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="recursão" scheme="http://blog.da2k.com.br/tags/recursao/"/>
+    
+      <category term="functional programming" scheme="http://blog.da2k.com.br/tags/functional-programming/"/>
+    
+      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Stylus - o poder das funções]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"/>
+    <id>http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/</id>
+    <published>2015-02-26T00:00:00.000Z</published>
+    <updated>2015-02-27T01:49:45.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-the-power-of-functions.png" alt=""></p>
+<p>Funções são bastante parecidas com <em>mixins</em>, no <strong>Stylus</strong>. A grande diferença é que elas podem retornar valores! Vamos ver como elas funcionam? ;)</p>
+<a id="more"></a>
+
+<p>Podemos, por exemplo, criar uma função que soma dois valores passados como argumento:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line">.wrapper</div><div class="line">  width <span class="built_in">add</span>( <span class="number">600</span>px, <span class="number">15</span> )</div></pre></td></tr></table></figure>
+
+<p>Que compila para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class">.wrapper</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">615px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<h2 id="Valores_padrão">Valores padrão</h2>
+<p>Podemos também passar valores <em>default</em> para os argumentos:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b = <span class="operator">a</span> )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line"><span class="built_in">add</span>( <span class="number">10</span>, <span class="number">5</span> )<span class="comment"> // =&gt; 15</span></div><div class="line">  </div><div class="line"><span class="built_in">add</span>( <span class="number">10</span> )<span class="comment"> // =&gt; 20</span></div></pre></td></tr></table></figure>
+
+<p>Os valores <em>default</em> dos argumentos nada mais são do que atribuições. Logo, nós podemos também passar funções como valores <em>default</em>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b = unit( <span class="operator">a</span>, px ) )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line"><span class="built_in">add</span>( <span class="number">20</span> )<span class="comment"> // =&gt; 40px</span></div></pre></td></tr></table></figure>
+
+<p>Repare que o resultado de <code>add( 20 )</code> não é <code>20px</code>, e sim <code>40px</code>. A função <code>unit()</code> faz parte do Stylus. Ela adiciona uma unidade de medida ao valor passado no primeiro parâmetro. O que nós estamos fazendo é atribuir para <code>b</code>, o valor passado para <code>a</code>, e ainda adicionando a unidade <code>px</code>.</p>
+<p>Já conseguiu imaginar as milhões de possibilidades que você pode fazer com isso? xD</p>
+<h2 id="Parâmetros_nomeados">Parâmetros nomeados</h2>
+<p>Podemos também passar valores específicos para as funções. Veja o exemplo:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">subtract</span>( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> - b</div><div class="line">  </div><div class="line"><span class="built_in">subtract</span>( b: <span class="number">10</span>, <span class="operator">a</span>: <span class="number">20</span> )<span class="comment"> // =&gt; 10</span></div></pre></td></tr></table></figure>
+
+<p>Se nós somente passássemos os valores <code>( 10, 20 )</code> para a função <code>subtract</code>, o resultado seria <code>-10</code>. Mas nós podemos nomear os valores, não necessitando assim passar os parãmetros na mesma ordem em que foram definidos na função. Por isso o resultado é <code>10</code> positivo. :D</p>
+<p>Você ainda pode passar apenas um dos valores. Se o outro não for passado, ele será <code>undefined</code>, então podemos utilizar valores padrão para os parâmetros que não são obrigatórios:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">subtract</span>( <span class="operator">a</span> = <span class="number">5</span>, b )</div><div class="line">  <span class="operator">a</span> - b</div><div class="line">  </div><div class="line"><span class="built_in">subtract</span>( b: <span class="number">2</span> )<span class="comment"> // =&gt; 3</span></div></pre></td></tr></table></figure>
+
+<p>Locurage! :D</p>
+<h2 id="Retorno_de_múltiplos_valores">Retorno de múltiplos valores</h2>
+<p>Podemos retornar valores como se estivéssemos usando um <code>array</code> em JS. Se atribuirmos vários valores à uma variável, usamos a notação de <code>array</code> para obter um valor. Exemplo:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">sizes </span>=<span class="string"> 15px 20px</span></div><div class="line">  </div><div class="line">sizes[0] // =&gt; 15px</div></pre></td></tr></table></figure>
+
+<p>O mesmo vale para funções. A diferença é que precisamos invocá-la antes de pegar o valor:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">sizes</span>()</div><div class="line">  15px 10px</div><div class="line">  </div><div class="line"><span class="function">sizes</span>()<span class="attr_selector">[1]</span> <span class="comment">// =&gt; 10px</span></div></pre></td></tr></table></figure>
+
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p>Uma exceção para esses casos, é quando os valores de retorno são identificadores.</p>
+<p>No exemplo abaixo, os valores de retorno podem se confundir com atribuições para propriedades:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">swap</span><span class="params">( a, b )</span></span></div><div class="line">  <span class="title">b</span> <span class="title">a</span></div><div class="line">  </div><div class="line"><span class="title">body</span></div><div class="line">  <span class="title">swap</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></div></pre></td></tr></table></figure>
+
+<p>Se fizermos isso, tentando usar <code>swap</code> como <em>mixin</em>, temos como resultado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">b</span>:<span class="value"> <span class="number">10</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E se tentarmos usar como função, retornando um valor:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span></div><div class="line">  <span class="attribute">width</span> <span class="function">swap</span>( 10, 20 )</div></pre></td></tr></table></figure>
+
+<p>Temos como resultado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> b: <span class="number">10</span></span></span>;<span class="rule">;</span></div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Ou seja: <strong>Nada a ver, né meu!</strong></p>
+<p>Para remover a ambiguidade, você pode usar parênteses, ou então a palavra-chave <code>return</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">swap</span><span class="params">( a, b )</span></span></div><div class="line">  <span class="params">( b a )</span></div><div class="line">  </div><div class="line"><span class="title">body</span></div><div class="line">  <span class="title">padding</span> <span class="title">swap</span><span class="params">( <span class="number">10</span>px, <span class="number">20</span>px )</span></div></pre></td></tr></table></figure>
+
+<p>Que retorna:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">20px</span> <span class="number">10px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Ou ainda, usando <code>return</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">swap</span>( a, b )</div><div class="line">  <span class="keyword">return</span> b a</div><div class="line">  </div><div class="line">body</div><div class="line">  padding <span class="built_in">swap</span>( 10px, 20px )</div></pre></td></tr></table></figure>
+
+<p>O resultado é o mesmo :)</p>
+<h2 id="Funções_como_parãmetro">Funções como parãmetro</h2>
+<p>Também é possível usar funções como parâmetros, para usar como um <em>callback</em>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line">sub( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> - b</div><div class="line">  </div><div class="line">invoke( <span class="operator">a</span>, b, fn )</div><div class="line">  fn( <span class="operator">a</span>, b )</div><div class="line">  </div><div class="line">body</div><div class="line">  padding invoke( <span class="number">10</span>px, <span class="number">20</span>, <span class="built_in">add</span> )</div><div class="line">  margin invoke( <span class="number">8</span>px, <span class="number">5</span>, sub )</div></pre></td></tr></table></figure>
+
+<p>Que vai compilar para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">30px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">3px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E isso é apenas o começo do que você pode fazer usando funções no <strong>Stylus</strong>! Para conhecer todas as possibilidades, visite a <a href="http://learnboost.github.io/stylus/docs/functions.html" target="_blank" rel="external">documentação oficial, na sessão de <em>functions</em></a> :D</p>
+<p>Até o próximo!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-the-power-of-functions.png" alt=""></p>
+<p>Funções são bastante parecidas com <em>mixins</em>, no <strong>Stylus</strong>. A grande diferença é que elas podem retornar valores! Vamos ver como elas funcionam? ;)</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="stylus" scheme="http://blog.da2k.com.br/tags/stylus/"/>
+    
+      <category term="pré-processadores" scheme="http://blog.da2k.com.br/tags/pre-processadores/"/>
+    
+      <category term="css" scheme="http://blog.da2k.com.br/categories/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[CSS - float ou overflow?]]></title>
+    <link href="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/"/>
+    <id>http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/</id>
+    <published>2015-02-25T00:00:00.000Z</published>
+    <updated>2015-02-26T10:06:30.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-vs-overflow.png" alt=""></p>
+<p>Hoje, em CSS, temos basicamente duas formas de conter flutuação em CSS: com o próprio <code>float</code>, ou usando <code>overflow</code>. Qual a melhor forma? Qual a forma correta? Quando eu devo usar? Nesse artigo, veremos as vantagens e desvantagens dos dois modos! Vem comigo :D</p>
+<a id="more"></a>
+
+<h2 id="Simulando_o_problema">Simulando o problema</h2>
+<p>É mais fácil <em>visualizar</em> o problema, já que estamos falando de CSS. Então, vamos escrever um pouco de código que eu vou explicando o que acontece :)</p>
+<p>Crie um arquivo <code>index.html</code>, com o seguinte código:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Float ou Overflow<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"http://placehold.it/1x1"</span> <span class="attribute">width</span>=<span class="value">"200"</span> <span class="attribute">height</span>=<span class="value">"200"</span> <span class="attribute">alt</span>=<span class="value">""</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque natus, corporis quae molestiae eum facilis mollitia temporibus expedita ipsam sequi culpa sunt, fugiat. Porro velit dolore quo, dolorem, quia earum nihil cumque inventore placeat vero ullam, neque ad quae, molestias deleniti. Quas facilis incidunt ipsa facere inventore impedit quae debitis?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Um simples HTML, com uma div, que contém um parágrafo e uma imagem. Agora vamos estilizar para deixar tudo um pouco mais bonito. Pode usar o CSS abaixo no HTML mesmo, somente para exemplo. Coloque o código abaixo da tag <code>&lt;title&gt;</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">&lt;/<span class="title">style</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>E temos o seguinte resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow1.png" alt=""></p>
+<p>Olha que lindo! Nossa div com um fundo bastante exótico, a imagem, e o texto logo abaixo. Agora nós queremos posicionar nossa imagem do lado direito do texto. O que precisamos fazer? Isso mesmo, <strong>flutuá-la!</strong></p>
+<p>Vamos então adicionar o estilo para flutuar a imagem. Coloque o código abaixo, logo após o CSS da <code>div</code>:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">img</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> right</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E olha o que aconteceu:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow2.png" alt=""></p>
+<p>A imagem ficou pra fora do nosso box! Mas não é isso que queremos! Ela faz parte do box, e deve ficar dentro dele, respeitando o <code>padding</code> de 15px que eu coloquei no box. Temos duas formas de “resolver” isso.</p>
+<h2 id="Overflow_para_conter_a_flutuação">Overflow para conter a flutuação</h2>
+<p>Podemos usar <code>overflow</code> no container pai para conter a flutuação:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Na linha <code>3</code>, adicionamos um <code>overflow: hidden</code>, e agora, olhe o que aconteceu:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow3.png" alt=""></p>
+<p><em>Perfeito! Era exatamente o que queríamos! Já acabou?</em></p>
+<p>Calma criança! Ficou exatamente como esperávamos, NESSE CASO. Agora imagine que o designer que fez o layout é todo descolado, e fez um <em>badge</em> que vai ficar posicionado no canto superior esquerdo, um pouco para fora do box.</p>
+<p>Vamos adicionar o <em>badge</em> no nosso código:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"badge"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"http://placehold.it/1x1"</span> <span class="attribute">width</span>=<span class="value">"200"</span> <span class="attribute">height</span>=<span class="value">"200"</span> <span class="attribute">alt</span>=<span class="value">""</span> /&gt;</span></div><div class="line">  ...</div></pre></td></tr></table></figure>
+
+<p>E vamos posicioná-lo no canto superior esquerdo do box:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line">  </div><div class="line"><span class="class">.badge</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> purple</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">left</span>:<span class="value"> -<span class="number">25px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> -<span class="number">25px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Deixamos a <code>div</code> com posicionamento relative (linha <code>5</code>), para que o <em>badge</em> não se perca, e fique posicionado absolutamente, mas sempre relativo à div.</p>
+<p>Olha o resultado que coisa mais fofa:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow4.png" alt=""></p>
+<p>Nosso <em>badge</em> ficou lá no canto, mas só apareceu 1/4 dele! Cadê o resto?</p>
+<p>O <em>overflow</em> conteve a flutuação, mas, em conpensação, impede que qualquer filho do container ao qual foi aplicado o overflow, apareça fora da área delimitada =/</p>
+<p><strong>Resultado: </strong></p>
+<p>Usar <code>overflow</code> resolve o problema de conter flutuação? Sim, em partes. A menos que vocẽ precise que, algo dentro do box, fique um pouco para fora.<br>É a solução correta? Não.</p>
+<h2 id="Usando_float_para_conter_a_flutuação">Usando float para conter a flutuação</h2>
+<p>Agora vamos ver como fazer o mesmo, mas usando <code>float</code>. Vamos remover o <code>overflow</code> da div e colocar um <code>float: left</code>:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E o resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow5.png" alt=""></p>
+<p>Ótimo, coisa linda! Mas perae, tem um problema… Nosso box não ocupou toda a largura da tela. Como ele está flutuado e não tem <code>width</code> definido, a largura dele será baseada no tamanho dos itens internos.</p>
+<p><em>Ah, mas isso é fácil de resolver: só colocar um <code>width: 100%</code> na div!</em></p>
+<p>Vamos fazer isso então:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Como ficou?</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow6.png" alt=""></p>
+<p>Olhe o que aconteceu: ficou “quase” da forma como queríamos. O problema foi que, como nosso box tem um <code>padding</code> de 15px em cada lado (30px na vertical, e 30px na horizontal), os <code>100%</code> da largura foram somados aos 30px horizontais! Ficamos com um box que tem 100% + 30px de largura!</p>
+<p><em>Tem como resolver isso de outra forma?</em></p>
+<p>Existe uma propriedade chamada <code>box-sizing</code>, que funciona no ie8+. Usando o valor <code>border-box</code>, nós fazemos com que, ao invés de somar os valores de <code>padding</code> do box, ele seja aplicado à largura do mesmo! Vamos aproveitar e aplicar à todos os elementos. Como é uma única propriedade, não há problema em usar o <code>*</code> nesse caso:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">* <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">-moz-box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E olha o resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow7.png" alt=""></p>
+<p>Agora sim, ficou exatamente como eu esperava! Mas eu precisei usar outra propriedade além do <code>float</code>, e ainda usar o <code>width: 100%</code> para ficar correto.</p>
+<p><strong>Resultado: </strong></p>
+<p>Usar <code>float</code> resolve o problema de conter flutuação? Não sozinho, precisa do box-sizing. Com o box-sizing sim.<br>É a solução correta? Não. Se estamos flutuando para direita ou esquerda, não faz muito sentido colocar width: 100%.</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Conclusão">Conclusão</h2>
+<p>Não existe uma solução “correta” para isso. Temos essas duas abordagens que estão disponíveis. Podemos usar qualquer uma delas. </p>
+<p>Em minha opinião, a que melhor funciona é a do float com box-sizing. Apesar de você precisar flutuar sempre os containers principais, eu penso que é muito mais fácil fazer isso do que, depois do layout todo pronto, o designer colocar uma nova feature, onde é necessário conter a flutuação, e você ter que sair flutuando loucamente tudo o que vir pela frente.</p>
+<p>Se flutuar somente os containers principais, o que vai ficar dentro deles é muito mais facilmente controlável :)</p>
+<p>A solução ideal para isso, na verdade, seria usar <code>flexbox</code>. Se no seu projeto você não precisa <a href="http://caniuse.com/#feat=flexbox" target="_blank" rel="external">se preocupar com o IE</a>, vocẽ pode usá-lo hoje mesmo. Chris Coyier, do CSS Tricks, escreveu um <a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">excelente artigo</a> falando praticamente tudo sobre Flexbox. Recomendo a leitura ;)</p>
+<p>E você: tem alguma técnica diferente para conter a flutuação? Usa alguma das citadas acima Já havia passado por isso, mas não sabia como resolver? Compartilhe conosco nos comentários! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-vs-overflow.png" alt=""></p>
+<p>Hoje, em CSS, temos basicamente duas formas de conter flutuação em CSS: com o próprio <code>float</code>, ou usando <code>overflow</code>. Qual a melhor forma? Qual a forma correta? Quando eu devo usar? Nesse artigo, veremos as vantagens e desvantagens dos dois modos! Vem comigo :D</p>
+]]>
+    
+    </summary>
+    
+      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="css" scheme="http://blog.da2k.com.br/categories/css/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[WordPress - Criando um formulário de contato sem plugin - Parte 2]]></title>
     <link href="http://blog.da2k.com.br/2015/02/24/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/"/>
     <id>http://blog.da2k.com.br/2015/02/24/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-2/</id>
     <published>2015-02-24T00:00:00.000Z</published>
-    <updated>2015-02-24T10:11:49.000Z</updated>
+    <updated>2015-02-24T10:18:36.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin2.png" alt=""></p>
 <p>No <a href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/" target="_blank" rel="external">post anterior</a>, montamos nossa <em>view</em>, com os campos do formulário, e deixamos preparada a interface que irá receber o retorno do envio.<br>Hoje nós veremos como a <em>view</em> receberá as informações que ela precisa, mantendo a ordem dos nossos arquivos :D</p>
 <a id="more"></a>
@@ -98,7 +383,7 @@
     <link href="http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/"/>
     <id>http://blog.da2k.com.br/2015/02/22/wordpress-criando-um-formulario-de-contato-sem-plugin-parte-1/</id>
     <published>2015-02-22T00:00:00.000Z</published>
-    <updated>2015-02-24T09:10:48.000Z</updated>
+    <updated>2015-02-24T10:18:36.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-form-without-plugin.png" alt=""></p>
 <p>Sempre que se pensa em formulários com <strong>WordPress</strong>, a primeira coisa que vem à mente é: <em>vou usar um plugin!</em> E realmente, existem plugins muito bons para fazer isso. Mas, em alguns momentos, você precisa de um controle maior no seu código. </p>
 <p><em>Mas é possível criar formulários “na mão”, de forma fácil?</em><br>Claro que sim! O que não é fácil de fazer com <strong>WordPress</strong>? ;)<br>Vem comigo que eu te mostro como faz!</p>
@@ -428,7 +713,7 @@
     <link href="http://blog.da2k.com.br/2015/02/17/stylus-usando-mixins/"/>
     <id>http://blog.da2k.com.br/2015/02/17/stylus-usando-mixins/</id>
     <published>2015-02-17T00:00:00.000Z</published>
-    <updated>2015-02-17T23:21:07.000Z</updated>
+    <updated>2015-02-27T01:49:45.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-mixins.png" alt=""></p>
 <p>Depois do <a href="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/" target="_blank" rel="external">primeiro post mostrando toda a lindeza do Stylus</a>, como ele funciona, e as vantagens que ele tem sobre outros pré-processadores, nesse novo artigo da série, vamos ver como utilizar todo o poder dos mixins dentro do Stylus! Bora? ;)</p>
 <a id="more"></a>
@@ -479,6 +764,10 @@
     </summary>
     
       <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
+    
+      <category term="stylus" scheme="http://blog.da2k.com.br/tags/stylus/"/>
+    
+      <category term="pré-processadores" scheme="http://blog.da2k.com.br/tags/pre-processadores/"/>
     
       <category term="css" scheme="http://blog.da2k.com.br/categories/css/"/>
     
@@ -1464,324 +1753,6 @@
       <category term="mutation observer" scheme="http://blog.da2k.com.br/tags/mutation-observer/"/>
     
       <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Javascript - o operador void]]></title>
-    <link href="http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/"/>
-    <id>http://blog.da2k.com.br/2015/02/06/javascript-o-operador-void/</id>
-    <published>2015-02-06T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/undefined.png" alt=""></p>
-<p>Você já deve ter visto em alguns links por aí algo como <code>&lt;a href=&quot;javascript:void(0)&quot;&gt;&lt;/a&gt;</code>, não? Mas você sabe para quê usamos o <code>void</code> em Javascript? E sabe quando podemos usá-lo? Vem descobrir :D</p>
-<a id="more"></a>
-
-<p>Segundo a <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/void" target="_blank" rel="external">documentação da MDN</a>:</p>
-<blockquote>
-<p>O operador <code>void</code> avalia uma expressão dada, e retorna undefined.</p>
-</blockquote>
-<p>Ou seja: qualquer valor passado após <code>void</code> será avalidado, mas o valor retornado sempre será <code>undefined</code>.</p>
-<p>Vamos ver na prática como isso funciona. Execute no console:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnOne</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnOne(); <span class="comment">// 1</span></div></pre></td></tr></table></figure>
-
-<p>Agora, se você usar o <code>void</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnUndefined</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="keyword">void</span> <span class="number">1</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnUndefined(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
-
-<p>O número <code>1</code> é avaliado, mas o valor retornado é <code>undefined</code>.</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/gente-qual-a-necessidade-disso.jpg" alt=""></p>
-<p>Só lembrando que o <code>void</code> não é uma função, e sim um <code>operador</code>. Os parênteses são opcionais.</p>
-<p><em>Não daria para retornar direto <code>undefined</code>?</em></p>
-<p>Nesse caso, sim:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldReturnUndefined</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</div><div class="line">}</div><div class="line"></div><div class="line">shouldReturnUndefined(); <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
-
-<p><em>Então pra quê eu vou usar o <code>void</code>?</em></p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<p>Javascript é uma linguagem de <em>tipagem fraca</em> e <em>dinâmica</em>. Isso significa que você não precisa dizer ao Javascript que uma variável vai receber um número ou uma string, ou que uma função irá retornar um valor booleano.<br>Você simplesmente atribui valores à variáveis e retorna valores em funções, e o Javascript se vira com o resto.</p>
-<p>Para entender melhor o <code>void</code>, é necessário entender um pouco sobre tipagem.</p>
-<p>Por exemplo: se fossemos escrever um <code>Hello World</code> em Java, ele seria algo assim:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class HelloWorld {</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>( String args[] ) {</div><div class="line">    System.out.println( <span class="string">"Hello World!"</span> );</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>O Java é uma linguagem imperativa, orientada a objetos. Por isso é necessário sempre criar uma <code>class</code> para qualquer coisa que você queira fazer. </p>
-<p>Mas o que eu quero mostrar está na primeira linha dentro da classe:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>( String args[] )</div></pre></td></tr></table></figure>
-
-<p>Essa linha cria um método estático (<code>static</code>), público (<code>public</code>), chamado <code>main</code>, e que não retorna nada (<code>void</code>). Ou seja: posso colocar qualquer código dentro desse método que será executado normalmente. Agora, seu eu colocar no final desse método um <code>return 1</code>, por exemplo, na hora de tentar compilar, vai dar esse erro:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HelloWorld.java:<span class="number">4</span>: error: incompatible types: unexpected <span class="keyword">return</span> value</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">           ^</div><div class="line"><span class="number">1</span> error</div></pre></td></tr></table></figure>
-
-<p>Porque o Java não espera nenhum valor retornado para esse método.</p>
-<p>Enfim, não quero ensinar Java, mas sim mostrar que, para não retornar nenhum valor em linguagens de tipagem forte, é necessário deixar explícito no método o <code>void</code>.</p>
-<p>Em Javascript não precisamos disso, mas tem alguns casos em que ele pode vir a ser útil.</p>
-<p>Exemplo:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fillBodyRed</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">document</span>.querySelector( <span class="string">'body'</span> ).style.background = <span class="string">'red'</span>;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHypsterStyle</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">}</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( isHypsterStyle() ) {</div><div class="line">    fillBodyRed();</div><div class="line">  }</div><div class="line">}</div><div class="line"></div><div class="line">handleDOM();</div></pre></td></tr></table></figure>
-
-<p>No exemplo acima, executamos a função <code>handleDOM()</code>, que verifica se <code>isHypsterStyle</code> está setado e chama a função <code>fillBodyRed</code>, que preenche o <code>background</code> do <code>body</code> de vermelho.</p>
-<p>A única função que retorna algum valor, é a <code>isHypsterStyle()</code>, para verificar se o estilo foi setado na função <code>handleDOM()</code>.</p>
-<p>Podemos melhorar a função <code>handleDOM()</code>, removendo o <code>if</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  isHypsterStyle() && fillBodyRed();</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Ao passar o código acima pelo <a href="http://jshint.com/" target="_blank" rel="external">JSHint</a>, ele vai acusar um <em>warning</em>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Expected an assignment or <span class="function"><span class="keyword">function</span> <span class="title">call</span> <span class="title">and</span> <span class="title">instead</span> <span class="title">saw</span> <span class="title">an</span> <span class="title">expression</span>.</span></div></pre></td></tr></table></figure>
-
-<p>Ou seja: nós estamos utilizando um operador lógico (<code>&amp;&amp;</code>), em <em>short circuit</em>, que normalmente é usado para testar expressões. Uma expressão normalmente retorna um valor. Se a expressão retorna um valor, para me aproveitar desse valor, eu preciso usar um <code>return</code> dentro da <code>function</code>, para que eu possa invocar essa função para obter esse valor, ou então atribuir à uma variável, por exemplo, para que eu possa usar o valor no futuro.</p>
-<p>Como nossa função <code>fillBodyRed()</code> não retorna nada, mas é ela que será executada se <code>isHypsterStyle()</code> for <code>true</code>, precisamos de uma forma de avaliar essa expressão para remover o <em>warning</em>.</p>
-<p>Poderíamos usar o <code>return</code>, mas não faria sentido pois não temos valor a retornar. É aqui que entra o <code>void</code>:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleDOM</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">void</span> ( isHypsterStyle() && fillBodyRed() );</div><div class="line">}</div></pre></td></tr></table></figure>
-
-<p>Agora nós avaliamos a expressão e não retornamos nada. Esse é um uso válido do <code>void</code>. </p>
-<h2 id="IIFE">IIFE</h2>
-<p>Como você já deve ter visto no post sobre <a href="http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/" target="_blank" rel="external">invocação de funções</a>, para que uma função anônima seja invocada, ela também precisa ser transformada em uma expressão. Logo, também podemos usar o <code>void</code> nesse caso:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  ...</div><div class="line">}();</div></pre></td></tr></table></figure>
-
-<p>Normalmente quem trabalha com frontend tem seu primeiro contato com uma linguagem de programação através do Javascript, e acabam não entendendo algumas coisas, como é o caso do <code>void</code>. Espero que o seu uso tenha ficado claro :D</p>
-<p>Até a próxima!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/undefined.png" alt=""></p>
-<p>Você já deve ter visto em alguns links por aí algo como <code>&lt;a href=&quot;javascript:void(0)&quot;&gt;&lt;/a&gt;</code>, não? Mas você sabe para quê usamos o <code>void</code> em Javascript? E sabe quando podemos usá-lo? Vem descobrir :D</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="void" scheme="http://blog.da2k.com.br/tags/void/"/>
-    
-      <category term="javascript" scheme="http://blog.da2k.com.br/categories/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Segredos do Github - Hospedando seu site no Github]]></title>
-    <link href="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"/>
-    <id>http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/</id>
-    <published>2015-02-05T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
-<p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
-<p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
-<a id="more"></a>
-
-<p>Uma ponto importante que eu preciso frizar antes de começar: o <strong>Github</strong> só aceita arquivos estáticos. Não adianta querer usar o <strong>Github</strong> para hospedar um site em <strong>PHP</strong> que não vai funcionar, blz? ;)</p>
-<p>Ele só vai servir os arquivos <em>estáticos</em> gerados - HTML, CSS e JS, imagens, fontes, etc.</p>
-<p>Para se aproveitar dessa feature, você pode cair em duas situações:</p>
-<p>1) <em>Tenho um site pessoal que quero hospedar no <strong>Github</strong></em><br>2) <em>Tenho um projeto Open Source, em um repositório dentro da minha conta, e quero criar um site para ele.</em></p>
-<h2 id="Site_Pessoal">Site Pessoal</h2>
-<p>Para o seu site pessoal, você deve fazer o seguinte:</p>
-<ul>
-<li>crie um novo repositório na sua conta, com o seguinte padrão:</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">username.github.io</div></pre></td></tr></table></figure>
-
-<p>Obviamente, trocando <code>username</code> pelo seu nome de usuário no <strong>Github</strong>. No meu caso, ficou <code>fdaciuk.github.io</code>. O repositório é esse: <a href="https://github.com/fdaciuk/fdaciuk.github.io/" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/</a></p>
-<p>Fazendo isso, você pode subir seus arquivos estáticos para a branch <strong>master</strong> normalmente, e acessá-los pelo endereço:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://username.github.io</div></pre></td></tr></table></figure>
-
-<p>De novo: trocando o <code>username</code> pelo seu nome de usuário!</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<h2 id="Site_para_projeto_open_source">Site para projeto open source</h2>
-<p>Se você já tem um projeto open source no Github, e quer criar um site para ele, você precisa fazer o seguinte:</p>
-<ul>
-<li>crie uma branch orfã - em branco - chamada <code>gh-pages</code>.</li>
-<li>suba os arquivos para essa branch.</li>
-</ul>
-<p>Para criar uma nova branch em branco, use o seguinte comando:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --orphan gh-pages</div></pre></td></tr></table></figure>
-
-<p>Só lembre de <strong>NUNCA</strong> fazer merge dessa branch na master. Os arquivos das duas branches serão completamente diferentes! Na <code>master</code>, ficarão os arquivos do seu projeto. Na <code>gh-pages</code>, somente os estáticos do site do projeto.</p>
-<p>Você conseguirá acessar pelo seguinte endereço:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://username.github.io/repositoryname</div></pre></td></tr></table></figure>
-
-<p>Não precisa falar do <code>username</code> de novo, né? :P</p>
-<p>E troque o <code>repositoryname</code> pelo nome do seu repositório.</p>
-<p>Para facilitar, veja como fica o acesso ao site do <a href="https://github.com/wpbrasil/odin" target="_blank" rel="external">Odin</a>:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://wpbrasil.github.io/odin</div></pre></td></tr></table></figure>
-
-<p>Onde temos a conta da organização <code>wpbrasil</code> e o repositório cadastrado como <code>odin</code>. Fácil, não?</p>
-<h2 id="Usando_um_domínio_personalizado">Usando um domínio personalizado</h2>
-<p>Para usar um domínio personalizado, você só precisa criar um arquivo chamado <code>CNAME</code>, - na branch onde estão os estáticos do seus site - e o conteúdo dele deve ser o seu domínio. </p>
-<p>O <code>CNAME</code> do meu blog está com o conteúdo assim:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blog.da2k.com.br</div></pre></td></tr></table></figure>
-
-<p>Não precisa do <code>http(s)</code>.</p>
-<p>Depois você só precisa configurar para que o seu domínio aponte para os DNS do <strong>Github</strong>. Para fazer isso, siga esse tutorial: <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="external">https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/</a></p>
-<p>Você pode usar tanto um domínio principal, como um subdomínio :)</p>
-<h2 id="Geradores_de_estáticos">Geradores de estáticos</h2>
-<p>E já respondendo à pergunta: Não! Você não precisa criar todos os seus arquivos HTML manualmente!</p>
-<p>Existem milhares de ferramentas que geram estáticos, onde você escreve em uma linguagem específica - NodeJS, Ruby, etc - e o framework gera toda a estrutura dos estáticos para você. Aqui no blog, eu estou usando o <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>. Inclusive, fiz <a href="http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/" target="_blank" rel="external">um post</a>, mostrando como é simples usá-lo para começar um blog :D</p>
-<p>O <strong>Hexo</strong> tem um plugin que gera um <code>sitemap.xml</code> e um <code>atom.xml</code>, onde fica o feed. </p>
-<p>Eu posso criar templates para as páginas, usando <strong>EJS</strong>, <strong>Jade</strong> ou <strong>Markdown</strong>, posso usar <strong>Stylus</strong> para pré-processar o CSS, me aproveitar de partials para não ficar repetindo código, etc. No final, tudo é compilado para HTML, CSS e JS.</p>
-<p>E para escrever os posts, posso utilizar <strong>Markdown</strong> &lt;3</p>
-<p>Ele gera também uma estrutura de URLs amigáveis, que você pode escolher. Ou seja, é perfeito para SEO :)</p>
-<p>Se quiser outras opções de geradores de estáticos, veja esses links:</p>
-<ul>
-<li><a href="https://github.com/pinceladasdaweb/Static-Site-Generators" target="_blank" rel="external">https://github.com/pinceladasdaweb/Static-Site-Generators</a></li>
-<li><a href="https://www.staticgen.com/" target="_blank" rel="external">https://www.staticgen.com/</a></li>
-<li><a href="https://staticsitegenerators.net/" target="_blank" rel="external">https://staticsitegenerators.net/</a></li>
-<li><a href="http://www.modernstatic.com/" target="_blank" rel="external">http://www.modernstatic.com/</a></li>
-</ul>
-<p><em>Have fun</em> :)</p>
-<h2 id="Jekyll">Jekyll</h2>
-<p>Um outro detalhe importante, é que o <strong>Github</strong> consegue compilar seus estáticos sozinho, se você estiver usando o <strong>Jekyll</strong>. O <a href="https://github.com/willianjusten" target="_blank" rel="external">Willian Justen</a> já mostrou porque é interessante usar o <strong>Jekyll</strong> com o <strong>Github</strong>, nesse <a href="http://willianjusten.com.br/por-que-usar-jekyll/" target="_blank" rel="external">ótimo post</a>! E <a href="http://willianjusten.com.br/perguntas-e-respostas-jekyll/" target="_blank" rel="external">nesse outro</a> ele tira algumas dúvidas sobre a ferramenta. Vale muito a leitura!</p>
-<p><em>That’s all folks!</em> Até a próxima :D</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
-<p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
-<p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="segredos do github" scheme="http://blog.da2k.com.br/tags/segredos-do-github/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Git e Github - Do clone ao pull request]]></title>
-    <link href="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"/>
-    <id>http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/</id>
-    <published>2015-02-04T00:00:00.000Z</published>
-    <updated>2015-02-17T03:30:20.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/git-clone-pull-request.jpg" alt=""></p>
-<p>Você tem uma conta no Github, acompanha projetos open source, gostaria de colaborar com algum deles, mas não sabe como fazer? Como criar uma nova feature? Como preparar o repositório? O que é <em>git push</em>?</p>
-<p>Se você tem essas dúvidas, esse artigo é pra você!</p>
-<a id="more"></a>
-
-<p>Alguns devs já me perguntaram como seria o workflow correto para colaborar com um projeto open source. Como criar uma nova branch, porque fazer isso, como enviar um pull request, como saber se o que você está fazendo está de acordo com o propósito do repositório.</p>
-<p>Seguindo a dica do <a href="https://github.com/romuloctba" target="_blank" rel="external">Rômulo</a>, esse artigo é para você que quer aprender desde o básico necessário de git, até a submissão de um <em>pull request</em>, com um ajuste ou nova funcionalidade para um projeto no Github!</p>
-<h2 id="Primeiros_passos_com_Git">Primeiros passos com Git</h2>
-<p>Eu poderia escrever aqui todos os passos necessários para você instalar o git, criar seu projeto, criar um repositório local, criar branchs, etc. Mas o <a href="https://github.com/rogerdudler" target="_blank" rel="external">Roger Dudler</a> já fez um ótimo trabalho que você encontra <a href="http://rogerdudler.github.io/git-guide/index.pt_BR.html" target="_blank" rel="external">nesse link</a>, traduzido por brasileiros :)</p>
-<h2 id="Escolhendo_o_repositório">Escolhendo o repositório</h2>
-<p>Após seguir os passos acima, vocẽ já estará apto para fazer alterações em qualquer projeto e submeter o seu <em>pull request</em>!<br>E a primeira coisa que você tem que fazer é <strong>clonar</strong> o repositório que vocẽ quer colaborar!</p>
-<p><em>Mas qual repositório eu escolho?</em></p>
-<p>Se você não sabe em qual repositório pode colaborar, acesse o perfil de seus amigos no <strong>Github</strong>, veja os repositórios que eles têm e/ou seguem, e escolha algum que utilize uma linguagem que você está familiarizado, ou que quer aprender.</p>
-<p>Fuce no código que está no repositório. Ele está ali para que você possa aprender com ele. Baixe, teste, procure por falhas! Quando encontrar algo que possa ser melhorado, é hora de você fazer a sua parte e enviar um <em>pull request</em> :D</p>
-<p>Vamos pegar como exemplo o repositório do <strong>Gulp</strong>. Vamos fazer todos os passos e enviar nosso <em>pull request</em> através desse repositório.</p>
-<h2 id="Forkando_o_repositório">Forkando o repositório</h2>
-<p>A primeira coisa a fazer é <em>forkar</em> o repositório. Acesse a <a href="https://github.com/gulpjs/gulp" target="_blank" rel="external">página do repositório no <strong>Github</strong></a>, e clique no botão <strong>Fork</strong>:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/fork-repository.png" alt="Forkar o repositório"></p>
-<p><em>O que significa forkar?</em></p>
-<p>A tradução literal de <em>fork</em> é <em>garfo</em>. Então, você dá uma “garfada” no repositório, dá aquela enrolada no garfo, e traz ele pra sua conta xD</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/forked-repository.png" alt="Repositório forkado"></p>
-<p>Quando você <em>forkar</em> o repositório, repare que, abaixo do nome do repositório é mostrado o repositório original, ou seja, de onde ele foi <em>forkado</em>:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/forked-from.png" alt="Forkado de"></p>
-<p>Você agora pode fazer o que quiser com esse repositório (tomando cuidado com a <a href="http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/" target="_blank" rel="external">licença</a> sob a qual ele foi liberado). A ideia aqui é resolver um problema e enviar o <em>pull request</em> com a correção para o repositório original. Como você não tem permissão para comitar diretamente no repositório principal, você precisa forkar e alterar no seu, para então submeter a correção.</p>
-<p>Após <em>forkar</em>, vamos fazer nossas alterações!</p>
-<h2 id="Clonando_o_repositório">Clonando o repositório</h2>
-<p>Agora você precisa baixar os arquivos do repositório para que você possa alterar. A primeira coisa a fazer é copiar a URL do repositório daqui:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/clone-repository.png" alt="Clonar repositório"></p>
-<p>Confira se o texto de cima do <code>input</code> está como <code>SSH clone URL</code>. Se não estiver, clique no link SSH que aparece abaixo do <code>input</code>.</p>
-<p>Após copiar a URL, abra seu terminal, crie um diretório onde você vai guardar o projeto, e digite <code>git clone &lt;url-do-repositorio&gt;</code>:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> clone git<span class="variable">@github</span>.com:fdaciuk/gulp.git</div></pre></td></tr></table></figure>
-
-<p>O comando <code>git clone</code> pega o repositório como ele está no <strong>Github</strong>, já iniciado e com todo o histórico de commits atualizado. Seria o mesmo que você executar os comandos:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git init</div><div class="line"><span class="variable">$ </span>git remote add origin git<span class="variable">@github</span>.<span class="symbol">com:</span>fdaciuk/gulp.git</div><div class="line"><span class="variable">$ </span>git pull origin master</div></pre></td></tr></table></figure>
-
-<p>Pronto! Já temos nosso projeto clonado em nossa máquina local! Com esse comando (<code>git clone</code>), será criado um diretório com o mesmo nome do repositório. Entrando nele (<code>cd gulp</code>), vamos começar a codar!</p>
-<h2 id="Criando_a_branch_para_codar_a_feature">Criando a branch para codar a feature</h2>
-<p>Agora vamos criar uma nova <em>branch</em> para a nossa feature. Digamos que vamos melhorar o método <code>watch()</code> do <strong>Gulp</strong>. Vamos criar uma <em>branch</em> com um nome que diga o que será feito. Antes de tudo, garanta que você está na branch <strong>master</strong>, executando o comando:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> branch</div></pre></td></tr></table></figure>
-
-<p>A resposta deve ser:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>master</div></pre></td></tr></table></figure>
-
-<p><em>Porque precisa estar na master?</em></p>
-<p>Por convenção, o <strong>git</strong> utiliza a <em>branch</em> master como padrão, para o código estável do projeto. Então, tudo o que estiver nessa <em>branch</em>, em qualquer repositório, <del>teóricamente</del> é código estável. Logo, você nunca irá mexer diretamente nela, mas em outras branchs, para então fazer <strong>merge</strong> com a master.</p>
-<p>Agora vamos criar a <em>branch</em> com nossa feature. Temos duas formas de fazer isso. A forma mais rápida é:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> checkout -b improve_method_watch</div></pre></td></tr></table></figure>
-
-<p><code>improve_method_watch</code> é o nome da nossa <em>branch</em>. A outra forma de criar um repositório é com os comandos:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git branch improve_method_watch</div><div class="line"><span class="variable">$ </span>git checkout improve_method_watch</div></pre></td></tr></table></figure>
-
-<p>O primeiro comando cria a branch. O segundo comando troca da branch <strong>master</strong> para a branch <strong>improve_method_watch</strong>.</p>
-<p>Mas o primeiro comando que executamos (<code>git checkout -b improve_method_watch</code>), já faz essas duas coisas em um comando só: cria a branch (<code>-b</code>) e já muda para a branch criada (<code>git checkout</code>).</p>
-<p>Ok. Agora podemos trabalhar! Vamos codar o que for necessário para deixar essa feature funcionando!</p>
-<p><em>Tá, mas porque eu preciso criar uma nova branch? Se tudo irá para a master, porque não posso codar direto ali?</em></p>
-<p>Como eu disse, a branch <strong>master</strong> é a branch com o código final do projeto, estável. Criando uma nova branch, se você submeter o <em>pull request</em> para o repositório original, mas ele não for aceito, as alterações não estarão na sua branch master. Dessa forma, se você quiser manter sempre os dois repositórios atualizados e sincronizados, você só precisa apagar a branch que você criou e fez a feature. As duas <strong>master</strong> vão continuar iguaizinhas :)</p>
-<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
-
-<h2 id="Dicas_para_um_bom_Pull_Request">Dicas para um bom Pull Request</h2>
-<p>Quando você for fazer um <em>pull request</em>, a pessoa que é responsável pelo repositório terá de conferir se o código que você está enviando está de acordo com os padrões definidos para aquele projeto. Por isso, tenha em mente que o seu <em>pull request</em> deve ter <strong>pouco código</strong>. Se a funcionalidade que você quer implementar for muito grande, quebre em partes menores, e envie <em>pull requests</em> pequenos, com o mínimo de alterações possíveis. </p>
-<p>Isso vai facilitar a conferência do código, e a sua feature terá maiores chances de ser aceita e fazer parte do projeto principal :)</p>
-<p>Após codar sua alteração, é hora de enviar para o seu <em>fork</em>. Primeiro você precisa <em>commitar</em> sua alteração:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> --<span class="keyword">all</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Mensagem de commit"</span></div></pre></td></tr></table></figure>
-
-<p>Coloque uma mensagem que defina exatamente o que você fez. De preferência, a cada pequena parte que você codar, comite com uma mensagem que diga o que está sendo feito até ali. Exemplo:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> -<span class="keyword">all</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Remove código não utilizado"</span></div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> -<span class="keyword">all</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Ajusta posicionamento do botão de submeter formulário, na página de contato"</span></div></pre></td></tr></table></figure>
-
-<p>Só alguns exemplos de mensagens de commit. Disserte um pouco sobre a funcionalidade que você está criando. Não precisa ser nada muito formal, mas escreva de uma forma que qualquer pessoa que ler, entenda.</p>
-<p>Lembrando que, se você estiver fazendo uma alteração para um projeto em inglês, a mensagem de commit deve ser nessa língua.</p>
-<p>Após comitar, nossa alteração já está na árvore do <strong>git</strong>. Vamos agora subir para o nosso repositório forkado:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">push</span> origin improve_method_watch</div></pre></td></tr></table></figure>
-
-<p>Você vai rodar esse comando, trocando <code>improve_method_watch</code> pelo nome da sua <em>branch</em>, obviamente.</p>
-<p>Fazendo isso, acesse a conta do repositório original no <strong>Github</strong>, e você verá uma mensagem como essa:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/message-pull-request.png" alt="Mensagem de Pull Request no Github"></p>
-<p>Depois é só clicar no botão verde <strong>Compare &amp; Pull Request</strong>.</p>
-<p><em>Você tá falando de Pull Request desde que começou esse tutorial, mas afinal, o que é Pull Request?</em></p>
-<p><em>Pull Request</em> é quando você envia uma sugestão de melhoria para o repositório. </p>
-<p>Quando você quer <em>trazer</em>, <em>pegar</em>, <em>puxar</em> algo para o seu repositório usando o git, você usa o comando <code>git pull</code>. Então, um <em>pull request</em> nada mais é do que uma requisição, ou pedido para que aquele repositório faça um <em>pull</em> com as suas alterações. :)</p>
-<p>Após clicar no botão <strong>Compare &amp; Pull Request</strong>, você será direcionado para a tela onde você vai criar o <em>pull request</em>, e pode conferir se as alterações que aparecem realmente correspondem às alterações que você fez:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/create-pull-request.png" alt="Mensagem de Pull Request"></p>
-<p>Na imagem acima você pode ver:</p>
-<ul>
-<li>Onde diz <strong>base fork</strong> é o diretório padrão. No meu caso, está em <strong>gulpjs/gulp</strong>.</li>
-<li>Ao lado, a <em>branch</em> para a qual eu vou enviar meu <em>pull request</em>. Vou enviar direto para a master do repositório padrão.</li>
-<li><strong>head fork</strong> é o seu repositório, que você forkou. Na imagem, é o <strong>fdaciuk/gulp</strong>.</li>
-<li>E por fim, a <em>branch</em> onde eu fiz a alteração: <em>compare improve_method_watch</em></li>
-</ul>
-<p>Depois disso, você vai colocar um título no seu <em>pull request</em>, para que, ao visualizar a listagem de <em>pull requests</em>, fique fácil saber do que se trata. Normalmente, quando você só tem uma mensagem de commit, esse título é assumido com a mensagem. Ajuste conforme a necessidade.</p>
-<p>Não esqueça também de comentar porque você está fazendo esse <em>pull request</em>, e porque esse ajuste que você fez, faz sentido para o repositório. Uma boa defesa pode ajudar a fazer com que seu <em>pull request</em> seja aceito.</p>
-<p>Antes de clicar no botão <strong>Create Pull Request</strong>, confira os dados da imagem abaixo:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/check-pull-request.png" alt="Conferir Pull Request"></p>
-<p>Rolando um pouco, você vai ver os commits que você fez. Confira se está na branch correta, e que você está enviando somente aquilo que vocẽ alterou. Se você escolher uma branch errada para enviar, você verá milhares de outras alterações - ou talvez nenhuma, se for a mesma branch - que não fará sentido de ser feito o <strong>merge</strong> do <em>pull request</em>.</p>
-<p>No meu caso, eu fiz só uma alteração no <strong>README.md</strong>, adicionando um plugin do <strong>Gulp</strong> (<code>gulp-util</code>) na sessão de <em>plugins recomendados</em>.</p>
-<p>Depois de tudo verificado, clique no botão <strong>Creat Pull Request</strong> e aguarde a resposta! Você será avisado por e-mail - se você não desabilitou as notificações - se houver qualquer atividade nesse <em>pull request</em>: comentários tanto no <em>pull request</em> como nos códigos, para que você possa modificar algo, se a <em>branch</em> for fechada, porque o autor achou que a alteração não fez sentido, ou ainda se o <strong>merge</strong> for feito. </p>
-<p>Se ele fez o <strong>merge</strong>, então sua alteração já faz parte do repositório principal, e você aparecerá na guia <strong>Contributors</strong> do repositório principal:</p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/contributors.png" alt="Colaboradores"></p>
-<p><img src="http://blog.da2k.com.br/uploads/2015/02/contributors-list.png" alt="Lista de colaboradores"></p>
-<p>Como você viu na imagem acima, aparece quantos commits você fez, quanto código você adicionou e quanto você removeu!</p>
-<h2 id="Manter_o_projeto_sempre_atualizado">Manter o projeto sempre atualizado</h2>
-<p>Para que o seu projeto tenha sempre as últimas alterações do repositório principal, siga as instruções <a href="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/" target="_blank" rel="external">desse link</a>.</p>
-<p>Agora você não tem mais desculpas para não colaborar com algum projeto no <strong>Github</strong>! Cada vez que você colabora para um projeto <em>open source</em>, você ganha conhecimento e cresce como profissional! Siga a <a href="https://www.youtube.com/watch?v=dkLCn2S03ws" target="_blank" rel="external">dica do E.T. Bilú</a>: busque conhecimento!</p>
-<p>Ficou alguma dúvida? Comente!</p>
-<blockquote>
-<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
-<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
-</blockquote>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/git-clone-pull-request.jpg" alt=""></p>
-<p>Você tem uma conta no Github, acompanha projetos open source, gostaria de colaborar com algum deles, mas não sabe como fazer? Como criar uma nova feature? Como preparar o repositório? O que é <em>git push</em>?</p>
-<p>Se você tem essas dúvidas, esse artigo é pra você!</p>
-]]>
-    
-    </summary>
-    
-      <category term="1postperday" scheme="http://blog.da2k.com.br/tags/1postperday/"/>
-    
-      <category term="git" scheme="http://blog.da2k.com.br/tags/git/"/>
-    
-      <category term="github" scheme="http://blog.da2k.com.br/categories/github/"/>
     
   </entry>
   
