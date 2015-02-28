@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.da2k.com.br/"/>
-  <updated>2015-02-27T04:58:29.571Z</updated>
+  <updated>2015-02-28T11:52:44.871Z</updated>
   <id>http://blog.da2k.com.br/</id>
   
   <author>
@@ -18,8 +18,8 @@
     <title><![CDATA[Javascript - como funcionam as funções recursivas]]></title>
     <link href="http://blog.da2k.com.br/2015/02/27/javascript-como-funcionam-as-funcoes-recursivas/"/>
     <id>http://blog.da2k.com.br/2015/02/27/javascript-como-funcionam-as-funcoes-recursivas/</id>
-    <published>2015-02-27T04:54:39.000Z</published>
-    <updated>2015-02-27T04:54:39.000Z</updated>
+    <published>2015-02-27T10:11:04.000Z</published>
+    <updated>2015-02-27T10:11:04.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/recursion.jpg" alt=""></p>
 <p><em>O que é <strong>recursão</strong> e como aplicar em <strong>JS</strong>? Como isso pode melhorar meu código?</em> Sexta, no Globo Repórter!<br>Não, pera… vem comigo que eu te mostro AGORA! :D</p>
 <a id="more"></a>
@@ -109,7 +109,7 @@
     <link href="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"/>
     <id>http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/</id>
     <published>2015-02-26T00:00:00.000Z</published>
-    <updated>2015-02-27T01:49:45.000Z</updated>
+    <updated>2015-02-27T10:11:04.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-the-power-of-functions.png" alt=""></p>
 <p>Funções são bastante parecidas com <em>mixins</em>, no <strong>Stylus</strong>. A grande diferença é que elas podem retornar valores! Vamos ver como elas funcionam? ;)</p>
 <a id="more"></a>
@@ -537,7 +537,7 @@
     <link href="http://blog.da2k.com.br/2015/02/20/os-segredos-da-iife/"/>
     <id>http://blog.da2k.com.br/2015/02/20/os-segredos-da-iife/</id>
     <published>2015-02-20T00:00:00.000Z</published>
-    <updated>2015-02-20T02:50:59.000Z</updated>
+    <updated>2015-02-28T11:51:59.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/iife.png" alt=""></p>
 <p>Quando uma <em>função imediata</em> é invocada, muita coisa pode estar acontecendo por trás dessa chamada. Quer descobrir o que é? Então me acompanhe na leitura :D</p>
 <a id="more"></a>
@@ -553,7 +553,7 @@
 <p>A <strong>IIFE</strong> é invocada imediatamente. Mas para que façamos a invocação de uma função imediata, precisamos transformá-la em uma expressão. Nesse caso, vamos utilizar os parênteses para transformar a função em uma expressão, e depois usar novamente os parênteses para invocá-la:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( win, undefined )</span> </span>{</div><div class="line">  <span class="keyword">return</span> <span class="string">'hi!'</span>;</div><div class="line">})( <span class="built_in">window</span> );</div></pre></td></tr></table></figure>
 
-<p>Essa é uma <strong>IIFE</strong>! É uma função anônima, logo, ela não pderia ser invocada, pois não tem um nome. Mas quando a transformamos em uma expressão, podemos invocá-la assim que ela é interpretada. Se executar esse código no seu console, você verá como resultado, a string <code>&quot;hi!&quot;</code>!</p>
+<p>Essa é uma <strong>IIFE</strong>! É uma função anônima, logo, ela não poderia ser invocada, pois não tem um nome. Mas quando a transformamos em uma expressão, podemos invocá-la assim que ela é interpretada. Se executar esse código no seu console, você verá como resultado, a string <code>&quot;hi!&quot;</code>!</p>
 <p>Você pode ler <a href="http://blog.da2k.com.br/2015/01/30/javascript-como-invocar-funcoes/" target="_blank" rel="external">esse post</a> se tiver interesse em saber mais sobre invocações de funções :)</p>
 <p><em>Mas porque eu usaria uma <strong>IIFE</strong>? E o ponto-e-vírgula no ínicio? E aqueles parâmetros? E porque o <code>undefined</code> como parâmetro?</em></p>
 <div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
@@ -713,7 +713,7 @@
     <link href="http://blog.da2k.com.br/2015/02/17/stylus-usando-mixins/"/>
     <id>http://blog.da2k.com.br/2015/02/17/stylus-usando-mixins/</id>
     <published>2015-02-17T00:00:00.000Z</published>
-    <updated>2015-02-27T01:49:45.000Z</updated>
+    <updated>2015-02-27T10:11:04.000Z</updated>
     <content type="html"><![CDATA[<p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-mixins.png" alt=""></p>
 <p>Depois do <a href="http://blog.da2k.com.br/2015/02/15/escrevendo-css-com-stylus/" target="_blank" rel="external">primeiro post mostrando toda a lindeza do Stylus</a>, como ele funciona, e as vantagens que ele tem sobre outros pré-processadores, nesse novo artigo da série, vamos ver como utilizar todo o poder dos mixins dentro do Stylus! Bora? ;)</p>
 <a id="more"></a>
