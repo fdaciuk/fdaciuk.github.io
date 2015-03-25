@@ -112,12 +112,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/curso-javascript-ninja/index.html</loc>
+    <loc>http://blog.da2k.com.br/cursos/index.html</loc>
     <lastmod>2015-02-23T10:12:01.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/cursos/index.html</loc>
+    <loc>http://blog.da2k.com.br/curso-javascript-ninja/index.html</loc>
     <lastmod>2015-02-23T10:12:01.000Z</lastmod>
   </url>
   
@@ -172,7 +172,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
+    <loc>http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -212,27 +212,12 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
-    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/</loc>
-    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/</loc>
-    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</loc>
+    <loc>http://blog.da2k.com.br/2014/03/18/meu-workflow-javascript-com-module-pattern/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -242,7 +227,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -252,7 +237,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
+    <loc>http://blog.da2k.com.br/2015/01/06/pensando-tdd-com-javascript/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -267,12 +252,27 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/01/segredos-do-github-mantendo-a-ordem-no-seu-repositorio/</loc>
+    <loc>http://blog.da2k.com.br/2015/02/14/segredos-do-github-gists/</loc>
+    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/26/segredos-do-github-imagens/</loc>
+    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/01/25/segredos-do-github-shortcuts/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
   <url>
     <loc>http://blog.da2k.com.br/2015/01/19/segredos-do-github-parametros-na-url/</loc>
+    <lastmod>2015-02-17T03:30:20.000Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.da2k.com.br/2015/02/09/segredos-do-github-branches/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -307,7 +307,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/</loc>
+    <loc>http://blog.da2k.com.br/2015/02/12/elimine-os-comentarios/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
@@ -322,7 +322,7 @@
   </url>
   
   <url>
-    <loc>http://blog.da2k.com.br/2015/02/12/elimine-os-comentarios/</loc>
+    <loc>http://blog.da2k.com.br/2015/02/13/escalando-javascript-no-browser/</loc>
     <lastmod>2015-02-17T03:30:20.000Z</lastmod>
   </url>
   
