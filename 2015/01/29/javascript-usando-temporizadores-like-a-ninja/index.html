@@ -1,0 +1,445 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Javascript - Usando temporizadores like a Ninja | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Você provavelmente já conhece os métodos setInterval() e setTimeout(). Mas você sabe a exatamente a diferença entre eles? Sabe como eles realmente funcionam? Vem descobrir :)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript - Usando temporizadores like a Ninja"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/javascript-timers.jpg" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-29T02:00:00.000Z"><a href="/2015/01/29/javascript-usando-temporizadores-like-a-ninja/">29 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Javascript - Usando temporizadores like a Ninja</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/javascript-timers.jpg" alt=""></p>
+<p>Você provavelmente já conhece os métodos <code>setInterval()</code> e <code>setTimeout()</code>. Mas você sabe a exatamente a diferença entre eles? Sabe como eles realmente funcionam? Vem descobrir :)</p>
+<a id="more"></a>
+
+<p><code>setInterval()</code> e <code>setTimeout()</code> são funções temporizadoras. Elas executam uma função de <em>callback</em> após determinado tempo.</p>
+<p>O uso delas é assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setTimeout( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Executa uma vez após 1 segundo.'</span> );</div><div class="line">}, <span class="number">1000</span> );</div><div class="line">  </div><div class="line">setInterval( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Executa infinitamente, 1 vez por segundo.'</span> );</div><div class="line">}, <span class="number">1000</span> );</div></pre></td></tr></table></figure>
+
+<p>Como você pode ver, a sintaxe para as duas é a mesma: o primeiro parâmetro é uma função de callback que será executada após <code>x</code> milissegundos, passados no segundo parâmetro.</p>
+<p>A principal diferença entre elas é que:</p>
+<ul>
+<li><code>setInterval()</code> executa infinitamente, até que você execute <code>clearInterval()</code>;</li>
+<li><code>setTimeout()</code> executa apenas uma vez.</li>
+</ul>
+<p>Você pode remover um temporizador, atribuindo ele a uma variável, e depois usando <code>clearInterval( variavel )</code> para o <code>setInterval()</code>, e <code>clearTimeout( variavel )</code> para <code>setTimeout()</code>.</p>
+<p>Um exemplo prático:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( counter &gt;= <span class="number">10</span> ) {</div><div class="line">    clearInterval( timer );</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( counter++ );</div><div class="line">}, <span class="number">1000</span>);</div></pre></td></tr></table></figure>
+
+<p>Colando esse código no seu console, você pode constatar que é printado o valor de 0 a 10, e então o temporizador é removido.</p>
+<p>Para usar com o <code>setTimeout()</code>, poderíamos fazer algo assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTimer</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> timer = setTimeout( <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( counter++ );</div><div class="line">    <span class="keyword">if</span>( counter &lt; <span class="number">11</span> ) {</div><div class="line">      myTimer();</div><div class="line">    }</div><div class="line">  }, <span class="number">1000</span> );</div><div class="line">}</div><div class="line">  </div><div class="line">myTimer();</div></pre></td></tr></table></figure>
+
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p>Como o <code>setTimeout()</code> executa somente uma vez, precisamos utilizar uma função recursiva para que temporizador continue executando até que ele encha o saco e nós possamos mandá-lo parar de chamar a função! xD</p>
+<p>Bom, até aqui, provavelmente você já sabia de tudo. Mas você sabe em que momento usar <code>setInterval()</code> e quando usar <code>setTimeout()</code>? E porquê?</p>
+<p><em>Dá no mesmo, posso usar qualquer uma!</em></p>
+<p>É nesse ponto que fazemos a separação do jovem Padawan para o verdadeiro Ninja: você precisa conhecer o <em>Event Loop</em> do Javascript, e saber como essas funções o afetam.</p>
+<h2 id="Como_funciona_o_Javascript">Como funciona o Javascript</h2>
+<p>O Javascript trabalha em single thread. Aí você me pergunta: <em>então como ele faz concorrência?</em> </p>
+<p>Através do <em>Event Loop!</em></p>
+<p>Cada instrução assíncrona que precisa ser executada em JS, é lançada no <em>Event Loop</em>. Imagine um círculo, com uma única entrada e uma única saída. Todas as instruções entram pelo mesmo lugar, e saem por outro, uma de cada vez.</p>
+<p>Como essas instruções são <em>assíncronas</em>, elas ficam rodando ali no <em>Event Loop</em> até que estejam prontas. Com isso, o JS não bloqueia a thread, podendo executar outras instruções. Quando uma instrução finaliza, o JS dispara um <strong>evento</strong> (daí o nome <em>Event Loop</em>), devolvendo em uma função de <code>callback</code> o resultado dessa instrução.</p>
+<p>Instruções <em>síncronas</em> são executadas diretamente, bloqueando a thread.</p>
+<p>Vamos ver isso na prática:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ ) {</div><div class="line">  <span class="built_in">console</span>.log( i );</div><div class="line">}</div><div class="line"><span class="built_in">console</span>.log( <span class="string">'Terminou o for'</span> );</div></pre></td></tr></table></figure>
+
+<p>Um loop é uma instrução <em>síncrona</em>, bloqueante. Ou seja, enquanto ele estiver executando, a thread ficará bloqueada. Assim que ele terminar, a próxima instrução é executada. Rodando o exemplo acima no seu console, você verá que, primeiro serão impressos os números de 0 a 9, para então mostrar a mensagem <code>Terminou o for</code>.</p>
+<p><em>E como seria uma instrução assíncrona?</em></p>
+<p>Assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log( <span class="string">'Vou executar antes de setInterval() o/'</span> );</div><div class="line"><span class="keyword">var</span> counter = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">if</span>( counter &gt;= <span class="number">10</span> ) {</div><div class="line">    clearInterval( timer );</div><div class="line">  }</div><div class="line">  </div><div class="line">  <span class="built_in">console</span>.log( counter++ );</div><div class="line">}, <span class="number">1000</span>);</div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log( <span class="string">'E eu, apesar de estar depois, também vou executar antes do setInterval() xD'</span> );</div></pre></td></tr></table></figure>
+
+<p><em>Porque os console.log() executam antes de setInterval()?</em></p>
+<p>Por que o temporizador é uma função assíncrona. Tanto o <code>setInterval()</code>, quanto o <code>setTimeout()</code>. A função passada como parâmetro não é executada até que o tempo passado no segundo parâmetro se esgote.</p>
+<p>O que acontece basicamente é o seguinte: o primeiro <code>console.log()</code> é automaticamente executado. Depois, o setInterval é colocado no <em>Event Loop</em> e, assim que se passar 1 segundo, e ele for o próximo da fila a ser executado (lembra que o <em>Event Loop</em> só executa uma coisa de cada vez?), o JS vai disparar um evento, fazendo com que a função de callback passada no primeiro parâmetro seja executada.</p>
+<p>O tempo nunca vai garantir que o que está no callback vai ser executado exatamente naquele tempo, pois podem ter outras funções assíncronas no <em>Event Loop</em> sendo disparadas. Logo que a fila é liberada, e chega a vez do temporizador, aí então ele é executado.</p>
+<p>Ficou claro como funciona o <em>Event Loop</em>? Ótimo, vamos seguir!</p>
+<p>Sabendo disso, podemos enfim falar sobre as diferenças de <code>setInterval()</code> e <code>setTimeout()</code>.</p>
+<h2 id="setInterval()">setInterval()</h2>
+<p>Como o <code>setInterval()</code> executa infinitamente, a garantia que temos é que ele vai adicionar uma instrução ao <em>Event Loop</em> a cada um segundo (levando em consideração os exemplos passados).</p>
+<p>Isso significa que, se em 1 segundo a primeira instrução não for executada, - por ter outras instruções no <em>Event Loop</em> - a segunda instrução será adicionada ao <em>Event Loop</em>, ficando duas instruções na fila.</p>
+<p>Imagine agora você com vários temporizadores na tela. Cada <code>setInterval()</code> adicionando várias instruções ao <em>Event Loop</em>. Lembrando que o <em>Event Loop</em> é gerenciado pelo browser, no <em>client side</em>. Pode acontecer de chegar um momento que seu computador não terá memória suficiente para suportar a quantidade de eventos alocados, fazer seu navegador dar <em>crash</em>, e em alguns casos, até travar o computador.</p>
+<p>Isso já aconteceu com você? Então. O problema, provavelmente, era o <code>setInterval()</code>.</p>
+<h2 id="setTimeout()">setTimeout()</h2>
+<p>Agora, analisando por esse lado, e sabendo que o <code>setTimeout()</code> só executa uma vez, - a menos que fizermos uma chamada recursiva para que ele execute mais vezes - podemos concluir que, o <code>setTimeout()</code> só vai adicionar mais uma instrução no <em>Event Loop</em> depois que a primeira instrução for retornada através do evento disparado!</p>
+<p>Se a primeira instrução demorar 5 segundos para disparar o evento, a segunda instrução só será adicionada DEPOIS disso!</p>
+<p>Agora pense no caso do exemplo acima, onde usamos vários <code>setInterval()</code>. Com o <code>setTimeout()</code> não teríamos o mesmo problema, pois cada <code>setTimeout()</code> garante que só uma instrução por <code>setTimeout()</code> será enviada ao <em>Event Loop</em>! É um ganho de performance absurdo! :D</p>
+<p>Então, sempre que estiver na dúvida: </p>
+<p><em><code>setInterval()</code> ou <code>setTimeout()</code> recursivo?</em></p>
+<p>Vá pela segunda opção. É muito mais performática!</p>
+<p>Até o próximo artigo!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/temporizadores/">temporizadores</a>, <a href="/tags/setinterval/">setInterval</a>, <a href="/tags/settimeout/">setTimeout</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/29/javascript-usando-temporizadores-like-a-ninja/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

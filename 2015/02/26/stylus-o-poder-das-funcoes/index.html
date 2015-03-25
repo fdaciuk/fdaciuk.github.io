@@ -1,0 +1,454 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Stylus - o poder das funções | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Funções são bastante parecidas com mixins, no Stylus. A grande diferença é que elas podem retornar valores! Vamos ver como elas funcionam? ;)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Stylus - o poder das funções"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/02/stylus-the-power-of-functions.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-26T03:00:00.000Z"><a href="/2015/02/26/stylus-o-poder-das-funcoes/">26 de fevereiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Stylus - o poder das funções</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/02/stylus-the-power-of-functions.png" alt=""></p>
+<p>Funções são bastante parecidas com <em>mixins</em>, no <strong>Stylus</strong>. A grande diferença é que elas podem retornar valores! Vamos ver como elas funcionam? ;)</p>
+<a id="more"></a>
+
+<p>Podemos, por exemplo, criar uma função que soma dois valores passados como argumento:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line">.wrapper</div><div class="line">  width <span class="built_in">add</span>( <span class="number">600</span>px, <span class="number">15</span> )</div></pre></td></tr></table></figure>
+
+<p>Que compila para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class">.wrapper</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">615px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<h2 id="Valores_padrão">Valores padrão</h2>
+<p>Podemos também passar valores <em>default</em> para os argumentos:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b = <span class="operator">a</span> )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line"><span class="built_in">add</span>( <span class="number">10</span>, <span class="number">5</span> )<span class="comment"> // =&gt; 15</span></div><div class="line">  </div><div class="line"><span class="built_in">add</span>( <span class="number">10</span> )<span class="comment"> // =&gt; 20</span></div></pre></td></tr></table></figure>
+
+<p>Os valores <em>default</em> dos argumentos nada mais são do que atribuições. Logo, nós podemos também passar funções como valores <em>default</em>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b = unit( <span class="operator">a</span>, px ) )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line"><span class="built_in">add</span>( <span class="number">20</span> )<span class="comment"> // =&gt; 40px</span></div></pre></td></tr></table></figure>
+
+<p>Repare que o resultado de <code>add( 20 )</code> não é <code>20px</code>, e sim <code>40px</code>. A função <code>unit()</code> faz parte do Stylus. Ela adiciona uma unidade de medida ao valor passado no primeiro parâmetro. O que nós estamos fazendo é atribuir para <code>b</code>, o valor passado para <code>a</code>, e ainda adicionando a unidade <code>px</code>.</p>
+<p>Já conseguiu imaginar as milhões de possibilidades que você pode fazer com isso? xD</p>
+<h2 id="Parâmetros_nomeados">Parâmetros nomeados</h2>
+<p>Podemos também passar valores específicos para as funções. Veja o exemplo:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">subtract</span>( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> - b</div><div class="line">  </div><div class="line"><span class="built_in">subtract</span>( b: <span class="number">10</span>, <span class="operator">a</span>: <span class="number">20</span> )<span class="comment"> // =&gt; 10</span></div></pre></td></tr></table></figure>
+
+<p>Se nós somente passássemos os valores <code>( 10, 20 )</code> para a função <code>subtract</code>, o resultado seria <code>-10</code>. Mas nós podemos nomear os valores, não necessitando assim passar os parãmetros na mesma ordem em que foram definidos na função. Por isso o resultado é <code>10</code> positivo. :D</p>
+<p>Você ainda pode passar apenas um dos valores. Se o outro não for passado, ele será <code>undefined</code>, então podemos utilizar valores padrão para os parâmetros que não são obrigatórios:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">subtract</span>( <span class="operator">a</span> = <span class="number">5</span>, b )</div><div class="line">  <span class="operator">a</span> - b</div><div class="line">  </div><div class="line"><span class="built_in">subtract</span>( b: <span class="number">2</span> )<span class="comment"> // =&gt; 3</span></div></pre></td></tr></table></figure>
+
+<p>Locurage! :D</p>
+<h2 id="Retorno_de_múltiplos_valores">Retorno de múltiplos valores</h2>
+<p>Podemos retornar valores como se estivéssemos usando um <code>array</code> em JS. Se atribuirmos vários valores à uma variável, usamos a notação de <code>array</code> para obter um valor. Exemplo:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">sizes </span>=<span class="string"> 15px 20px</span></div><div class="line">  </div><div class="line">sizes[0] // =&gt; 15px</div></pre></td></tr></table></figure>
+
+<p>O mesmo vale para funções. A diferença é que precisamos invocá-la antes de pegar o valor:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">sizes</span>()</div><div class="line">  15px 10px</div><div class="line">  </div><div class="line"><span class="function">sizes</span>()<span class="attr_selector">[1]</span> <span class="comment">// =&gt; 10px</span></div></pre></td></tr></table></figure>
+
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p>Uma exceção para esses casos, é quando os valores de retorno são identificadores.</p>
+<p>No exemplo abaixo, os valores de retorno podem se confundir com atribuições para propriedades:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">swap</span><span class="params">( a, b )</span></span></div><div class="line">  <span class="title">b</span> <span class="title">a</span></div><div class="line">  </div><div class="line"><span class="title">body</span></div><div class="line">  <span class="title">swap</span><span class="params">(<span class="number">10</span>, <span class="number">20</span>)</span></div></pre></td></tr></table></figure>
+
+<p>Se fizermos isso, tentando usar <code>swap</code> como <em>mixin</em>, temos como resultado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">b</span>:<span class="value"> <span class="number">10</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E se tentarmos usar como função, retornando um valor:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span></div><div class="line">  <span class="attribute">width</span> <span class="function">swap</span>( 10, 20 )</div></pre></td></tr></table></figure>
+
+<p>Temos como resultado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> b: <span class="number">10</span></span></span>;<span class="rule">;</span></div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Ou seja: <strong>Nada a ver, né meu!</strong></p>
+<p>Para remover a ambiguidade, você pode usar parênteses, ou então a palavra-chave <code>return</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">swap</span><span class="params">( a, b )</span></span></div><div class="line">  <span class="params">( b a )</span></div><div class="line">  </div><div class="line"><span class="title">body</span></div><div class="line">  <span class="title">padding</span> <span class="title">swap</span><span class="params">( <span class="number">10</span>px, <span class="number">20</span>px )</span></div></pre></td></tr></table></figure>
+
+<p>Que retorna:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">20px</span> <span class="number">10px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Ou ainda, usando <code>return</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">swap</span>( a, b )</div><div class="line">  <span class="keyword">return</span> b a</div><div class="line">  </div><div class="line">body</div><div class="line">  padding <span class="built_in">swap</span>( 10px, 20px )</div></pre></td></tr></table></figure>
+
+<p>O resultado é o mesmo :)</p>
+<h2 id="Funções_como_parãmetro">Funções como parãmetro</h2>
+<p>Também é possível usar funções como parâmetros, para usar como um <em>callback</em>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">add</span>( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> + b</div><div class="line">  </div><div class="line">sub( <span class="operator">a</span>, b )</div><div class="line">  <span class="operator">a</span> - b</div><div class="line">  </div><div class="line">invoke( <span class="operator">a</span>, b, fn )</div><div class="line">  fn( <span class="operator">a</span>, b )</div><div class="line">  </div><div class="line">body</div><div class="line">  padding invoke( <span class="number">10</span>px, <span class="number">20</span>, <span class="built_in">add</span> )</div><div class="line">  margin invoke( <span class="number">8</span>px, <span class="number">5</span>, sub )</div></pre></td></tr></table></figure>
+
+<p>Que vai compilar para:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">30px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">3px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E isso é apenas o começo do que você pode fazer usando funções no <strong>Stylus</strong>! Para conhecer todas as possibilidades, visite a <a href="http://learnboost.github.io/stylus/docs/functions.html" target="_blank" rel="external">documentação oficial, na sessão de <em>functions</em></a> :D</p>
+<p>Até o próximo!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/css/">css</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/stylus/">stylus</a>, <a href="/tags/pre-processadores/">pré-processadores</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/02/26/stylus-o-poder-das-funcoes/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

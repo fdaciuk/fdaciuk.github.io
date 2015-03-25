@@ -1,0 +1,453 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Segredos do Github - Hospedando seu site no Github | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?
+Eu disse hospedar! Isso mesmo! Seu site pode ficar hospedado no Github, for free, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Segredos do Github - Hospedando seu site no Github"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-05T02:00:00.000Z"><a href="/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/">5 de fevereiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Segredos do Github - Hospedando seu site no Github</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/02/github-gh-pages.png" alt=""></p>
+<p><em>Mas eu já sei que eu posso usar o Github para versionar meu site. O que tem de segredo nisso?</em></p>
+<p>Eu disse <strong>hospedar</strong>! Isso mesmo! Seu site pode ficar hospedado no <strong>Github</strong>, <em>for free</em>, e ser executado diretamente de lá, sem a necessidade de um servidor! Não sabe como fazer? Vem que eu te mostro então ;)</p>
+<a id="more"></a>
+
+<p>Uma ponto importante que eu preciso frizar antes de começar: o <strong>Github</strong> só aceita arquivos estáticos. Não adianta querer usar o <strong>Github</strong> para hospedar um site em <strong>PHP</strong> que não vai funcionar, blz? ;)</p>
+<p>Ele só vai servir os arquivos <em>estáticos</em> gerados - HTML, CSS e JS, imagens, fontes, etc.</p>
+<p>Para se aproveitar dessa feature, você pode cair em duas situações:</p>
+<p>1) <em>Tenho um site pessoal que quero hospedar no <strong>Github</strong></em><br>2) <em>Tenho um projeto Open Source, em um repositório dentro da minha conta, e quero criar um site para ele.</em></p>
+<h2 id="Site_Pessoal">Site Pessoal</h2>
+<p>Para o seu site pessoal, você deve fazer o seguinte:</p>
+<ul>
+<li>crie um novo repositório na sua conta, com o seguinte padrão:</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">username.github.io</div></pre></td></tr></table></figure>
+
+<p>Obviamente, trocando <code>username</code> pelo seu nome de usuário no <strong>Github</strong>. No meu caso, ficou <code>fdaciuk.github.io</code>. O repositório é esse: <a href="https://github.com/fdaciuk/fdaciuk.github.io/" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/</a></p>
+<p>Fazendo isso, você pode subir seus arquivos estáticos para a branch <strong>master</strong> normalmente, e acessá-los pelo endereço:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://username.github.io</div></pre></td></tr></table></figure>
+
+<p>De novo: trocando o <code>username</code> pelo seu nome de usuário!</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Site_para_projeto_open_source">Site para projeto open source</h2>
+<p>Se você já tem um projeto open source no Github, e quer criar um site para ele, você precisa fazer o seguinte:</p>
+<ul>
+<li>crie uma branch orfã - em branco - chamada <code>gh-pages</code>.</li>
+<li>suba os arquivos para essa branch.</li>
+</ul>
+<p>Para criar uma nova branch em branco, use o seguinte comando:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout --orphan gh-pages</div></pre></td></tr></table></figure>
+
+<p>Só lembre de <strong>NUNCA</strong> fazer merge dessa branch na master. Os arquivos das duas branches serão completamente diferentes! Na <code>master</code>, ficarão os arquivos do seu projeto. Na <code>gh-pages</code>, somente os estáticos do site do projeto.</p>
+<p>Você conseguirá acessar pelo seguinte endereço:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://username.github.io/repositoryname</div></pre></td></tr></table></figure>
+
+<p>Não precisa falar do <code>username</code> de novo, né? :P</p>
+<p>E troque o <code>repositoryname</code> pelo nome do seu repositório.</p>
+<p>Para facilitar, veja como fica o acesso ao site do <a href="https://github.com/wpbrasil/odin" target="_blank" rel="external">Odin</a>:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://wpbrasil.github.io/odin</div></pre></td></tr></table></figure>
+
+<p>Onde temos a conta da organização <code>wpbrasil</code> e o repositório cadastrado como <code>odin</code>. Fácil, não?</p>
+<h2 id="Usando_um_domínio_personalizado">Usando um domínio personalizado</h2>
+<p>Para usar um domínio personalizado, você só precisa criar um arquivo chamado <code>CNAME</code>, - na branch onde estão os estáticos do seus site - e o conteúdo dele deve ser o seu domínio. </p>
+<p>O <code>CNAME</code> do meu blog está com o conteúdo assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blog.da2k.com.br</div></pre></td></tr></table></figure>
+
+<p>Não precisa do <code>http(s)</code>.</p>
+<p>Depois você só precisa configurar para que o seu domínio aponte para os DNS do <strong>Github</strong>. Para fazer isso, siga esse tutorial: <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="external">https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/</a></p>
+<p>Você pode usar tanto um domínio principal, como um subdomínio :)</p>
+<h2 id="Geradores_de_estáticos">Geradores de estáticos</h2>
+<p>E já respondendo à pergunta: Não! Você não precisa criar todos os seus arquivos HTML manualmente!</p>
+<p>Existem milhares de ferramentas que geram estáticos, onde você escreve em uma linguagem específica - NodeJS, Ruby, etc - e o framework gera toda a estrutura dos estáticos para você. Aqui no blog, eu estou usando o <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>. Inclusive, fiz <a href="http://blog.da2k.com.br/2014/01/05/hexo-criando-um-blog-ao-estilo-miojo/" target="_blank" rel="external">um post</a>, mostrando como é simples usá-lo para começar um blog :D</p>
+<p>O <strong>Hexo</strong> tem um plugin que gera um <code>sitemap.xml</code> e um <code>atom.xml</code>, onde fica o feed. </p>
+<p>Eu posso criar templates para as páginas, usando <strong>EJS</strong>, <strong>Jade</strong> ou <strong>Markdown</strong>, posso usar <strong>Stylus</strong> para pré-processar o CSS, me aproveitar de partials para não ficar repetindo código, etc. No final, tudo é compilado para HTML, CSS e JS.</p>
+<p>E para escrever os posts, posso utilizar <strong>Markdown</strong> &lt;3</p>
+<p>Ele gera também uma estrutura de URLs amigáveis, que você pode escolher. Ou seja, é perfeito para SEO :)</p>
+<p>Se quiser outras opções de geradores de estáticos, veja esses links:</p>
+<ul>
+<li><a href="https://github.com/pinceladasdaweb/Static-Site-Generators" target="_blank" rel="external">https://github.com/pinceladasdaweb/Static-Site-Generators</a></li>
+<li><a href="https://www.staticgen.com/" target="_blank" rel="external">https://www.staticgen.com/</a></li>
+<li><a href="https://staticsitegenerators.net/" target="_blank" rel="external">https://staticsitegenerators.net/</a></li>
+<li><a href="http://www.modernstatic.com/" target="_blank" rel="external">http://www.modernstatic.com/</a></li>
+</ul>
+<p><em>Have fun</em> :)</p>
+<h2 id="Jekyll">Jekyll</h2>
+<p>Um outro detalhe importante, é que o <strong>Github</strong> consegue compilar seus estáticos sozinho, se você estiver usando o <strong>Jekyll</strong>. O <a href="https://github.com/willianjusten" target="_blank" rel="external">Willian Justen</a> já mostrou porque é interessante usar o <strong>Jekyll</strong> com o <strong>Github</strong>, nesse <a href="http://willianjusten.com.br/por-que-usar-jekyll/" target="_blank" rel="external">ótimo post</a>! E <a href="http://willianjusten.com.br/perguntas-e-respostas-jekyll/" target="_blank" rel="external">nesse outro</a> ele tira algumas dúvidas sobre a ferramenta. Vale muito a leitura!</p>
+<p><em>That’s all folks!</em> Até a próxima :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/github/">github</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/segredos-do-github/">segredos do github</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/02/05/segredos-do-github-hospedando-seu-site-no-github/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

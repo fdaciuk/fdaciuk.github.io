@@ -1,0 +1,457 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>CSS - float ou overflow? | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Hoje, em CSS, temos basicamente duas formas de conter flutuação em CSS: com o próprio float, ou usando overflow. Qual a melhor forma? Qual a forma correta? Quando eu devo usar? Nesse artigo, veremos as vantagens e desvantagens dos dois modos! Vem comigo :D">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="CSS - float ou overflow?"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/02/float-vs-overflow.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-25T03:00:00.000Z"><a href="/2015/02/25/css-float-ou-overflow/">25 de fevereiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">CSS - float ou overflow?</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/02/float-vs-overflow.png" alt=""></p>
+<p>Hoje, em CSS, temos basicamente duas formas de conter flutuação em CSS: com o próprio <code>float</code>, ou usando <code>overflow</code>. Qual a melhor forma? Qual a forma correta? Quando eu devo usar? Nesse artigo, veremos as vantagens e desvantagens dos dois modos! Vem comigo :D</p>
+<a id="more"></a>
+
+<h2 id="Simulando_o_problema">Simulando o problema</h2>
+<p>É mais fácil <em>visualizar</em> o problema, já que estamos falando de CSS. Então, vamos escrever um pouco de código que eu vou explicando o que acontece :)</p>
+<p>Crie um arquivo <code>index.html</code>, com o seguinte código:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Float ou Overflow<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"http://placehold.it/1x1"</span> <span class="attribute">width</span>=<span class="value">"200"</span> <span class="attribute">height</span>=<span class="value">"200"</span> <span class="attribute">alt</span>=<span class="value">""</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="title">p</span>&gt;</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque natus, corporis quae molestiae eum facilis mollitia temporibus expedita ipsam sequi culpa sunt, fugiat. Porro velit dolore quo, dolorem, quia earum nihil cumque inventore placeat vero ullam, neque ad quae, molestias deleniti. Quas facilis incidunt ipsa facere inventore impedit quae debitis?<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Um simples HTML, com uma div, que contém um parágrafo e uma imagem. Agora vamos estilizar para deixar tudo um pouco mais bonito. Pode usar o CSS abaixo no HTML mesmo, somente para exemplo. Coloque o código abaixo da tag <code>&lt;title&gt;</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="tag">&lt;/<span class="title">style</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>E temos o seguinte resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow1.png" alt=""></p>
+<p>Olha que lindo! Nossa div com um fundo bastante exótico, a imagem, e o texto logo abaixo. Agora nós queremos posicionar nossa imagem do lado direito do texto. O que precisamos fazer? Isso mesmo, <strong>flutuá-la!</strong></p>
+<p>Vamos então adicionar o estilo para flutuar a imagem. Coloque o código abaixo, logo após o CSS da <code>div</code>:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">img</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> right</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E olha o que aconteceu:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow2.png" alt=""></p>
+<p>A imagem ficou pra fora do nosso box! Mas não é isso que queremos! Ela faz parte do box, e deve ficar dentro dele, respeitando o <code>padding</code> de 15px que eu coloquei no box. Temos duas formas de “resolver” isso.</p>
+<h2 id="Overflow_para_conter_a_flutuação">Overflow para conter a flutuação</h2>
+<p>Podemos usar <code>overflow</code> no container pai para conter a flutuação:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Na linha <code>3</code>, adicionamos um <code>overflow: hidden</code>, e agora, olhe o que aconteceu:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow3.png" alt=""></p>
+<p><em>Perfeito! Era exatamente o que queríamos! Já acabou?</em></p>
+<p>Calma criança! Ficou exatamente como esperávamos, NESSE CASO. Agora imagine que o designer que fez o layout é todo descolado, e fez um <em>badge</em> que vai ficar posicionado no canto superior esquerdo, um pouco para fora do box.</p>
+<p>Vamos adicionar o <em>badge</em> no nosso código:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"badge"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"http://placehold.it/1x1"</span> <span class="attribute">width</span>=<span class="value">"200"</span> <span class="attribute">height</span>=<span class="value">"200"</span> <span class="attribute">alt</span>=<span class="value">""</span> /&gt;</span></div><div class="line">  ...</div></pre></td></tr></table></figure>
+
+<p>E vamos posicioná-lo no canto superior esquerdo do box:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line">  </div><div class="line"><span class="class">.badge</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> purple</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">left</span>:<span class="value"> -<span class="number">25px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> absolute</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">top</span>:<span class="value"> -<span class="number">25px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Deixamos a <code>div</code> com posicionamento relative (linha <code>5</code>), para que o <em>badge</em> não se perca, e fique posicionado absolutamente, mas sempre relativo à div.</p>
+<p>Olha o resultado que coisa mais fofa:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow4.png" alt=""></p>
+<p>Nosso <em>badge</em> ficou lá no canto, mas só apareceu 1/4 dele! Cadê o resto?</p>
+<p>O <em>overflow</em> conteve a flutuação, mas, em conpensação, impede que qualquer filho do container ao qual foi aplicado o overflow, apareça fora da área delimitada =/</p>
+<p><strong>Resultado: </strong></p>
+<p>Usar <code>overflow</code> resolve o problema de conter flutuação? Sim, em partes. A menos que vocẽ precise que, algo dentro do box, fique um pouco para fora.<br>É a solução correta? Não.</p>
+<h2 id="Usando_float_para_conter_a_flutuação">Usando float para conter a flutuação</h2>
+<p>Agora vamos ver como fazer o mesmo, mas usando <code>float</code>. Vamos remover o <code>overflow</code> da div e colocar um <code>float: left</code>:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E o resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow5.png" alt=""></p>
+<p>Ótimo, coisa linda! Mas perae, tem um problema… Nosso box não ocupou toda a largura da tela. Como ele está flutuado e não tem <code>width</code> definido, a largura dele será baseada no tamanho dos itens internos.</p>
+<p><em>Ah, mas isso é fácil de resolver: só colocar um <code>width: 100%</code> na div!</em></p>
+<p>Vamos fazer isso então:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">div</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> red</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">15px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">position</span>:<span class="value"> relative</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Como ficou?</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow6.png" alt=""></p>
+<p>Olhe o que aconteceu: ficou “quase” da forma como queríamos. O problema foi que, como nosso box tem um <code>padding</code> de 15px em cada lado (30px na vertical, e 30px na horizontal), os <code>100%</code> da largura foram somados aos 30px horizontais! Ficamos com um box que tem 100% + 30px de largura!</p>
+<p><em>Tem como resolver isso de outra forma?</em></p>
+<p>Existe uma propriedade chamada <code>box-sizing</code>, que funciona no ie8+. Usando o valor <code>border-box</code>, nós fazemos com que, ao invés de somar os valores de <code>padding</code> do box, ele seja aplicado à largura do mesmo! Vamos aproveitar e aplicar à todos os elementos. Como é uma única propriedade, não há problema em usar o <code>*</code> nesse caso:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">* <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">-moz-box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>E olha o resultado:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/float-overflow7.png" alt=""></p>
+<p>Agora sim, ficou exatamente como eu esperava! Mas eu precisei usar outra propriedade além do <code>float</code>, e ainda usar o <code>width: 100%</code> para ficar correto.</p>
+<p><strong>Resultado: </strong></p>
+<p>Usar <code>float</code> resolve o problema de conter flutuação? Não sozinho, precisa do box-sizing. Com o box-sizing sim.<br>É a solução correta? Não. Se estamos flutuando para direita ou esquerda, não faz muito sentido colocar width: 100%.</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Conclusão">Conclusão</h2>
+<p>Não existe uma solução “correta” para isso. Temos essas duas abordagens que estão disponíveis. Podemos usar qualquer uma delas. </p>
+<p>Em minha opinião, a que melhor funciona é a do float com box-sizing. Apesar de você precisar flutuar sempre os containers principais, eu penso que é muito mais fácil fazer isso do que, depois do layout todo pronto, o designer colocar uma nova feature, onde é necessário conter a flutuação, e você ter que sair flutuando loucamente tudo o que vir pela frente.</p>
+<p>Se flutuar somente os containers principais, o que vai ficar dentro deles é muito mais facilmente controlável :)</p>
+<p>A solução ideal para isso, na verdade, seria usar <code>flexbox</code>. Se no seu projeto você não precisa <a href="http://caniuse.com/#feat=flexbox" target="_blank" rel="external">se preocupar com o IE</a>, vocẽ pode usá-lo hoje mesmo. Chris Coyier, do CSS Tricks, escreveu um <a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="external">excelente artigo</a> falando praticamente tudo sobre Flexbox. Recomendo a leitura ;)</p>
+<p>E você: tem alguma técnica diferente para conter a flutuação? Usa alguma das citadas acima Já havia passado por isso, mas não sabia como resolver? Compartilhe conosco nos comentários! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/css/">css</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/02/25/css-float-ou-overflow/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

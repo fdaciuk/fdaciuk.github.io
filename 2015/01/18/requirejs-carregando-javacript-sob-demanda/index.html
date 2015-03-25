@@ -1,0 +1,479 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>RequireJS - Carregando Javacript sob demanda | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Quando você tem uma aplicação onde vai usar muito código Javascript, é sempre importante pensar na performance. Mas além disso, para que sua aplicação possa escalar, seu código precisa ser modular.
+Nesse momento surgem as dúvidas:- Escrevo todo o meu código em um arquivo só, e minifico para não sobrecarregar os requests do browser?- Separo em vários arquivos para facilitar o desenvolvimento, sem me preocupar com a quantidade de requests http?
+Qual a melhor solução?">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="RequireJS - Carregando Javacript sob demanda"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/requirejs.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-18T02:00:00.000Z"><a href="/2015/01/18/requirejs-carregando-javacript-sob-demanda/">18 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">RequireJS - Carregando Javacript sob demanda</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/requirejs.png" alt="RequireJS"></p>
+<p>Quando você tem uma aplicação onde vai usar muito código Javascript, é sempre importante pensar na performance. Mas além disso, para que sua aplicação possa escalar, seu código precisa ser modular.</p>
+<p>Nesse momento surgem as dúvidas:<br><em>- Escrevo todo o meu código em um arquivo só, e minifico para não sobrecarregar os requests do browser?</em><br><em>- Separo em vários arquivos para facilitar o desenvolvimento, sem me preocupar com a quantidade de requests http?</em></p>
+<p><em>Qual a melhor solução?</em></p>
+<a id="more"></a>
+
+<p>A resposta correta é: depende do seu projeto. Você vai precisar medir isso e ver o que é mais viável no seu caso. O problema que temos hoje é que, quando você adiciona vários scripts no seu app, ao baixar um arquivo <code>css</code> ou <code>js</code>, o browser bloqueia a renderização do navegador até que o arquivo seja baixado e parseado. Feito isso, a renderização continua, e faz o mesmo ao encontrar o próximo script.</p>
+<p>Isso deixa sua aplicação muito lenta, pois cada request pode levar em torno de 20ms a 120ms, dependendo do tamanho do arquivo, para executar esse processo. Se saber mais sobre performance, e porque isso acontece, leia <a href="http://csswizardry.com/2013/01/front-end-performance-for-web-designers-and-front-end-developers/" target="_blank" rel="external">este artigo.</a>.</p>
+<h2 id="RequireJS">RequireJS</h2>
+<p>Mas ao carregarmos nossos scripts assincronamente, o browser não bloqueia a renderização, mas faz o download e parse dos arquivos em segundo plano, disponibilizando-os assim que estiverem prontos.</p>
+<p>E o <a href="http://requirejs.org/" target="_blank" rel="external"><strong>RequireJS</strong></a> nos ajuda exatamente com isso: usando uma estrutura modular, baseada no <a href="http://blog.da2k.com.br/2015/01/03/como-criar-componentes-js-usando-modulos-amd-commonjs-e-umd-parte-1-3/" target="_blank" rel="external">AMD</a>, você usa <em>Dependency Injection</em>, para que os scripts necessários sejam carregados de forma assincrona, sob demanda, ou seja, você só vai carregar um arquivo quando realmente precisar dele!</p>
+<p>A configuração inicial do RequireJS é um pouco chata, mas vou mostrar o passo-a-passo para que você possa utilizar ele em seus projetos sem maiores problemas :D</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Obtendo_o_RequireJS">Obtendo o RequireJS</h2>
+<p>Você pode baixar o RequireJS à partir <a href="http://requirejs.org/docs/download.html#requirejs" target="_blank" rel="external">desse link</a>. Pode baixar a <a href="http://requirejs.org/docs/release/2.1.15/minified/require.js" target="_blank" rel="external">versão minificada aqui</a>.</p>
+<p>Com o Require em mãos, vamos criar a seguinte estrutura de diretórios:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── index.html</div><div class="line">└── js</div><div class="line">    ├── App.js</div><div class="line">    ├── boot.js</div><div class="line">    ├── controllers</div><div class="line">    │   └── HomeController.js</div><div class="line">    └── vendor</div><div class="line">        ├── jquery.js</div><div class="line">        ├── lodash.js</div><div class="line">        └── require.js</div></pre></td></tr></table></figure>
+
+<p>No diretório <code>js/vendor/</code> é onde iremos centralizar <em>libs</em> de terceiros. Baixe o <a href="http://jquery.com/" target="_blank" rel="external">jQuery</a> e a <a href="https://lodash.com/" target="_blank" rel="external">LoDash</a>, e adicione nesse diretório.</p>
+<p>Na <code>index.html</code>:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"pt-br"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>RequireJS<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  </div><div class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">data-main</span>=<span class="value">"js/boot"</span> <span class="attribute">src</span>=<span class="value">"js/vendor/require.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Se você reparar na linha <code>9</code>, onde adicionamos o script do RequireJS, temos um atributo <code>data-main</code>. Esse atributo diz ao Require que, quando ele for baixado, esse é o arquivo que deve ser executado: <code>js/boot.js</code>. Então é nesse arquivo que nós iremos fazer nossas configurações iniciais. </p>
+<p>O Require faz a adição do <code>.js</code> no final do arquivo, então sempre chame-o sem a extensão.</p>
+<p>Se você abrir a aba <code>Network</code> no seu navegador, com a <code>index.html</code> do nosso projeto aberta, pode constatar que os dois arquivos foram baixados corretamente:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/bootjs.png" alt="boot.js"></p>
+<p>Agora no <code>js/boot.js</code>, vamos iniciar as configurações:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>([ <span class="string">'vendor/jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'jQuery carregado!'</span>, $( <span class="built_in">document</span> ) );</div><div class="line">  });</div><div class="line">})();</div></pre></td></tr></table></figure>
+
+<p>O <strong>RequireJS</strong> tem 3 funções:</p>
+<ul>
+<li><code>require()</code> / <code>requirejs()</code> - Injeta um arquivo;</li>
+<li><code>define()</code> - Cria um componente no padrão AMD.</li>
+</ul>
+<p>Para fazer a injeção de dependências, você pode usar tanto o <code>require()</code> quanto o <code>requirejs()</code>, que fazem exatamente a mesma coisa. </p>
+<p><em>E pra quê duas funções que fazem a mesma coisa?</em></p>
+<p>Porque você pode estar usando alguma outra lib que use a função <code>require()</code>. Nesse caso, o <strong>RequireJS</strong> não sobrescreve essa função, mas te dá a opção de usar <code>requirejs()</code> no lugar, mantendo tudo sob controle :)</p>
+<p>A sintaxe das funções <code>require()</code> e <code>requirejs()</code> é a seguinte:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>( deps, callback );</div></pre></td></tr></table></figure>
+
+<p>E a sintaxe da função <code>define()</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">define( <span class="string">'moduleName'</span>, deps, callback );</div></pre></td></tr></table></figure>
+
+<p>A única diferença das funções <code>require()</code> e <code>requirejs()</code> para a função <code>define()</code>, é que na <code>define()</code> você pode - opcionalmente - adicionar o nome do seu módulo.</p>
+<p><em>E como saber quando usar <code>define</code> e quando usar <code>require</code> ou <code>requirejs</code>?</em></p>
+<p>A regra basicamente é essa:</p>
+<ul>
+<li><code>define</code> será usado sempre no início de novos arquivos - levando em consideração que cada módulo será um arquivo;</li>
+<li><code>require</code> ou <code>requirejs</code>, se você precisar injetar uma dependência no corpo de um módulo já existente.</li>
+</ul>
+<p>Ainda confuso? Quando estivermos criando nossos módulos, você vai entender melhor :)</p>
+<h2 id="Entendendo_os_parâmetros">Entendendo os parâmetros</h2>
+<p>O parâmetro <code>moduleName</code>, na função <code>define()</code>, é o nome do seu módulo.</p>
+<p>No parâmetro <code>deps</code>, você vai passar um array de dependências. Coloque o caminho completo dos arquivos, tomando como base o caminho do arquivo chamado no atributo <code>data-main</code> do seu script. No nosso caso, o <code>js/boot.js</code>. E não é necessário adicionar o <code>.js</code> no final do arquivo.</p>
+<p><strong>Nota:</strong> ainda que você vá utilizar somente uma dependência, é necessário utilizar a notação de array. Se não houver dependências (quando utilizar o <code>define()</code>), esse parâmetro é opcional. Nesse caso, passe somente a função de callback. E se você não tiver dependências e precisar retornar, por exemplo, somente um objeto, você pode passar ele diretamente para a função <code>define()</code>, sem precisar instanciar a função de callback:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">define({</div><div class="line">  color: <span class="string">'black'</span>,</div><div class="line">  size: <span class="string">'large'</span></div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p><em>Quer dizer que só no <code>require()</code> e <code>requirejs()</code> as dependências são obrigatórias?</em></p>
+<p>Se não há a necessidade de injetar dependências, então você não precisará do <code>require</code> ;)</p>
+<p>E o parâmetro <code>callback</code> é uma função que será executada assim que todas as dependências forem resolvidas (ou um objeto, como mostrado acima).</p>
+<h2 id="require-config()"><code>require.config()</code></h2>
+<p>As funções <code>require</code> e <code>requirejs</code> - a partir daqui vou parar de citar as duas. Quando eu me referir a <code>require</code>, estou falando das duas, ok? ;) - têm um método <code>config()</code>, onde você pode configurar algumas coisas para facilitar a injeção de dependências. Vamos adicionar essas configurações no nosso <code>js/boot.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>.config({</div><div class="line">    baseUrl: <span class="string">'./js'</span>,</div><div class="line">    paths: {</div><div class="line">      jquery: [</div><div class="line">        <span class="string">'https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min'</span>,</div><div class="line">        <span class="string">'vendor/jquery'</span></div><div class="line">      ],</div><div class="line">      lodash: <span class="string">'vendor/lodash'</span></div><div class="line">    }</div><div class="line">  });</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( <span class="string">'jQuery carregado!'</span>, $( <span class="built_in">document</span> ) );</div><div class="line">  });</div><div class="line">})();</div></pre></td></tr></table></figure>
+
+<p>Primeiro vou explicar o parâmetro na função de callback do <code>require()</code>.</p>
+<h2 id="Parâmetros_do_callback">Parâmetros do callback</h2>
+<p>Quando uma dependência é injetada, o retorno dessa dependência pode ser obtido a partir dos parâmetros na função de callback. Os parâmetros do callback devem ser passados <strong>na mesma ordem</strong> das dependências injetadas.</p>
+<p>No nosso primeiro exemplo, no início do artigo, fizemos a injeção do jQuery, mas não passamos parâmetro algum no callback. O código funciona corretamente porque o jQuery passa para o objeto <code>window</code> os objetos <code>jQuery</code> e <code>$</code>. Logo, você pode usar esses objetos globais. Mas, por questões de boas práticas e performance, é melhor você usar sempre objetos e variáveis locais. Nesse caso, no último exemplo, passamos como parâmetro para a função de callback o <code>$</code>, que recebe o <code>jquery</code> injetado, para que possamos usar <code>$</code> localmente.</p>
+<p>Injetamos também a <code>lodash</code>, e passamos como parâmetro no callback o <code>_</code>, para ser usado também localmente.</p>
+<h2 id="Agora_sim,_o_método_config()">Agora sim, o método <code>config()</code></h2>
+<p>Como já havia dito, para fazer a injeção de dependências, o <strong>RequireJS</strong> toma como base o caminho do arquivo passado no parâmetro <code>data-main</code> do nosso script. Mas nós podemos passar um parâmetro <code>baseUrl</code> para setar manualmente esse caminho. A partir daí, todos os caminhos de scripts injetados tomam essa URL como base. Você pode passar tanto caminhos absolutos como relativos.</p>
+<p>Para usar caminhos relativos com o <code>baseUrl</code>, a base será o caminho do HTML onde está inserido o <code>&lt;script&gt;</code> que chama o <strong>RequireJS</strong>.</p>
+<p>A propriedade <code>paths</code> é um objeto, que recebe como chave uma referência para o módulo que será injetado, e como valor, a URL desse módulo. Isso facilita na hora da injeção, para que você não precise passar todo o caminho da dependência.</p>
+<p>Se você voltar no primeiro exemplo, vai ver que injetamos o jQuery com <code>vendor/jquery</code>. Nesse segundo exemplo, usamos somente <code>jquery</code>, pois no <code>paths</code> já setamos o caminho completo.</p>
+<p>Você deve ter percebido também que podemos usar um array como valor da dependência. O que o <strong>RequireJS</strong> faz nesse caso é tentar carregar os arquivos na ordem que está no array. Se a primeira URL falhar, ele tenta carregar a segunda, e assim por diante. No caso do jQuery, a vantagem é poder usar um CDN e, se esse método falhar, chamamos a lib localmente, em <code>vendor/jquery</code>.</p>
+<p>A ideia de usar o <strong>RequreJS</strong> é basicamente essa. Mas para facilitar a visualização, vamos escrever um pouco mais de código, pois ainda não vimos a função <code>define()</code> em ação.</p>
+<p>No nosso arquivo <code>js/App.js</code> coloque o seguinte código:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">define([ <span class="string">'jquery'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $ )</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Carregou App.js'</span> );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>E no arquivo <code>js/boot.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span><span class="params">( undefined )</span> </span>{</div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>.config({</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  });</div><div class="line">  </div><div class="line">  <span class="built_in">require</span>([ <span class="string">'jquery'</span>, <span class="string">'lodash'</span> ], <span class="function"><span class="keyword">function</span><span class="params">( $, _ )</span> </span>{</div><div class="line">    <span class="built_in">require</span>([ <span class="string">'App'</span> ]);</div><div class="line">  });</div><div class="line">})();</div></pre></td></tr></table></figure>
+
+<p>Perceba que podemos aninhar os métodos <code>require</code> para garantir que, ao carregar <code>js/App.js</code>, o <code>jquery</code> e a <code>lodash</code> já estejam carregados!</p>
+<p>No arquivo <code>js/App.js</code>, nós usamos o <code>define</code> para definir esse módulo. Porque não utilizamos o <code>require</code>?</p>
+<p>Por que esse módulo ainda não existe, e está sendo definido. Se eu precisar injetar dependências dentro do módulo, que dependam das dependências passadas no array do primeiro parâmetro, aí sim eu vou usar o <code>require()</code>. Ficou mais claro o uso deles agora?</p>
+<p><em>Hey, mas você passou o <code>jquery</code> como dependência do módulo <code>App</code>. Isso não vai fazer o <strong>RequireJS</strong> trabalhar dobrado e baixar duas vezes o jQuery?</em></p>
+<p>Não. Em cada módulo você deve injetar todas as dependências que você precisa usar internamente nele, ou que você precisa que estejam carregadas para usá-lo. O <strong>RequireJS</strong> se encarrega de - se essa dependência já tiver sido carregada antes - usar o arquivo que foi carregado da primeira vez.</p>
+<p>Nesse nosso exemplo, o arquivo <code>js/boot.js</code> vai fazer o boot do <strong>RequireJS</strong>, e o <code>js/App.js</code> vai controlar toda a nossa aplicação.</p>
+<p>Dentro do <code>js/App.js</code>, você pode escrever qualquer código Javascript para chamar os seus scripts sob demanda, somente quando necessário.</p>
+<p>Vou deixar <a href="https://github.com/fdaciuk/workflow-requirejs" target="_blank" rel="external">nesse repositório</a> um exemplo de <em>workflow</em> com <strong>RequireJS</strong>, tomando como base os exemplos passados nesse artigo, mas com algumas coisas a mais, para que você possa se basear nele para montar seu próprio <em>workflow</em>, dependendo do seu projeto, ok?</p>
+<p>Ficou com dúvidas? Poste nos comentários!</p>
+<p>Até o próximo artigo!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/requirejs/">requirejs</a>, <a href="/tags/amd/">amd</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/18/requirejs-carregando-javacript-sob-demanda/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

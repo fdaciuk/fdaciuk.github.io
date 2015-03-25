@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>GulpJS - Um gole de otimização no seu workflow | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Em 2014 palestrei em alguns eventos evangelizando a galera sobre o uso do GulpJS. Hoje resolvi transformar essa palestra em post, para facilitar futuras consultas e poder fazer outros posts falando mais a fundo sobre GulpJS e seus plugins!
+Mas precisamos começar de algum lugar! Vem comigo? :D">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="GulpJS - Um gole de otimização no seu workflow"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/01/gulpjs.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-01-24T02:00:00.000Z"><a href="/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/">24 de janeiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">GulpJS - Um gole de otimização no seu workflow</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/01/gulpjs.png" alt=""></p>
+<p>Em 2014 <a href="https://github.com/fdaciuk/talks" target="_blank" rel="external">palestrei em alguns eventos</a> evangelizando a galera sobre o uso do <a href="http://gulpjs.com/" target="_blank" rel="external">GulpJS</a>. Hoje resolvi transformar essa palestra em post, para facilitar futuras consultas e poder fazer outros posts falando mais a fundo sobre GulpJS e seus plugins!</p>
+<p>Mas precisamos começar de algum lugar! Vem comigo? :D</p>
+<a id="more"></a>
+
+<h2 id="O_que_é_o_GulpJS?">O que é o GulpJS?</h2>
+<p>O <strong>GulpJS</strong> é um <em>task runner</em>, assim como o <a href="http://gruntjs.com/" target="_blank" rel="external"><strong>Grunt</strong></a>. </p>
+<p><em>E o que é um task runner</em>?</p>
+<p><em>Task Runner</em> é o nome dado à uma ferramenta que centraliza e executa alguma tarefa repetitiva automaticamente. Eles existem para facilitar o seu dia-a-dia como desenvolvedor.</p>
+<p>Elas são sinônimo de <strong>performance</strong>.</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/performance.gif" alt="Performance"></p>
+<p>A ideia é dar performance ao desenvolvedor na hora de escrever códigos, e também performance ao entregar o projeto ao cliente final, deixando-o mais leve e rápido.</p>
+<p>Um <em>task runner</em> pode executar tarefas rotineiras como <strong>minificação de arquivos</strong>, <strong>compilação de CSS com pré-processadores</strong>, <strong>minificação de imagens</strong>, <strong>deploy</strong>, etc., tudo isso de forma automatizada. <em>Cool, hum?</em> ;)</p>
+<p>Para facilitar o entendimento, vou mostrar alguns exemplos de ferramentas que você precisa usar diariamente para executar essas tarefas:</p>
+<h3 id="Javascript_Compressor">Javascript Compressor</h3>
+<p>Após escrever seu JS, você cola seu código <a href="http://www.minifyjs.com/javascript-compressor/" target="_blank" rel="external">nessa ferramenta</a>, e ela te devolve o código todo minificado, pronto para entregar em produção!</p>
+<h3 id="Lint_de_JS">Lint de JS</h3>
+<p>O <a href="http://jshint.com/" target="_blank" rel="external"><strong>JSHint</strong></a> busca no seu código erros comuns, garantindo que você esteja usando as melhores práticas nas escrita do seu Javascript.</p>
+<p>Existe também o <a href="http://www.jslint.com/" target="_blank" rel="external"><strong>JSLint</strong></a>, criado por <a href="">Douglas Crockford</a>. É uma ferramenta que tem um pouco mais de restrições que o JSHint, - JSHint é mais “maleável” - e é recomendado para quem gosta de <a href="https://github.com/twbs/bootstrap/issues/3057#issuecomment-5135512" target="_blank" rel="external">“desafios maiores”</a> :P</p>
+<h3 id="Testes_(TDD/BDD/E2E)">Testes (TDD/BDD/E2E)</h3>
+<p>Testar seu código não pode ser uma tarefa difícil, muito menos lenta, senão você acaba deixando eles de lado. Algumas ferramentas facilitam o trabalho, como o <a href="http://mochajs.org/" target="_blank" rel="external">Mocha</a>, <a href="http://shouldjs.github.io/" target="_blank" rel="external">Should</a>, <a href="http://jasmine.github.io/" target="_blank" rel="external">Jasmine</a>, <a href="http://qunitjs.com/" target="_blank" rel="external">QUnit</a>, <a href="http://chaijs.com/" target="_blank" rel="external">Chai</a>, <a href="http://sinonjs.org/" target="_blank" rel="external">Sinon</a>, etc.</p>
+<h3 id="Pré-processadores">Pré-processadores</h3>
+<p>Com eles você “programa” dentro do CSS. Pode usar estruturas condicionais, funções, variáveis, includes, mixins, e ainda diminui muito a repetição de código. Os mais conhecidos são: <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a>, <a href="http://sass-lang.com/" target="_blank" rel="external">Sass</a> e <a href="http://lesscss.org/" target="_blank" rel="external">LESS</a>.</p>
+<h3 id="Compressão_de_imagens">Compressão de imagens</h3>
+<p>Ao exportar suas imagens, elas precisam ser tão leves quanto possível. Existem vários softwares que fazem esse trabalho, diminuindo o tamanho da imagem, mas mantendo a mesma qualidade. Uma ferramenta legal (e online) para fazer isso é o <a href="http://compressor.io/" target="_blank" rel="external">Compressor.io</a>.</p>
+<h3 id="Sistema_de_controle_de_versão">Sistema de controle de versão</h3>
+<p><a href="http://git-scm.com/" target="_blank" rel="external">Git</a>, <a href="http://mercurial.selenic.com/" target="_blank" rel="external">Mercurial</a>, <a href="https://subversion.apache.org/" target="_blank" rel="external">SVN</a> são sistemas que ajudam a controlar a versão do seu projeto. Você pode desenvolver por partes e ter o controle de cada feature implementada no seu sistema.</p>
+<p>Então você pensa: <em>Nossa, eu posso usar milhões de ferramentas para otimizar meu projeto!</em></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/crazy-bird.gif" alt="Passarinho locão"></p>
+<p>Mas ao mesmo tempo, você percebe que é muita coisa! Muita ferramenta para lembrar de usar, muito site para favoritar, e desiste de tudo isso! <em>Vou entregar o projeto assim mesmo! Não vou conseguir lembrar de usar todas essas ferramentas!</em></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/panda.gif" alt="Panda derrubando carrinho"></p>
+<h3 id="E_se_pudéssemos_automatizar_esse_processo?">E se pudéssemos automatizar esse processo?</h3>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/blocks.gif" alt="Automatização"></p>
+<p>Uma vez vi uma palestra do <a href="http://addyosmani.com/blog/" target="_blank" rel="external">Addy Osmani</a>, onde ele disse que:</p>
+<blockquote>
+<p>Automation isn’t about being lazy, It’s about being efficient.</p>
+</blockquote>
+<p>Mas como é possível ser eficiente tendo que lembrar de milhões de coisas pra usar? Não dá pra centralizar tudo isso em uma única ferramenta? Será que é possível?</p>
+<p><strong>SIM!</strong> Nós podemos fazer isso usando <a href="http://nodejs.org/" target="_blank" rel="external">NodeJS</a>!</p>
+<h2 id="Instalando_o_NodeJS">Instalando o NodeJS</h2>
+<p>A instalação do NodeJS é bastante simples: acesse o site do <a href="http://nodejs.org/download/" target="_blank" rel="external">NodeJS</a>, baixe a versão para o seu sistema operacional e siga as instruções.</p>
+<p>Fazendo isso, você terá no seu terminal o comando <code>node</code> disponível!</p>
+<p>O Node também traz junto com ele o gerenciador de pacotes NPM. Logo, você também já deve ter o comando <code>npm</code> disponível no seu terminal para gerenciar os pacotes do Node! :D</p>
+<p>Para quem não sabe, um gerenciador de pacotes é o cara que vai centralizar os pacotes de software disponíveis para a ferramenta em questão. </p>
+<p>É como os gerenciadores de pacote do seus sistema operacional:</p>
+<p>No Linux, nós temos o <code>apt-get</code> nos linux <em>Debian Like</em>, <code>yum</code> do Fedora;<br>No Mac, <code>brew</code> ou <code>ports</code>;<br>No Windows, bem… no Windows não tem! Mas se tivesse, acho que seria algo assim:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/windows-package-manager.gif" alt="Gerenciador de pacotes no Windows"></p>
+<p>:P</p>
+<p>Mas zueiras à parte, vamos ver como utilizar o NPM:</p>
+<h2 id="Instalação_de_pacotes">Instalação de pacotes</h2>
+<p>Para instalar algum módulo NodeJS com o NPM, você pode usar o comando:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install &lt;module name&gt;</div></pre></td></tr></table></figure>
+
+<p>Ou ainda:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i &lt;module name&gt;</div></pre></td></tr></table></figure>
+
+<p>O <code>i</code> é apenas um <em>alias</em> para o <code>install</code>, ou seja, eles fazem a mesma coisa.</p>
+<p>E <code>&lt;module name&gt;</code> é o nome do seu módulo. Você pode encontrar os <a href="https://www.npmjs.com/" target="_blank" rel="external">módulos disponíveis no NPM aqui</a>.</p>
+<h2 id="Instalando_o_GulpJS">Instalando o GulpJS</h2>
+<p>Depois do Node e NPM instalados e funcionando, precisamos começar instalando o GulpJS:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g gulp</div></pre></td></tr></table></figure>
+
+<p>Com esse comando, instalamos o GulpJS globalmente (repare no <code>-g</code> do comando acima). Quando instalamos um módulo do Node globalmente, temos disponíveis no nosso terminal o comando que geralmente é o mesmo nome do módulo. Nesse caso, temos o comando <code>gulp</code> disponível :)</p>
+<p>Vamos ver um exemplo na prática de como usá-lo. Crie a seguinte estrutura de arquivos:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── gulpfile.js</div><div class="line">└── package.json</div></pre></td></tr></table></figure>
+
+<p>No <code>package.json</code> ficarão todas as informações do nosso módulo. Podemos criá-lo manualmente, ou através do comando:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure>
+
+<p>Ao utilizar o comando, serão feitas algumas perguntas relacionadas ao projeto. Vá dando <code>enter</code> para ignorar se não quiser preencher. Essas informações não serão relevantes para o nosso caso, usando um <em>task runner</em>.</p>
+<p>Se não quiser usar o <code>npm init</code>, crie manualmente o <code>package.json</code>, com uma estrutura básica para um JSON, para que possamos começar a utilizá-lo. No arquivo <code>package.json</code>, adicione:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">{}</div></pre></td></tr></table></figure>
+
+<p>É tudo o que precisamos para começar no <code>package.json</code>. Vamos agora instalar nossas dependências.</p>
+<h2 id="Dependências">Dependências</h2>
+<p>Para que possamos usar o Gulp no nosso projeto, precisamos instalar algumas dependências. Uma delas é o próprio Gulp, mas dessa vez, instalado de forma local:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp</div></pre></td></tr></table></figure>
+
+<p>Repare na flag <code>--save-dev</code>. Na primeira vez, instalamos o Gulp globalmente (<code>-g</code>) para termos o comando <code>gulp</code> no terminal. Agora, instalamos ele localmente, em modo de desenvolvimento (<code>--save-dev</code>), para utilizar os métodos dele dentro do nosso <code>gulpfile.js</code>.</p>
+<p>Usando essa flag, a dependência é salva automaticamente no nosso <code>package.json</code>. O porquê disso explicarei mais à frente.</p>
+<p>Agora nosso arquivo <code>package.json</code> está assim:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">  "<span class="attribute">devDependencies</span>": <span class="value">{</span></div><div class="line">    "<span class="attribute">gulp</span>": <span class="value"><span class="string">"^3.8.10"</span></span></div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Todas as dependências que precisaremos para utilizar enquanto estivermos desenvolvendo devem ser instaladas com a flag <code>--save-dev</code>, que o NPM automaticamente vai salvar dentro dessa diretiva <code>devDependencies</code>.</p>
+<p>Perceba também que foi criado um diretório <code>node_modules</code> na raiz do nosso projeto. Nesse diretório temos a seguinte estrutura:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">└── /node_modules</div><div class="line">    └── /gulp</div><div class="line">        └── // <span class="keyword">...</span> arquivos do gulp <span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+<p>Ou seja, quando instalamos algum módulo com o comando <code>npm install</code> ou <code>npm i</code>, o módulo fica no diretório <code>node_modules</code> (salvo quando instalamos globalmente).</p>
+<p>Agora, no <code>gulpfile.js</code>, adicione:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="string">'Hello Gulp!'</span> );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Aqui é puro Javascript (no servidor, com NodeJS). Criamos uma variável <code>gulp</code>, que receberá o módulo <code>gulp</code>, que foi instalado localmente. Se você passa como parâmetro da função <code>require</code> somente uma string, sem definir caminho de arquivos (como <code>./</code>, <code>/</code> ou <code>../</code>, por exemplo), o NodeJS procura essa dependência dentro da pasta <code>node_modules</code>.</p>
+<p>O <code>.js</code> no final do arquivo é opcional. E se vamos fazer <code>require</code> de um arquivo chamado <code>index.js</code>, o nome desse arquivo também é opcional.</p>
+<p>Sabendo disso, podemos concluir que o <code>var gulp = require( &#39;gulp&#39; );</code> na verdade poderia ter sido chamado dessa forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'./node_modules/gulp/index.js'</span> );</div></pre></td></tr></table></figure>
+
+<p>O método <code>task()</code> do objeto <code>gulp</code> cria uma <em>task</em> que será executada. Como primeiro parâmetro, passamos o nome da task. Depois, uma função de callback que será executada quando a task for chamada.</p>
+<p>Para chamar essa task, vamos executar no terminal:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp default</div></pre></td></tr></table></figure>
+
+<p>Ou somente:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp</div></pre></td></tr></table></figure>
+
+<p>Rodando o comando <code>gulp</code> sem nenhum parâmetro, ele deduz que você tem uma task chamada <code>default</code>, que é a task padrão do Gulp. Ou seja: para a task <code>default</code>, o nome da task, na chamada pelo terminal, é opcional.</p>
+<p>Executando esse comando, temos o seguinte resultado:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ gulp</div><div class="line">[<span class="number">16</span>:<span class="number">20</span>:<span class="number">50</span>] Using gulpfile /var/www/<span class="number">01</span>-testes/test-gulp/gulpfile.js</div><div class="line">[<span class="number">16</span>:<span class="number">20</span>:<span class="number">50</span>] Starting <span class="string">'default'</span>...</div><div class="line">Hello Gulp!</div><div class="line">[<span class="number">16</span>:<span class="number">20</span>:<span class="number">50</span>] Finished <span class="string">'default'</span> after <span class="number">476</span> μs</div></pre></td></tr></table></figure>
+
+<p>Na linha <code>2</code>, ele mostra que encontrou o arquivo <code>gulpfile.js</code> e mostra o caminho do arquivo;<br>Na linha <code>3</code>, a task que está sendo executada;<br>Na linha <code>4</code>, printa a mensagem que colocamos em <code>console.log()</code>;<br>Na linha <code>5</code> é mostrado o tempo que demorou para finalizar a task.</p>
+<p>Reparou no tempo? Sabe o que significa o símbolo <code>μs</code>? MICROSSEGUNDOS!</p>
+<p>Isso mesmo: microssegundos! A task roda muito rápido mesmo.</p>
+<p><em>Mas essa task não faz nada.. só executa um console.log() ¬¬</em></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/nothing.gif" alt="Não faz nada"></p>
+<p>Concordo! Mas você verá que, quando estivermos executando tarefas de verdade, o tempo ainda assim será muito baixo! :D</p>
+<p>Agora que já aprendemos como criar uma task no Gulp, que tal fazer algo realmente útil?</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Minificar_CSS">Minificar CSS</h2>
+<p>Vamos ver como podemos automatizar a minificação dos nossos arquivos CSS. Primeiro vamos instalar o módulo de minificação:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp-minify-css</div></pre></td></tr></table></figure>
+
+<p>Agora vamos adicionar o módulo ao nosso <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> minifycss = <span class="built_in">require</span>( <span class="string">'gulp-minify-css'</span> );</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src( <span class="string">'./src/css/**/*.css'</span> )</div><div class="line">    .pipe( minifycss() )</div><div class="line">    .pipe( gulp.dest( <span class="string">'./public/css'</span> ) );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p><em>Perae, tem muita coisa acontecendo aqui! Como vou saber tudo isso?</em></p>
+<p>Calma gafanhoto, vou explicar linha por linha:</p>
+<p>Já sabemos como funciona o <code>gulp.task()</code>.<br>A task vai definir uma ação que queremos fazer. A nossa ação será <strong>minificar o CSS</strong>.</p>
+<p>Para isso, precisamos ter um CSS para minificar. Crie um diretório <code>src</code>, e dentro dele um diretório <code>css</code>. Esse será o nosso CSS fonte, onde iremos escrever nosso CSS todo organizado, com espaços necessários para fazer leitura, etc.</p>
+<p>Esse CSS será minificado, e a versão minificada ficará no diretório <code>public/css</code> (não precisa criar esse diretório).</p>
+<p>Agora, crie um arquivo chamado <code>style.css</code> no diretório <code>src/css</code> e coloque o seguinte código:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> purple</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#fc0</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">font</span>:<span class="value"> <span class="number">4rem</span> fantasy</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Voltando ao <code>gulpfile.js</code>: com o <code>gulp.src()</code>, você passa o source do CSS, ou seja, os arquivos que você está editando. Você pode passar um array de arquivos ou então utilizar o <em>glob pattern</em> para percorrer recursivamente o diretório <code>./src/css</code> em busca de todos os arquivos <code>.css</code>.</p>
+<p>Usar o <code>.pipe()</code>, é o mesmo que você usar o <code>|</code> (pipe) na linha de comando do Unix: a saída do primeiro comando é a entrada do próximo.</p>
+<p>Então, pegamos os arquivos <code>.css</code> que estão em <code>./src/css</code>, e mandamos executar o <code>minifycss()</code> em todos eles. A saída será todos os arquivos minificados. Mas eles ainda estão em memória, e precisam ser salvos em algum lugar.</p>
+<p>É aí que vamos passá-los novamente para frente com o <code>.pipe()</code> para o comando <code>gulp.dest()</code>, que vai definir o caminho de destino dos nossos arquivos minificados.</p>
+<p>Estamos dizendo ao Gulp que queremos que esses arquivos sejam salvos (fisicamente) no diretório <code>./public/css</code>.</p>
+<p>Ao executar novamente o comando <code>gulp</code> no terminal, olhe agora como ficou nossa estrutura de diretórios:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── gulpfile.js</div><div class="line">├── /node_modules</div><div class="line">│   └── // ... dependências ...</div><div class="line">├── package.json</div><div class="line">├── /public</div><div class="line">│   └── /css</div><div class="line">│       └── style.css</div><div class="line">└── /src</div><div class="line">    └── /css</div><div class="line">        └── style.css</div></pre></td></tr></table></figure>
+
+<p>Não precisamos criar o diretório <code>public</code>, pois ele foi automaticamente criado pelo Node.</p>
+<p>E o nosso arquivo <code>style.css</code>, no diretório gerado <code>public</code>, ficou assim:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span><span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value">purple</span></span>;<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#fc0</span></span></span>;<span class="rule"><span class="attribute">font</span>:<span class="value"><span class="number">4rem</span> fantasy</span></span></span>}</div></pre></td></tr></table></figure>
+
+<p>Coisa linda, não? Sem precisar lembrar de passar em nenhum <em>minify online</em> xD</p>
+<p>E olha o tempo que foi executado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ gulp</div><div class="line">[18:49:35] Using gulpfile /var/www/01-testes/test-gulp/gulpfile.js</div><div class="line">[18:49:35] Starting 'default'...</div><div class="line">[18:49:35] Finished 'default' after 16 ms</div></pre></td></tr></table></figure>
+
+<p>O Gulp sempre vai executar muito rápido, independente da quantidade de tasks que você tiver, pois ele usa <a href="https://github.com/vitorbritto/art-of-node/blob/master/readme.pt-br.md#streams" target="_blank" rel="external"><em>strems</em></a> e trabalha com alta concorrência, ou seja, ele executa muitas coisas em paralelo, deixando tudo muito mais rápido.</p>
+<h2 id="Usando_pré-processadores">Usando pré-processadores</h2>
+<p>Para usar pré-processadores com Gulp também é bastante simples. Vou mostrar como utilizá-lo com o <a href="http://learnboost.github.io/stylus/" target="_blank" rel="external">Stylus</a>.</p>
+<p>Primeiro, precisamos instalar o módulo do <strong>Stylus</strong>. Execute no terminal:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp-stylus</div></pre></td></tr></table></figure>
+
+<p>Vamos tirar o <code>minifycss</code> por enquanto, para facilitar a visualização do nosso exemplo. No seu <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> stylus = <span class="built_in">require</span>( <span class="string">'gulp-stylus'</span> );</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src( <span class="string">'./src/stylus/**/*.styl'</span> )</div><div class="line">    .pipe( stylus() )</div><div class="line">    .pipe( gulp.dest( <span class="string">'./public/css'</span> ) );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Agora nós buscamos todos os arquivos em <code>./src/stylus</code>, com a extensão <code>.styl</code>. Vamos criar esse diretório, e um arquivo chamado <code>style.styl</code>, com o seguinte conteúdo:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span></div><div class="line">  <span class="attribute">background</span> purple</div><div class="line">  <span class="attribute">color</span> <span class="id">#fc0</span></div><div class="line">  <span class="attribute">font</span> 4rem fantasy</div></pre></td></tr></table></figure>
+
+<p>No <strong>Stylus</strong>, não precisamos de <em>brackets</em> (<code>{}</code>), nem dois-pontos (<code>:</code>) para separar as propriedades. E ele funciona com base na indentação.</p>
+<p>Mas não é obrigatório remover. Você pode escrever no formato do CSS também, sem problemas.</p>
+<p>Agora, execute novamente o <code>gulp</code> no terminal. Você terá no diretório <code>public/css</code> um arquivo <code>.css</code> compilado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#800080</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#fc0</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">font</span>:<span class="value"> <span class="number">4rem</span> fantasy</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>Normalmente, os módulos retornam funções, que podem receber parâmetros para configurar o que eles devem fazer. Nesse caso do Stylus, nós só passamos a função <code>stylus()</code>, para que o arquivo <code>.styl</code> transforme corretamente o código em CSS válido. Mas e se quisermos minificar? </p>
+<p>Temos duas formas de fazer isso: a primeira é passando parâmetros na função <code>stylus()</code>. No <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> stylus = <span class="built_in">require</span>( <span class="string">'gulp-stylus'</span> );</div><div class="line"></div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src( <span class="string">'./src/stylus/**/*.styl'</span> )</div><div class="line">    .pipe( stylus({ compress: <span class="literal">true</span> }) )</div><div class="line">    .pipe( gulp.dest( <span class="string">'./public/css'</span> ) );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Passamos como objeto da função <code>stylus()</code> o parâmetro <code>compress: true</code>. Executando o <code>gulp</code> novamente no terminal, agora temos nosso CSS em <code>public/css</code> minificado:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">body</span><span class="rules">{<span class="rule"><span class="attribute">background</span>:<span class="value"><span class="hexcolor">#800080</span></span></span>;<span class="rule"><span class="attribute">color</span>:<span class="value"><span class="hexcolor">#fc0</span></span></span>;<span class="rule"><span class="attribute">font</span>:<span class="value"><span class="number">4rem</span> fantasy</span></span></span>}</div></pre></td></tr></table></figure>
+
+<p>A outra forma de minificar, é usando o <code>minifycss</code> (que já vimos no primeiro exemplo), junto com o Stylus. Ficaria assim o seu <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> minifycss = <span class="built_in">require</span>( <span class="string">'gulp-minify-css'</span> );</div><div class="line"><span class="keyword">var</span> stylus = <span class="built_in">require</span>( <span class="string">'gulp-stylus'</span> );</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src( <span class="string">'./src/stylus/**/*.styl'</span> )</div><div class="line">    .pipe( stylus() )</div><div class="line">    .pipe( minifycss() )</div><div class="line">    .pipe( gulp.dest( <span class="string">'./public/css'</span> ) );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>É interessante lembrar que a ordem que você coloca as coisas interfere no resultado final. Porque colocamos o <code>minifycss()</code> depois do <code>stylus()</code>?</p>
+<p>Por que a função <code>stylus()</code> vai retornar o CSS gerado. Se colocarmos o <code>minifycss()</code> antes dele, o CSS ainda não foi gerado, e o arquivo final não será minificado. Muita atenção com isso, ok? ;)</p>
+<p><em>Mas qual seria a vantagem de utilizar o <code>minifycss()</code> junto com o <code>stylus()</code>, sendo que o <code>stylus()</code> já tem uma opção de comprimir os arquivos?</em></p>
+<p>O Stylus tem uma diretiva chamada <code>@css</code>, onde você pode colocar códigos CSS “brutos”. Imagine que você baixou um plugin para usar no seu app ou site, e esse veio com um CSS. Se você está assistindo arquivos <code>.styl</code>, não é legal misturar as coisas, e colocar um arquivo <code>.css</code> junto. </p>
+<p>O que você pode fazer é usar a extensão <code>.styl</code> e colocar todo o seu CSS na diretiva <code>@css</code>:</p>
+<figure class="highlight styl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="at_rule">@<span class="keyword">css</span> </span>{</div><div class="line">  <span class="class">.plugin</span> <span class="rules">{</span></div><div class="line">    <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#000</span></span></span>;</div><div class="line">    <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#ff0</span></span></span>;</div><div class="line">  <span class="rule">}</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Só que, tudo o que está dentro dessa diretiva, o Stylus ignora. Ele não compila, nem ao menos minifica. Assim, seu código ficaria com parte dele sem minificar. Então você pode usar em conjunto o <code>compress: true</code> do <code>stylus()</code> e o <code>minifycss()</code> para minificar o que restar dessas diretivas ;)</p>
+<p><em>Ok, já sei como minificar CSS e também como utilizar um pré-processador. Mas toda vez que eu alterar um arquivo, vou precisar ficar rodando o comando <code>gulp</code> no terminal? Não tem como o Gulp ficar assistindo meus arquivos, como o SASS faz?</em></p>
+<h2 id="O_método_watch()">O método <code>watch()</code></h2>
+<p>Claro que tem! Você pode usar o método <code>watch()</code> pra isso! Vamos mudar um pouco a estrutura do nosso <code>gulpfile.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> minifycss = <span class="built_in">require</span>( <span class="string">'gulp-minify-css'</span> );</div><div class="line"><span class="keyword">var</span> stylus = <span class="built_in">require</span>( <span class="string">'gulp-stylus'</span> );</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'css'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src( <span class="string">'./src/stylus/**/*.styl'</span> )</div><div class="line">    .pipe( stylus() )</div><div class="line">    .pipe( minifycss() )</div><div class="line">    .pipe( gulp.dest( <span class="string">'./public/css'</span> ) );</div><div class="line">});</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.watch( <span class="string">'./src/stylus/**/*.styl'</span>, [ <span class="string">'css'</span> ] );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>O que eu fiz foi, basicamente, renomear a task <code>default</code> para <code>css</code> e criar uma nova task <code>default</code>, com o <code>watch()</code>.</p>
+<p>No primeiro parâmetro, você passa os arquivos que você quer assistir. E no segundo, você passa um array de tasks que precisam ser executadas toda vez que você fizer alguma alteração nesses arquivos do primeiro parâmetro! Bem simples!</p>
+<p>Agora, executando o comando <code>gulp</code> no terminal, ele não vai te devolver o prompt para voltar a digitar, pois estará assistindo às alterações dos arquivos. Para parar o <code>watch()</code>, use o <code>Ctrl + C</code>.</p>
+<p>Esses são os métodos que você precisa conhecer do Gulp:</p>
+<ul>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulptaskname-deps-fn" target="_blank" rel="external">gulp.task()</a>: cria uma task;</li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpsrcglobs-options" target="_blank" rel="external">gulp.src()</a>: caminho dos fontes;</li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpdestpath-options" target="_blank" rel="external">gulp.dest()</a>: caminho de destino;</li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpwatchglob--opts-tasks-or-gulpwatchglob--opts-cb" target="_blank" rel="external">gulp.watch()</a>: assiste os arquivos.</li>
+</ul>
+<p>Cada um desses métodos tem mais opções além das que mostrei. A documentação completa está no links de cada um, acima. Mas para começar a brincar com Gulp, isso que eu mostrei já vai resolver!</p>
+<p>Mais ainda temos outro problema: toda vez que estivermos compilando os arquivos, precisamos olhar no terminal para ver se já compilou, voltar no browser e recarregar a tela. Olhar no terminal, ir até o browser, recarregar a tela… infinitamente. Não dá pra melhorar isso?</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/watching.gif" alt="Assistindo"></p>
+<h2 id="Notificações">Notificações</h2>
+<p>O Gulp tem vários <a href="http://gulpjs.com/plugins/" target="_blank" rel="external">plugins</a> que você pode utilizar. Um que é muito útil, é o <code>gulp-notify</code>. Ao finalizar uma task (ou no momento em que você escolher que quer executá-lo), ele utiliza as notificações do seu sistema para dizer que aquele momento chegou! Vamos instalar ele agora mesmo!</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp-notify</div></pre></td></tr></table></figure>
+
+<p>Agora vamos configurar nosso <code>gulpfile.js</code>, adicionando o <code>notify()</code> para mostrar uma mensagem assim que o nosso arquivo CSS for gerado:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>( <span class="string">'gulp'</span> );</div><div class="line"><span class="keyword">var</span> minifycss = <span class="built_in">require</span>( <span class="string">'gulp-minify-css'</span> );</div><div class="line"><span class="keyword">var</span> stylus = <span class="built_in">require</span>( <span class="string">'gulp-stylus'</span> );</div><div class="line"><span class="keyword">var</span> notify = <span class="built_in">require</span>( <span class="string">'gulp-notify'</span> );</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'css'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.src( <span class="string">'./src/stylus/**/*.styl'</span> )</div><div class="line">    .pipe( stylus() )</div><div class="line">    .pipe( minifycss() )</div><div class="line">    .pipe( gulp.dest( <span class="string">'./public/css'</span> ) )</div><div class="line">    .pipe( notify( <span class="string">'CSS OK!'</span> ) );</div><div class="line">});</div><div class="line">  </div><div class="line">gulp.task( <span class="string">'default'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  gulp.watch( <span class="string">'./src/stylus/**/*.styl'</span>, [ <span class="string">'css'</span> ] );</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Agora, executando o comando <code>gulp</code> novamente, temos a notificação:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/gulp-notify.jpg" alt="Notificação com gulp-notify"></p>
+<p>Uhuull!!</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/01/uhul.gif" alt="Uhuull!!"></p>
+<h2 id="Plugins">Plugins</h2>
+<p>O Gulp tem milhões de outros plugins que você pode usar. Para encontrar todos os plugins homologados, acesse: <a href="http://gulpjs.com/plugins/" target="_blank" rel="external">http://gulpjs.com/plugins/</a></p>
+<p>Se não encontrar um plugin que você precisa, você pode facilmente usar algum módulo do NodeJS para criar sua tarefa, já que você escreve o seu <code>gulpfile.js</code> em puro NodeJS. Todos os pacotes do Node você encontra em <a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a></p>
+<p>Na página do plugin, tanto no NPM como no Github, você vai encontrar a documentação de como utilizá-lo. Não tem segredo.</p>
+<h2 id="A_flag_—save-dev">A flag —save-dev</h2>
+<p>Lembra que instalamos todas as nossas dependências com a flag <code>--save-dev</code>? Porque isso é importante?</p>
+<p>Como você pôde perceber, todas as dependências ficam listadas no arquivo <code>package.json</code>. Se você quiser começar um novo projeto, e for utilizar as mesmas configurações que você utilizou da última vez, você só precisa executar dois simples passos:</p>
+<ol>
+<li>Copiar os arquivos <code>package.json</code> e <code>gulpfile.js</code> para o diretório do novo projeto;</li>
+<li>Executar o comando <code>npm i</code>.</li>
+</ol>
+<p>Fazendo isso, o NPM irá ler o seu <code>package.json</code> e, todos os módulos encontrados em <code>dependencies</code> e <code>devDependencies</code> serão automaticamente instalados. Você não precisa nem copiar a pasta node_modules (que ficará bem grande com o tempo), pois ela será criada automaticamente ao executar o <code>npm i</code> :D</p>
+<h2 id="Conclusão">Conclusão</h2>
+<p>Existem vários plugins que irão facilitar o seu dia-a-dia usando o GulpJS. Nos próximos artigos, vou mostrar alguns deles, que acho bastante importante utilizar, mostrando também algumas boas práticas de como você poderá organizar suas tasks para que seu <code>gulpfile.js</code> não fique gigantesco. Fique ligado!</p>
+<p>O que achou do GulpJS? Já conhecia? Utiliza outro task runner? Gostaria de compartilhar como é seu <em>workflow</em>? Comente! :D</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/task-runner/">task runner</a>, <a href="/tags/gulpjs/">gulpjs</a>, <a href="/tags/nodejs/">nodejs</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/01/24/gulpjs-um-gole-de-otimizacao-no-seu-workflow/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

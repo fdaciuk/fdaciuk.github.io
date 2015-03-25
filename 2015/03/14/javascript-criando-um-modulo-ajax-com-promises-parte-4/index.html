@@ -1,0 +1,478 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Javascript - Criando um módulo Ajax com Promises - Parte 4 | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Após uma série de 4 posts (aqui, aqui, aqui e aqui), vamos começar a ver nosso módulo finalmente funcionando! Vem comigo :D">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript - Criando um módulo Ajax com Promises - Parte 4"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/03/ajax-module-with-promises4.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-14T03:00:00.000Z"><a href="/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/">14 de março de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Javascript - Criando um módulo Ajax com Promises - Parte 4</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/03/ajax-module-with-promises4.png" alt=""></p>
+<p>Após uma série de 4 posts (<a href="http://blog.da2k.com.br/2015/03/05/javascript-entendendo-e-criando-suas-proprias-promises/" target="_blank" rel="external">aqui</a>, <a href="http://blog.da2k.com.br/2015/03/06/javascript-criando-um-modulo-ajax-com-promises/" target="_blank" rel="external">aqui</a>, <a href="http://blog.da2k.com.br/2015/03/08/javascript-criando-um-modulo-ajax-com-promises-parte-2/" target="_blank" rel="external">aqui</a> e <a href="http://blog.da2k.com.br/2015/03/11/javascript-criando-um-modulo-ajax-com-promises-parte-3/" target="_blank" rel="external">aqui</a>), vamos começar a ver nosso módulo finalmente funcionando! Vem comigo :D</p>
+<a id="more"></a>
+
+<p>Vamos testar as funcionalidades do nosso módulo. Começaremos sempre pelo mais simples: o método <code>get</code>.<br>Ao requisitar uma URL da nossa API, via GET, esse método deve retornar um objeto.</p>
+<p>Vamos ver então como ficaria o teste. Nosso arquivo de testes tem um bloco <code>describe</code> que está testando a interface do nosso módulo. Vamos criar então outro bloco <code>describe</code>, para testar a resposta de cada método, referente aos verbos HTTP, separadamente. Adicione ao arquivo <code>tests/test.ajax.js</code>, logo após o primeiro bloco <code>describe</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">describe( <span class="string">'Test `get` method'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  it( <span class="string">'Should return an object'</span>, <span class="function"><span class="keyword">function</span><span class="params">( done )</span> </span>{</div><div class="line">    <span class="keyword">var</span> ajax = <span class="keyword">new</span> Ajax();</div><div class="line">    ajax.get( <span class="string">'http://localhost:3000/api/users'</span> ).done(<span class="function"><span class="keyword">function</span><span class="params">( response )</span> </span>{</div><div class="line">      response.should.be.an( <span class="string">'object'</span> );</div><div class="line">      done();</div><div class="line">    });</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Temos várias coisas acontecendo aqui, vamos por partes:</p>
+<p>Primeiro criamos nosso novo bloco de testes, na linha <code>1</code>, onde testaremos o método <code>get</code> do nosso módulo. Criamos o primeiro teste, na linha <code>2</code>, onde este deveria retornar, como resposta da requisição bem sucedida, um objeto.</p>
+<p>Para testar se realmente funciona, precisamos fazer a asserção com a resposta da requisição. Então instanciamos o nosso módulo <code>Ajax</code>, na linha <code>3</code>, e logo após, na linha <code>4</code>, fazemos a requisição para uma URL utilizando o método <code>get</code>. Sabemos que esse método retorna outros dois métodos <code>done</code> e <code>error</code> - usados como <strong>Promises</strong> - que já testamos acima, garantindo que esses métodos existem.</p>
+<p>Então passamos para o método <code>done</code> uma função de callback, que será chamada assim que nossa requisição retornar com sucesso. Essa função de callback recebe um parâmetro <code>response</code>, com os dados da nossa requisição.</p>
+<p>Enfim, na linha <code>5</code>, fazemos a asserção, para verificar se o retorno é realmente um objeto. Se você não entendeu como esses métodos encadeados funcionam, formando uma frase, sugiro consultar a <a href="http://chaijs.com/api/bdd/" target="_blank" rel="external">documentação do <strong>Chai</strong></a>.</p>
+<p><em>Mas o que é essa função <code>done()</code>, sendo invocada na linha <code>6</code>?</em></p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p>Quando precisamos testar métodos assíncronos, ou seja, quando não sabemos exatamente o momento da resposta, pois dependemos do retorno de um <em>callback</em>, o <strong>Mocha</strong> nos dá uma função que passamos como parâmetro na função <code>it()</code>, que pode ser invocada logo após nossa asserção, para dizer ao <strong>Mocha</strong> quando ele deve realmente verificar se nosso teste passa.</p>
+<p>Como as requisições do nosso módulo serão sempre assíncronas (ainda iremos definir isso), precisamos usar a função <code>done()</code> para que o teste não execute antes que resposta da requisição esteja realmente pronta.</p>
+<p>Se abrirmos a nossa <code>index.html</code>, que contém os testes, veremos que nosso teste NÃO PASSA. Era o que esperávamos, visto que não implementamos nada ainda!</p>
+<p>Mas agora sabemos exatamente o que precisa ser feito: criaremos o processo que faz a requisição e responde ao método <code>done()</code> do nosso módulo :D</p>
+<h2 id="Primeiro_problema:_CORS">Primeiro problema: CORS</h2>
+<p>Ao acessar a <code>index.html</code>, onde tem os testes, podemos ver no <em>console</em> do nosso navegador que temos um problema com <strong>CORS</strong>. Vamos resolver isso de forma prática, mas que não deve ser feita para toda aplicação: adicionaremos um <em>header</em> na nossa API, que permite que requisições de domínios diferentes consumam essa API. Vamos liberar para todos os domínios, mas fica o alerta: quando você criar uma API Rest, libere somente requisições para domínios específicos, ou então use um <em>acess token</em> para validar as requisições. Mas foi só um alerta, isso é assunto para um post somente sobre APIs Rest.</p>
+<p>Voltando ao que interessa: vamos então adicionar o <em>header</em> à nossa API. No arquivo <code>api/app.js</code>, adicione logo após o objeto <code>users</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">app.use(<span class="function"><span class="keyword">function</span><span class="params">( req, res, next )</span> </span>{</div><div class="line">  res.setHeader( <span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span> );</div><div class="line">  next();</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>Isso irá garantir que, antes de toda requisição, o <em>header</em> <code>Access-Control-Allow-Origin</code> seja passado, liberando acesso de qualquer domínio à nossa API :)</p>
+<p>Agora vamos ao nosso módulo. Em <code>src/ajax.js</code>, vamos mudar um pouco nosso método <code>get</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$public.get = <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">( url )</span> </span>{</div><div class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  xhr.open( <span class="string">'GET'</span>, url, <span class="literal">true</span> );</div><div class="line">  xhr.addEventListener( <span class="string">'readystatechange'</span>, $private.handleReadyStateChange, <span class="literal">false</span> );</div><div class="line">  xhr.send();</div><div class="line">  <span class="keyword">return</span> $private.promises();</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Quando falamos em <strong>TDD</strong>, e desenvolver usando <em>baby steps</em>, sabemos que devemos escrever o mínimo de código possível para que nosso teste passe, e então ir refatorando até que o código fique aceitável. Nesse caso, escrevemos código até demais, mas tem um bom motivo: não estamos <strong>criando</strong> o <strong>XMLHttpRequest</strong>. Ele já existe, e precisa de uma quantidade mínima de código para funcionar corretamente. E as linhas adicionadas acima é o que precisamos para que uma requisição seja feita corretamente.</p>
+<p>Primeiro passamos para o método <code>get</code> o parâmetro <code>url</code>, pois é à partir dele que iremos requisitar os dados do servidor. Na linha <code>2</code>, instanciamos o objeto <code>XMLHttpRequest</code>, que será responsável por fazer a requisição. Na linha <code>3</code>, abrimos uma nova conexão, passando o verbo <code>GET</code> (já que estamos usando o método <code>get()</code> do nosso módulo), depois a URL, e o terceiro parâmetro diz se a requisição será assíncrona ou não. Vamos deixá-lo como <code>true</code>, pois teremos <em>callbacks</em> para nos orientar quando a requisição tiver um retorno.</p>
+<p>Na linha <code>4</code>, atrelamos ao nosso objeto um evento chamado <code>readystatechange</code>, onde poderemos tratar todos os passos da requisição. Na linha <code>5</code>, invocamos o método <code>send()</code>, que irá enviar a requisição ao servidor, para que comece a brincadeira! :D</p>
+<p>No final, retornamos nesse método as <strong>Promises</strong>, pois queremos utilizar os métodos <code>done()</code> e <code>error()</code>, dependendo da resposta da requisição.</p>
+<p>Como você sabe, cada <em>listener</em> de evento recebe como segundo parâmetro uma função de <em>callback</em>, onde será feito o tratamento dos dados quando aquele evento for disparado. Vamos ver como ficará o método <code>$private.handleReadyStateChange()</code>, no nosso módulo <code>src/ajax.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$private.handleReadyStateChange = <span class="function"><span class="keyword">function</span> <span class="title">handleReadyStateChange</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log( <span class="keyword">this</span>.readyState === <span class="number">4</span> && <span class="keyword">this</span>.status === <span class="number">200</span> && <span class="built_in">JSON</span>.parse( <span class="keyword">this</span>.responseText ) );</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Antes de qualquer coisa, vamos verificar se os dados são retornados corretamente. Para isso, o objeto <code>XMLHttpRequest</code> tem uma propriedade somente leitura chamada <code>readyState</code> que, quando está em <code>4</code>, significa que a requisição está completa. A propriedade <code>status</code> retorna o <em>status HTTP</em> da requisição. 200 significa <em>OK</em>, ou seja, os dados foram retornados corretamente.</p>
+<p>Em <code>responseText</code>, recebemos uma <em>DOMString</em>, com o resultado da requisição. Como estamos retornando um JSON do servidor, usamos o método <code>JSON.parse()</code> para <em>parsear</em> a string, transformando-a em um objeto do Javascript.</p>
+<p>A resposta que temos é essa:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/03/ajax-request.png" alt=""></p>
+<p>Antes de retornar o objeto, podemos ver dois <em>requests</em> acusando <code>404</code>. Analisando o erro, vemos que é por causa do <em>assert</em> que testa a interface do método <code>get</code>, se ele retorna os métodos <code>done</code> e <code>error</code>. O erro acontece porque não estamos passando uma URL para o método, e o <em>XMLHttpRequest</em> tenta requisitar uma URL que não existe. Precisamos ajustar isso. Temos dois caminhos: ou simplesmente passamos uma string vazia na chamada <code>get()</code> do nosso objeto, ou validamos dentro do nosso módulo que, se não for passada nenhuma URL, ele passa uma string vazia, considerando a URL atual.</p>
+<p>Vamos alterar nosso módulo, para manter retrocompatibilidade. Imagine que outras pessoas já estão usando esse módulo, então não podemos fazer com que a atualização do mesmo quebre os projetos que usam versões mais antigas. No método <code>get()</code> do nosso módulo, em <code>src/ajax.js</code>, vamos adicionar:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open( <span class="string">'GET'</span>, url || <span class="string">''</span>, <span class="literal">true</span> );</div></pre></td></tr></table></figure>
+
+<p>Dessa forma, se não for passada URL alguma, consideramos a URL atual, passando uma string vazia, e não precisamos mudar as implementações anteriores :)</p>
+<p>Hora de fazer nossas promises funcionarem! Nosso método <code>get()</code> retorna os métodos <code>done()</code> e <code>error()</code>, mas não é no exato momento do retorno desse método que as informações estarão disponíveis, mas sim no retorno do <em>callback</em> do evento <code>readystatechange</code>. Então nós precisaremos de um objeto auxiliar, que será usado para fazer com que as nossas <strong>Promises</strong> conversem com o retorno da requisição.</p>
+<p>Parece complicado? Vamos ver na prática como fazer isso! Primeiro, no nosso módulo, criaremos o objeto auxiliar. No início do módulo, em <code>src/ajax.js</code>, logo após as declarações dos objetos <code>$public</code> e <code>$private</code>, adicione:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$private.methods = {</div><div class="line">  done: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{},</div><div class="line">  error: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{}</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Esse objeto conterá os métodos que nos auxiliarão a criar nossas <strong>Promises</strong>.</p>
+<p>Agora, na função de callback do evento <code>readystatechange</code>, vamos adicionar os métodos <code>done()</code> e <code>error()</code> ao <code>$private.methods</code>, e invocá-los, passando a resposta da requisição para eles. Mudando o método <code>$private.handleReadyStateChange()</code>, vamos agora ter o seguinte:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$private.handleReadyStateChange = <span class="function"><span class="keyword">function</span> <span class="title">handleReadyStateChange</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">var</span> xhr = <span class="keyword">this</span>;</div><div class="line">  <span class="keyword">var</span> DONE = <span class="number">4</span>;</div><div class="line">  <span class="keyword">if</span>( xhr.readyState === DONE ) {</div><div class="line">    <span class="keyword">if</span>( xhr.status &gt;= <span class="number">200</span> && xhr.status &lt; <span class="number">300</span> ) {</div><div class="line">      <span class="keyword">return</span> $private.methods.done.call( $private.methods, <span class="built_in">JSON</span>.parse( xhr.responseText ) );</div><div class="line">    }</div><div class="line">    $private.methods.error.call( $private.methods, <span class="built_in">JSON</span>.parse( xhr.responseText ) );</div><div class="line">  }</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Só vamos retornar algo quando a requisição estiver completa, por isso fazemos a verificação do <code>xhr.readyState</code> na linha <code>4</code>. Na linha <code>5</code>, verificamos se o status HTTP da requisição está OK, ou seja, se for um status entre <code>200</code> e <code>300</code>, a requisição retornou com sucesso.</p>
+<p>Na linha <code>6</code> é onde acontece a primeira parte da magia das <strong>Promises</strong>: usamos o objeto <code>$private.methods</code>, invocando o método <code>done()</code> com o <code>call()</code>, e setamos o próprio objeto para ser o <code>this</code> dentro do método <code>done()</code>. Passamos também como parâmetro o JSON de resposta da requisição, já parseado como objeto Javascript.</p>
+<p>Mas tem um porém: esse método <code>$private.methods.done( response )</code>, que recebe esse parâmetro <code>response</code>, deve ser a função de <em>callback</em> que passaremos como parâmetro do método <code>done()</code> da <strong>Promise</strong>.</p>
+<p>Para que isso seja possível, vamos mexer um pouco no método <code>$private.promises()</code> do nosso módulo, fazendo com que, quando os métodos <code>done()</code> e <code>error()</code> do módulo Ajax, quando forem chamados, recebam essa função como callback:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$private.promises = <span class="function"><span class="keyword">function</span> <span class="title">promises</span><span class="params">()</span> </span>{</div><div class="line">  <span class="keyword">return</span> {</div><div class="line">    done: <span class="function"><span class="keyword">function</span> <span class="title">done</span><span class="params">( callback )</span> </span>{</div><div class="line">      $private.methods.done = callback;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    },</div><div class="line">    error: <span class="function"><span class="keyword">function</span> <span class="title">error</span><span class="params">( callback )</span> </span>{</div><div class="line">      $private.methods.error = callback;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    }</div><div class="line">  };</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Complicou? Pois é, eu disse que seria uma aventura :D</p>
+<p>Vou explicar o que acontece: quando invocamos o método <code>get()</code> do nosso módulo, através de:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ajax = <span class="keyword">new</span> Ajax();</div><div class="line">ajax.get( <span class="string">'http://localhost:3000/api/users'</span> );</div></pre></td></tr></table></figure>
+
+<p>Nós temos disponíveis outros dois métodos: <code>done()</code> e <code>error()</code>, que são chamados através do <code>return $private.promises()</code> dentro do método <code>get()</code> no nosso módulo.</p>
+<p>No método <code>$private.promises()</code> - atualizado acima - nós retornamos esses dois métodos <code>done()</code> e <code>error()</code>, que recebem como parâmetro uma função de callback.</p>
+<p>Então, nós atribuímos ao objeto <code>$private.methods</code> o callback passado como parãmetro.</p>
+<p>Lá na função de callback do evento <code>readystatechange</code>, você viu que invocamos o <code>$private.methods.done</code> e o <code>$private.methods.error</code> com o <code>call</code>, passando o <code>xhr.responseText</code> como parâmetro desses métodos.</p>
+<p>É aproveitando-se da natureza funcional do Javascript que conseguimos fazer as <strong>Promises</strong> conversarem com o retorno dos métodos no momento certo, retornando a interface que temos agora!</p>
+<p>E se você perceber, ainda no método <code>$private.promises()</code>, dentro dos métodos <code>done()</code> e <code>error()</code>, nós retornamos o <code>this</code>, que é o próprio objeto retornado nesse método, para que possamos encadear as respostas, exatamente como vimos no <a href="http://blog.da2k.com.br/2015/03/05/javascript-entendendo-e-criando-suas-proprias-promises/" target="_blank" rel="external">primeiro artigo dessa série</a>, mas com jQuery :D</p>
+<p>Por isso, nós podemos utilizar nosso módulo dessa forma:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ajax = <span class="keyword">new</span> Ajax();</div><div class="line">ajax.get( <span class="string">'http://localhost:3000/api/users'</span> )</div><div class="line">  .done(<span class="function"><span class="keyword">function</span><span class="params">( response )</span> </span>{</div><div class="line">    <span class="comment">// =&gt; sucesso</span></div><div class="line">  })</div><div class="line">  .error(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="comment">// =&gt; erro</span></div><div class="line">  });</div></pre></td></tr></table></figure>
+
+<p>Vamos executar nosso teste para ver se agora passa:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Error: Uncaught SyntaxError: Unexpected token &lt; (http://localhost/<span class="number">00</span>-opensource/ajax/:<span class="number">1</span>)</div><div class="line">    at process.on.global.onerror (http://localhost/<span class="number">00</span>-opensource/ajax/public/mocha.js:<span class="number">6366</span>:<span class="number">10</span>)</div></pre></td></tr></table></figure>
+
+<p>Opa! Alguma coisa deu errado! O que aconteceu?</p>
+<p>Vamos tentar debugar, para ver se a resposta está vindo corretamente. Em nosso teste, em <code>tests/test.ajax.js</code>, vamos adicionar um <code>console.log( response )</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">it( <span class="string">'Should return an object'</span>, <span class="function"><span class="keyword">function</span><span class="params">( done )</span> </span>{</div><div class="line">  <span class="keyword">var</span> ajax = <span class="keyword">new</span> Ajax();</div><div class="line">  ajax.get( <span class="string">'http://localhost:3000/api/users'</span> ).done(<span class="function"><span class="keyword">function</span><span class="params">( response )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( response );</div><div class="line">    response.should.be.an( <span class="string">'object'</span> );</div><div class="line">    done();</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>E vemos que, como esperado, o nosso objeto é retornado com sucesso! Mas está dando um erro de sintaxe no teste!</p>
+<p>O que acontece é que, em algum momento, o resultado que é retornado por nossa API como JSON, é convertido para <em>string</em>, com <code>toString()</code> (não sei porque o <strong>Mocha</strong> faz isso), e depois, quando tentamos fazer o parse com <code>JSON.parse</code>, acontece o erro de sintaxe.</p>
+<p>Como o formato da resposta pode variar, temos que garantir que nosso módulo traga a resposta corretamente. Então vamos fazer uma pequena modificação no método <code>$private.handleReadyStateChange</code> do nosso método, em <code>src/ajax.js</code>, para ficar assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>( xhr.readyState === DONE ) {</div><div class="line">  <span class="keyword">if</span>( xhr.status &gt;= <span class="number">200</span> && xhr.status &lt; <span class="number">300</span> ) {</div><div class="line">    <span class="keyword">return</span> $private.methods.done( $private.parseResponse( xhr.responseText ) );</div><div class="line">  }</div><div class="line">  $private.methods.error( $private.parseResponse( xhr.responseText ) );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Somente vamos chamar um método <code>$private.parseResponse</code>, passando como parâmetro a resposta da requisição. Nesse método, vamos tratar o parse do JSON:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$private.parseResponse = <span class="function"><span class="keyword">function</span> <span class="title">parseResponse</span><span class="params">( response )</span> </span>{</div><div class="line">  <span class="keyword">var</span> result;</div><div class="line">  <span class="keyword">try</span> {</div><div class="line">    result = <span class="built_in">JSON</span>.parse( response );</div><div class="line">  }</div><div class="line">  <span class="keyword">catch</span>( e ) {</div><div class="line">    result = response;</div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>E pronto! Simplesmente colocamos o retorno em um bloco <code>try/catch</code>. Se der erro ao tentar parsear, retornamos somente a resposta, que já deve estar em JSON :D</p>
+<p>Agora o nosso teste passou! Ufa!</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/03/get-method-return-true.png" alt=""></p>
+<p>Agora você está vendo como realmente as <strong>Promises</strong> funcionam. Não precisamos de nenhuma <em>library</em> ou <em>framework</em> para fazê-las funcionar. Claro que não é um trabalho tão simples, mas conhecendo um pouco de programação funcional, nós conseguimos fazer uma funcionalidade onde antes precisaríamos carregar um lib inteira como a <code>Q</code> ou <code>async</code> só para fazer isso!</p>
+<p>Mas ainda não acabou: já temos nosso módulo funcional, mas ainda temos testes a fazer! Precisamos testar agora o próximo método: o <code>post</code>.<br>Mas como esse artigo já está grande demais, o método <code>post</code> ficará para o próximo artigo! Não perca :D</p>
+<p>Ficou com dúvida de algo? Não fique com vergonha! Comente :D</p>
+<p>Até o próximo! o/</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/promises/">promises</a>, <a href="/tags/ajax/">ajax</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/03/14/javascript-criando-um-modulo-ajax-com-promises-parte-4/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

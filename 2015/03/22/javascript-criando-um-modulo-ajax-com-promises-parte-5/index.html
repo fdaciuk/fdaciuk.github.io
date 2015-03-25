@@ -1,0 +1,449 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Javascript - Criando um módulo Ajax com Promises - Parte 5 | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Seguindo com nossa série, vamos agora fazer funcionar o método POST do nosso módulo Ajax!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Javascript - Criando um módulo Ajax com Promises - Parte 5"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/03/ajax-module-with-promises5.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-22T03:00:00.000Z"><a href="/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/">22 de março de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Javascript - Criando um módulo Ajax com Promises - Parte 5</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/03/ajax-module-with-promises5.png" alt=""></p>
+<p>Seguindo com <a href="http://blog.da2k.com.br/2015/03/05/javascript-entendendo-e-criando-suas-proprias-promises/" target="_blank" rel="external">nossa série</a>, vamos agora fazer funcionar o método <strong>POST</strong> do nosso módulo <strong>Ajax</strong>!</p>
+<a id="more"></a>
+
+<h2 id="Testando_o_método_POST">Testando o método POST</h2>
+<p>No último artigo, criamos um <code>describe()</code> para testar o método <code>get()</code>. Faremos o mesmo agora para o método <code>post()</code>. No arquivo <code>tests/test.ajax.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">describe( <span class="string">'Test `post` method'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  it( <span class="string">'Should return an object'</span>, <span class="function"><span class="keyword">function</span><span class="params">( done )</span> </span>{</div><div class="line">    <span class="keyword">var</span> ajax = <span class="keyword">new</span> Ajax();</div><div class="line">    ajax.post( <span class="string">'http://localhost:3000/api/user/joao'</span> ).done(<span class="function"><span class="keyword">function</span><span class="params">( response )</span> </span>{</div><div class="line">      response.should.be.an( <span class="string">'object'</span> );</div><div class="line">      done();</div><div class="line">    });</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>O método <code>post()</code> na nossa API de testes retorna um objeto com os dados do usuário passado. Estamos chamando os dados do usuário <code>joao</code>, então, nosso primeiro teste, é verificar se a requisição nos retorna um objeto.</p>
+<p>Obviamente, o teste não passa, pois ainda não implementamos a funcionalidade para o método <code>post()</code> no nosso módulo. Sem mais delongas, vamos fazer isso agora mesmo. No arquivo <code>src/ajax.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$public.post = <span class="function"><span class="keyword">function</span> <span class="title">post</span><span class="params">( url )</span> </span>{</div><div class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  xhr.open( <span class="string">'POST'</span>, url || <span class="string">''</span>, <span class="literal">true</span> );</div><div class="line">  xhr.addEventListener( <span class="string">'readystatechange'</span>, $private.handleReadyStateChange, <span class="literal">false</span> );</div><div class="line">  xhr.send();</div><div class="line">  <span class="keyword">return</span> $private.promises();</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>O método post na nossa API recebe via URL o parâmetro <code>slug</code>, onde iremos fazer algo com os dados desse usuário. No exemplo, nós simplesmente retornamos os dados, mas em uma API real, provavelmente iremos alterar esses dados, ou tratar de alguma forma. </p>
+<p>Por ser simples, a implementação no nosso módulo é basicamente a mesma do método <code>get()</code>, com a diferença do método <code>open()</code>, onde passamos o atributo <code>POST</code>, ao invés de <code>GET</code>.</p>
+<p>Agora nosso teste passa! Estamos com todos os testes verdes, mas temos código repetido. Já sabe o que temos que fazer né? Isso mesmo: <strong style="color: blue">REFACTORY!</strong></p>
+<p>Esse é o momento em que deixamos nosso código um pouco melhor, mais legível, muitas vezes removendo código - pois menos é mais :D - mas sempre mantendo os testes passando. Não podemos implementar nada novo nesse momento, apenas melhorar o que já temos :)</p>
+<p>Vamos então fazer o <em>refactory</em>. Criaremos um novo método para envolver o código repetido, e passaremos por parâmetro somente o tipo e a URL. No arquivo <code>src/ajax.js</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$private.XHRConnection = <span class="function"><span class="keyword">function</span> <span class="title">XHRConnection</span><span class="params">( type, url )</span> </span>{</div><div class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  xhr.open( type, url || <span class="string">''</span>, <span class="literal">true</span> );</div><div class="line">  xhr.addEventListener( <span class="string">'readystatechange'</span>, $private.handleReadyStateChange, <span class="literal">false</span> );</div><div class="line">  xhr.send();</div><div class="line">  <span class="keyword">return</span> $private.promises();</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>E os nossos métodos <code>get()</code> e <code>post()</code> agora ficarão assim:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$public.get = <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">( url )</span> </span>{</div><div class="line">  <span class="keyword">return</span> $private.XHRConnection( <span class="string">'GET'</span>, url );</div><div class="line">};</div><div class="line">  </div><div class="line">$public.post = <span class="function"><span class="keyword">function</span> <span class="title">post</span><span class="params">( url )</span> </span>{</div><div class="line">  <span class="keyword">return</span> $private.XHRConnection( <span class="string">'POST'</span>, url );</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Se executarmos nossos testes, veremos que tudo continua passando lindamente! <em>Refactory</em> executado com sucesso \o/</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<p>Como disse acima, na maioria dos casos, os métodos <code>post</code>, <code>put</code> e <code>delete</code> podem receber os parâmetros implicitamente, ao invés de enviar via URL. Vamos então preparar nossa API para receber um <strong>POST</strong> através da URL <code>http://localhost:3000/user</code>, e passar o parâmetro implicitamente. </p>
+<p>Primeiro vamos precisar instalar o <code>body-parser</code>, que vai parsear os dados que recebermos via <strong>POST</strong> em <code>req.body</code>. Instale com o comando abaixo no seu terminal:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev body-parser</div></pre></td></tr></table></figure>
+
+<p>Agora, vamos adicionar o <code>body-parser</code> à nossa API. No início do nosso arquivo <code>api/app.js</code>, vamos adicionar o <code>body-parser</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>( <span class="string">'body-parser'</span> );</div></pre></td></tr></table></figure>
+
+<p>Agora, antes da chamada onde setamos o header <code>res.setHeader( &#39;Access-Control-Allow-Origin&#39;, &#39;*&#39; );</code>, vamos dizer ao <code>connect</code> que ele deve usar o <em>middleware</em> do <code>bodyParser</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">app.use( bodyParser.urlencoded({ extended: <span class="literal">false</span> }) );</div><div class="line">app.use( bodyParser.json() );</div></pre></td></tr></table></figure>
+
+<p>Vamos também fazer uma pequena alteração na função <code>postResponse()</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">postRequest</span><span class="params">( req, res, next )</span> </span>{</div><div class="line">  <span class="keyword">var</span> user = req.params.slug || req.body.slug;</div><div class="line">  res.setHeader( <span class="string">'Content-Type'</span>, <span class="string">'application/json'</span> );</div><div class="line">  res.end( <span class="built_in">JSON</span>.stringify( users[ user ] ) );</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>Essa alteração é para que possamos obter dados vindo tanto da URL, com <code>req.params.slug</code>, como os dados enviados no corpo da requisição, com <code>req.body.slug</code>. Como vamos sempre usar um ou outro, podemos tratar dessa forma, com <code>||</code>.</p>
+<p>E por fim, vamos criar mais um <em>endpoint</em> para nossa nova requisição à <code>http://localhost:3000/user</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">router.post( <span class="string">'/api/user'</span>, postRequest );</div><div class="line">router.post( <span class="string">'/api/user/:slug'</span>, postRequest );</div></pre></td></tr></table></figure>
+
+
+
+<p>A linha <code>2</code>, já existe na nossa API, somente adicionamos a linha <code>1</code>. Vamos testar nossa API com o <strong>Postman</strong>, e verificar se o request retorna a requisição que desejamos:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/03/request-post-data-implicit.png" alt=""></p>
+<p>Pronto! Tudo funciona corretamente! Só precisamos enviar o <em>header</em> <code>x-www-form-urlencoded</code> na nossa requisição :D</p>
+<p>Se ficou em dúvida de como o arquivo deve ficar, consulte o <a href="https://github.com/fdaciuk/ajax" target="_blank" rel="external">repositório onde estamos desenvolvendo nosso módulo</a>.</p>
+<p>Mas para não ficarmos só no teste manual, vamos adicionar mais um teste no nosso arquivo <code>tests/test.ajax.js</code>, para essa URL:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">it( <span class="string">'Should return data about `joao`'</span>, <span class="function"><span class="keyword">function</span><span class="params">( done )</span> </span>{</div><div class="line">  <span class="keyword">var</span> ajax = <span class="keyword">new</span> Ajax();</div><div class="line">  ajax.post( <span class="string">'http://localhost:3000/api/user'</span>, <span class="string">'slug=joao'</span> ).done(<span class="function"><span class="keyword">function</span><span class="params">( response )</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log( response );</div><div class="line">    response.name.should.be.equal( <span class="string">'João da Silva'</span> );</div><div class="line">    done();</div><div class="line">  });</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>A novidade aqui é que passamos mais um parâmetro no método <code>post()</code>: os dados que serão enviados ao servidor, em formato de <em>query string</em>. Passamos o parâmetro <code>slug</code>, que é o que nossa API espera, com o <em>slug</em> do usuário que queremos os dados de volta. Para passar mais dados, você pode usar o formato: <code>dado1=valor1&amp;dado2=valor2&amp;dado3=valor3</code>.</p>
+<p>Vamos agora implementar essa funcionalidade em <code>src/ajax.js</code>. Primeiro, passamos o parâmetro para o método <code>post()</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$public.post = <span class="function"><span class="keyword">function</span> <span class="title">post</span><span class="params">( url, data )</span> </span>{</div><div class="line">  <span class="keyword">return</span> $private.XHRConnection( <span class="string">'POST'</span>, url, data );</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Agora vamos alterar o método da conexão, para receber os dados e enviar ao servidor, com o <em>header</em> correto:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$private.XHRConnection = <span class="function"><span class="keyword">function</span> <span class="title">XHRConnection</span><span class="params">( type, url, data )</span> </span>{</div><div class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">  xhr.open( type, url || <span class="string">''</span>, <span class="literal">true</span> );</div><div class="line">  xhr.setRequestHeader( <span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span> );</div><div class="line">  xhr.addEventListener( <span class="string">'readystatechange'</span>, $private.handleReadyStateChange, <span class="literal">false</span> );</div><div class="line">  xhr.send( data );</div><div class="line">  <span class="keyword">return</span> $private.promises();</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>Passamos o parâmetro <code>data</code> no método, que será passado para <code>xhr.send()</code>, e adicionamos o <em>header</em> <code>application/x-www-form-urlencoded</code>.</p>
+<p>Agora nosso método faz requisições <strong>GET</strong> e <strong>POST</strong>, e todos os testes estão passando! o/</p>
+<p>Os métodos <code>put()</code> e <code>delete()</code> são praticamente o <code>post()</code>, somente mudando para o verbo correto - <code>PUT</code> e <code>DELETE</code>. </p>
+<p>Podemos ainda melhorar o tipo de envio de dados: ao invés de passar uma <em>query string</em>, poderíamos passar um objeto e, no módulo, tratar esses dados, convertendo para <em>query string</em> antes de fazer o envio.</p>
+<p>Como você pode ver, tem muitas coisas que podemos fazer para melhorar: o envio dos dados, <em>headers</em> dinâmicos, credenciais para validação no servidor (usuário e senha), até que todos os métodos do objeto <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest" target="_blank" rel="external">XMLHttpRequest</a> estejam cobertos. A série acaba por aqui, mas vou fazendo essas implementaçôes aos poucos! Se quiser acompanhar, dê um <strong>watch</strong> no repositório: <a href="https://github.com/fdaciuk/ajax" target="_blank" rel="external">https://github.com/fdaciuk/ajax</a></p>
+<p>Dúvidas? Comente!</p>
+<p>Até o próximo o/</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/javascript/">javascript</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/promises/">promises</a>, <a href="/tags/ajax/">ajax</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/03/22/javascript-criando-um-modulo-ajax-com-promises-parte-5/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

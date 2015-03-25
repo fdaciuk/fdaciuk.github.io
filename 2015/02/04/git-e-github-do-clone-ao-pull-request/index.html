@@ -1,0 +1,492 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Git e Github - Do clone ao pull request | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Você tem uma conta no Github, acompanha projetos open source, gostaria de colaborar com algum deles, mas não sabe como fazer? Como criar uma nova feature? Como preparar o repositório? O que é git push?
+Se você tem essas dúvidas, esse artigo é pra você!">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Git e Github - Do clone ao pull request"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/02/git-clone-pull-request.jpg" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-04T02:00:00.000Z"><a href="/2015/02/04/git-e-github-do-clone-ao-pull-request/">4 de fevereiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Git e Github - Do clone ao pull request</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/02/git-clone-pull-request.jpg" alt=""></p>
+<p>Você tem uma conta no Github, acompanha projetos open source, gostaria de colaborar com algum deles, mas não sabe como fazer? Como criar uma nova feature? Como preparar o repositório? O que é <em>git push</em>?</p>
+<p>Se você tem essas dúvidas, esse artigo é pra você!</p>
+<a id="more"></a>
+
+<p>Alguns devs já me perguntaram como seria o workflow correto para colaborar com um projeto open source. Como criar uma nova branch, porque fazer isso, como enviar um pull request, como saber se o que você está fazendo está de acordo com o propósito do repositório.</p>
+<p>Seguindo a dica do <a href="https://github.com/romuloctba" target="_blank" rel="external">Rômulo</a>, esse artigo é para você que quer aprender desde o básico necessário de git, até a submissão de um <em>pull request</em>, com um ajuste ou nova funcionalidade para um projeto no Github!</p>
+<h2 id="Primeiros_passos_com_Git">Primeiros passos com Git</h2>
+<p>Eu poderia escrever aqui todos os passos necessários para você instalar o git, criar seu projeto, criar um repositório local, criar branchs, etc. Mas o <a href="https://github.com/rogerdudler" target="_blank" rel="external">Roger Dudler</a> já fez um ótimo trabalho que você encontra <a href="http://rogerdudler.github.io/git-guide/index.pt_BR.html" target="_blank" rel="external">nesse link</a>, traduzido por brasileiros :)</p>
+<h2 id="Escolhendo_o_repositório">Escolhendo o repositório</h2>
+<p>Após seguir os passos acima, vocẽ já estará apto para fazer alterações em qualquer projeto e submeter o seu <em>pull request</em>!<br>E a primeira coisa que você tem que fazer é <strong>clonar</strong> o repositório que vocẽ quer colaborar!</p>
+<p><em>Mas qual repositório eu escolho?</em></p>
+<p>Se você não sabe em qual repositório pode colaborar, acesse o perfil de seus amigos no <strong>Github</strong>, veja os repositórios que eles têm e/ou seguem, e escolha algum que utilize uma linguagem que você está familiarizado, ou que quer aprender.</p>
+<p>Fuce no código que está no repositório. Ele está ali para que você possa aprender com ele. Baixe, teste, procure por falhas! Quando encontrar algo que possa ser melhorado, é hora de você fazer a sua parte e enviar um <em>pull request</em> :D</p>
+<p>Vamos pegar como exemplo o repositório do <strong>Gulp</strong>. Vamos fazer todos os passos e enviar nosso <em>pull request</em> através desse repositório.</p>
+<h2 id="Forkando_o_repositório">Forkando o repositório</h2>
+<p>A primeira coisa a fazer é <em>forkar</em> o repositório. Acesse a <a href="https://github.com/gulpjs/gulp" target="_blank" rel="external">página do repositório no <strong>Github</strong></a>, e clique no botão <strong>Fork</strong>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/fork-repository.png" alt="Forkar o repositório"></p>
+<p><em>O que significa forkar?</em></p>
+<p>A tradução literal de <em>fork</em> é <em>garfo</em>. Então, você dá uma “garfada” no repositório, dá aquela enrolada no garfo, e traz ele pra sua conta xD</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/forked-repository.png" alt="Repositório forkado"></p>
+<p>Quando você <em>forkar</em> o repositório, repare que, abaixo do nome do repositório é mostrado o repositório original, ou seja, de onde ele foi <em>forkado</em>:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/forked-from.png" alt="Forkado de"></p>
+<p>Você agora pode fazer o que quiser com esse repositório (tomando cuidado com a <a href="http://blog.da2k.com.br/2015/02/02/segredos-do-github-licencas/" target="_blank" rel="external">licença</a> sob a qual ele foi liberado). A ideia aqui é resolver um problema e enviar o <em>pull request</em> com a correção para o repositório original. Como você não tem permissão para comitar diretamente no repositório principal, você precisa forkar e alterar no seu, para então submeter a correção.</p>
+<p>Após <em>forkar</em>, vamos fazer nossas alterações!</p>
+<h2 id="Clonando_o_repositório">Clonando o repositório</h2>
+<p>Agora você precisa baixar os arquivos do repositório para que você possa alterar. A primeira coisa a fazer é copiar a URL do repositório daqui:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/clone-repository.png" alt="Clonar repositório"></p>
+<p>Confira se o texto de cima do <code>input</code> está como <code>SSH clone URL</code>. Se não estiver, clique no link SSH que aparece abaixo do <code>input</code>.</p>
+<p>Após copiar a URL, abra seu terminal, crie um diretório onde você vai guardar o projeto, e digite <code>git clone &lt;url-do-repositorio&gt;</code>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> clone git<span class="variable">@github</span>.com:fdaciuk/gulp.git</div></pre></td></tr></table></figure>
+
+<p>O comando <code>git clone</code> pega o repositório como ele está no <strong>Github</strong>, já iniciado e com todo o histórico de commits atualizado. Seria o mesmo que você executar os comandos:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git init</div><div class="line"><span class="variable">$ </span>git remote add origin git<span class="variable">@github</span>.<span class="symbol">com:</span>fdaciuk/gulp.git</div><div class="line"><span class="variable">$ </span>git pull origin master</div></pre></td></tr></table></figure>
+
+<p>Pronto! Já temos nosso projeto clonado em nossa máquina local! Com esse comando (<code>git clone</code>), será criado um diretório com o mesmo nome do repositório. Entrando nele (<code>cd gulp</code>), vamos começar a codar!</p>
+<h2 id="Criando_a_branch_para_codar_a_feature">Criando a branch para codar a feature</h2>
+<p>Agora vamos criar uma nova <em>branch</em> para a nossa feature. Digamos que vamos melhorar o método <code>watch()</code> do <strong>Gulp</strong>. Vamos criar uma <em>branch</em> com um nome que diga o que será feito. Antes de tudo, garanta que você está na branch <strong>master</strong>, executando o comando:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> branch</div></pre></td></tr></table></figure>
+
+<p>A resposta deve ser:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>master</div></pre></td></tr></table></figure>
+
+<p><em>Porque precisa estar na master?</em></p>
+<p>Por convenção, o <strong>git</strong> utiliza a <em>branch</em> master como padrão, para o código estável do projeto. Então, tudo o que estiver nessa <em>branch</em>, em qualquer repositório, <del>teóricamente</del> é código estável. Logo, você nunca irá mexer diretamente nela, mas em outras branchs, para então fazer <strong>merge</strong> com a master.</p>
+<p>Agora vamos criar a <em>branch</em> com nossa feature. Temos duas formas de fazer isso. A forma mais rápida é:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">git</span> checkout -b improve_method_watch</div></pre></td></tr></table></figure>
+
+<p><code>improve_method_watch</code> é o nome da nossa <em>branch</em>. A outra forma de criar um repositório é com os comandos:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git branch improve_method_watch</div><div class="line"><span class="variable">$ </span>git checkout improve_method_watch</div></pre></td></tr></table></figure>
+
+<p>O primeiro comando cria a branch. O segundo comando troca da branch <strong>master</strong> para a branch <strong>improve_method_watch</strong>.</p>
+<p>Mas o primeiro comando que executamos (<code>git checkout -b improve_method_watch</code>), já faz essas duas coisas em um comando só: cria a branch (<code>-b</code>) e já muda para a branch criada (<code>git checkout</code>).</p>
+<p>Ok. Agora podemos trabalhar! Vamos codar o que for necessário para deixar essa feature funcionando!</p>
+<p><em>Tá, mas porque eu preciso criar uma nova branch? Se tudo irá para a master, porque não posso codar direto ali?</em></p>
+<p>Como eu disse, a branch <strong>master</strong> é a branch com o código final do projeto, estável. Criando uma nova branch, se você submeter o <em>pull request</em> para o repositório original, mas ele não for aceito, as alterações não estarão na sua branch master. Dessa forma, se você quiser manter sempre os dois repositórios atualizados e sincronizados, você só precisa apagar a branch que você criou e fez a feature. As duas <strong>master</strong> vão continuar iguaizinhas :)</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Dicas_para_um_bom_Pull_Request">Dicas para um bom Pull Request</h2>
+<p>Quando você for fazer um <em>pull request</em>, a pessoa que é responsável pelo repositório terá de conferir se o código que você está enviando está de acordo com os padrões definidos para aquele projeto. Por isso, tenha em mente que o seu <em>pull request</em> deve ter <strong>pouco código</strong>. Se a funcionalidade que você quer implementar for muito grande, quebre em partes menores, e envie <em>pull requests</em> pequenos, com o mínimo de alterações possíveis. </p>
+<p>Isso vai facilitar a conferência do código, e a sua feature terá maiores chances de ser aceita e fazer parte do projeto principal :)</p>
+<p>Após codar sua alteração, é hora de enviar para o seu <em>fork</em>. Primeiro você precisa <em>commitar</em> sua alteração:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> --<span class="keyword">all</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Mensagem de commit"</span></div></pre></td></tr></table></figure>
+
+<p>Coloque uma mensagem que defina exatamente o que você fez. De preferência, a cada pequena parte que você codar, comite com uma mensagem que diga o que está sendo feito até ali. Exemplo:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> --<span class="keyword">all</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Remove código não utilizado"</span></div></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">add</span> --<span class="keyword">all</span></div><div class="line">$ git commit -<span class="keyword">m</span> <span class="string">"Ajusta posicionamento do botão de submeter formulário, na página de contato"</span></div></pre></td></tr></table></figure>
+
+<p>Só alguns exemplos de mensagens de commit. Disserte um pouco sobre a funcionalidade que você está criando. Não precisa ser nada muito formal, mas escreva de uma forma que qualquer pessoa que ler, entenda.</p>
+<p>Lembrando que, se você estiver fazendo uma alteração para um projeto em inglês, a mensagem de commit deve ser nessa língua.</p>
+<p>Após comitar, nossa alteração já está na árvore do <strong>git</strong>. Vamos agora subir para o nosso repositório forkado:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">push</span> origin improve_method_watch</div></pre></td></tr></table></figure>
+
+<p>Você vai rodar esse comando, trocando <code>improve_method_watch</code> pelo nome da sua <em>branch</em>, obviamente.</p>
+<p>Fazendo isso, acesse a conta do repositório original no <strong>Github</strong>, e você verá uma mensagem como essa:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/message-pull-request.png" alt="Mensagem de Pull Request no Github"></p>
+<p>Depois é só clicar no botão verde <strong>Compare &amp; Pull Request</strong>.</p>
+<p><em>Você tá falando de Pull Request desde que começou esse tutorial, mas afinal, o que é Pull Request?</em></p>
+<p><em>Pull Request</em> é quando você envia uma sugestão de melhoria para o repositório. </p>
+<p>Quando você quer <em>trazer</em>, <em>pegar</em>, <em>puxar</em> algo para o seu repositório usando o git, você usa o comando <code>git pull</code>. Então, um <em>pull request</em> nada mais é do que uma requisição, ou pedido para que aquele repositório faça um <em>pull</em> com as suas alterações. :)</p>
+<p>Após clicar no botão <strong>Compare &amp; Pull Request</strong>, você será direcionado para a tela onde você vai criar o <em>pull request</em>, e pode conferir se as alterações que aparecem realmente correspondem às alterações que você fez:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/create-pull-request.png" alt="Mensagem de Pull Request"></p>
+<p>Na imagem acima você pode ver:</p>
+<ul>
+<li>Onde diz <strong>base fork</strong> é o diretório padrão. No meu caso, está em <strong>gulpjs/gulp</strong>.</li>
+<li>Ao lado, a <em>branch</em> para a qual eu vou enviar meu <em>pull request</em>. Vou enviar direto para a master do repositório padrão.</li>
+<li><strong>head fork</strong> é o seu repositório, que você forkou. Na imagem, é o <strong>fdaciuk/gulp</strong>.</li>
+<li>E por fim, a <em>branch</em> onde eu fiz a alteração: <em>compare improve_method_watch</em></li>
+</ul>
+<p>Depois disso, você vai colocar um título no seu <em>pull request</em>, para que, ao visualizar a listagem de <em>pull requests</em>, fique fácil saber do que se trata. Normalmente, quando você só tem uma mensagem de commit, esse título é assumido com a mensagem. Ajuste conforme a necessidade.</p>
+<p>Não esqueça também de comentar porque você está fazendo esse <em>pull request</em>, e porque esse ajuste que você fez, faz sentido para o repositório. Uma boa defesa pode ajudar a fazer com que seu <em>pull request</em> seja aceito.</p>
+<p>Antes de clicar no botão <strong>Create Pull Request</strong>, confira os dados da imagem abaixo:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/check-pull-request.png" alt="Conferir Pull Request"></p>
+<p>Rolando um pouco, você vai ver os commits que você fez. Confira se está na branch correta, e que você está enviando somente aquilo que vocẽ alterou. Se você escolher uma branch errada para enviar, você verá milhares de outras alterações - ou talvez nenhuma, se for a mesma branch - que não fará sentido de ser feito o <strong>merge</strong> do <em>pull request</em>.</p>
+<p>No meu caso, eu fiz só uma alteração no <strong>README.md</strong>, adicionando um plugin do <strong>Gulp</strong> (<code>gulp-util</code>) na sessão de <em>plugins recomendados</em>.</p>
+<p>Depois de tudo verificado, clique no botão <strong>Creat Pull Request</strong> e aguarde a resposta! Você será avisado por e-mail - se você não desabilitou as notificações - se houver qualquer atividade nesse <em>pull request</em>: comentários tanto no <em>pull request</em> como nos códigos, para que você possa modificar algo, se a <em>branch</em> for fechada, porque o autor achou que a alteração não fez sentido, ou ainda se o <strong>merge</strong> for feito. </p>
+<p>Se ele fez o <strong>merge</strong>, então sua alteração já faz parte do repositório principal, e você aparecerá na guia <strong>Contributors</strong> do repositório principal:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/contributors.png" alt="Colaboradores"></p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/contributors-list.png" alt="Lista de colaboradores"></p>
+<p>Como você viu na imagem acima, aparece quantos commits você fez, quanto código você adicionou e quanto você removeu!</p>
+<h2 id="Manter_o_projeto_sempre_atualizado">Manter o projeto sempre atualizado</h2>
+<p>Para que o seu projeto tenha sempre as últimas alterações do repositório principal, siga as instruções <a href="http://blog.da2k.com.br/2014/01/19/manter-repositorio-github-forkado-sincronizado-com-o-original/" target="_blank" rel="external">desse link</a>.</p>
+<p>Agora você não tem mais desculpas para não colaborar com algum projeto no <strong>Github</strong>! Cada vez que você colabora para um projeto <em>open source</em>, você ganha conhecimento e cresce como profissional! Siga a <a href="https://www.youtube.com/watch?v=dkLCn2S03ws" target="_blank" rel="external">dica do E.T. Bilú</a>: busque conhecimento!</p>
+<p>Ficou alguma dúvida? Comente!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/github/">github</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/git/">git</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/02/04/git-e-github-do-clone-ao-pull-request/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>Aprenda Markdown | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Markdown é uma ferramenta de conversão de text-to-HTML. Com ele é possível você marcar títulos, listas, tabelas, etc., de forma muito mais limpa, legível e precisa, do que se fosse fazer com HTML.Ainda não sabe tudo o que é possível fazer com Markdown? Então esse post é pra você! Vem comigo que eu te mostro :)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Aprenda Markdown"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/02/markdown.png" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-08T02:00:00.000Z"><a href="/2015/02/08/aprenda-markdown/">8 de fevereiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">Aprenda Markdown</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/02/markdown.png" alt=""></p>
+<p><strong>Markdown</strong> é uma ferramenta de conversão de <em>text-to-HTML</em>. Com ele é possível você marcar títulos, listas, tabelas, etc., de forma muito mais limpa, legível e precisa, do que se fosse fazer com HTML.<br>Ainda não sabe tudo o que é possível fazer com Markdown? Então esse post é pra você! Vem comigo que eu te mostro :)</p>
+<a id="more"></a>
+
+<h2 id="Onde_usar_Markdown">Onde usar Markdown</h2>
+<p>Existem vários lugares que você pode usar <strong>Markdown</strong>: No <strong>Github</strong> mesmo, você pode usar no <em>README.md</em>, que é um arquivo que fica na raiz do seu projeto, e é renderizado pelo <strong>Github</strong> abaixo da lista de arquivos. Aquele texto que você lê quando acessa um repositório é um arquivo <em>README.md</em>, escrito em <strong>Markdown</strong>.</p>
+<p>Ainda no <strong>Github</strong>, você pode usar <strong>Markdown</strong> no texto das issues, no texto de um <em>pull request</em> e na <em>wiki</em>.</p>
+<p>Também a maior parte dos <a href="https://www.staticgen.com/" target="_blank" rel="external">geradores de estáticos</a> (Hexo, Jekyll, HarpJS, Docpad, etc.), permitem escrever em <strong>Markdown</strong>! É uma ótima oportunidade pra você que queria começar o seu blog, mas estava com preguiça de usar um CMS ou ficar fazendo HTML na mão xD</p>
+<h2 id="Porque_eu_devo_aprender_e_usar_Markdown">Porque eu devo aprender e usar Markdown</h2>
+<p>Porque HTML é muito verboso! <strong>Markdown</strong> é mais legível, mais fácil de ler e interpretar.</p>
+<h2 id="Devo_parar_de_escrever_HTML_para_sites_e_fazer_tudo_em_Markdown?">Devo parar de escrever HTML para sites e fazer tudo em Markdown?</h2>
+<p>Não! <strong>Markdown</strong> serve basicamente para escrever textos. Como toda ferramenta, ele tem algumas desvantagens com relação à escrever em HTML:</p>
+<ul>
+<li>Você não consegue colocar atributos nos elementos (class, id, title, etc.), além dos poucos que ele permite por padrão;</li>
+<li>Você não tem muito controle para fazer aninhamento de tags.</li>
+</ul>
+<p>Por isso é importante frisar que o uso do <strong>Markdown</strong> deve ser especificamente para a escrita de textos, artigos de blog, etc. Não é para simplesmente usá-lo no lugar do HTML!</p>
+<h2 id="Como_eu_começo_a_escrever_em_Markdown">Como eu começo a escrever em Markdown</h2>
+<p>Se você já tiver um <em>parser</em>, você só precisa criar um arquivo com uma dessas extensões: mark, markdown, md, mdml, mdown, text, mdtext, mdtxt, mdwn, mkd, mkdn.</p>
+<p>Entre essas, a mais utilizada é a <em>md</em>. Crie um arquivo com uma dessas extensões e você já estará apto para começar a escrever em <strong>Markdown</strong>!</p>
+<p>Agora, se você não tiver um <em>parser</em>, pode usar uma ferramenta online. Existem muitas ferramentas de <em>parse</em> de <strong>Markdown</strong> para <strong>HTML</strong>. Vou recomendar uma para que você possa acompanhar esse post, mas buscando por <strong>Markdown Editor</strong> no Google, você vai encontrar muitas outras!</p>
+<p>Gosto bastante do <a href="https://stackedit.io/editor" target="_blank" rel="external">Stack Edit</a>. Ele converte <strong>Markdown</strong> para <strong>HTML</strong> enquanto você digita. É bastante simples para ver o resultado :)</p>
+<p>Vamos aprender então como escrever em <strong>Markdown</strong>!</p>
+<h2 id="Tìtulos_(&lt;h1&gt;_a_&lt;h6&gt;)">Tìtulos (<code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code>)</h2>
+<p>Para marcar um título, você vai usar <code>#</code> a quantidade de vezes que irá representar o nível do título. Exemplo:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="header"># Título nível 1</span></div><div class="line"><span class="header">## Título nível 2</span></div><div class="line"><span class="header">### Título nível 3</span></div><div class="line"><span class="header">#### Título nível 4</span></div><div class="line"><span class="header">##### Título nível 5</span></div><div class="line"><span class="header">###### Título nível 6</span></div></pre></td></tr></table></figure>
+
+<p>Parseia para:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">h1</span>&gt;</span>Título nível 1<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">h2</span>&gt;</span>Título nível 2<span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">h3</span>&gt;</span>Título nível 3<span class="tag">&lt;/<span class="title">h3</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">h4</span>&gt;</span>Título nível 4<span class="tag">&lt;/<span class="title">h4</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">h5</span>&gt;</span>Título nível 5<span class="tag">&lt;/<span class="title">h5</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">h6</span>&gt;</span>Título nível 6<span class="tag">&lt;/<span class="title">h6</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Bastante simples, não? O <code>h1</code> e o <code>h2</code> ainda podem ser escritos da seguinte forma:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="header">Título de nível 1</span></div><div class="line">==================</div><div class="line">  </div><div class="line"><span class="header">Título de nível 2</span></div><div class="line">------------------</div></pre></td></tr></table></figure>
+
+<h2 id="Parágrafos_e_quebras_de_linha_(&lt;p&gt;_e_&lt;br_/&gt;)">Parágrafos e quebras de linha (<code>&lt;p&gt;</code> e <code>&lt;br /&gt;</code>)</h2>
+<p>Para gerar parágrafos, basta você escrever o texto em uma linha:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Este é um parágrafo.</div><div class="line">  </div><div class="line">Este é outro parágrafo.</div></pre></td></tr></table></figure>
+
+<p>Isso gera:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>Este é um parágrafo.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>Este é outro parágrafo.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Note que eu pulei uma linha entre os parágrafos. Se eu não fizesse isso, o código gerado seria:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>Este é um parágrafo. Este é outro parágrafo.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><em>Mas ele não deveria usar um `<br> para quebrar linha?</em></p>
+<p>Isso é muito particular de cada parser. Alguns quebram linha quando você dá enter. Mas a documentação do <strong>Markdown</strong> diz que, para quebras de linha, você precisa deixar dois espaços no final da linha:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Primeira linha do parágrafo.··</div><div class="line">Segunda linha do parágrafo.</div></pre></td></tr></table></figure>
+
+<p>Coloquei o <code>··</code> no final da primeira linha somente para facilitar a visualização. Você deve substituir esse símbolo por dois espaços em branco. Isso deve gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">  Primeira linha do parágrafo.<span class="tag">&lt;<span class="title">br</span> /&gt;</span></div><div class="line">  Segunda linha do parágrafo.</div><div class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Por isso, se você estiver usando o <a href="http://editorconfig.org/" target="_blank" rel="external">.editorconfig</a> no seu projeto, deixe a opção <code>trim_trailing_whitespace</code> como <code>false</code> para arquivos <strong>Markdown</strong>. Assim, os espaços adicionais não serão removidos :)</p>
+<h2 id="Ênfase_(&lt;strong&gt;_e_&lt;em&gt;)">Ênfase (<code>&lt;strong&gt;</code> e <code>&lt;em&gt;</code>)</h2>
+<p>Para enfatizar uma palavras (<code>&lt;em&gt;</code>), usamos um <code>*</code> ou <code>_</code>:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Javascript é <span class="emphasis">_cool_</span>!</div></pre></td></tr></table></figure>
+
+<p>ou:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Javascript é <span class="emphasis">*cool*</span>!</div></pre></td></tr></table></figure>
+
+<p>Que irá gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">  Javascript é <span class="tag">&lt;<span class="title">em</span>&gt;</span>cool<span class="tag">&lt;/<span class="title">em</span>&gt;</span>!</div><div class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>O mais utilizado para ênfase (<code>&lt;em&gt;</code>) é o <em>underline</em>.</p>
+<p>Para dar forte ênfase em palavras (<code>&lt;strong&gt;</code>), você usa dois <code>**</code> ou <code>__</code>:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="strong">**Da2k**</span> é a pronúncia para <span class="strong">**Daciuk**</span>: DA-TWO-K!</div></pre></td></tr></table></figure>
+
+<p>ou </p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="strong">__Da2k__</span> é a pronúncia para <span class="strong">__Daciuk__</span>: DA-TWO-K!</div></pre></td></tr></table></figure>
+
+<p>Que irá gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">strong</span>&gt;</span>Da2k<span class="tag">&lt;/<span class="title">strong</span>&gt;</span> é a pronúncia para <span class="tag">&lt;<span class="title">strong</span>&gt;</span>Daciuk:<span class="tag">&lt;/<span class="title">strong</span>&gt;</span> DA-TWO-K!</div><div class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>O mais utilizado para forte ênfase (<code>&lt;strong&gt;</code>) são dois asteriscos.</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Links_(&lt;a&gt;)">Links (<code>&lt;a&gt;</code>)</h2>
+<p>Para gerar links, você usa <code>[]()</code>. Dentro dos colchetes você coloca o texto do link, e dentro dos parênteses, você coloca a URL:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="link_label">Blog do Da2k</span>](<span class="link_url">http://blog.da2k.com.br</span>)</div></pre></td></tr></table></figure>
+
+<p>Que irá gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://blog.da2k.com.br"</span>&gt;</span>Blog do Da2k<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Passando um texto após a URL, separando o link do texto por um espaço em branco, esse texto será usado como <code>title</code>:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="link_label">Blog do Da2k</span>](<span class="link_url">http://blog.da2k.com.br "Clique e acesse agora!"</span>)</div></pre></td></tr></table></figure>
+
+<p>Vai gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://blog.da2k.com.br"</span> <span class="attribute">title</span>=<span class="value">"Clique e acesse agora!"</span>&gt;</span>Blog do Da2k<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<h2 id="Links_automáticos">Links automáticos</h2>
+<p>Se o texto do seu link é o próprio link, você pode envolvê-lo entre <code>&lt;</code> e <code>&gt;</code>, que o link será gerado automaticamente:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="title">https:</span>//<span class="attribute">www.google.com.br</span>&gt;</span></span></div></pre></td></tr></table></figure>
+
+<p>Irá gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"https://www.google.com.br"</span>&gt;</span>https://www.google.com.br<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>E isso funciona também para e-mails:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="title">meu@email.com</span>&gt;</span></span></div></pre></td></tr></table></figure>
+
+<p>Vai gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"mailto:meu@email.com"</span>&gt;</span>meu@email.com<span class="tag">&lt;/<span class="title">a</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Da hora, não? ;)</p>
+<h2 id="Referências">Referências</h2>
+<p>Expliquei sobre referências <a href="http://blog.da2k.com.br/2015/01/16/segredos-do-github-variaveis/" target="_blank" rel="external">nesse post</a>.</p>
+<h2 id="Blocos_de_citação_(&lt;blockquote&gt;)">Blocos de citação (<code>&lt;blockquote&gt;</code>)</h2>
+<p>Para criar blocos de citação, você usa o sinal de <code>&gt;</code>:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="blockquote">&gt; Esse é um bloco de citação.</span></div><div class="line"><span class="blockquote">&gt; Ele pode ter várias linhas por parágrafo.</span></div><div class="line"><span class="blockquote">&gt;</span></div><div class="line">&gt; Inclusive, dando um espaço, você tem um novo parágrafo.</div></pre></td></tr></table></figure>
+
+<p>Que gera o seguinte:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">blockquote</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">    Esse é um bloco de citação.</div><div class="line">    Ele pode ter várias linhas.</div><div class="line">  <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">p</span>&gt;</span>Inclusive, uma quebra de linha.<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">blockquote</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<h2 id="Listas_(&lt;ul&gt;_e_&lt;ol&gt;)">Listas (<code>&lt;ul&gt;</code> e <code>&lt;ol&gt;</code>)</h2>
+<p>Para listas não ordenadas (<code>&lt;ul&gt;</code>), você pode usar <code>*</code>, <code>+</code> ou <code>-</code>. Veja:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">* </span>Item 1</div><div class="line"><span class="bullet">* </span>Item 2</div><div class="line"><span class="bullet">* </span>Item 3</div><div class="line">  </div><div class="line"><span class="bullet">+ </span>Item 1</div><div class="line"><span class="bullet">+ </span>Item 2</div><div class="line"><span class="bullet">+ </span>Item 3</div><div class="line">  </div><div class="line"><span class="bullet">- </span>Item 1</div><div class="line"><span class="bullet">- </span>Item 2</div><div class="line"><span class="bullet">- </span>Item 3</div></pre></td></tr></table></figure>
+
+<p>Os três formatos acima geram a mesma marcação:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>E para listas ordenadas, você usa o número, seguido de ponto:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">1. </span>Item 1</div><div class="line"><span class="bullet">2. </span>Item 2</div><div class="line"><span class="bullet">3. </span>Item 3</div></pre></td></tr></table></figure>
+
+<p>Que irá gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">ol</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="title">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">ol</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Alguns parsers renderizam automaticamente os próximos números, após o 1. Você só precisa usar <code>*</code> para os itens do 2 em diante:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">1. </span>Item 1</div><div class="line"><span class="bullet">* </span>Item 2</div><div class="line"><span class="bullet">* </span>Item 3</div></pre></td></tr></table></figure>
+
+<p>Mas não são todos que renderizam dessa forma, então é bom ficar ligado ;)</p>
+<h2 id="Imagens_(&lt;img_/&gt;)">Imagens (<code>&lt;img /&gt;</code>)</h2>
+<p>Geração de imagens é bem parecido com a geração de links: você só precisa adicionar uma <code>!</code> no início. E o texto que você coloca entre os colchetes, é usado como <code>alt</code> na imagem:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![<span class="link_label">Banana</span>](<span class="link_url">http://cdn.osxdaily.com/wp-content/uploads/2013/07/dancing-banana.gif</span>)</div></pre></td></tr></table></figure>
+
+<p>Esse código vai gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"http://cdn.osxdaily.com/wp-content/uploads/2013/07/dancing-banana.gif"</span> <span class="attribute">alt</span>=<span class="value">"Banana"</span> /&gt;</span></div></pre></td></tr></table></figure>
+
+<p>O <code>title</code> também funciona como no link:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![<span class="link_label">Banana</span>](<span class="link_url">http://cdn.osxdaily.com/wp-content/uploads/2013/07/dancing-banana.gif "Olha a banana dançando!"</span>)</div></pre></td></tr></table></figure>
+
+<p>Que gera:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"http://cdn.osxdaily.com/wp-content/uploads/2013/07/dancing-banana.gif"</span> <span class="attribute">alt</span>=<span class="value">"Banana"</span> <span class="attribute">title</span>=<span class="value">"Olha a banana dançando!"</span> /&gt;</span></div></pre></td></tr></table></figure>
+
+<h2 id="Tabelas_(&lt;table&gt;)">Tabelas (<code>&lt;table&gt;</code>)</h2>
+<p>Já falei sobre tabelas em um <a href="http://blog.da2k.com.br/2015/01/17/segredos-do-github-tabelas-e-task-lists/" target="_blank" rel="external">post anterior</a>. Nesse post eu falo também sobre as <code>task lists</code>, mas elas são específicas do <strong>Github</strong>, não funcionam com qualquer parser ;)</p>
+<h2 id="Código_inline_e_bloco_(&lt;code&gt;_e_&lt;pre&gt;)">Código inline e bloco (<code>&lt;code&gt;</code> e <code>&lt;pre&gt;</code>)</h2>
+<p>Vocế ainda pode adicionar trechos de código via <strong>Markdown</strong>. Para adicionar código a nível <em>inline</em>, você usa ```:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">O <span class="code">`&lt;blockquote&gt;`</span> é uma tag HTML.</div></pre></td></tr></table></figure>
+
+<p>Isso irá gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">  O <span class="tag">&lt;<span class="title">code</span>&gt;</span>&lt;blockquote&gt;<span class="tag">&lt;/<span class="title">code</span>&gt;</span> é uma tag HTML!</div><div class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>E para gerar blocos de código, você simplesmente indenta o código 4 espaços (ou 1 tab) à frente do paràgrafo:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Essa é a função sayHello():</div><div class="line"><span class="code">    function sayHello() {</span></div><div class="line"><span class="code">      return 'hi!';</span></div><div class="line"><span class="code">    }</span></div></pre></td></tr></table></figure>
+
+<p>Que irá gerar:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span></div><div class="line">  Essa é a função sayHello():</div><div class="line">  <span class="tag">&lt;<span class="title">pre</span>&gt;</span><span class="tag">&lt;<span class="title">code</span>&gt;</span>function sayHello() {</div><div class="line">    return 'hi!';</div><div class="line">  }<span class="tag">&lt;/<span class="title">code</span>&gt;</span><span class="tag">&lt;/<span class="title">pre</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>Isso é como está na documentação. Mas a maior parte dos parses que eu conheço não funcionam dessa forma. Eles geram blocos de código usando três crases no início da primeira e última linha, para marcar o início e o fim do bloco:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/code-block.png" alt=""></p>
+<p>PS.: Tive que colocar como imagem, pois o meu parser não consegue escapar as 3 crases ¬¬</p>
+<p>O <strong>Github</strong> inclusive <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code" target="_blank" rel="external">recomenda que se use as 3 crases</a>, pois é mais fácil de visualizar e dar manutenção no código.</p>
+<p>No <strong>Github</strong>, você ainda consegue definir qual a linguagem que está sendo utilizada, para que seja feito <em>code highlight</em> no seu código. Só passe a linguagem após as 3 crases, dessa forma:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/code-block-language.png" alt=""></p>
+<p>Que ó seu código será mostrado bonitinho assim:</p>
+<p><img src="http://blog.da2k.com.br/uploads/2015/02/code-block-highlighted.png" alt=""></p>
+<p>:D</p>
+<h2 id="Backslash_scapes">Backslash scapes</h2>
+<p>Para escapar caracteres que são parseados pelo <strong>Markdown</strong>, você pode usar a barra invertida <code>\</code> (<em>backslash</em>), seguida do caractere, para imprimí-lo literalmente. O escape funciona para os caracteres listados abaixo:</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">\   backslash (barra invertida)</div><div class="line">`   backtick (crase)</div><div class="line"><span class="bullet">*   </span>asterisk (asterisco)</div><div class="line">_   underscore</div><div class="line">{}  curly braces (chaves)</div><div class="line">[]  square brackets (colchetes)</div><div class="line">()  parentheses (parênteses)</div><div class="line"><span class="header">#   hash mark (sustenido / hash / jogo da velha)</span></div><div class="line"><span class="bullet">+   </span>plus sign (sinal de "mais" ou somar)</div><div class="line"><span class="bullet">-   </span>minus sign (hyphen) (sinal de menos ou hífen)</div><div class="line">.   dot (ponto)</div><div class="line">!   exclamation mark (ponto de exclamação)</div></pre></td></tr></table></figure>
+
+<p>Além de tudo isso, é importante saber também, que é possível usar HTML junto com <strong>Markdown</strong>! Isso mesmo! Se você precisar adicionar uma classe em uma imagem para alinhar, ou colocar uma cor específica em alguma palavra, você pode usar tags HTML normalmente :D</p>
+<p>Para saber mais sobre <strong>Markdown</strong>, recomendo a leitura da documentação oficial:<br><a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">http://daringfireball.net/projects/markdown/</a></p>
+<p>E alguns links de como o <strong>Github</strong> usa <strong>Markdown</strong>:<br><a href="https://help.github.com/articles/markdown-basics/" target="_blank" rel="external">https://help.github.com/articles/markdown-basics/</a><br><a href="https://help.github.com/articles/github-flavored-markdown/" target="_blank" rel="external">https://help.github.com/articles/github-flavored-markdown/</a><br><a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="external">https://guides.github.com/features/mastering-markdown/</a><br><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="external">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></p>
+<p>E você: o que já faz hoje com <strong>Markdown</strong>? Tem algo diferente do que foi visto nesse post para compartilhar? Ficou com alguma dúvida? Comente!</p>
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/markdown/">markdown</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/02/08/aprenda-markdown/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/02/08/aprenda-markdown/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>

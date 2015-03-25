@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8" />
+  
+  <title>WordPress - Separando as responsabilidades | Da2k Blog</title>
+  <link rel="author" href="//plus.google.com/+FernandoDaciuk">
+  
+  <meta name="description" content="Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em controllers separados. Vamos ver como isso fica na prática? ;)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="WordPress - Separando as responsabilidades"/>
+  <meta property="og:site_name" content="Da2k Blog"/>
+
+  
+    <meta property="og:image" content="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" />
+  
+
+  <meta property="og:url" content="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/" />
+
+  
+    <meta name="google-site-verification" content="GDAVmZEJwsAq3Cv0Uk8BJNicEJCOkmYOqFxQKtR8RAw" />
+  
+
+  <link href="http://blog.da2k.com.br/favicon.png" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Da2k Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26050978-1']);
+  _gaq.push(['_setDomainName', 'da2k.com.br']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1>
+    <a class="brand" href="/">
+        
+          <img src="/images/logo-blog.svg" width="210" height="80" title="Da2k Blog" />
+        
+    </a>
+  </h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/cursos">Cursos</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+
+<a href="http://leokz.com/campanha/" target="_blank" class="banner-leokz">Ajude o Leonardo a vencer o câncer.</a>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-10T02:00:00.000Z"><a href="/2015/02/10/wordpress-separando-as-responsabilidades/">10 de fevereiro de 2015</a></time>
+      
+      
+  
+    <h1 class="title">WordPress - Separando as responsabilidades</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><img src="http://blog.da2k.com.br/uploads/2015/02/wordpress-responsability-separator.jpg" alt=""></p>
+<p>Vamos começar a organizar melhor nosso tema, separando as responsabilidades. Tiraremos toda a lógica da view, e trataremos em <em>controllers</em> separados. Vamos ver como isso fica na prática? ;)</p>
+<a id="more"></a>
+
+<p>Pra começar, acompanhe o tema que estamos desenvolvendo juntos: <a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br" target="_blank" rel="external">https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br</a></p>
+<p>A grande vantagem de trabalhar com o WordPress, é que ele não nos prende a uma estrutura específica. Precisamos seguir algumas convenções, mas podemos facilmente organizar nossos arquivos e separar como cada coisa é feita de forma bem fácil.</p>
+<p>Esse formato que vou mostrar hoje, é como eu uso nos meus projetos. É importante que fique claro que, existem várias formas de fazer o que veremos hoje. Essa não é a forma “absolutamente certa”, mas é como resolve os problemas pra mim.</p>
+<p>Chega de lenga-lenga, vamos ao que interessa: código!</p>
+<h2 id="Single">Single</h2>
+<p>No último post, vimos que, no <strong>WordPress</strong>, temos alguns Tipos de Conteúdo padrão, mas que também podemos criar os nossos próprios. Hoje veremos o template <code>single.php</code>.</p>
+<p>Então, antes de qualquer coisa, crie esse arquivo na raiz do seu tema. Nossa estrutura agora deve estar assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── footer.php</div><div class="line">├── /functions</div><div class="line">│   └── security.php</div><div class="line">├── functions.php</div><div class="line">├── header.php</div><div class="line">├── index.php</div><div class="line">├── single.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
+
+<p>Fazendo isso, vamos começar a brincadeira! O <code>single.php</code> serve para mostrar uma postagem específica.<br>Quando você acessa a URL de um post, por exemplo, o WordPress procura usa esse template para renderizar o post.</p>
+<p>Mas o <code>single.php</code> vai muito além disso: segundo a <a href="http://codex.wordpress.org/Template_Hierarchy" target="_blank" rel="external">hierarquia de templates</a> do <strong>WordPress</strong>, quando você acessa a URL de uma postagem (seja do <em>Post Type</em> “post” ou qualquer outro criado por você), a busca pelo template é feita na seguinte ordem:</p>
+<p>Primeiro o <strong>WordPress</strong> procura na raiz da sua aplicação, um arquivo chamado <code>single-{post-type}.php</code>, onde `{post-type} é o nome do seu <em>Post Type</em>.</p>
+<p>Exemplo: imagine que você tem um <em>Post Type</em> chamado filmes, e você quer acessar a URL que leva para o filme <strong>The Avengers</strong>. Ao acessar a URL <code>http://seusite.com.br/filmes/the-avengers/</code>, o <strong>WordPress</strong> irá verificar se no seu tema você tem um arquivo chamado <code>single-filmes.php</code>.</p>
+<p>Se esse arquivo não existir, o WordPress vai procurar o arquivo <code>single.php</code> (que é o que estamos vendo agora). Se encontrar, é nese arquivo que a postagem será renderizada. Senão, a renderização é feita na <code>index.php</code>.</p>
+<p>Perceba que a <code>index.php</code> é o fallback para todos os templates, por isso é importante mantê-la no seu projeto, ainda que você quase não a use, ou use pouco. Fazendo a cópia da <code>index.php</code> na <code>single.php</code>, nossa <code>single</code> deve estar com essa estrutura:</p>
+<p><a href="https://github.com/fdaciuk/wordpress-base-theme-da2k.com.br/blob/7e61f6f73153641a438a4b8ca09da7bb9e2361f3/index.php" target="_blank" rel="external">Estrutura da single.php</a></p>
+<p>Mantivemos essa estrutura, pois precisamos apenas mostrar um post. Não é necessário o loop aqui, somente as <em>template tags</em>.</p>
+<div class="ads-da2k"><a href="http://www.eventick.com.br/curso-javascript-ninja" target="_blank"><img src="https://cloud.githubusercontent.com/assets/487669/6239059/58b94ab0-b6e7-11e4-8e5d-a5f2740870fd.png" alt="CURSO NINJA JAVASCRIPT - INSCREVA-SE JÁ!"></a></div>
+
+<h2 id="Interface">Interface</h2>
+<p>Para separar as responsabilidades, não podemos deixar lógica alguma na nossa view. Os templates que o WordPress disponibiliza não deveriam ter nenhuma lógica ou regra de negócio. Isso precisa ficar em arquivos à parte.</p>
+<p>No nosso caso, vamos utilizar <em>controllers</em> para nos ajudar a organizar as coisas. Crie no diretório <code>functions/</code>, um outro diretório chamado <code>controllers</code>. E dentro desse diretório, crie um arquivo chamado <code>controller-single.php</code>. A nossa estrutura agora deveria estar assim:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── footer.php</div><div class="line">├── /functions</div><div class="line">│   ├── /controllers</div><div class="line">│   │   └── controller-single.php</div><div class="line">│   └── security.php</div><div class="line">├── functions.php</div><div class="line">├── header.php</div><div class="line">├── index.php</div><div class="line">├── single.php</div><div class="line">└── style.css</div></pre></td></tr></table></figure>
+
+<p>Cada <em>controller</em> conterá uma <em>classe PHP</em>, que irá responder por uma página específica, ou por URL. No nosso caso, estamos criando primeiramente um controller que vai gerenciar nossa <code>single.php</code>.</p>
+<p>Vamos agora fazer algumas mudanças na <code>single.php</code>. Primeiro de tudo, vamos criar nossa interface. Nosso <code>single</code> deve ficar assim:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span></span></div><div class="line"><span class="keyword">require_once</span> <span class="string">'functions/security.php'</span>;</div><div class="line">get_header();</div><div class="line"><span class="preprocessor">?&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$single_post</span><span class="variable">-&gt;thumbnail</span> <span class="preprocessor">?&gt;</span></span></div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="title">h2</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$single_post</span><span class="variable">-&gt;title</span> <span class="preprocessor">?&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="title">h2</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"content"</span>&gt;</span></div><div class="line">    <span class="php"><span class="preprocessor">&lt;?php</span> <span class="keyword">echo</span> <span class="variable">$single_post</span><span class="variable">-&gt;content</span> <span class="preprocessor">?&gt;</span></span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  </div><div class="line"><span class="php"><span class="preprocessor">&lt;?php</span> get_footer() <span class="preprocessor">?&gt;</span></span></div></pre></td></tr></table></figure>
+
+<p><em>O que é significa “ter uma interface” o por que precisamos de uma?</em></p>
+<p>A interface são os métodos e propriedades públicas da classe que vai controlar o conteúdo mostrado na nossa <code>single</code>. Primeiramente nós colocamos na nossa <em>view</em>, o que nós esperamos que seja retornado. </p>
+<p>Podemos ver nesse exemplo que:</p>
+<ul>
+<li>a variável <code>$single_post</code> recebe um objeto;</li>
+<li>esperamos que sejam retornadas 3 informações: <code>thumbnail</code>, <code>title</code> e <code>content</code>, como propriedades do objeto <code>$single_post</code>.</li>
+</ul>
+<p><em>Mas de onde vêm esses dados?</em></p>
+<p>Do <em>controller</em>! É ele que vai cuidar de toda a lógica para que nossa <em>view</em> se mantenha assim, limpa! A <em>view</em> deve somente “cuspir” as informações. Nada de zona na view! Nada de lógica de PHP e estruturas gigantes! Vamos separar as responsabilidades para que nosso código fique legível e fácil de editar!</p>
+<p>No próximo post, vamos ver como ficará nosso <em>controller</em>, e como ele irá tratar as informações para devolver à <em>view</em>!</p>
+<p>Ficou com alguma dúvida? Comente!</p>
+<p>Até a próxima! :D</p>
+<blockquote>
+
+<p><strong>Link para o índice dessa série: </strong><br><a href="http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/" target="_blank" rel="external">http://blog.da2k.com.br/2015/01/11/indice-da-serie-como-criar-temas-para-wordpress/</a></p>
+<p><strong> Post anterior:</strong><br><a href="http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/03/wordpress-tipos-de-conteudo/</a></p>
+<p><strong> Próximo post:</strong><br><a href="http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/" target="_blank" rel="external">http://blog.da2k.com.br/2015/02/11/wordpress-controlando-a-exibicao-dos-dados/</a></p>
+</blockquote>
+
+
+<blockquote>
+<p>Sobre o #1postperday: <a href="http://blog.da2k.com.br/2014/12/31/um-post-por-dia/" target="_blank" rel="external">http://blog.da2k.com.br/2014/12/31/um-post-por-dia/</a></p>
+<p>Tem alguma sugestão para os próximos posts do #1postperday? Deixe ela aqui: <a href="https://github.com/fdaciuk/fdaciuk.github.io/issues/1" target="_blank" rel="external">https://github.com/fdaciuk/fdaciuk.github.io/issues/1</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/wordpress/">wordpress</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/1postperday/">1postperday</a>, <a href="/tags/serie-temas-wordpress/">serie temas wordpress</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"></a>
+    
+    
+      <a class="addthis_button_tweet" addthis:url="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium" addthis:url="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal" addthis:url="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"></a>
+    
+    <a class="addthis_counter addthis_pill_style" addthis:url="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+<div class="newsletter">
+  <h3 class="newsletter-title">Não perca nenhuma atualização!</h3>
+  <p class="newsletter-description"><em>Não vou mandar SPAM, não se preocupe ;)</em></p>
+
+  <form action="//da2k.us6.list-manage.com/subscribe/post?u=56a51839b0a1d33544ef8745a&amp;id=41446ab989" method="post" target="_blank" data-js="form-newsletter" class="newsletter__form">
+    <input type="text" name="FNAME" id="signup-name" placeholder="Nome" class="[ input-text ] newsletter__form__input" />
+    <input type="email" name="EMAIL" id="signup-email" placeholder="E-mail" class="[ input-text ] newsletter__form__input" />
+    <input type="text" name="b_56a51839b0a1d33544ef8745a_41446ab989" id="signup-email-robot" class="input-robot" />
+    <button
+      type="submit"
+      data-js="button-submit"
+      data-loading-text="Enviando..."
+      data-original-text="OK"
+      class="newsletter__form__button">
+      Assinar!
+    </button>
+  </form>
+</div>
+
+
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action=""
+    method="get"
+    data-action="https://google.com.br/search?q=site:blog.da2k.com.br"
+    accept-charset="utf-8"
+    data-js="google-search-form">
+    <input type="search" name="q" results="0" placeholder="Search" data-js="google-search-input">
+  </form>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/css/">css</a><small>5</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>1</small></li>
+  
+    <li><a href="/categories/github/">github</a><small>13</small></li>
+  
+    <li><a href="/categories/html/">html</a><small>2</small></li>
+  
+    <li><a href="/categories/javascript/">javascript</a><small>37</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/wordpress/">wordpress</a><small>13</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/1postperday/">1postperday</a><small>70</small></li>
+  
+    <li><a href="/tags/ajax/">ajax</a><small>5</small></li>
+  
+    <li><a href="/tags/amd/">amd</a><small>2</small></li>
+  
+    <li><a href="/tags/bdd/">bdd</a><small>1</small></li>
+  
+    <li><a href="/tags/braches/">braches</a><small>1</small></li>
+  
+    <li><a href="/tags/chrome-extension/">chrome extension</a><small>1</small></li>
+  
+    <li><a href="/tags/clean-code/">clean code</a><small>2</small></li>
+  
+    <li><a href="/tags/cli/">cli</a><small>1</small></li>
+  
+    <li><a href="/tags/code-coverage/">code coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/commonjs/">commonjs</a><small>1</small></li>
+  
+    <li><a href="/tags/coverage/">coverage</a><small>1</small></li>
+  
+    <li><a href="/tags/debug/">debug</a><small>1</small></li>
+  
+    <li><a href="/tags/debugger/">debugger</a><small>1</small></li>
+  
+    <li><a href="/tags/deploy/">deploy</a><small>1</small></li>
+  
+    <li><a href="/tags/devtools/">devtools</a><small>1</small></li>
+  
+    <li><a href="/tags/disqus/">disqus</a><small>1</small></li>
+  
+    <li><a href="/tags/escalabilidade/">escalabilidade</a><small>1</small></li>
+  
+    <li><a href="/tags/formularios/">formularios</a><small>1</small></li>
+  
+    <li><a href="/tags/functional-programming/">functional programming</a><small>3</small></li>
+  
+    <li><a href="/tags/funcoes/">funções</a><small>1</small></li>
+  
+    <li><a href="/tags/getmodule/">getmodule</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulpjs/">gulpjs</a><small>5</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/html5/">html5</a><small>1</small></li>
+  
+    <li><a href="/tags/istanbul/">istanbul</a><small>1</small></li>
+  
+    <li><a href="/tags/linux/">linux</a><small>1</small></li>
+  
+    <li><a href="/tags/markdown/">markdown</a><small>2</small></li>
+  
+    <li><a href="/tags/module-pattern/">module pattern</a><small>1</small></li>
+  
+    <li><a href="/tags/mutation-observer/">mutation observer</a><small>1</small></li>
+  
+    <li><a href="/tags/mvc/">mvc</a><small>1</small></li>
+  
+    <li><a href="/tags/nodejs/">nodejs</a><small>7</small></li>
+  
+    <li><a href="/tags/performance/">performance</a><small>1</small></li>
+  
+    <li><a href="/tags/promises/">promises</a><small>6</small></li>
+  
+    <li><a href="/tags/pre-processadores/">pré-processadores</a><small>4</small></li>
+  
+    <li><a href="/tags/recursao/">recursão</a><small>1</small></li>
+  
+    <li><a href="/tags/requirejs/">requirejs</a><small>1</small></li>
+  
+    <li><a href="/tags/rsync/">rsync</a><small>1</small></li>
+  
+    <li><a href="/tags/segredos-do-github/">segredos do github</a><small>12</small></li>
+  
+    <li><a href="/tags/serie-temas-wordpress/">serie temas wordpress</a><small>11</small></li>
+  
+    <li><a href="/tags/setinterval/">setInterval</a><small>1</small></li>
+  
+    <li><a href="/tags/settimeout/">setTimeout</a><small>1</small></li>
+  
+    <li><a href="/tags/sourcemaps/">sourcemaps</a><small>1</small></li>
+  
+    <li><a href="/tags/spam/">spam</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/stylus/">stylus</a><small>4</small></li>
+  
+    <li><a href="/tags/task-runner/">task runner</a><small>1</small></li>
+  
+    <li><a href="/tags/tdd/">tdd</a><small>2</small></li>
+  
+    <li><a href="/tags/tema-wordpress/">tema wordpress</a><small>1</small></li>
+  
+    <li><a href="/tags/temporizadores/">temporizadores</a><small>1</small></li>
+  
+    <li><a href="/tags/tips/">tips</a><small>5</small></li>
+  
+    <li><a href="/tags/umd/">umd</a><small>1</small></li>
+  
+    <li><a href="/tags/void/">void</a><small>1</small></li>
+  
+    <li><a href="/tags/wordcamp/">wordcamp</a><small>1</small></li>
+  
+    <li><a href="/tags/workflow/">workflow</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 <a href="//plus.google.com/+FernandoDaciuk?rel=author" rel="author"  target="_blank">Fernando Daciuk</a>
+  
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/google-search.js"></script>
+<script src="/js/modules/InfiniteScroll.js"></script>
+<script src="/js/app.js" id="script-main" data-url="http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'blogda2k';
+var disqus_url = 'http://blog.da2k.com.br/2015/02/10/wordpress-separando-as-responsabilidades/';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+</html>
