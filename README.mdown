@@ -1,2 +1,0 @@
-# Blog Pessoal - Fernando Daciuk
-Nesse repositório estão os arquivos estáticos gerados pelo Hexo.
