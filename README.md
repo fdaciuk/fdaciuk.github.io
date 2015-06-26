@@ -13,4 +13,4 @@ let da2k = {
 
 [da2k.blog()](http://blog.da2k.com.br);
 
-> [da2k.cursoJSNinja()](http://www.eventick.com.br/curso-javascript-ninja);
+[da2k.cursoJSNinja()](http://www.eventick.com.br/curso-javascript-ninja);
