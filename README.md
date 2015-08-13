@@ -7,6 +7,9 @@ let da2k = {
   },
   cursoJSNinja() {
     return 'http://www.eventick.com.br/curso-javascript-ninja';
+  },
+  cursoGiteGithubNinja() {
+    return 'http://www.eventick.com.br/curso-git-e-github-ninja';
   }
 };
 ```
@@ -14,3 +17,5 @@ let da2k = {
 [da2k.blog()](http://blog.da2k.com.br);
 
 [da2k.cursoJSNinja()](http://www.eventick.com.br/curso-javascript-ninja);
+
+[da2k.cursoGiteGithubNinja()](http://www.eventick.com.br/curso-git-e-github-ninja);
