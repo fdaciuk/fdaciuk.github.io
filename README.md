@@ -1,14 +1,12 @@
 # me
 
 ```js
-const da2k = (link) => {
-  return {
-    'blog': 'http://blog.da2k.com.br',
-    'curso-js-ninja': 'https://www.eventick.com.br/curso-javascript-ninja',
-    'curso-reactjs-ninja': 'https://www.eventick.com.br/curso-reactjs-ninja',
-    'curso-git-e-github-ninja': 'https://www.eventick.com.br/curso-git-e-github-ninja'  
-  }[link]
-}
+const da2k = (link) => ({
+  'blog': 'http://blog.da2k.com.br',
+  'curso-js-ninja': 'https://www.eventick.com.br/curso-javascript-ninja',
+  'curso-reactjs-ninja': 'https://www.eventick.com.br/curso-reactjs-ninja',
+  'curso-git-e-github-ninja': 'https://www.eventick.com.br/curso-git-e-github-ninja'  
+}[link])
 ```
 
 [`da2k('blog')`][blog]
