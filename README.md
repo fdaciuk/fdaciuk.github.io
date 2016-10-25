@@ -5,7 +5,8 @@ const da2k = (link) => ({
   'blog': 'http://blog.da2k.com.br',
   'curso-js-ninja': 'https://www.eventick.com.br/curso-javascript-ninja',
   'curso-reactjs-ninja': 'https://www.eventick.com.br/curso-reactjs-ninja',
-  'curso-git-e-github-ninja': 'https://www.eventick.com.br/curso-git-e-github-ninja'  
+  'curso-git-e-github-ninja': 'https://www.eventick.com.br/curso-git-e-github-ninja',
+  'all-courses': 'https://queroser.ninja'  
 }[link])
 ```
 
@@ -29,7 +30,13 @@ const da2k = (link) => ({
 // https://www.eventick.com.br/curso-git-e-github-ninja
 ```
 
+[`da2k('all-courses')`][all-courses]
+```js
+// https://queroser.ninja
+```
+
 [blog]: http://blog.da2k.com.br
 [js-ninja]: https://www.eventick.com.br/curso-javascript-ninja
 [reactjs-ninja]: https://www.eventick.com.br/curso-reactjs-ninja
 [git-github-ninja]: https://www.eventick.com.br/curso-git-e-github-ninja
+[all-courses]: https://queroser.ninja
